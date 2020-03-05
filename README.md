@@ -24,6 +24,8 @@ $ amplify init
 ❯ dev
 master
 // Choose defaults for the rest of inital questions
+
+$ cd ios && pod install && cd ..
 ```
 
 4. Change the world with your awesome code!
