@@ -25,6 +25,7 @@ $ amplify init
 master
 // Choose defaults for the rest of inital questions
 
+$ yarn
 $ cd ios && pod install && cd ..
 ```
 
