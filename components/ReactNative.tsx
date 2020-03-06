@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
 } from 'react-native';
 
 import {
@@ -16,11 +17,15 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-export default function ReactNative() {
+export default function ReactNative(props) {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
+        <Button
+          onPress={props.changeView}
+          title="<---------Back to login page--------->"
+        />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
