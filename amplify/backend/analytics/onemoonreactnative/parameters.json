@@ -1,0 +1,20 @@
+{
+    "appName": "onemoonreactnative",
+    "roleName": "pinpointLambdaRole9875b749",
+    "cloudWatchPolicyName": "cloudWatchPolicy9875b749",
+    "pinpointPolicyName": "pinpointPolicy9875b749",
+    "authPolicyName": "pinpoint_amplify_9875b749",
+    "unauthPolicyName": "pinpoint_amplify_9875b749",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
