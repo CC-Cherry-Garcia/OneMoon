@@ -1,16 +1,74 @@
-type Blog @model {
+type User @model {
   id: ID!
   name: String!
-  posts: [Post] @connection(name: "BlogPosts")
+  challenges: [Challenge] @connection(keyName: "ByUser", fields: ["id"])
 }
-type Post @model {
-  id: ID!
-  title: String!
-  blog: Blog @connection(name: "BlogPosts")
-  comments: [Comment] @connection(name: "PostComments")
-}
-type Comment @model {
-  id: ID!
-  content: String
-  post: Post @connection(name: "PostComments")
+
+type Challenge @model 
+  @key(name: "ByUser", fields: ["userID", "id"]) {
+    id: ID!
+    userID: ID!
+    title: String!
+    increase: Int
+    isValid: String! # Boolean types cannot be sort keys
+    task1Name: String!
+    task1IsDone: Boolean!
+    task2Name: String!
+    task2IsDone: Boolean!
+    task3Name: String!
+    task3IsDone: Boolean!
+    task4Name: String!
+    task4IsDone: Boolean!
+    task5Name: String!
+    task5IsDone: Boolean!
+    task6Name: String!
+    task6IsDone: Boolean!
+    task7Name: String!
+    task7IsDone: Boolean!
+    task8Name: String!
+    task8IsDone: Boolean!
+    task9Name: String!
+    task9IsDone: Boolean!
+    task10Name: String!
+    task10IsDone: Boolean!
+    task11Name: String!
+    task11IsDone: Boolean!
+    task12Name: String!
+    task12IsDone: Boolean!
+    task13Name: String!
+    task13IsDone: Boolean!
+    task14Name: String!
+    task14IsDone: Boolean!
+    task15Name: String!
+    task15IsDone: Boolean!
+    task16Name: String!
+    task16IsDone: Boolean!
+    task17Name: String!
+    task17IsDone: Boolean!
+    task18Name: String!
+    task18IsDone: Boolean! 
+    task19Name: String!
+    task19IsDone: Boolean!
+    task20Name: String!
+    task20IsDone: Boolean!
+    task21Name: String!
+    task21IsDone: Boolean!
+    task22Name: String!
+    task22IsDone: Boolean!
+    task23Name: String!
+    task23IsDone: Boolean!
+    task24Name: String!
+    task24IsDone: Boolean!
+    task25Name: String!
+    task25IsDone: Boolean!
+    task26Name: String!
+    task26IsDone: Boolean!
+    task27Name: String!
+    task27IsDone: Boolean!    
+    task28Name: String!
+    task28IsDone: Boolean!
+    task29Name: String!
+    task29IsDone: Boolean!
+    task30Name: String!
+    task30IsDone: Boolean!
 }
