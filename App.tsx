@@ -10,6 +10,8 @@ import {StyleSheet, View} from 'react-native';
 
 import Login from './components/Login';
 import ReactNative from './components/ReactNative';
+import Splash from './components/Splash';
+import FirstTime from './components/FirstTime';
 
 const initialState = {
   currentView: 'LOGIN_VIEW',
@@ -55,7 +57,8 @@ const App: () => React$Node = () => {
 
   return (
     <>
-      <View style={styles.scrollView}>{body}</View>
+      {/* <View style={styles.scrollView}>{body}</View> */}
+      <FirstTime />
     </>
   );
 };
