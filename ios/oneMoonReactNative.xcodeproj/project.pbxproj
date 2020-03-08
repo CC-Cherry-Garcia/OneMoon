@@ -8,18 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* oneMoonReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* oneMoonReactNativeTests.m */; };
-		11F066753A06C66326E41E5F /* libPods-oneMoonReactNative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7711A5770CE463B713AE872 /* libPods-oneMoonReactNative-tvOS.a */; };
-		12371667A090930DF40BE417 /* libPods-oneMoonReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90006DC9C034B3EED2D2FBE2 /* libPods-oneMoonReactNative.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1A3C4EFAD9E8058405C7E70A /* libPods-oneMoonReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF94424B07D21981FF534C5 /* libPods-oneMoonReactNativeTests.a */; };
+		1FB58A04241242E900D97172 /* archivo-black-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB58A03241242E900D97172 /* archivo-black-regular.ttf */; };
+		2BE88983F93905DF7D0DD84F /* libPods-oneMoonReactNative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296F2F1B8998A8FE2FDDFF1A /* libPods-oneMoonReactNative-tvOS.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* oneMoonReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* oneMoonReactNativeTests.m */; };
-		7B6BDEDC1D81A11AD3A95260 /* libPods-oneMoonReactNative-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAFF36FF088FDE0A9ADB01C5 /* libPods-oneMoonReactNative-tvOSTests.a */; };
+		4AFC06B26C67D17351E466D4 /* libPods-oneMoonReactNative-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C48A90C404EAC3F19BA13DD /* libPods-oneMoonReactNative-tvOSTests.a */; };
+		7E25385D7A3A6800CB761D64 /* libPods-oneMoonReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD8DF656CCC54ECB4048C27 /* libPods-oneMoonReactNative.a */; };
+		9BE1F5A9CFFEF5424D75BFB3 /* libPods-oneMoonReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D2C17DC0EC828B6DA4BFCB /* libPods-oneMoonReactNativeTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		00E356EE1AD99517003FC87E /* oneMoonReactNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = oneMoonReactNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* oneMoonReactNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = oneMoonReactNativeTests.m; sourceTree = "<group>"; };
+		08215A04994B39245BD55BF5 /* Pods-oneMoonReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative/Pods-oneMoonReactNative.debug.xcconfig"; sourceTree = "<group>"; };
+		0A9FB033C84B54B29E12E5D3 /* Pods-oneMoonReactNative-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOSTests/Pods-oneMoonReactNative-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* oneMoonReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oneMoonReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = oneMoonReactNative/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = oneMoonReactNative/AppDelegate.m; sourceTree = "<group>"; };
@@ -51,22 +54,21 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = oneMoonReactNative/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = oneMoonReactNative/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = oneMoonReactNative/main.m; sourceTree = "<group>"; };
+		1ADC380FAE393A99C38CF6FE /* Pods-oneMoonReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNativeTests/Pods-oneMoonReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
+		1FB58A03241242E900D97172 /* archivo-black-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "archivo-black-regular.ttf"; path = "../../src/assets/fonts/archivo-black-regular.ttf"; sourceTree = "<group>"; };
+		296F2F1B8998A8FE2FDDFF1A /* libPods-oneMoonReactNative-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* oneMoonReactNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "oneMoonReactNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* oneMoonReactNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "oneMoonReactNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		44F2882A5DAE14E70C3346BB /* Pods-oneMoonReactNative-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOSTests/Pods-oneMoonReactNative-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6B13E4C32E653DA276A2605E /* Pods-oneMoonReactNative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOS/Pods-oneMoonReactNative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		6BF94424B07D21981FF534C5 /* libPods-oneMoonReactNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		90006DC9C034B3EED2D2FBE2 /* libPods-oneMoonReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2FDA501BC0EC1544B1D3292 /* Pods-oneMoonReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative/Pods-oneMoonReactNative.release.xcconfig"; sourceTree = "<group>"; };
-		AAFF36FF088FDE0A9ADB01C5 /* libPods-oneMoonReactNative-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7711A5770CE463B713AE872 /* libPods-oneMoonReactNative-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3140D80174CBA5358AA0626 /* Pods-oneMoonReactNative-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOSTests/Pods-oneMoonReactNative-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		C4877983295C089F463376A3 /* Pods-oneMoonReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNativeTests/Pods-oneMoonReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
+		4BE4ED6ADEF836663B0DB8C9 /* Pods-oneMoonReactNative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOS/Pods-oneMoonReactNative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		50C0EF1B9E4E862624E5BF7F /* Pods-oneMoonReactNative-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOSTests/Pods-oneMoonReactNative-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		68BC20F0653C6F8686C17410 /* Pods-oneMoonReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative/Pods-oneMoonReactNative.release.xcconfig"; sourceTree = "<group>"; };
+		7FD8DF656CCC54ECB4048C27 /* libPods-oneMoonReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C48A90C404EAC3F19BA13DD /* libPods-oneMoonReactNative-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9D2C17DC0EC828B6DA4BFCB /* libPods-oneMoonReactNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81BBA7116648F286DEF159F /* Pods-oneMoonReactNative-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOS/Pods-oneMoonReactNative-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		EE54695ED929C5DA763D567B /* Pods-oneMoonReactNative-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative-tvOS/Pods-oneMoonReactNative-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F40C086481E466508F285844 /* Pods-oneMoonReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNative.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNative/Pods-oneMoonReactNative.debug.xcconfig"; sourceTree = "<group>"; };
-		FD53881BE1E9CFAAC48914B0 /* Pods-oneMoonReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNativeTests/Pods-oneMoonReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F0E93C77660ED7C078E1BE88 /* Pods-oneMoonReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNativeTests/Pods-oneMoonReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A3C4EFAD9E8058405C7E70A /* libPods-oneMoonReactNativeTests.a in Frameworks */,
+				9BE1F5A9CFFEF5424D75BFB3 /* libPods-oneMoonReactNativeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12371667A090930DF40BE417 /* libPods-oneMoonReactNative.a in Frameworks */,
+				7E25385D7A3A6800CB761D64 /* libPods-oneMoonReactNative.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11F066753A06C66326E41E5F /* libPods-oneMoonReactNative-tvOS.a in Frameworks */,
+				2BE88983F93905DF7D0DD84F /* libPods-oneMoonReactNative-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B6BDEDC1D81A11AD3A95260 /* libPods-oneMoonReactNative-tvOSTests.a in Frameworks */,
+				4AFC06B26C67D17351E466D4 /* libPods-oneMoonReactNative-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,17 +138,40 @@
 			name = oneMoonReactNative;
 			sourceTree = "<group>";
 		};
+		1FB58A02241242D200D97172 /* FontsA */ = {
+			isa = PBXGroup;
+			children = (
+				1FB58A03241242E900D97172 /* archivo-black-regular.ttf */,
+			);
+			path = FontsA;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				90006DC9C034B3EED2D2FBE2 /* libPods-oneMoonReactNative.a */,
-				B7711A5770CE463B713AE872 /* libPods-oneMoonReactNative-tvOS.a */,
-				AAFF36FF088FDE0A9ADB01C5 /* libPods-oneMoonReactNative-tvOSTests.a */,
-				6BF94424B07D21981FF534C5 /* libPods-oneMoonReactNativeTests.a */,
+				7FD8DF656CCC54ECB4048C27 /* libPods-oneMoonReactNative.a */,
+				296F2F1B8998A8FE2FDDFF1A /* libPods-oneMoonReactNative-tvOS.a */,
+				8C48A90C404EAC3F19BA13DD /* libPods-oneMoonReactNative-tvOSTests.a */,
+				A9D2C17DC0EC828B6DA4BFCB /* libPods-oneMoonReactNativeTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8318CF9F58381D7F11FBDFA3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08215A04994B39245BD55BF5 /* Pods-oneMoonReactNative.debug.xcconfig */,
+				68BC20F0653C6F8686C17410 /* Pods-oneMoonReactNative.release.xcconfig */,
+				B81BBA7116648F286DEF159F /* Pods-oneMoonReactNative-tvOS.debug.xcconfig */,
+				4BE4ED6ADEF836663B0DB8C9 /* Pods-oneMoonReactNative-tvOS.release.xcconfig */,
+				50C0EF1B9E4E862624E5BF7F /* Pods-oneMoonReactNative-tvOSTests.debug.xcconfig */,
+				0A9FB033C84B54B29E12E5D3 /* Pods-oneMoonReactNative-tvOSTests.release.xcconfig */,
+				F0E93C77660ED7C078E1BE88 /* Pods-oneMoonReactNativeTests.debug.xcconfig */,
+				1ADC380FAE393A99C38CF6FE /* Pods-oneMoonReactNativeTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -159,12 +184,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1FB58A02241242D200D97172 /* FontsA */,
 				13B07FAE1A68108700A75B9A /* oneMoonReactNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* oneMoonReactNativeTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				9A6F50EC31380868D078379A /* Pods */,
+				C00C0B287993479BBB943921 /* Resources */,
+				8318CF9F58381D7F11FBDFA3 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -182,20 +209,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9A6F50EC31380868D078379A /* Pods */ = {
+		C00C0B287993479BBB943921 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F40C086481E466508F285844 /* Pods-oneMoonReactNative.debug.xcconfig */,
-				A2FDA501BC0EC1544B1D3292 /* Pods-oneMoonReactNative.release.xcconfig */,
-				EE54695ED929C5DA763D567B /* Pods-oneMoonReactNative-tvOS.debug.xcconfig */,
-				6B13E4C32E653DA276A2605E /* Pods-oneMoonReactNative-tvOS.release.xcconfig */,
-				44F2882A5DAE14E70C3346BB /* Pods-oneMoonReactNative-tvOSTests.debug.xcconfig */,
-				C3140D80174CBA5358AA0626 /* Pods-oneMoonReactNative-tvOSTests.release.xcconfig */,
-				FD53881BE1E9CFAAC48914B0 /* Pods-oneMoonReactNativeTests.debug.xcconfig */,
-				C4877983295C089F463376A3 /* Pods-oneMoonReactNativeTests.release.xcconfig */,
 			);
-			name = Pods;
-			path = Pods;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +223,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "oneMoonReactNativeTests" */;
 			buildPhases = (
-				66D8524E0813D2D0D85D0CA6 /* [CP] Check Pods Manifest.lock */,
+				2DBE7AC19052B9EA02EB2D64 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -224,12 +242,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "oneMoonReactNative" */;
 			buildPhases = (
-				117A78EC9FCE78AE27F6FC39 /* [CP] Check Pods Manifest.lock */,
+				7A7B0126CBFF406E61449BC5 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				B2D7CF45CB937C6F65F15E28 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,7 +263,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "oneMoonReactNative-tvOS" */;
 			buildPhases = (
-				0FAFCC728ED6AF97933D8C4F /* [CP] Check Pods Manifest.lock */,
+				71DA496087B35985A7E17EB6 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -264,7 +283,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "oneMoonReactNative-tvOSTests" */;
 			buildPhases = (
-				657EAE0A27DA9BD91DA995F3 /* [CP] Check Pods Manifest.lock */,
+				493EBAC1F3D2BCB1C37D8222 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -285,7 +304,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -308,6 +327,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -338,6 +358,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				1FB58A04241242E900D97172 /* archivo-black-regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,50 +394,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		0FAFCC728ED6AF97933D8C4F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-oneMoonReactNative-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		117A78EC9FCE78AE27F6FC39 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-oneMoonReactNative-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,7 +408,29 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		657EAE0A27DA9BD91DA995F3 /* [CP] Check Pods Manifest.lock */ = {
+		2DBE7AC19052B9EA02EB2D64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-oneMoonReactNativeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		493EBAC1F3D2BCB1C37D8222 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -453,7 +452,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		66D8524E0813D2D0D85D0CA6 /* [CP] Check Pods Manifest.lock */ = {
+		71DA496087B35985A7E17EB6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -468,11 +467,81 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-oneMoonReactNativeTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-oneMoonReactNative-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A7B0126CBFF406E61449BC5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-oneMoonReactNative-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2D7CF45CB937C6F65F15E28 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-oneMoonReactNative/Pods-oneMoonReactNative-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-oneMoonReactNative/Pods-oneMoonReactNative-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -580,7 +649,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD53881BE1E9CFAAC48914B0 /* Pods-oneMoonReactNativeTests.debug.xcconfig */;
+			baseConfigurationReference = F0E93C77660ED7C078E1BE88 /* Pods-oneMoonReactNativeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -603,7 +672,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4877983295C089F463376A3 /* Pods-oneMoonReactNativeTests.release.xcconfig */;
+			baseConfigurationReference = 1ADC380FAE393A99C38CF6FE /* Pods-oneMoonReactNativeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -623,7 +692,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F40C086481E466508F285844 /* Pods-oneMoonReactNative.debug.xcconfig */;
+			baseConfigurationReference = 08215A04994B39245BD55BF5 /* Pods-oneMoonReactNative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -643,7 +712,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2FDA501BC0EC1544B1D3292 /* Pods-oneMoonReactNative.release.xcconfig */;
+			baseConfigurationReference = 68BC20F0653C6F8686C17410 /* Pods-oneMoonReactNative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -662,7 +731,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE54695ED929C5DA763D567B /* Pods-oneMoonReactNative-tvOS.debug.xcconfig */;
+			baseConfigurationReference = B81BBA7116648F286DEF159F /* Pods-oneMoonReactNative-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -690,7 +759,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6B13E4C32E653DA276A2605E /* Pods-oneMoonReactNative-tvOS.release.xcconfig */;
+			baseConfigurationReference = 4BE4ED6ADEF836663B0DB8C9 /* Pods-oneMoonReactNative-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -718,7 +787,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44F2882A5DAE14E70C3346BB /* Pods-oneMoonReactNative-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 50C0EF1B9E4E862624E5BF7F /* Pods-oneMoonReactNative-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -745,7 +814,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3140D80174CBA5358AA0626 /* Pods-oneMoonReactNative-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 0A9FB033C84B54B29E12E5D3 /* Pods-oneMoonReactNative-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
