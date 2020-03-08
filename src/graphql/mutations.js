@@ -1,198 +1,468 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBlog = /* GraphQL */ `
-  mutation CreateBlog(
-    $input: CreateBlogInput!
-    $condition: ModelBlogConditionInput
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    createBlog(input: $input, condition: $condition) {
+    createUser(input: $input, condition: $condition) {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog(
-    $input: UpdateBlogInput!
-    $condition: ModelBlogConditionInput
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    updateBlog(input: $input, condition: $condition) {
+    updateUser(input: $input, condition: $condition) {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog(
-    $input: DeleteBlogInput!
-    $condition: ModelBlogConditionInput
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    deleteBlog(input: $input, condition: $condition) {
+    deleteUser(input: $input, condition: $condition) {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const createPost = /* GraphQL */ `
-  mutation CreatePost(
-    $input: CreatePostInput!
-    $condition: ModelPostConditionInput
+export const createChallenge = /* GraphQL */ `
+  mutation CreateChallenge(
+    $input: CreateChallengeInput!
+    $condition: ModelChallengeConditionInput
   ) {
-    createPost(input: $input, condition: $condition) {
+    createChallenge(input: $input, condition: $condition) {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;
-export const updatePost = /* GraphQL */ `
-  mutation UpdatePost(
-    $input: UpdatePostInput!
-    $condition: ModelPostConditionInput
+export const updateChallenge = /* GraphQL */ `
+  mutation UpdateChallenge(
+    $input: UpdateChallengeInput!
+    $condition: ModelChallengeConditionInput
   ) {
-    updatePost(input: $input, condition: $condition) {
+    updateChallenge(input: $input, condition: $condition) {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;
-export const deletePost = /* GraphQL */ `
-  mutation DeletePost(
-    $input: DeletePostInput!
-    $condition: ModelPostConditionInput
+export const deleteChallenge = /* GraphQL */ `
+  mutation DeleteChallenge(
+    $input: DeleteChallengeInput!
+    $condition: ModelChallengeConditionInput
   ) {
-    deletePost(input: $input, condition: $condition) {
+    deleteChallenge(input: $input, condition: $condition) {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    createComment(input: $input, condition: $condition) {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    updateComment(input: $input, condition: $condition) {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;
