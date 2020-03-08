@@ -13,6 +13,7 @@ import ReactNative from './components/ReactNative';
 import Splash from './components/Splash';
 import FirstTime from './components/FirstTime';
 import FirstTimeChallengeType from './components/FirstTimeChallengeType';
+import FirstTimeChallengeTypeQuantity from './components/FirstTimeChallengeTypeQuantity';
 
 const initialState = {
   currentView: 'LOGIN_VIEW',
@@ -59,7 +60,7 @@ const App: () => React$Node = () => {
   return (
     <>
       {/* <View style={styles.scrollView}>{body}</View> */}
-      <FirstTimeChallengeType />
+      <FirstTimeChallengeTypeQuantity />
     </>
   );
 };
