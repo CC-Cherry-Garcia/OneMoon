@@ -57,7 +57,7 @@ const App: () => React$Node = () => {
   return (
     <>
       {/* <View style={styles.scrollView}>{body}</View> */}
-      <Splash />
+      <Login />
     </>
   );
 };

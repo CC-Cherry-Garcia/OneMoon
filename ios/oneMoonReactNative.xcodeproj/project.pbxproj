@@ -13,6 +13,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1FB58A04241242E900D97172 /* archivo-black-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB58A03241242E900D97172 /* archivo-black-regular.ttf */; };
+		1FB58A072414CE2E00D97172 /* roboto-500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB58A052414CE2E00D97172 /* roboto-500.ttf */; };
+		1FB58A082414CE2E00D97172 /* roboto-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB58A062414CE2E00D97172 /* roboto-regular.ttf */; };
 		2BE88983F93905DF7D0DD84F /* libPods-oneMoonReactNative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 296F2F1B8998A8FE2FDDFF1A /* libPods-oneMoonReactNative-tvOS.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -56,6 +58,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = oneMoonReactNative/main.m; sourceTree = "<group>"; };
 		1ADC380FAE393A99C38CF6FE /* Pods-oneMoonReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oneMoonReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-oneMoonReactNativeTests/Pods-oneMoonReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		1FB58A03241242E900D97172 /* archivo-black-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "archivo-black-regular.ttf"; path = "../../src/assets/fonts/archivo-black-regular.ttf"; sourceTree = "<group>"; };
+		1FB58A052414CE2E00D97172 /* roboto-500.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "roboto-500.ttf"; path = "../../src/assets/fonts/roboto-500.ttf"; sourceTree = "<group>"; };
+		1FB58A062414CE2E00D97172 /* roboto-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "roboto-regular.ttf"; path = "../../src/assets/fonts/roboto-regular.ttf"; sourceTree = "<group>"; };
 		296F2F1B8998A8FE2FDDFF1A /* libPods-oneMoonReactNative-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-oneMoonReactNative-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* oneMoonReactNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "oneMoonReactNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* oneMoonReactNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "oneMoonReactNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +145,8 @@
 		1FB58A02241242D200D97172 /* FontsA */ = {
 			isa = PBXGroup;
 			children = (
+				1FB58A052414CE2E00D97172 /* roboto-500.ttf */,
+				1FB58A062414CE2E00D97172 /* roboto-regular.ttf */,
 				1FB58A03241242E900D97172 /* archivo-black-regular.ttf */,
 			);
 			path = FontsA;
@@ -357,6 +363,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				1FB58A072414CE2E00D97172 /* roboto-500.ttf in Resources */,
+				1FB58A082414CE2E00D97172 /* roboto-regular.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				1FB58A04241242E900D97172 /* archivo-black-regular.ttf in Resources */,
 			);

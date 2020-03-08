@@ -57,6 +57,8 @@
 	<array>
 		<string>Ionicons.ttf</string>
 		<string>archivo-black-regular.ttf</string>
+		<string>roboto-500.ttf</string>
+		<string>roboto-regular.ttf</string>
 	</array>
 </dict>
 </plist>
