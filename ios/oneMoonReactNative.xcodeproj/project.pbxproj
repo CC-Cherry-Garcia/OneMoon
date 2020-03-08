@@ -194,7 +194,6 @@
 				FD53881BE1E9CFAAC48914B0 /* Pods-oneMoonReactNativeTests.debug.xcconfig */,
 				C4877983295C089F463376A3 /* Pods-oneMoonReactNativeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +308,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

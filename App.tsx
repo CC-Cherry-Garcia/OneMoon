@@ -109,6 +109,7 @@ const App: () => React$Node = () => {
             <Button
               title="Sign in with Facebook"
               onPress={() => {
+                console.log('Auth :', Auth);
                 Auth.federatedSignIn({provider: 'Facebook'});
               }}
             />
