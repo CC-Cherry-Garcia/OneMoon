@@ -17,25 +17,18 @@
             }
         }
     },
-    "auth": {
-        "cognito6488d302": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": []
-        }
-    },
-    "analytics": {
-        "onemoonreactnative": {
-            "service": "Pinpoint",
-            "providerPlugin": "awscloudformation"
-        }
-    },
     "notifications": {
         "onemoonreactnative": {
             "service": "Pinpoint",
-            "channels": [
-                "APNS"
-            ]
+            "channels": []
+        }
+    },
+    "auth": {
+        "onemoonreactnativedc404f5c": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
         }
     }
 }

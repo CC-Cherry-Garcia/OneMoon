@@ -235,9 +235,6 @@ const styles = {
     width: 300,
     maxWidth: 300,
     fontSize: 16,
-    outline: 'none',
-    border: 'none',
-    borderBottom: '2px solid rgba(0, 0, 0, .3)',
   },
   button: {
     backgroundColor: '#006bfc',
@@ -247,9 +244,6 @@ const styles = {
     marginTop: 10,
     fontWeight: '600',
     fontSize: 14,
-    cursor: 'pointer',
-    border: 'none',
-    outline: 'none',
     borderRadius: 3,
     boxShadow: '0px 1px 3px rgba(0, 0, 0, .3)',
   },
@@ -260,6 +254,5 @@ const styles = {
   },
   anchor: {
     color: '#006bfc',
-    cursor: 'pointer',
   },
 };

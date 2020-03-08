@@ -8,10 +8,10 @@ import React from 'react';
 import {useReducer, useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import Amplify, {Hub, Auth} from 'aws-amplify';
-// import {FaSignOutAlt} from 'react-native-vector-icons';
 import EmailLoginForm from './components/EmailLoginForm';
 import awsconfig from './aws-exports';
 import ReactNative from './components/ReactNative';
+
 Amplify.configure(awsconfig);
 
 const initialState = {
@@ -29,10 +29,7 @@ const App: () => React$Node = () => {
     Hub.listen('auth', data => {
       const {payload} = data;
       if (payload.event === 'signIn') {
-        setImmediate(() => dispatch({type: 'setUser', user: payload.data}));
-        setImmediate(() =>
-          window.history.pushState({}, null, 'https://www.amplifyauth.dev/'),
-        );
+        setImmediate(() => dispatch({type: 'SET_USER', user: payload.data}));
         updateFormState('base');
       }
       if (payload.event === 'signOut') {
@@ -70,7 +67,6 @@ const App: () => React$Node = () => {
   async function checkUser(dispatch) {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      console.log('user :', Object.keys(user));
       dispatch({type: 'SET_USER', user});
     } catch (err) {
       console.log('err: ', err);
@@ -80,9 +76,11 @@ const App: () => React$Node = () => {
 
   //Keep for now
   function signOut() {
+    console.log('signOut :');
     Auth.signOut()
       .then(data => {
         console.log('signed out: ', data);
+        setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
       })
       .catch(err => console.log(err));
   }
@@ -96,15 +94,7 @@ const App: () => React$Node = () => {
     );
   }
 
-  // let body = <Login changeView={setReactView} />;
-  // if (state.currentView === 'USER_MAIN_VIEW') {
-  //   body = <Login changeView={setReactView} />;
-  // } else if (state.currentView === 'LOGIN_VIEW') {
-  //   body = <Login changeView={setReactView} />;
-  // } else if (state.currentView === 'REACT_NATIVE_VIEW') {
-  //   body = <ReactNative changeView={setUserView} />;
-  // }
-  let body = <ReactNative changeView={setReactView} />;
+  let body = <ReactNative signOut={signOut} user={state.user} />;
 
   return (
     <View style={styles.appContainer}>
@@ -124,11 +114,13 @@ const App: () => React$Node = () => {
             />
             <Button
               title="Sign in with Google"
-              onPress={() => Auth.federatedSignIn({provider: 'Google'})}
-            />
-            <Button
-              title="Sign in with Hosted UI"
-              onPress={() => Auth.federatedSignIn()}
+              onPress={async () => {
+                const result = await Auth.federatedSignIn({provider: 'Google'});
+                console.log(
+                  'get aws Auth.federatedSignI google credentials',
+                  result,
+                );
+              }}
             />
             <Button
               title="Sign in with Email"
