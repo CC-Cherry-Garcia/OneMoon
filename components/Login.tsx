@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TextInput, Text} from 'react-native';
+import {StyleSheet, View, TextInput, Text, Alert, Button} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/components/CupertinoHeaderWithLargeTitle';
 import CupertinoButtonSuccess from '../src/components/CupertinoButtonSuccess';
 
@@ -27,6 +27,7 @@ function Login(props) {
         text1="Sign In"
         style={styles.cupertinoButtonSuccess2}
       />
+
       <View style={styles.rect} />
     </View>
   );
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(60,99,130,1)',
   },
   cupertinoHeaderWithLargeTitle: {
-    width: 375,
+    // width: 375,
     height: 96,
   },
   email: {

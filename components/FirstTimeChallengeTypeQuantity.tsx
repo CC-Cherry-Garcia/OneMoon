@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   cupertinoHeaderWithLargeTitle: {
     top: 0,
     left: 0,
-    width: 375,
+    // width: 375,
     height: 96,
     position: 'absolute',
   },
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 29,
   },
   cupertinoHeaderWithLargeTitleStack: {
-    width: 375,
+    // width: 375,
     height: 96,
   },
   createAnAccount2: {

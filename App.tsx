@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import {useReducer} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {useReducer, useEffect} from 'react';
+import {StyleSheet, View, ScrollView} from 'react-native';
 
 import Login from './components/Login';
 import ReactNative from './components/ReactNative';
@@ -16,7 +16,9 @@ import FirstTimeChallengeType from './components/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/FirstTimeChallengeTypeQuantity';
 
 const initialState = {
-  currentView: 'LOGIN_VIEW',
+  currentView: 'SPLASH_VIEW',
+  username: '',
+  password: '',
 };
 
 const reducer = (state: any, action: {type: string}) => {
@@ -48,7 +50,14 @@ const App: () => React$Node = () => {
     dispatch({type: 'SET_REACT_NATIVE_VIEW'});
   }
 
-  let body = <Login changeView={setReactView} />;
+  useEffect(() => {
+    // load app with Spalsh screen, change to login screen after 2 seconds
+    setTimeout(() => {
+      dispatch({type: 'SET_LOGIN_VIEW'});
+    }, 2000);
+  }, []);
+
+  let body = <Splash changeView={setReactView} />;
   if (state.currentView === 'USER_MAIN_VIEW') {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'LOGIN_VIEW') {
@@ -60,7 +69,8 @@ const App: () => React$Node = () => {
   return (
     <>
       {/* <View style={styles.scrollView}>{body}</View> */}
-      <FirstTimeChallengeTypeQuantity />
+      {body}
+      {/* <Splash /> */}
     </>
   );
 };
