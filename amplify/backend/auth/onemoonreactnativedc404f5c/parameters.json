@@ -1,6 +1,6 @@
 {
     "identityPoolName": "onemoonreactnativedc404f5c_identitypool_dc404f5c",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "onemoodc404f5c",
     "userPoolName": "onemoonreactnativedc404f5c_userpool_dc404f5c",
     "autoVerifiedAttributes": [

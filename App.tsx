@@ -4,16 +4,13 @@
  * @flow
  */
 
-import React from 'react';
-import {useReducer, useEffect} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import React, {useReducer, useEffect, useState} from 'react';
+import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
+import Amplify, {Hub, Auth} from 'aws-amplify';
+import awsconfig from './aws-exports';
 
 import Login from './components/Login';
-import {useReducer, useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import Amplify, {Hub, Auth} from 'aws-amplify';
 import EmailLoginForm from './components/EmailLoginForm';
-import awsconfig from './aws-exports';
 import ReactNative from './components/ReactNative';
 import Splash from './components/Splash';
 import FirstTime from './components/FirstTime';
@@ -103,7 +100,7 @@ const App: () => React$Node = () => {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'REACT_NATIVE_VIEW') {
     body = <ReactNative changeView={setUserView} />;
-    
+  }
   async function checkUser(dispatch) {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -134,7 +131,7 @@ const App: () => React$Node = () => {
     );
   }
 
-  let body = <ReactNative signOut={signOut} user={state.user} />;
+  // let body = <ReactNative signOut={signOut} user={state.user} />;
 
   return (
     // <>
@@ -178,7 +175,7 @@ const App: () => React$Node = () => {
       {state.user && state.user.signInUserSession && (
         <View style={styles.scrollView}>{body}</View>
       )}
-      {/* If you want to use Sign out, please use it :) 
+      {/* If you want to use Sign out, please use it :)
           <Button
             title="Sign Out"
             style={{...styles.button, ...styles.signOut}}
