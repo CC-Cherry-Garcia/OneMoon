@@ -1,32 +1,95 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
-        posts {
+        challenges {
           nextToken
         }
       }
@@ -34,83 +97,150 @@ export const listBlogs = /* GraphQL */ `
     }
   }
 `;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
+export const getChallenge = /* GraphQL */ `
+  query GetChallenge($id: ID!) {
+    getChallenge(id: $id) {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
+export const listChallenges = /* GraphQL */ `
+  query ListChallenges(
+    $filter: ModelChallengeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listChallenges(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userID
         title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        content
-        post {
-          id
-          title
-        }
+        increase
+        isValid
+        task1Name
+        task1IsDone
+        task2Name
+        task2IsDone
+        task3Name
+        task3IsDone
+        task4Name
+        task4IsDone
+        task5Name
+        task5IsDone
+        task6Name
+        task6IsDone
+        task7Name
+        task7IsDone
+        task8Name
+        task8IsDone
+        task9Name
+        task9IsDone
+        task10Name
+        task10IsDone
+        task11Name
+        task11IsDone
+        task12Name
+        task12IsDone
+        task13Name
+        task13IsDone
+        task14Name
+        task14IsDone
+        task15Name
+        task15IsDone
+        task16Name
+        task16IsDone
+        task17Name
+        task17IsDone
+        task18Name
+        task18IsDone
+        task19Name
+        task19IsDone
+        task20Name
+        task20IsDone
+        task21Name
+        task21IsDone
+        task22Name
+        task22IsDone
+        task23Name
+        task23IsDone
+        task24Name
+        task24IsDone
+        task25Name
+        task25IsDone
+        task26Name
+        task26IsDone
+        task27Name
+        task27IsDone
+        task28Name
+        task28IsDone
+        task29Name
+        task29IsDone
+        task30Name
+        task30IsDone
       }
       nextToken
     }

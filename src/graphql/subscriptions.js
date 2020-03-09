@@ -1,171 +1,450 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBlog = /* GraphQL */ `
-  subscription OnCreateBlog {
-    onCreateBlog {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const onUpdateBlog = /* GraphQL */ `
-  subscription OnUpdateBlog {
-    onUpdateBlog {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const onDeleteBlog = /* GraphQL */ `
-  subscription OnDeleteBlog {
-    onDeleteBlog {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       name
-      posts {
+      challenges {
         items {
           id
+          userID
           title
+          increase
+          isValid
+          task1Name
+          task1IsDone
+          task2Name
+          task2IsDone
+          task3Name
+          task3IsDone
+          task4Name
+          task4IsDone
+          task5Name
+          task5IsDone
+          task6Name
+          task6IsDone
+          task7Name
+          task7IsDone
+          task8Name
+          task8IsDone
+          task9Name
+          task9IsDone
+          task10Name
+          task10IsDone
+          task11Name
+          task11IsDone
+          task12Name
+          task12IsDone
+          task13Name
+          task13IsDone
+          task14Name
+          task14IsDone
+          task15Name
+          task15IsDone
+          task16Name
+          task16IsDone
+          task17Name
+          task17IsDone
+          task18Name
+          task18IsDone
+          task19Name
+          task19IsDone
+          task20Name
+          task20IsDone
+          task21Name
+          task21IsDone
+          task22Name
+          task22IsDone
+          task23Name
+          task23IsDone
+          task24Name
+          task24IsDone
+          task25Name
+          task25IsDone
+          task26Name
+          task26IsDone
+          task27Name
+          task27IsDone
+          task28Name
+          task28IsDone
+          task29Name
+          task29IsDone
+          task30Name
+          task30IsDone
         }
         nextToken
       }
     }
   }
 `;
-export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+export const onCreateChallenge = /* GraphQL */ `
+  subscription OnCreateChallenge {
+    onCreateChallenge {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;
-export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+export const onUpdateChallenge = /* GraphQL */ `
+  subscription OnUpdateChallenge {
+    onUpdateChallenge {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;
-export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+export const onDeleteChallenge = /* GraphQL */ `
+  subscription OnDeleteChallenge {
+    onDeleteChallenge {
       id
+      userID
       title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-      }
-      comments {
-        items {
-          id
-          content
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
-      id
-      content
-      post {
-        id
-        title
-        blog {
-          id
-          name
-        }
-        comments {
-          nextToken
-        }
-      }
+      increase
+      isValid
+      task1Name
+      task1IsDone
+      task2Name
+      task2IsDone
+      task3Name
+      task3IsDone
+      task4Name
+      task4IsDone
+      task5Name
+      task5IsDone
+      task6Name
+      task6IsDone
+      task7Name
+      task7IsDone
+      task8Name
+      task8IsDone
+      task9Name
+      task9IsDone
+      task10Name
+      task10IsDone
+      task11Name
+      task11IsDone
+      task12Name
+      task12IsDone
+      task13Name
+      task13IsDone
+      task14Name
+      task14IsDone
+      task15Name
+      task15IsDone
+      task16Name
+      task16IsDone
+      task17Name
+      task17IsDone
+      task18Name
+      task18IsDone
+      task19Name
+      task19IsDone
+      task20Name
+      task20IsDone
+      task21Name
+      task21IsDone
+      task22Name
+      task22IsDone
+      task23Name
+      task23IsDone
+      task24Name
+      task24IsDone
+      task25Name
+      task25IsDone
+      task26Name
+      task26IsDone
+      task27Name
+      task27IsDone
+      task28Name
+      task28IsDone
+      task29Name
+      task29IsDone
+      task30Name
+      task30IsDone
     }
   }
 `;

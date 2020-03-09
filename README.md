@@ -18,6 +18,7 @@ $ cd <project-dir>
 3. Run these commands:
 
 ```
+$ amplify configure
 $ amplify init
 ? Do you want to use an existing environment? Yes
 ? Choose the environment you would like to use:
