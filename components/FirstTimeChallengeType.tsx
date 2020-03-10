@@ -10,7 +10,7 @@ function FirstTimeChallengeType(props) {
     <View style={styles.container}>
       <View style={styles.group}>
         <ChallengeType
-          data={props}
+          state={props}
           text1="Pick this if you want to increase the duration you do something. For example: Read for 10 minutes longer everyday."
           text2="Quantitiy Challenge"
           style={styles.challengeType} 

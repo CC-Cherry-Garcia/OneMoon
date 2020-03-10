@@ -6,9 +6,9 @@ function ChallengeType(props) {
   return (
     <View style={[styles.container, props.style]}>
       <TouchableOpacity
-        onPress={() =>
-          console.log('Navigate to FirstTimeChallengeTypeQuantity')
-        }
+        onPress={() => {
+          props.state.changeView()
+        }}
         style={styles.button}>
         <Text style={styles.quantityChallenge}>
           {props.text2 || 'Quantity Challenge'}

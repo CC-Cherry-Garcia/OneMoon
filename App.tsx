@@ -43,6 +43,9 @@ const reducer = (state: any, action: {type: string}) => {
     case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
       newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
       return newState;
+    case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW':
+      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW';
+      return newState;
     case 'SET_USER':
       return {...state, user: action.user, loading: false};
     case 'LOADED':
@@ -101,6 +104,10 @@ const App: () => React$Node = () => {
     dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW'});
   }
 
+  function setFirstTimeChallengeTypeQuantityView() {
+    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW'});
+  }
+
   // useEffect(() => {
   //   // load app with Spalsh screen, change to login screen after 2 seconds
   //   setTimeout(() => {
@@ -121,7 +128,11 @@ const App: () => React$Node = () => {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
     console.log('challengeInput: ', challengeInput);
-    body = <FirstTimeChallengeType state={state}/>;
+    body = <FirstTimeChallengeType 
+            state={state}
+            changeView={setFirstTimeChallengeTypeQuantityView}/>;
+  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
+    body = <FirstTimeChallengeTypeQuantity state={state}/>;
   }
 
   // User authentication
