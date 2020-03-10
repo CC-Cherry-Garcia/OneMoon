@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, StatusBar, TextInput} from 'react-native';
+import {StyleSheet, View, Text, StatusBar, TextInput, Button, Alert} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
@@ -13,25 +13,39 @@ function FirstTimeChallengeTypeQuantity(props) {
         />
         <Icon name="gear" style={styles.icon} />
       </View>
-      <Text style={styles.createAnAccount2}>
+      {/* <Text style={styles.createAnAccount2}>
         Build your {'\n'}First Challenge!
-      </Text>
-      <Text style={styles.loremIpsum3}>
+      </Text> */}
+      {/* <Text style={styles.loremIpsum3}>
         Pick the task you want to complete every day and how many times you want
         it to increase.
-      </Text>
-      <CupertinoButtonSuccess
-        text1="Review your Challege"
-        style={styles.cupertinoButtonSuccess1}
-      />
-      <View style={styles.rect1} />
-      <Text style={styles.text}>Pick your Challenge Task and Quantity:</Text>
+      </Text> */}
+      {/* <View style={styles.rect1} /> */}
+      {/* <Text style={styles.text}>Pick your Challenge Task and Quantity:</Text> */}
       <StatusBar animated={false} hidden={true} />
       <Text style={styles.dailyTask}>Daily Task:</Text>
-      <TextInput placeholder=" Squats" style={styles.email1} />
+      <TextInput
+        onChangeText={TextInputValue => props.setChallengeInput({
+          ...props.challengeInput, 
+          taskName: TextInputValue,
+        })}
+        placeholder=" Squats" style={styles.email1} />
       <Text style={styles.dailyTask2}>Increase Quantity by:</Text>
-      <TextInput placeholder=" 5" style={styles.textInput} />
-      <View style={styles.day1Row}>
+      <TextInput 
+        onChangeText={TextInputValue => props.setChallengeInput({
+          ...props.challengeInput, 
+          increase: TextInputValue
+        })}
+        placeholder=" 5" 
+        style={styles.textInput} />
+      <Button
+        title="Review your Challege"
+        onPress={() => {
+          console.log('props: ', props);
+          props.changeView()
+        }}
+      />
+      {/* <View style={styles.day1Row}>
         <Text style={styles.day1}>Day 1:</Text>
         <Text style={styles.day12}>5 Squats</Text>
       </View>
@@ -46,7 +60,7 @@ function FirstTimeChallengeTypeQuantity(props) {
         <Text style={styles.day30}>Day 30:</Text>
         <Text style={styles.text3}>150 Squats</Text>
       </View>
-      <View style={styles.rect2} />
+      <View style={styles.rect2} /> */}
     </View>
   );
 }

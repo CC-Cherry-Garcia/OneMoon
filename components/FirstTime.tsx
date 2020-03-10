@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Alert, Button} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 
 function FirstTime(props) {
+  console.log('props in FirstTime.tsx: ', props);
   return (
     <View style={styles.container}>
       <View style={styles.cupertinoHeaderWithLargeTitleStack}>
@@ -22,16 +24,25 @@ function FirstTime(props) {
       </Text>
       <View style={styles.group2}>
         <Text style={styles.loremIpsum4}>Pick a Challenge start date:</Text>
-        <TextInput placeholder=" Date Picker" style={styles.email1} />
+        <TextInput 
+          onChangeText={TextInputValue => props.setChallengeInput({...props.challengeInput, startDate: TextInputValue})}
+          placeholder=" Date Picker" 
+          style={styles.email1} 
+        />
       </View>
-      <CupertinoButtonSuccess
-        text1=" Next Step"
-        style={styles.cupertinoButtonSuccess1}
+      <Button
+        title=" Next Step"
+        color="#f194ff"
+        onPress={() => props.changeView()}
       />
       <View style={styles.rect1} />
       <View style={styles.group3}>
         <Text style={styles.challengeName}>Challenge Name:</Text>
-        <TextInput placeholder=" Crushing Squats" style={styles.textInput} />
+        <TextInput 
+          onChangeText={TextInputValue => props.setChallengeInput({...props.challengeInput, title: TextInputValue})}
+          placeholder=" Crushing Squats" 
+          style={styles.textInput} 
+        />
       </View>
     </View>
   );
