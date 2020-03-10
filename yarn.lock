@@ -5975,11 +5975,6 @@ react-native-elements@^0.19.1:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
-react-native-social-share@^1.6.5:
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/react-native-social-share/-/react-native-social-share-1.6.5.tgz#c3c9cb0152efc3dfa0472c5f67d051540b505d9d"
-  integrity sha512-S61aHlAj9AelpHR4ZJ3w+42UFI5DkqP+hZLfx2/fY2By7QTn+nD0OHeEBrRKWYuabA+XAz8PSaeI9r2LZN8JWw==
-
 react-native-typescript-transformer@^1.2.13:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/react-native-typescript-transformer/-/react-native-typescript-transformer-1.2.13.tgz#be92a3d110dbb2cf2f4aebe60a935be124cfb7ed"

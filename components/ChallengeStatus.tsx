@@ -3,25 +3,11 @@ import {StyleSheet, View, StatusBar, Text} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
-import {shareOnFacebook, shareOnTwitter} from 'react-native-social-share';
 
 function ChallengeStatus(props) {
   const isDone = props.data.task4IsDone;
 
-  const shareTwitter = () => {
-    shareOnTwitter(
-      {
-        text: 'Global democratized marketplace for art',
-        link: 'https://artboost.com/',
-        imagelink: 'https://artboost.com/apple-touch-icon-144x144.png',
-        //or use image
-        image: 'artboost-icon',
-      },
-      results => {
-        console.log(results);
-      },
-    );
-  };
+  const shareTwitter = () => {};
   return (
     <View style={styles.container}>
       <View style={styles.cupertinoHeaderWithLargeTitleStackColumn}>
