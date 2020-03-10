@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, StatusBar, Text} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  StatusBar,
+  Text,
+  Platform,
+  Linking,
+  Button,
+} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
@@ -7,7 +15,21 @@ import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess
 function ChallengeStatus(props) {
   const isDone = props.data.task4IsDone;
 
-  const shareTwitter = () => {};
+  // const shareTwitter = async () => {
+  //   const shareOptions = {
+  //     title: 'Share file',
+  //     url: 'http://foo.com',
+  //     failOnCancel: false,
+  //   };
+
+  //   try {
+  //     const ShareResponse = await Share.open(shareOptions);
+  //     // setResult(JSON.stringify(ShareResponse, null, 2));
+  //   } catch (error) {
+  //     console.log('Error =>', error);
+  //     // setResult('error: '.concat(getErrorString(error)));
+  //   }
+  // };
   return (
     <View style={styles.container}>
       <View style={styles.cupertinoHeaderWithLargeTitleStackColumn}>
@@ -19,11 +41,16 @@ function ChallengeStatus(props) {
           <StatusBar animated={false} hidden={true} />
         </View>
         <Text style={styles.createAnAccount2}>{props.data.title}</Text>
-        <CupertinoButtonSuccess
-          text1="Share Your Progress"
+        <Button
+          title="Share Your Progress"
           style={styles.cupertinoButtonSuccess2}
-          click={shareTwitter}
+          onPress={() =>
+            Linking.openURL(
+              'https://twitter.com/intent/tweet?text=Hello%20world',
+            )
+          }
         />
+
         {/* </View>
       <View style={styles.cupertinoHeaderWithLargeTitleStackColumnFiller}> */}
         <View style={styles.day10StackStack}>
@@ -84,6 +111,13 @@ const styles = StyleSheet.create({
     height: 72,
     marginTop: 368,
     marginLeft: 30,
+    backgroundColor: 'rgba(229,80,57,1)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: 16,
+    paddingLeft: 16,
+    borderRadius: 5,
   },
   cupertinoHeaderWithLargeTitleStackColumn: {
     width: 375,
