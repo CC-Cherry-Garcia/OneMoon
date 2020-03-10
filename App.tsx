@@ -6,7 +6,8 @@
 
 import React, {useReducer, useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
-import Amplify, {Hub, Auth} from 'aws-amplify';
+import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
+import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
 
 import Login from './components/Login';
@@ -17,6 +18,7 @@ import FirstTime from './components/FirstTime';
 import FirstTimeChallengeType from './components/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/FirstTimeChallengeTypeQuantity';
 import FirstTimeChallengeTypeQuantityConfirm from './components/FirstTimeChallengeTypeQuantityConfirm';
+import ChallengeStatus from './components/ChallengeStatus';
 
 Amplify.configure(awsconfig);
 
@@ -24,6 +26,74 @@ const initialState = {
   currentView: 'SPLASH_VIEW',
   user: null,
   loading: true,
+  userCurrentChallenge: {
+    id: '1',
+    userID: 'Travis',
+    title: 'Squat til you Drop',
+    startDate: '2020-03-6',
+    increase: null,
+    isValid: 'valid',
+    task1Name: '5 Squats',
+    task1IsDone: false,
+    task2Name: '10 Squats',
+    task2IsDone: false,
+    task3Name: '15 Squats',
+    task3IsDone: false,
+    task4Name: '20 Squats',
+    task4IsDone: false,
+    task5Name: 'taskName',
+    task5IsDone: false,
+    task6Name: 'taskName',
+    task6IsDone: false,
+    task7Name: 'taskName',
+    task7IsDone: false,
+    task8Name: 'taskName',
+    task8IsDone: false,
+    task9Name: 'taskName',
+    task9IsDone: false,
+    task10Name: 'taskName',
+    task10IsDone: false,
+    task11Name: 'taskName',
+    task11IsDone: false,
+    task12Name: 'taskName',
+    task12IsDone: false,
+    task13Name: 'taskName',
+    task13IsDone: false,
+    task14Name: 'taskName',
+    task14IsDone: false,
+    task15Name: 'taskName',
+    task15IsDone: false,
+    task16Name: 'taskName',
+    task16IsDone: false,
+    task17Name: 'taskName',
+    task17IsDone: false,
+    task18Name: 'taskName',
+    task18IsDone: false,
+    task19Name: 'taskName',
+    task19IsDone: false,
+    task20Name: 'taskName',
+    task20IsDone: false,
+    task21Name: 'taskName',
+    task21IsDone: false,
+    task22Name: 'taskName',
+    task22IsDone: false,
+    task23Name: 'taskName',
+    task23IsDone: false,
+    task24Name: 'taskName',
+    task24IsDone: false,
+    task25Name: 'taskName',
+    task25IsDone: false,
+    task26Name: 'taskName',
+    task26IsDone: false,
+    task27Name: 'taskName',
+    task27IsDone: false,
+    task28Name: 'taskName',
+    task28IsDone: false,
+    task29Name: 'taskName',
+    task29IsDone: false,
+    task30Name: 'taskName',
+    task30IsDone: false,
+  },
 };
 
 const reducer = (state: any, action: {type: string}) => {
@@ -50,10 +120,15 @@ const reducer = (state: any, action: {type: string}) => {
     case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW':
       newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW';
       return newState;
+    case 'SET_CHALLENGE_STATUS':
+      newState.currentView = 'CHALLENGE_STATUS';
+      return newState;
     case 'SET_USER':
       return {...state, user: action.user, loading: false};
     case 'LOADED':
       return {...state, loading: false};
+    case 'SET_USER_CURRENT_CHALLENGE':
+      return {...state, userCurrentChallenge: action.userCurrentChallenge};
     default:
       return state;
   }
@@ -77,6 +152,20 @@ const App: () => React$Node = () => {
       }
     });
     checkUser(dispatch);
+
+    // get user's current active challenge
+    const getUserCurrentChallenge = async () => {
+      const data = await API.graphql(
+        graphqlOperation(queries.getChallenge, {id: '1'}),
+      );
+      const payload = data.data.getChallenge;
+      dispatch({
+        type: 'SET_USER_CURRENT_CHALLENGE',
+        userCurrentChallenge: payload,
+      });
+      // console.log(data);
+    };
+    getUserCurrentChallenge();
   }, []);
 
   // function reducer(state: any, action: {type: string}) {
@@ -191,51 +280,54 @@ const App: () => React$Node = () => {
     //   {body}
     //   {/* <Splash /> */}
     // </>
-    <View style={styles.appContainer}>
-      {state.loading && (
-        <View style={styles.body}>
-          <Text>Loading...</Text>
-        </View>
-      )}
-      {!state.user && !state.loading && (
-        <View>
-          <View style={styles.container}>
-            <Button
-              title="Sign in with Facebook"
-              onPress={() => {
-                console.log('Auth :', Auth);
-                Auth.federatedSignIn({provider: 'Facebook'});
-              }}
-            />
-            <Button
-              title="Sign in with Google"
-              onPress={async () => {
-                const result = await Auth.federatedSignIn({provider: 'Google'});
-                console.log(
-                  'get aws Auth.federatedSignI google credentials',
-                  result,
-                );
-              }}
-            />
-            <Button
-              title="Sign in with Email"
-              onPress={() => updateFormState('email')}
-            />
-          </View>
-        </View>
-      )}
-      {state.user && state.user.signInUserSession && (
-        <View style={styles.scrollView}>{body}</View>
-      )}
-      {/* If you want to use Sign out, please use it :)
-          <Button
-            title="Sign Out"
-            style={{...styles.button, ...styles.signOut}}
-            onPress={signOut}>
-            <FaSignOutAlt color="white" />
-          </Button>
-      */}
-    </View>
+    // <View style={styles.appContainer}>
+    //   {state.loading && (
+    //     <View style={styles.body}>
+    //       <Text>Loading...</Text>
+    //     </View>
+    //   )}
+    //   {!state.user && !state.loading && (
+    //     <View>
+    //       <View style={styles.container}>
+    //         <Button
+    //           title="Sign in with Facebook"
+    //           onPress={() => {
+    //             console.log('Auth :', Auth);
+    //             Auth.federatedSignIn({provider: 'Facebook'});
+    //           }}
+    //         />
+    //         <Button
+    //           title="Sign in with Google"
+    //           onPress={async () => {
+    //             const result = await Auth.federatedSignIn({provider: 'Google'});
+    //             console.log(
+    //               'get aws Auth.federatedSignI google credentials',
+    //               result,
+    //             );
+    //           }}
+    //         />
+    //         <Button
+    //           title="Sign in with Email"
+    //           onPress={() => updateFormState('email')}
+    //         />
+    //       </View>
+    //     </View>
+    //   )}
+    //   {state.user && state.user.signInUserSession && (
+    //     <View style={styles.scrollView}>{body}</View>
+    //   )}
+    //   {/* If you want to use Sign out, please use it :)
+    //       <Button
+    //         title="Sign Out"
+    //         style={{...styles.button, ...styles.signOut}}
+    //         onPress={signOut}>
+    //         <FaSignOutAlt color="white" />
+    //       </Button>
+    //   */}
+    // </View>
+    <>
+      <ChallengeStatus data={state.userCurrentChallenge} />
+    </>
   );
 };
 
