@@ -1,14 +1,15 @@
 type User @model {
-  id: ID!
+  id: String!
   name: String!
   challenges: [Challenge] @connection(keyName: "ByUser", fields: ["id"])
 }
 
 type Challenge @model 
   @key(name: "ByUser", fields: ["userID", "id"]) {
-    id: ID!
-    userID: ID!
+    id: String!
+    userID: String!
     title: String!
+    startDate: String!
     increase: Int
     isValid: String! # Boolean types cannot be sort keys
     task1Name: String!
