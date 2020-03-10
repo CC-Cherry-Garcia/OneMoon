@@ -4,20 +4,42 @@
  * @flow
  */
 
-import React from 'react';
-import {useReducer, useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import React, {useReducer, useEffect, useState} from 'react';
+import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import Amplify, {Hub, Auth} from 'aws-amplify';
-import EmailLoginForm from './components/EmailLoginForm';
 import awsconfig from './aws-exports';
+
+import Login from './components/Login';
+import EmailLoginForm from './components/EmailLoginForm';
 import ReactNative from './components/ReactNative';
+import Splash from './components/Splash';
+import FirstTime from './components/FirstTime';
+import FirstTimeChallengeType from './components/FirstTimeChallengeType';
+import FirstTimeChallengeTypeQuantity from './components/FirstTimeChallengeTypeQuantity';
 
 Amplify.configure(awsconfig);
 
 const initialState = {
-  currentView: 'LOGIN_VIEW',
+  currentView: 'SPLASH_VIEW',
   user: null,
   loading: true,
+};
+
+const reducer = (state: any, action: {type: string}) => {
+  let newState = {...state};
+  switch (action.type) {
+    case 'SET_LOGIN_VIEW':
+      newState.currentView = 'LOGIN_VIEW';
+      return newState;
+    case 'SET_USER_VIEW':
+      newState.currentView = 'USER_MAIN_VIEW';
+      return newState;
+    case 'SET_REACT_NATIVE_VIEW':
+      newState.currentView = 'REACT_NATIVE_VIEW';
+      return newState;
+    default:
+      return state;
+  }
 };
 
 const App: () => React$Node = () => {
@@ -64,6 +86,21 @@ const App: () => React$Node = () => {
     dispatch({type: 'SET_REACT_NATIVE_VIEW'});
   }
 
+  // useEffect(() => {
+  //   // load app with Spalsh screen, change to login screen after 2 seconds
+  //   setTimeout(() => {
+  //     dispatch({type: 'SET_LOGIN_VIEW'});
+  //   }, 2000);
+  // }, []);
+
+  let body = <Splash changeView={setReactView} />;
+  if (state.currentView === 'USER_MAIN_VIEW') {
+    body = <Login changeView={setReactView} />;
+  } else if (state.currentView === 'LOGIN_VIEW') {
+    body = <Login changeView={setReactView} />;
+  } else if (state.currentView === 'REACT_NATIVE_VIEW') {
+    body = <ReactNative changeView={setUserView} />;
+  }
   async function checkUser(dispatch) {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -94,9 +131,14 @@ const App: () => React$Node = () => {
     );
   }
 
-  let body = <ReactNative signOut={signOut} user={state.user} />;
+  // let body = <ReactNative signOut={signOut} user={state.user} />;
 
   return (
+    // <>
+    //   {/* <View style={styles.scrollView}>{body}</View> */}
+    //   {body}
+    //   {/* <Splash /> */}
+    // </>
     <View style={styles.appContainer}>
       {state.loading && (
         <View style={styles.body}>
@@ -133,7 +175,7 @@ const App: () => React$Node = () => {
       {state.user && state.user.signInUserSession && (
         <View style={styles.scrollView}>{body}</View>
       )}
-      {/* If you want to use Sign out, please use it :) 
+      {/* If you want to use Sign out, please use it :)
           <Button
             title="Sign Out"
             style={{...styles.button, ...styles.signOut}}
