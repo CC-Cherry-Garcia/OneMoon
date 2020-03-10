@@ -31,10 +31,5 @@
             "customAuth": false
         }
     },
-    "analytics": {
-        "onemoonreactnative": {
-            "service": "Pinpoint",
-            "providerPlugin": "awscloudformation"
-        }
-    }
+    "analytics": {}
 }

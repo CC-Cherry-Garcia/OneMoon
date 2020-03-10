@@ -139,11 +139,19 @@ const App: () => React$Node = () => {
     });
     checkUser(dispatch);
 
-    // const getUserCurrentChallenge = async () => {
-    //   const data = await axios.get('');
-    // };
-    // await API.graphql(graphqlOperation(queries.listTodos));
-    // console.log(allTodos);
+    // get user's current active challenge
+    const getUserCurrentChallenge = async () => {
+      const data = await API.graphql(
+        graphqlOperation(queries.getChallenge, {id: '1'}),
+      );
+      const payload = data.data.getChallenge;
+      dispatch({
+        type: 'SET_USER_CURRENT_CHALLENGE',
+        userCurrentChallenge: payload,
+      });
+      // console.log(data);
+    };
+    getUserCurrentChallenge();
   }, []);
 
   // function reducer(state: any, action: {type: string}) {
