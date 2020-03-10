@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TextInput, Text, Alert, Button} from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/components/CupertinoHeaderWithLargeTitle';
-import CupertinoButtonSuccess from '../src/components/CupertinoButtonSuccess';
+import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
 
 function Login(props) {
   return (

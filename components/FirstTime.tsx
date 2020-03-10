@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput} from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/components/CupertinoHeaderWithLargeTitle';
+import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/components/CupertinoButtonSuccess';
+import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
 
 function FirstTime(props) {
   return (
