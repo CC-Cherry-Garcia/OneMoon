@@ -11,7 +11,7 @@ import awsconfig from './aws-exports';
 
 import Login from './components/Login';
 import EmailLoginForm from './components/EmailLoginForm';
-import ReactNative from './components/ReactNative';
+import UserChallengeStatus from './components/UserChallengeStatus';
 import Splash from './components/Splash';
 import FirstTime from './components/FirstTime';
 import FirstTimeChallengeType from './components/FirstTimeChallengeType';
@@ -37,6 +37,10 @@ const reducer = (state: any, action: {type: string}) => {
     case 'SET_REACT_NATIVE_VIEW':
       newState.currentView = 'REACT_NATIVE_VIEW';
       return newState;
+    case 'SET_USER':
+      return {...state, user: action.user, loading: false};
+    case 'LOADED':
+      return {...state, loading: false};
     default:
       return state;
   }
@@ -61,26 +65,26 @@ const App: () => React$Node = () => {
     checkUser(dispatch);
   }, []);
 
-  function reducer(state: any, action: {type: string}) {
-    let newState = {...state};
-    switch (action.type) {
-      case 'SET_LOGIN_VIEW': //Keep for now
-        newState.currentView = 'LOGIN_VIEW';
-        return newState;
-      case 'SET_USER_VIEW': //Keep for now
-        newState.currentView = 'USER_MAIN_VIEW';
-        return newState;
-      case 'SET_REACT_NATIVE_VIEW':
-        newState.currentView = 'REACT_NATIVE_VIEW';
-        return newState;
-      case 'SET_USER':
-        return {...state, user: action.user, loading: false};
-      case 'LOADED':
-        return {...state, loading: false};
-      default:
-        return state;
-    }
-  }
+  // function reducer(state: any, action: {type: string}) {
+  //   let newState = {...state};
+  //   switch (action.type) {
+  //     case 'SET_LOGIN_VIEW': //Keep for now
+  //       newState.currentView = 'LOGIN_VIEW';
+  //       return newState;
+  //     case 'SET_USER_VIEW': //Keep for now
+  //       newState.currentView = 'USER_MAIN_VIEW';
+  //       return newState;
+  //     case 'SET_REACT_NATIVE_VIEW':
+  //       newState.currentView = 'REACT_NATIVE_VIEW';
+  //       return newState;
+  //     case 'SET_USER':
+  //       return {...state, user: action.user, loading: false};
+  //     case 'LOADED':
+  //       return {...state, loading: false};
+  //     default:
+  //       return state;
+  //   }
+  // }
 
   function setReactView() {
     dispatch({type: 'SET_REACT_NATIVE_VIEW'});
@@ -98,9 +102,9 @@ const App: () => React$Node = () => {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'LOGIN_VIEW') {
     body = <Login changeView={setReactView} />;
-  } else if (state.currentView === 'REACT_NATIVE_VIEW') {
-    body = <ReactNative changeView={setUserView} />;
   }
+
+  // User authentication
   async function checkUser(dispatch) {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -111,7 +115,7 @@ const App: () => React$Node = () => {
     }
   }
 
-  //Keep for now
+  // Sign out; Don't delete
   function signOut() {
     console.log('signOut :');
     Auth.signOut()
@@ -122,7 +126,7 @@ const App: () => React$Node = () => {
       .catch(err => console.log(err));
   }
 
-  // This renders the custom form
+  // This renders the sign-in form
   if (formState === 'email') {
     return (
       <View style={styles.appContainer}>

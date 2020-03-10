@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, Text, StatusBar, Button} from 'react-native';
 
-export default function ReactNative(props) {
+export default function UserChallengeStatus(props) {
   console.log('props.user :', props.user.username);
   return (
     <>
