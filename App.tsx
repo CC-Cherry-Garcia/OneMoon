@@ -16,6 +16,7 @@ import Splash from './components/Splash';
 import FirstTime from './components/FirstTime';
 import FirstTimeChallengeType from './components/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/FirstTimeChallengeTypeQuantity';
+import FirstTimeChallengeTypeQuantityConfirm from './components/FirstTimeChallengeTypeQuantityConfirm';
 
 Amplify.configure(awsconfig);
 
@@ -45,6 +46,9 @@ const reducer = (state: any, action: {type: string}) => {
       return newState;
     case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW':
       newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW';
+      return newState;
+    case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW':
+      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW';
       return newState;
     case 'SET_USER':
       return {...state, user: action.user, loading: false};
@@ -108,6 +112,10 @@ const App: () => React$Node = () => {
     dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW'});
   }
 
+  function setFirstTimeChallengeTypeQuantityConfirmView() {
+    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'});
+  }
+
   // useEffect(() => {
   //   // load app with Spalsh screen, change to login screen after 2 seconds
   //   setTimeout(() => {
@@ -132,7 +140,16 @@ const App: () => React$Node = () => {
             state={state}
             changeView={setFirstTimeChallengeTypeQuantityView}/>;
   } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
-    body = <FirstTimeChallengeTypeQuantity state={state}/>;
+    body = <FirstTimeChallengeTypeQuantity 
+            state={state}
+            challengeInput={challengeInput}
+            setChallengeInput={setChallengeInput}
+            changeView={setFirstTimeChallengeTypeQuantityConfirmView}/>;
+  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW') {
+    body = <FirstTimeChallengeTypeQuantityConfirm 
+    state={state}
+    challengeInput={challengeInput}
+    changeView={setFirstTimeChallengeTypeQuantityConfirmView}/>;
   }
 
   // User authentication

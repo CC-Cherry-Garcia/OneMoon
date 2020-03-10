@@ -33,10 +33,7 @@ function FirstTime(props) {
       <Button
         title=" Next Step"
         color="#f194ff"
-        onPress={() => {
-          props.setChallengeInput({...props.challengeInput, })
-          props.changeView()
-        }}
+        onPress={() => props.changeView()}
       />
       <View style={styles.rect1} />
       <View style={styles.group3}>

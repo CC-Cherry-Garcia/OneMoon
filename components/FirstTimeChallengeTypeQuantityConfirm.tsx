@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, StatusBar, TextInput, Button, Alert} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
 
-function FirstTimeChallengeTypeQuantity(props) {
+
+function FirstTimeChallengeTypeQuantityConfirm(props) {
   return (
     <View style={styles.container}>
       <View style={styles.cupertinoHeaderWithLargeTitleStack}>
@@ -13,54 +13,14 @@ function FirstTimeChallengeTypeQuantity(props) {
         />
         <Icon name="gear" style={styles.icon} />
       </View>
-      {/* <Text style={styles.createAnAccount2}>
-        Build your {'\n'}First Challenge!
-      </Text> */}
-      {/* <Text style={styles.loremIpsum3}>
-        Pick the task you want to complete every day and how many times you want
-        it to increase.
-      </Text> */}
-      {/* <View style={styles.rect1} /> */}
-      {/* <Text style={styles.text}>Pick your Challenge Task and Quantity:</Text> */}
       <StatusBar animated={false} hidden={true} />
-      <Text style={styles.dailyTask}>Daily Task:</Text>
-      <TextInput
-        onChangeText={TextInputValue => props.setChallengeInput({
-          ...props.challengeInput, 
-          taskName: TextInputValue,
-        })}
-        placeholder=" Squats" style={styles.email1} />
-      <Text style={styles.dailyTask2}>Increase Quantity by:</Text>
-      <TextInput 
-        onChangeText={TextInputValue => props.setChallengeInput({
-          ...props.challengeInput, 
-          increase: TextInputValue
-        })}
-        placeholder=" 5" 
-        style={styles.textInput} />
+      <Text></Text>
       <Button
-        title="Review your Challege"
+        title="Start Challenge"
         onPress={() => {
-          console.log('props: ', props);
           props.changeView()
         }}
       />
-      {/* <View style={styles.day1Row}>
-        <Text style={styles.day1}>Day 1:</Text>
-        <Text style={styles.day12}>5 Squats</Text>
-      </View>
-      <View style={styles.day2StackStack}>
-        <View style={styles.day2Stack}>
-          <Text style={styles.day2}>Day 2:</Text>
-          <Text style={styles.day22}>...</Text>
-        </View>
-        <Text style={styles.text2}>10 Squats</Text>
-      </View>
-      <View style={styles.day30Stack}>
-        <Text style={styles.day30}>Day 30:</Text>
-        <Text style={styles.text3}>150 Squats</Text>
-      </View>
-      <View style={styles.rect2} /> */}
     </View>
   );
 }
@@ -261,4 +221,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FirstTimeChallengeTypeQuantity;
+export default FirstTimeChallengeTypeQuantityConfirm;
