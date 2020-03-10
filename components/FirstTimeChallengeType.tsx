@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, StatusBar} from 'react-native';
+import {StyleSheet, View, Text, StatusBar, Alert} from 'react-native';
 import ChallengeType from '../src/sub-components/ChallengeType';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,8 +9,13 @@ function FirstTimeChallengeType(props) {
   return (
     <View style={styles.container}>
       <View style={styles.group}>
-        <ChallengeType style={styles.challengeType} />
         <ChallengeType
+          data={props}
+          text1="Pick this if you want to increase the duration you do something. For example: Read for 10 minutes longer everyday."
+          text2="Quantitiy Challenge"
+          style={styles.challengeType} 
+        />
+        {/* <ChallengeType
           text1="Pick this if you want to increase the duration you do something. For example: Read for 10 minutes longer everyday."
           text2="Time Challenge"
           style={styles.challengeType2}
@@ -24,7 +29,7 @@ function FirstTimeChallengeType(props) {
           text2="Custom Challenge"
           text1="Pick this to decide custom goals for each of your 30 days. (This takes the longest to set up.)"
           style={styles.challengeType4}
-        />
+        /> */}
       </View>
       <View style={styles.cupertinoHeaderWithLargeTitleStack}>
         <CupertinoHeaderWithLargeTitle

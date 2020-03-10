@@ -37,6 +37,12 @@ const reducer = (state: any, action: {type: string}) => {
     case 'SET_REACT_NATIVE_VIEW':
       newState.currentView = 'REACT_NATIVE_VIEW';
       return newState;
+    case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
+      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
+      return newState;
+    case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
+      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
+      return newState;
     case 'SET_USER':
       return {...state, user: action.user, loading: false};
     case 'LOADED':
@@ -49,6 +55,7 @@ const reducer = (state: any, action: {type: string}) => {
 const App: () => React$Node = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [formState, updateFormState] = useState('base');
+  const [challengeInput, setChallengeInput] = useState({});
 
   useEffect(() => {
     // set listener for auth events
@@ -90,6 +97,10 @@ const App: () => React$Node = () => {
     dispatch({type: 'SET_REACT_NATIVE_VIEW'});
   }
 
+  function setFirstTimeChallengeTypeView() {
+    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW'});
+  }
+
   // useEffect(() => {
   //   // load app with Spalsh screen, change to login screen after 2 seconds
   //   setTimeout(() => {
@@ -97,11 +108,20 @@ const App: () => React$Node = () => {
   //   }, 2000);
   // }, []);
 
-  let body = <Splash changeView={setReactView} />;
+  // let body = <Splash changeView={setReactView} />;
+  let body = <FirstTime 
+              state={state} 
+              challengeInput={challengeInput}
+              setChallengeInput={setChallengeInput}
+              changeView={setFirstTimeChallengeTypeView}/>;
+  console.log('currentView: ', state.currentView);
   if (state.currentView === 'USER_MAIN_VIEW') {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'LOGIN_VIEW') {
     body = <Login changeView={setReactView} />;
+  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
+    console.log('challengeInput: ', challengeInput);
+    body = <FirstTimeChallengeType state={state}/>;
   }
 
   // User authentication
