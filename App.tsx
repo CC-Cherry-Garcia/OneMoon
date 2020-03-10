@@ -147,9 +147,9 @@ const App: () => React$Node = () => {
             changeView={setFirstTimeChallengeTypeQuantityConfirmView}/>;
   } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW') {
     body = <FirstTimeChallengeTypeQuantityConfirm 
-    state={state}
-    challengeInput={challengeInput}
-    changeView={setFirstTimeChallengeTypeQuantityConfirmView}/>;
+            state={state}
+            challengeInput={challengeInput}
+            changeView={setFirstTimeChallengeTypeQuantityConfirmView}/>;
   }
 
   // User authentication
