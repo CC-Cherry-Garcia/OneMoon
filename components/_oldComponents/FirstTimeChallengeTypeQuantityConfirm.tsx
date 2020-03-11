@@ -7,11 +7,11 @@ import {
   Button,
   FlatList,
 } from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import * as queries from '../src/graphql/queries';
-import * as mutations from '../src/graphql/mutations';
+import * as queries from '../../src/graphql/queries';
+import * as mutations from '../../src/graphql/mutations';
 
 function FirstTimeChallengeTypeQuantityConfirm(props) {
   const taskQuantityArray = [];

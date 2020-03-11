@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, StatusBar, Alert} from 'react-native';
-import ChallengeType from '../src/sub-components/ChallengeType';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import ChallengeType from '../../src/sub-components/ChallengeType';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import CupertinoButtonSuccess from '../../src/sub-components/CupertinoButtonSuccess';
 
 function FirstTimeChallengeType(props) {
   return (

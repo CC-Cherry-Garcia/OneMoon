@@ -8,9 +8,9 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import CupertinoButtonSuccess from '../../src/sub-components/CupertinoButtonSuccess';
 
 function FirstTimeChallengeTypeQuantity(props) {
   return (

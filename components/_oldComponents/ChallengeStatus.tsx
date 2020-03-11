@@ -9,11 +9,11 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import CupertinoButtonSuccess from '../../src/sub-components/CupertinoButtonSuccess';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import * as queries from '../src/graphql/queries';
+import * as queries from '../../src/graphql/queries';
 
 function ChallengeStatus(props) {
   // async function getChallenge() {

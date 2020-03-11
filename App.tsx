@@ -10,15 +10,15 @@ import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
 
-import Login from './components/Login';
-import EmailLoginForm from './components/EmailLoginForm';
-import UserChallengeStatus from './components/UserChallengeStatus';
-import Splash from './components/Splash';
-import FirstTime from './components/FirstTime';
-import FirstTimeChallengeType from './components/FirstTimeChallengeType';
-import FirstTimeChallengeTypeQuantity from './components/FirstTimeChallengeTypeQuantity';
-import FirstTimeChallengeTypeQuantityConfirm from './components/FirstTimeChallengeTypeQuantityConfirm';
-import ChallengeStatus from './components/ChallengeStatus';
+import Login from './components/_oldComponents/Login';
+import EmailLoginForm from './components/_oldComponents/EmailLoginForm';
+import UserChallengeStatus from './components/_oldComponents/UserChallengeStatus';
+import Splash from './components/_oldComponents/Splash';
+import FirstTime from './components/_oldComponents/FirstTime';
+import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallengeType';
+import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
+import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/FirstTimeChallengeTypeQuantityConfirm';
+import ChallengeStatus from './components/_oldComponents/ChallengeStatus';
 
 Amplify.configure(awsconfig);
 
