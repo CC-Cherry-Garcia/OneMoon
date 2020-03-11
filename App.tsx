@@ -26,74 +26,75 @@ const initialState = {
   currentView: 'SPLASH_VIEW',
   user: null,
   loading: true,
-  // userCurrentChallenge: {
-  //   id: '1',
-  //   userID: 'Travis',
-  //   title: 'Squat til you Drop',
-  //   startDate: '2020-03-6',
-  //   increase: null,
-  //   isValid: 'valid',
-  //   task1Name: '5 Squats',
-  //   task1IsDone: false,
-  //   task2Name: '10 Squats',
-  //   task2IsDone: false,
-  //   task3Name: '15 Squats',
-  //   task3IsDone: false,
-  //   task4Name: '20 Squats',
-  //   task4IsDone: false,
-  //   task5Name: 'taskName',
-  //   task5IsDone: false,
-  //   task6Name: 'taskName',
-  //   task6IsDone: false,
-  //   task7Name: 'taskName',
-  //   task7IsDone: false,
-  //   task8Name: 'taskName',
-  //   task8IsDone: false,
-  //   task9Name: 'taskName',
-  //   task9IsDone: false,
-  //   task10Name: 'taskName',
-  //   task10IsDone: false,
-  //   task11Name: 'taskName',
-  //   task11IsDone: false,
-  //   task12Name: 'taskName',
-  //   task12IsDone: false,
-  //   task13Name: 'taskName',
-  //   task13IsDone: false,
-  //   task14Name: 'taskName',
-  //   task14IsDone: false,
-  //   task15Name: 'taskName',
-  //   task15IsDone: false,
-  //   task16Name: 'taskName',
-  //   task16IsDone: false,
-  //   task17Name: 'taskName',
-  //   task17IsDone: false,
-  //   task18Name: 'taskName',
-  //   task18IsDone: false,
-  //   task19Name: 'taskName',
-  //   task19IsDone: false,
-  //   task20Name: 'taskName',
-  //   task20IsDone: false,
-  //   task21Name: 'taskName',
-  //   task21IsDone: false,
-  //   task22Name: 'taskName',
-  //   task22IsDone: false,
-  //   task23Name: 'taskName',
-  //   task23IsDone: false,
-  //   task24Name: 'taskName',
-  //   task24IsDone: false,
-  //   task25Name: 'taskName',
-  //   task25IsDone: false,
-  //   task26Name: 'taskName',
-  //   task26IsDone: false,
-  //   task27Name: 'taskName',
-  //   task27IsDone: false,
-  //   task28Name: 'taskName',
-  //   task28IsDone: false,
-  //   task29Name: 'taskName',
-  //   task29IsDone: false,
-  //   task30Name: 'taskName',
-  //   task30IsDone: false,
-  // },
+  userCurrentChallenge: {
+    id: '1',
+    userID: 'Travis',
+    title: 'Squat til you Drop',
+    startDate: '2020-03-6',
+    increase: null,
+    isValid: 'valid',
+    task1Name: '5 Squats',
+    task1IsDone: false,
+    task2Name: '10 Squats',
+    task2IsDone: false,
+    task3Name: '15 Squats',
+    task3IsDone: false,
+    task4Name: '20 Squats',
+    task4IsDone: false,
+    task5Name: 'taskName',
+    task5IsDone: false,
+    task6Name: 'taskName',
+    task6IsDone: false,
+    task7Name: 'taskName',
+    task7IsDone: false,
+    task8Name: 'taskName',
+    task8IsDone: false,
+    task9Name: 'taskName',
+    task9IsDone: false,
+    task10Name: 'taskName',
+    task10IsDone: false,
+    task11Name: 'taskName',
+    task11IsDone: false,
+    task12Name: 'taskName',
+    task12IsDone: false,
+    task13Name: 'taskName',
+    task13IsDone: false,
+    task14Name: 'taskName',
+    task14IsDone: false,
+    task15Name: 'taskName',
+    task15IsDone: false,
+    task16Name: 'taskName',
+    task16IsDone: false,
+    task17Name: 'taskName',
+    task17IsDone: false,
+    task18Name: 'taskName',
+    task18IsDone: false,
+    task19Name: 'taskName',
+    task19IsDone: false,
+    task20Name: 'taskName',
+    task20IsDone: false,
+    task21Name: 'taskName',
+    task21IsDone: false,
+    task22Name: 'taskName',
+    task22IsDone: false,
+    task23Name: 'taskName',
+    task23IsDone: false,
+    task24Name: 'taskName',
+    task24IsDone: false,
+    task25Name: 'taskName',
+    task25IsDone: false,
+    task26Name: 'taskName',
+    task26IsDone: false,
+    task27Name: 'taskName',
+    task27IsDone: false,
+    task28Name: 'taskName',
+    task28IsDone: false,
+    task29Name: 'taskName',
+    task29IsDone: false,
+    task30Name: 'taskName',
+    task30IsDone: false,
+  },
+  isDone: false,
 };
 
 const reducer = (state: any, action: {type: string}) => {
@@ -127,8 +128,8 @@ const reducer = (state: any, action: {type: string}) => {
       return {...state, user: action.user, loading: false};
     case 'LOADED':
       return {...state, loading: false};
-    case 'SET_USER_CURRENT_CHALLENGE':
-      return {...state, userCurrentChallenge: action.userCurrentChallenge};
+    // case 'SET_USER_CURRENT_CHALLENGE':
+    //   return {...state, userCurrentChallenge: action.userCurrentChallenge};
     default:
       return state;
   }
@@ -139,6 +140,8 @@ const App: () => React$Node = () => {
   const [formState, updateFormState] = useState('base');
   const [challengeInput, setChallengeInput] = useState({});
   const [currentChallengeId, setCurrentChallengeId] = useState({});
+  const [userCurrentChallenge, setUserCurrentChallenge] = useState({});
+  const [isDone, setIsDone] = useState(false);
 
   console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
 
@@ -169,7 +172,6 @@ const App: () => React$Node = () => {
     //   // console.log(data);
     // };
     // getUserCurrentChallenge();
-    
   }, []);
 
   // function reducer(state: any, action: {type: string}) {
@@ -221,11 +223,22 @@ const App: () => React$Node = () => {
   // }, []);
 
   // let body = <Splash changeView={setReactView} />;
-  let body = <FirstTime 
-              state={state} 
-              challengeInput={challengeInput}
-              setChallengeInput={setChallengeInput}
-              changeView={setFirstTimeChallengeTypeView}/>;
+
+  // mark task complete
+  const markComplete = () => {
+    setIsDone(true);
+    console.log('markComplete', isDone);
+    return;
+  };
+
+  let body = (
+    <FirstTime
+      state={state}
+      challengeInput={challengeInput}
+      setChallengeInput={setChallengeInput}
+      changeView={setFirstTimeChallengeTypeView}
+    />
+  );
   console.log('currentView: ', state.currentView);
   if (state.currentView === 'USER_MAIN_VIEW') {
     body = <Login changeView={setReactView} />;
@@ -233,30 +246,44 @@ const App: () => React$Node = () => {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
     console.log('challengeInput: ', challengeInput);
-    body = <FirstTimeChallengeType 
-            state={state}
-            changeView={setFirstTimeChallengeTypeQuantityView}
-            />;
+    body = (
+      <FirstTimeChallengeType
+        state={state}
+        changeView={setFirstTimeChallengeTypeQuantityView}
+      />
+    );
   } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
-    body = <FirstTimeChallengeTypeQuantity 
-            state={state}
-            challengeInput={challengeInput}
-            setChallengeInput={setChallengeInput}
-            changeView={setFirstTimeChallengeTypeQuantityConfirmView}
-            />;
-  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW') {
-    body = <FirstTimeChallengeTypeQuantityConfirm 
-            state={state}
-            challengeInput={challengeInput}
-            changeView={setChallengeStatusView}
-            currentChallengeId={currentChallengeId}
-            setCurrentChallengeId={setCurrentChallengeId}
-            />;
+    body = (
+      <FirstTimeChallengeTypeQuantity
+        state={state}
+        challengeInput={challengeInput}
+        setChallengeInput={setChallengeInput}
+        changeView={setFirstTimeChallengeTypeQuantityConfirmView}
+      />
+    );
+  } else if (
+    state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'
+  ) {
+    body = (
+      <FirstTimeChallengeTypeQuantityConfirm
+        state={state}
+        challengeInput={challengeInput}
+        changeView={setChallengeStatusView}
+        currentChallengeId={currentChallengeId}
+        setCurrentChallengeId={setCurrentChallengeId}
+        setUserCurrentChallenge={setUserCurrentChallenge}
+      />
+    );
   } else if (state.currentView === 'CHALLENGE_STATUS_VIEW') {
-    body = <ChallengeStatus 
-            state={state}
-            currentChallengeId={currentChallengeId}
-            />;
+    body = (
+      <ChallengeStatus
+        state={state}
+        currentChallengeId={currentChallengeId}
+        data={state.userCurrentChallenge}
+        markComplete={markComplete}
+        isDone={isDone}
+      />
+    );
   }
 
   // User authentication
@@ -343,9 +370,9 @@ const App: () => React$Node = () => {
     //       </Button>
     //   */}
     // </View>
-  //   <>
-  //     <ChallengeStatus data={state.userCurrentChallenge} />
-  //   </>
+    //   <>
+    //     <ChallengeStatus data={state.userCurrentChallenge} />
+    //   </>
   );
 };
 

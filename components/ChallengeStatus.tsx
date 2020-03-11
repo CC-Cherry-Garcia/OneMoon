@@ -12,18 +12,16 @@ import {
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../src/graphql/queries';
 
 function ChallengeStatus(props) {
-
   // async function getChallenge() {
   //   const currentUserChallenges = await API.graphql(graphqlOperation(queries.getChallengeByUser, {userID: props.user.username}));
   //   console.log('**********currentUserChallenges', currentUserChallenges);
   // }
 
-
-  // const isDone = props.data.task4IsDone;
+  const isDone = props.isDone;
 
   // const shareTwitter = async () => {
   //   const shareOptions = {
@@ -46,13 +44,13 @@ function ChallengeStatus(props) {
         style={styles.cupertinoHeaderWithLargeTitle}
       />
       <Icon name="gear" style={styles.icon} />
-      {/* <Text style={styles.createAnAccount2}>{props.data.title}</Text> */}
+      <Text style={styles.createAnAccount2}>{props.data.title}</Text>
       <TouchableOpacity
         title="Share Your Progress"
         style={styles.btnStyle}
         onPress={() =>
           Linking.openURL(
-            'https://twitter.com/intent/tweet?text=I%20just%20completed%20Day%204%20of%20my%20Squats%20Challenge%20using%20%23OneMoon',
+            'https://twitter.com/intent/tweet?text=I%20just%20completed%20Day%201%20of%20my%20Squats%20Challenge%20using%20%23OneMoon',
           )
         }>
         <Text style={styles.btnText}>Share Your Progress</Text>
@@ -64,10 +62,12 @@ function ChallengeStatus(props) {
         <View style={styles.day10Stack}>
           <Text style={styles.day10}>Day 4</Text>
         </View>
-        <CupertinoButtonSuccess
-          text1="Mark Today Done"
-          style={styles.cupertinoButtonSuccess1}
-        />
+        <TouchableOpacity
+          title="Mark Today Done"
+          style={styles.btnStyle}
+          onPress={props.markComplete}>
+          <Text style={styles.btnText}>Mark Today Done</Text>
+        </TouchableOpacity>
         <Text style={styles.todaysTask}>Today&#39;s Task:</Text>
         {/* <Text style={styles.day102}>{props.data.task4Name}</Text> */}
         <Text style={styles.completed}>Completed:</Text>

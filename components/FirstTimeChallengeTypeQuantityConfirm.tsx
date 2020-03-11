@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, StatusBar, Button, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  Button,
+  FlatList,
+} from 'react-native';
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../src/graphql/queries';
 import * as mutations from '../src/graphql/mutations';
 
-
 function FirstTimeChallengeTypeQuantityConfirm(props) {
   const taskQuantityArray = [];
-  const taskName = props.challengeInput.taskName;  
+  const taskName = props.challengeInput.taskName;
   const increaseRate = Number(props.challengeInput.increase);
   let i = 1;
   while (i <= 30) {
-    taskQuantityArray.push(`Day${i} Task: ${taskName} ${increaseRate * i} times`);
+    taskQuantityArray.push(
+      `Day${i} Task: ${taskName} ${increaseRate * i} times`,
+    );
     ++i;
   }
 
@@ -84,16 +92,19 @@ function FirstTimeChallengeTypeQuantityConfirm(props) {
     task29IsDone: false,
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
     task30IsDone: false,
-  }
+  };
 
   console.log('*************challenge: ', challengeInput);
 
   function insertChallenge() {
-    API.graphql(graphqlOperation(mutations.createChallenge, {input: challengeInput}))
-    .then((res) => {
-      props.setCurrentChallengeId(res.data.id);
-    })
-    .catch((error) => console.log(error));
+    API.graphql(
+      graphqlOperation(mutations.createChallenge, {input: challengeInput}),
+    )
+      .then(res => {
+        props.setCurrentChallengeId(res.data.id);
+        props.setUserCurrentChallenge(challengeInput);
+      })
+      .catch(error => console.log(error));
   }
 
   return (
