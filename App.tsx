@@ -103,6 +103,9 @@ const reducer = (state: any, action: {type: string}) => {
     case 'SET_LOGIN_VIEW':
       newState.currentView = 'LOGIN_VIEW';
       return newState;
+    case 'SET_FIRST_VIEW':
+      newState.currentView = 'FIRST_TIME';
+      return newState;
     case 'SET_USER_VIEW':
       newState.currentView = 'USER_MAIN_VIEW';
       return newState;
@@ -215,12 +218,12 @@ const App: () => React$Node = () => {
     dispatch({type: 'SET_CHALLENGE_STATUS_VIEW'});
   }
 
-  // useEffect(() => {
-  //   // load app with Spalsh screen, change to login screen after 2 seconds
-  //   setTimeout(() => {
-  //     dispatch({type: 'SET_LOGIN_VIEW'});
-  //   }, 2000);
-  // }, []);
+  useEffect(() => {
+    // load app with Spalsh screen, change to login screen after 2 seconds
+    setTimeout(() => {
+      dispatch({type: 'SET_FIRST_VIEW'});
+    }, 2000);
+  }, []);
 
   // let body = <Splash changeView={setReactView} />;
 
@@ -231,16 +234,18 @@ const App: () => React$Node = () => {
     return;
   };
 
-  let body = (
-    <FirstTime
-      state={state}
-      challengeInput={challengeInput}
-      setChallengeInput={setChallengeInput}
-      changeView={setFirstTimeChallengeTypeView}
-    />
-  );
+  let body = <Splash />;
   console.log('currentView: ', state.currentView);
-  if (state.currentView === 'USER_MAIN_VIEW') {
+  if (state.currentView === 'FIRST_TIME') {
+    body = (
+      <FirstTime
+        state={state}
+        challengeInput={challengeInput}
+        setChallengeInput={setChallengeInput}
+        changeView={setFirstTimeChallengeTypeView}
+      />
+    );
+  } else if (state.currentView === 'USER_MAIN_VIEW') {
     body = <Login changeView={setReactView} />;
   } else if (state.currentView === 'LOGIN_VIEW') {
     body = <Login changeView={setReactView} />;
