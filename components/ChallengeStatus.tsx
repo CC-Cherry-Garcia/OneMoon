@@ -60,7 +60,7 @@ function ChallengeStatus(props) {
       <View style={styles.cupertinoHeaderWithLargeTitleStackColumnFiller}> */}
       <View style={styles.day10StackStack}>
         <View style={styles.day10Stack}>
-          <Text style={styles.day10}>Day 4</Text>
+          <Text style={styles.day10}>Day 1</Text>
         </View>
         <TouchableOpacity
           title="Mark Today Done"

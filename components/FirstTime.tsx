@@ -24,10 +24,15 @@ function FirstTime(props) {
       </Text>
       <View style={styles.group2}>
         <Text style={styles.loremIpsum4}>Pick a Challenge start date:</Text>
-        <TextInput 
-          onChangeText={TextInputValue => props.setChallengeInput({...props.challengeInput, startDate: TextInputValue})}
-          placeholder=" Date Picker" 
-          style={styles.email1} 
+        <TextInput
+          onChangeText={TextInputValue =>
+            props.setChallengeInput({
+              ...props.challengeInput,
+              startDate: TextInputValue,
+            })
+          }
+          placeholder=" Date Picker"
+          style={styles.email1}
         />
       </View>
       <Button
@@ -38,10 +43,15 @@ function FirstTime(props) {
       <View style={styles.rect1} />
       <View style={styles.group3}>
         <Text style={styles.challengeName}>Challenge Name:</Text>
-        <TextInput 
-          onChangeText={TextInputValue => props.setChallengeInput({...props.challengeInput, title: TextInputValue})}
-          placeholder=" Crushing Squats" 
-          style={styles.textInput} 
+        <TextInput
+          onChangeText={TextInputValue =>
+            props.setChallengeInput({
+              ...props.challengeInput,
+              title: TextInputValue,
+            })
+          }
+          placeholder=" Crushing Squats"
+          style={styles.textInput}
         />
       </View>
     </View>
@@ -58,7 +68,6 @@ const styles = StyleSheet.create({
     left: 0,
     // width: 400,
     height: 96,
-    position: 'absolute',
   },
   icon: {
     top: 56,
@@ -116,7 +125,7 @@ const styles = StyleSheet.create({
   },
   rect1: {
     height: 7,
-    backgroundColor: 'rgba(130,204,221,1)',
+    // backgroundColor: 'rgba(130,204,221,1)',
     marginTop: -353,
   },
   group3: {
@@ -131,6 +140,7 @@ const styles = StyleSheet.create({
     color: 'rgba(232,173,120,1)',
     fontSize: 24,
     fontFamily: 'ArchivoBlack-Regular',
+    marginTop: 15,
   },
   textInput: {
     width: 315,
