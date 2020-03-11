@@ -88,9 +88,12 @@ function FirstTimeChallengeTypeQuantityConfirm(props) {
 
   console.log('*************challenge: ', challengeInput);
 
-  async function insertChallenge() {
-    const newChallenge = await API.graphql(graphqlOperation(mutations.createChallenge, {input: challengeInput}));
-    console.log(newChallenge);
+  function insertChallenge() {
+    API.graphql(graphqlOperation(mutations.createChallenge, {input: challengeInput}))
+    .then((res) => {
+      props.setCurrentChallengeId(res.data.id);
+    })
+    .catch((error) => console.log(error));
   }
 
   return (
@@ -138,7 +141,7 @@ function FirstTimeChallengeTypeQuantityConfirm(props) {
         title="Start Challenge"
         onPress={() => {
           insertChallenge();
-          // props.changeView();
+          props.changeView();
         }}
       />
     </View>

@@ -12,9 +12,18 @@ import {
 import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import Amplify, { API, graphqlOperation } from "aws-amplify";
+import * as queries from '../src/graphql/queries';
 
 function ChallengeStatus(props) {
-  const isDone = props.data.task4IsDone;
+
+  // async function getChallenge() {
+  //   const currentUserChallenges = await API.graphql(graphqlOperation(queries.getChallengeByUser, {userID: props.user.username}));
+  //   console.log('**********currentUserChallenges', currentUserChallenges);
+  // }
+
+
+  // const isDone = props.data.task4IsDone;
 
   // const shareTwitter = async () => {
   //   const shareOptions = {
@@ -37,7 +46,7 @@ function ChallengeStatus(props) {
         style={styles.cupertinoHeaderWithLargeTitle}
       />
       <Icon name="gear" style={styles.icon} />
-      <Text style={styles.createAnAccount2}>{props.data.title}</Text>
+      {/* <Text style={styles.createAnAccount2}>{props.data.title}</Text> */}
       <TouchableOpacity
         title="Share Your Progress"
         style={styles.btnStyle}
@@ -60,7 +69,7 @@ function ChallengeStatus(props) {
           style={styles.cupertinoButtonSuccess1}
         />
         <Text style={styles.todaysTask}>Today&#39;s Task:</Text>
-        <Text style={styles.day102}>{props.data.task4Name}</Text>
+        {/* <Text style={styles.day102}>{props.data.task4Name}</Text> */}
         <Text style={styles.completed}>Completed:</Text>
         {isDone ? (
           <Text style={styles.yes}>Nice job!</Text>
