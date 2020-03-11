@@ -4,8 +4,12 @@
  * @flow
  */
 
+import 'react-native-gesture-handler';
 import React, {useReducer, useEffect, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
+
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
@@ -138,6 +142,47 @@ const reducer = (state: any, action: {type: string}) => {
   }
 };
 
+function HomeScreen({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+function SplashScreen({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Splash />
+    </View>
+  );
+}
+
+function DetailsScreen({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.push('Details')}
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Go back to first screen in stack"
+        onPress={() => navigation.popToTop()}
+      />
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
 const App: () => React$Node = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [formState, updateFormState] = useState('base');
@@ -220,9 +265,9 @@ const App: () => React$Node = () => {
 
   useEffect(() => {
     // load app with Spalsh screen, change to login screen after 2 seconds
-    setTimeout(() => {
-      dispatch({type: 'SET_FIRST_VIEW'});
-    }, 2000);
+    // setTimeout(() => {
+    //   dispatch({type: 'SET_FIRST_VIEW'});
+    // }, 2000);
   }, []);
 
   // let body = <Splash changeView={setReactView} />;
@@ -326,9 +371,51 @@ const App: () => React$Node = () => {
 
   return (
     <>
-      <View style={styles.scrollView}>{body}</View>
-      {body}
-      {/* <Splash /> */}
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#0a3d62',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+          initialRouteName="Splash">
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{
+              title: 'splashzz',
+              headerRight: () => (
+                <Button
+                  onPress={() => alert('This is a button!')}
+                  title="Alert"
+                  color="#fff"
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              title: 'One Moon',
+            }}
+          />
+          <Stack.Screen
+            name="Details"
+            component={DetailsScreen}
+            options={{
+              title: 'Detailz',
+            }}
+          />
+        </Stack.Navigator>
+        {/* <View style={styles.scrollView}>{body}</View>
+        {body} */}
+        {/* <Splash /> */}
+      </NavigationContainer>
     </>
     // <View style={styles.appContainer}>
     //   {state.loading && (
