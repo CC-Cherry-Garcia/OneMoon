@@ -69,7 +69,7 @@ function ChallengeStatus(props) {
           <Text style={styles.btnText}>Mark Today Done</Text>
         </TouchableOpacity>
         <Text style={styles.todaysTask}>Today&#39;s Task:</Text>
-        {/* <Text style={styles.day102}>{props.data.task4Name}</Text> */}
+        <Text style={styles.day102}>{props.data.task1Name}</Text>
         <Text style={styles.completed}>Completed:</Text>
         {isDone ? (
           <Text style={styles.yes}>Nice job!</Text>
