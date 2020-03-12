@@ -4,18 +4,20 @@
  * @flow
  */
 
-import 'react-native-gesture-handler';
+import 'react-native-gesture-handler'; // Should be first import per docs
 import React, {useReducer, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 // import {Ionicons} from 'react-native-vector-icons/Ionicons';
 
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
 
+// Components Import
 import Login from './components/_oldComponents/Login';
 import EmailLoginForm from './components/EmailLoginForm';
 import UserChallengeStatus from './components/_oldComponents/UserChallengeStatus';
@@ -27,7 +29,7 @@ import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/F
 import ChallengeStatus from './components/_oldComponents/ChallengeStatus';
 import CreateChallenge from './components/CreateChallenge/Index';
 import Settings from './components/Settings/Index';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import Home from './components/Home/Index';
 
 Amplify.configure(awsconfig);
 
@@ -156,6 +158,7 @@ const App: () => React$Node = () => {
   const [currentChallengeId, setCurrentChallengeId] = useState({});
   const [userCurrentChallenge, setUserCurrentChallenge] = useState({});
   const [isDone, setIsDone] = useState(false);
+  const [isSplashLoading, setIsSplashLoading] = useState(true);
 
   console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
 
@@ -232,7 +235,7 @@ const App: () => React$Node = () => {
   useEffect(() => {
     // load app with Spalsh screen, change to login screen after 2 seconds
     setTimeout(() => {
-      dispatch({type: 'SET_FIRST_VIEW'});
+      setIsSplashLoading(false);
     }, 2000);
   }, []);
 
@@ -351,7 +354,10 @@ const App: () => React$Node = () => {
           <EmailLoginForm />
         </View>
       )}
-      {state.user && state.user.signInUserSession && (
+      {state.user && state.user.signInUserSession && isSplashLoading && (
+        <Splash />
+      )}
+      {state.user && state.user.signInUserSession && !isSplashLoading && (
         // <View style={styles.scrollView}>{body}</View>
         <NavigationContainer>
           <Tab.Navigator
@@ -359,7 +365,7 @@ const App: () => React$Node = () => {
               activeTintColor: '#0a3d62',
               inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen name="Home" component={Splash} />
+            <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Create" component={CreateChallenge} />
             <Tab.Screen name="Search" component={Splash} />
             <Tab.Screen name="Settings" component={Settings} />
