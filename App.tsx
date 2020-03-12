@@ -30,6 +30,7 @@ import ChallengeStatus from './components/_oldComponents/ChallengeStatus';
 import CreateChallenge from './components/CreateChallenge/Index';
 import Settings from './components/Settings/Index';
 import Home from './components/Home/Index';
+import Search from './components/Search/Index';
 
 Amplify.configure(awsconfig);
 
@@ -359,7 +360,7 @@ const App: () => React$Node = () => {
             }}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Create" component={CreateChallenge} />
-            <Tab.Screen name="Search" component={Splash} />
+            <Tab.Screen name="Search" component={Search} />
             <Tab.Screen name="Settings" component={Settings} />
           </Tab.Navigator>
           {/* <View style={styles.scrollView}>{body}</View>
