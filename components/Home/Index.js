@@ -12,7 +12,7 @@ function HomeScreen({navigation}) {
   //   console.log('props in HomeScreen.tsx: ', props);
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="One Moon"
       screenOptions={{
         headerStyle: {
           backgroundColor: Colors.primary,
@@ -25,14 +25,13 @@ function HomeScreen({navigation}) {
         },
       }}>
       <Stack.Screen
-        name="HomeUser"
+        name="One Moon"
         component={HomeUser}
         options={{
-          title: 'One Moon',
           headerRight: () => (
             <Button
               onPress={() => navigation.navigate('HomeFirstTime')}
-              title="Type"
+              title="Switch"
             />
           ),
         }}
@@ -42,12 +41,6 @@ function HomeScreen({navigation}) {
         component={HomeFirstTime}
         options={{
           title: 'One Moon',
-          // headerRight: () => (
-          //   <Button
-          //     onPress={() => navigation.navigate('ChallengeType')}
-          //     title="Type"
-          //   />
-          // ),
         }}
       />
     </Stack.Navigator>

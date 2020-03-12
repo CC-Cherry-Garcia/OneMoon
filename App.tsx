@@ -213,25 +213,25 @@ const App: () => React$Node = () => {
   //   }
   // }
 
-  function setReactView() {
-    dispatch({type: 'SET_REACT_NATIVE_VIEW'});
-  }
+  // function setReactView() {
+  //   dispatch({type: 'SET_REACT_NATIVE_VIEW'});
+  // }
 
-  function setFirstTimeChallengeTypeView() {
-    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW'});
-  }
+  // function setFirstTimeChallengeTypeView() {
+  //   dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW'});
+  // }
 
-  function setFirstTimeChallengeTypeQuantityView() {
-    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW'});
-  }
+  // function setFirstTimeChallengeTypeQuantityView() {
+  //   dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW'});
+  // }
 
-  function setFirstTimeChallengeTypeQuantityConfirmView() {
-    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'});
-  }
+  // function setFirstTimeChallengeTypeQuantityConfirmView() {
+  //   dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'});
+  // }
 
-  function setChallengeStatusView() {
-    dispatch({type: 'SET_CHALLENGE_STATUS_VIEW'});
-  }
+  // function setChallengeStatusView() {
+  //   dispatch({type: 'SET_CHALLENGE_STATUS_VIEW'});
+  // }
 
   useEffect(() => {
     // load app with Spalsh screen, change to login screen after 2 seconds
@@ -249,62 +249,62 @@ const App: () => React$Node = () => {
     return;
   };
 
-  let body = <Splash />;
-  console.log('currentView: ', state.currentView);
-  if (state.currentView === 'FIRST_TIME') {
-    body = (
-      <FirstTime
-        state={state}
-        challengeInput={challengeInput}
-        setChallengeInput={setChallengeInput}
-        changeView={setFirstTimeChallengeTypeView}
-      />
-    );
-  } else if (state.currentView === 'USER_MAIN_VIEW') {
-    body = <Login changeView={setReactView} />;
-  } else if (state.currentView === 'LOGIN_VIEW') {
-    body = <Login changeView={setReactView} />;
-  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
-    console.log('challengeInput: ', challengeInput);
-    body = (
-      <FirstTimeChallengeType
-        state={state}
-        changeView={setFirstTimeChallengeTypeQuantityView}
-      />
-    );
-  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
-    body = (
-      <FirstTimeChallengeTypeQuantity
-        state={state}
-        challengeInput={challengeInput}
-        setChallengeInput={setChallengeInput}
-        changeView={setFirstTimeChallengeTypeQuantityConfirmView}
-      />
-    );
-  } else if (
-    state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'
-  ) {
-    body = (
-      <FirstTimeChallengeTypeQuantityConfirm
-        state={state}
-        challengeInput={challengeInput}
-        changeView={setChallengeStatusView}
-        currentChallengeId={currentChallengeId}
-        setCurrentChallengeId={setCurrentChallengeId}
-        setUserCurrentChallenge={setUserCurrentChallenge}
-      />
-    );
-  } else if (state.currentView === 'CHALLENGE_STATUS_VIEW') {
-    body = (
-      <ChallengeStatus
-        state={state}
-        currentChallengeId={currentChallengeId}
-        data={state.userCurrentChallenge}
-        markComplete={markComplete}
-        isDone={isDone}
-      />
-    );
-  }
+  // let body = <Splash />;
+  // console.log('currentView: ', state.currentView);
+  // if (state.currentView === 'FIRST_TIME') {
+  //   body = (
+  //     <FirstTime
+  //       state={state}
+  //       challengeInput={challengeInput}
+  //       setChallengeInput={setChallengeInput}
+  //       changeView={setFirstTimeChallengeTypeView}
+  //     />
+  //   );
+  // } else if (state.currentView === 'USER_MAIN_VIEW') {
+  //   body = <Login changeView={setReactView} />;
+  // } else if (state.currentView === 'LOGIN_VIEW') {
+  //   body = <Login changeView={setReactView} />;
+  // } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
+  //   console.log('challengeInput: ', challengeInput);
+  //   body = (
+  //     <FirstTimeChallengeType
+  //       state={state}
+  //       changeView={setFirstTimeChallengeTypeQuantityView}
+  //     />
+  //   );
+  // } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
+  //   body = (
+  //     <FirstTimeChallengeTypeQuantity
+  //       state={state}
+  //       challengeInput={challengeInput}
+  //       setChallengeInput={setChallengeInput}
+  //       changeView={setFirstTimeChallengeTypeQuantityConfirmView}
+  //     />
+  //   );
+  // } else if (
+  //   state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'
+  // ) {
+  //   body = (
+  //     <FirstTimeChallengeTypeQuantityConfirm
+  //       state={state}
+  //       challengeInput={challengeInput}
+  //       changeView={setChallengeStatusView}
+  //       currentChallengeId={currentChallengeId}
+  //       setCurrentChallengeId={setCurrentChallengeId}
+  //       setUserCurrentChallenge={setUserCurrentChallenge}
+  //     />
+  //   );
+  // } else if (state.currentView === 'CHALLENGE_STATUS_VIEW') {
+  //   body = (
+  //     <ChallengeStatus
+  //       state={state}
+  //       currentChallengeId={currentChallengeId}
+  //       data={state.userCurrentChallenge}
+  //       markComplete={markComplete}
+  //       isDone={isDone}
+  //     />
+  //   );
+  // }
 
   // User authentication
   async function checkUser(dispatch) {
@@ -339,14 +339,6 @@ const App: () => React$Node = () => {
     );
   }
 
-  let body1 = (
-    <Button
-      title="Sign Out"
-      style={{...styles.button, ...styles.signOut}}
-      onPress={signOut}
-    />
-  );
-
   return (
     <>
       {state.loading && <Splash />}
@@ -359,7 +351,6 @@ const App: () => React$Node = () => {
         <Splash />
       )}
       {state.user && state.user.signInUserSession && !isSplashLoading && (
-        // <View style={styles.scrollView}>{body}</View>
         <NavigationContainer>
           <Tab.Navigator
             tabBarOptions={{
