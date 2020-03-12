@@ -9,6 +9,8 @@ import React, {useReducer, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// import {Ionicons} from 'react-native-vector-icons/Ionicons';
 
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
@@ -23,6 +25,7 @@ import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallen
 import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
 import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/FirstTimeChallengeTypeQuantityConfirm';
 import ChallengeStatus from './components/_oldComponents/ChallengeStatus';
+import CreateChallenge from './components/CreateChallenge/Index';
 
 Amplify.configure(awsconfig);
 
@@ -180,6 +183,8 @@ function DetailsScreen({navigation}) {
     </View>
   );
 }
+
+const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
@@ -372,7 +377,7 @@ const App: () => React$Node = () => {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator
+        {/* <Stack.Navigator
           screenOptions={{
             headerStyle: {
               backgroundColor: '#0a3d62',
@@ -411,7 +416,15 @@ const App: () => React$Node = () => {
               title: 'Detailz',
             }}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
+        <Tab.Navigator
+          tabBarOptions={{
+            activeTintColor: '#0a3d62',
+            inactiveTintColor: 'gray',
+          }}>
+          <Tab.Screen name="Home" component={Splash} />
+          <Tab.Screen name="Create Challenge" component={CreateChallenge} />
+        </Tab.Navigator>
         {/* <View style={styles.scrollView}>{body}</View>
         {body} */}
         {/* <Splash /> */}
