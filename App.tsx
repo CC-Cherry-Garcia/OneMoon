@@ -24,8 +24,8 @@ import FirstTime from './components/_oldComponents/FirstTime';
 import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
 import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/FirstTimeChallengeTypeQuantityConfirm';
-import ChallengeStatus from './components/_oldComponents/ChallengeStatus';
 import CreateChallenge from './components/CreateChallenge/Index';
+import ChallengeStatus from './components/ChallengeStatus/Index';
 
 Amplify.configure(awsconfig);
 
@@ -422,7 +422,7 @@ const App: () => React$Node = () => {
             activeTintColor: '#0a3d62',
             inactiveTintColor: 'gray',
           }}>
-          <Tab.Screen name="Home" component={Splash} />
+          <Tab.Screen name="Home" component={ChallengeStatus} />
           <Tab.Screen name="Create" component={CreateChallenge} />
           <Tab.Screen name="Search" component={Splash} />
           <Tab.Screen name="Settings" component={Splash} />
