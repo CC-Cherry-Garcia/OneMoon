@@ -423,7 +423,9 @@ const App: () => React$Node = () => {
             inactiveTintColor: 'gray',
           }}>
           <Tab.Screen name="Home" component={Splash} />
-          <Tab.Screen name="Create Challenge" component={CreateChallenge} />
+          <Tab.Screen name="Create" component={CreateChallenge} />
+          <Tab.Screen name="Search" component={Splash} />
+          <Tab.Screen name="Settings" component={Splash} />
         </Tab.Navigator>
         {/* <View style={styles.scrollView}>{body}</View>
         {body} */}
