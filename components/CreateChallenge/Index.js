@@ -6,6 +6,7 @@ import Form01TitleAndDate from './Form01TitleAndDate';
 import Form02ChallengeType from './Form02ChallengeType';
 
 const Stack = createStackNavigator();
+import Colors from '../../variablesColors';
 
 function CreateChallenge({navigation}) {
   //   console.log('props in CreateChallenge.tsx: ', props);
@@ -14,7 +15,7 @@ function CreateChallenge({navigation}) {
       initialRouteName="ChallengeTitle"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#0a3d62',
+          backgroundColor: Colors.primary,
           borderBottomWidth: 0,
           shadowColor: 'transparent',
         },

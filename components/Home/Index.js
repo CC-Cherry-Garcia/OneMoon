@@ -6,6 +6,7 @@ import HomeUser from './HomeUser';
 import HomeFirstTime from './HomeFirstTime';
 
 const Stack = createStackNavigator();
+import Colors from '../../variablesColors';
 
 function HomeScreen({navigation}) {
   //   console.log('props in HomeScreen.tsx: ', props);
@@ -14,7 +15,7 @@ function HomeScreen({navigation}) {
       initialRouteName="Home"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#0a3d62',
+          backgroundColor: Colors.primary,
           borderBottomWidth: 0,
           shadowColor: 'transparent',
         },

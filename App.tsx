@@ -21,7 +21,7 @@ import awsconfig from './aws-exports';
 import Login from './components/_oldComponents/Login';
 import EmailLoginForm from './components/EmailLoginForm';
 import UserChallengeStatus from './components/_oldComponents/UserChallengeStatus';
-import Splash from './components/_oldComponents/Splash';
+import Splash from './components/Splash';
 import FirstTime from './components/_oldComponents/FirstTime';
 import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
@@ -150,6 +150,7 @@ const reducer = (state: any, action: {type: string}) => {
 };
 
 const Tab = createBottomTabNavigator();
+import Colors from './variablesColors';
 
 const App: () => React$Node = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -362,7 +363,7 @@ const App: () => React$Node = () => {
         <NavigationContainer>
           <Tab.Navigator
             tabBarOptions={{
-              activeTintColor: '#0a3d62',
+              activeTintColor: Colors.primary,
               inactiveTintColor: 'gray',
             }}>
             <Tab.Screen name="Home" component={Home} />

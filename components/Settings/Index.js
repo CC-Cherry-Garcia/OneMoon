@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SettingsMain from './SettingsMain';
 
 const Stack = createStackNavigator();
+import Colors from '../../variablesColors';
 
 function Settings({navigation}) {
   //   console.log('props in Settings.tsx: ', props);
@@ -13,7 +14,7 @@ function Settings({navigation}) {
       initialRouteName="SettingsMain"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#0a3d62',
+          backgroundColor: Colors.primary,
           borderBottomWidth: 0,
           shadowColor: 'transparent',
         },
