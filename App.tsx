@@ -11,7 +11,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-// import {Ionicons} from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
@@ -358,10 +358,42 @@ const App: () => React$Node = () => {
               activeTintColor: Colors.primary,
               inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Create" component={CreateChallenge} />
-            <Tab.Screen name="Search" component={Search} />
-            <Tab.Screen name="Settings" component={Settings} />
+            <Tab.Screen
+              name="Home"
+              component={Home}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-trophy" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Create"
+              component={CreateChallenge}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-create" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Search"
+              component={Search}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-search" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Settings"
+              component={Settings}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-settings" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
           </Tab.Navigator>
           {/* <View style={styles.scrollView}>{body}</View>
         {body} */}
