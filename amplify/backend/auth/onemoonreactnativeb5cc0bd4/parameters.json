@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "onemoonreactnativedc404f5c_identitypool_dc404f5c",
+    "identityPoolName": "onemoonreactnativeb5cc0bd4_identitypool_b5cc0bd4",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "onemoodc404f5c",
-    "userPoolName": "onemoonreactnativedc404f5c_userpool_dc404f5c",
+    "resourceNameTruncated": "onemoob5cc0bd4",
+    "userPoolName": "onemoonreactnativeb5cc0bd4_userpool_b5cc0bd4",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "onemoodc404f5c_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "onemoob5cc0bd4_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "onemoonreactnativedc404f5c",
+    "resourceName": "onemoonreactnativeb5cc0bd4",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -44,15 +44,7 @@
             "Arn"
         ]
     },
-    "useDefault": "defaultSocial",
+    "useDefault": "default",
     "userPoolGroupList": [],
-    "dependsOn": [],
-    "hostedUI": true,
-    "hostedUIDomainName": "onemoonreactnative0d2bb3d9-0d2bb3d9",
-    "authProvidersUserPool": [
-        "Facebook",
-        "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"onemoon://\"],\"LogoutURLs\":[\"onemoon://\"]}"
+    "dependsOn": []
 }

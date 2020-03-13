@@ -35,6 +35,8 @@ target 'oneMoonReactNative' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
+  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
+
   target 'oneMoonReactNativeTests' do
     inherit! :search_paths
     # Pods for testing

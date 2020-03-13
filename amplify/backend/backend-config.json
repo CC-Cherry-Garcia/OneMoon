@@ -17,19 +17,24 @@
             }
         }
     },
-    "notifications": {
-        "onemoonreactnative": {
-            "service": "Pinpoint",
-            "channels": []
-        }
-    },
     "auth": {
-        "onemoonreactnativedc404f5c": {
+        "onemoonreactnativeb5cc0bd4": {
             "service": "Cognito",
             "providerPlugin": "awscloudformation",
             "dependsOn": [],
             "customAuth": false
         }
     },
-    "analytics": {}
+    "analytics": {
+        "onemoonreactnative": {
+            "service": "Pinpoint",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "notifications": {
+        "onemoonreactnative": {
+            "service": "Pinpoint",
+            "channels": []
+        }
+    }
 }
