@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, StatusBar, Button, FlatList} from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  Button,
+  FlatList,
+} from 'react-native';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Amplify, { API, graphqlOperation } from "aws-amplify";
-import * as queries from '../src/graphql/queries';
-import * as mutations from '../src/graphql/mutations';
-
+import Amplify, {API, graphqlOperation} from 'aws-amplify';
+import * as queries from '../../src/graphql/queries';
+import * as mutations from '../../src/graphql/mutations';
 
 function FirstTimeChallengeTypeQuantityConfirm(props) {
   const taskQuantityArray = [];
-  const taskName = props.challengeInput.taskName;  
+  const taskName = props.challengeInput.taskName;
   const increaseRate = Number(props.challengeInput.increase);
   let i = 1;
   while (i <= 30) {
-    taskQuantityArray.push(`Day${i} Task: ${taskName} ${increaseRate * i} times`);
+    taskQuantityArray.push(
+      `Day${i} Task: ${taskName} ${increaseRate * i} times`,
+    );
     ++i;
   }
 
@@ -84,16 +92,19 @@ function FirstTimeChallengeTypeQuantityConfirm(props) {
     task29IsDone: false,
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
     task30IsDone: false,
-  }
+  };
 
   console.log('*************challenge: ', challengeInput);
 
   function insertChallenge() {
-    API.graphql(graphqlOperation(mutations.createChallenge, {input: challengeInput}))
-    .then((res) => {
-      props.setCurrentChallengeId(res.data.id);
-    })
-    .catch((error) => console.log(error));
+    API.graphql(
+      graphqlOperation(mutations.createChallenge, {input: challengeInput}),
+    )
+      .then(res => {
+        props.setCurrentChallengeId(res.data.id);
+        props.setUserCurrentChallenge(challengeInput);
+      })
+      .catch(error => console.log(error));
   }
 
   return (
@@ -104,39 +115,42 @@ function FirstTimeChallengeTypeQuantityConfirm(props) {
         />
         <Icon name="gear" style={styles.icon} />
       </View>
-      <StatusBar animated={false} hidden={true} />
-      <Text>Title: {props.challengeInput.title}</Text>
-      <Text>Start Date: {props.challengeInput.startDate}</Text>
-      <Text>{taskQuantityArray[0]}</Text>
-      <Text>{taskQuantityArray[1]}</Text>
-      <Text>{taskQuantityArray[2]}</Text>
-      <Text>{taskQuantityArray[3]}</Text>
-      <Text>{taskQuantityArray[4]}</Text>
-      <Text>{taskQuantityArray[5]}</Text>
-      <Text>{taskQuantityArray[6]}</Text>
-      <Text>{taskQuantityArray[7]}</Text>
-      <Text>{taskQuantityArray[8]}</Text>
-      <Text>{taskQuantityArray[9]}</Text>
-      <Text>{taskQuantityArray[10]}</Text>
-      <Text>{taskQuantityArray[11]}</Text>
-      <Text>{taskQuantityArray[12]}</Text>
-      <Text>{taskQuantityArray[13]}</Text>
-      <Text>{taskQuantityArray[14]}</Text>
-      <Text>{taskQuantityArray[15]}</Text>
-      <Text>{taskQuantityArray[16]}</Text>
-      <Text>{taskQuantityArray[17]}</Text>
-      <Text>{taskQuantityArray[18]}</Text>
-      <Text>{taskQuantityArray[19]}</Text>
-      <Text>{taskQuantityArray[20]}</Text>
-      <Text>{taskQuantityArray[21]}</Text>
-      <Text>{taskQuantityArray[22]}</Text>
-      <Text>{taskQuantityArray[23]}</Text>
-      <Text>{taskQuantityArray[24]}</Text>
-      <Text>{taskQuantityArray[25]}</Text>
-      <Text>{taskQuantityArray[26]}</Text>
-      <Text>{taskQuantityArray[27]}</Text>
-      <Text>{taskQuantityArray[28]}</Text>
-      <Text>{taskQuantityArray[29]}</Text>
+      <Text style={styles.createAnAccount2}>
+        Title: {props.challengeInput.title}
+      </Text>
+      <Text style={styles.taskText}>
+        Start Date: {props.challengeInput.startDate}
+      </Text>
+      <Text style={styles.taskText}>{taskQuantityArray[0]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[1]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[2]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[3]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[4]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[5]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[6]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[7]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[8]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[9]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[10]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[11]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[12]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[13]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[14]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[15]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[16]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[17]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[18]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[19]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[20]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[21]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[22]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[23]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[24]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[25]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[26]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[27]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[28]}</Text>
+      <Text style={styles.taskText}>{taskQuantityArray[29]}</Text>
       <Button
         title="Start Challenge"
         onPress={() => {
@@ -153,12 +167,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(60,99,130,1)',
   },
+  taskText: {
+    color: '#fff',
+    fontSize: 14,
+    lineHeight: 20,
+    // fontFamily: 'ArchivoBlack-Regular',
+    marginLeft: 40,
+  },
   cupertinoHeaderWithLargeTitle: {
     top: 0,
     left: 0,
     // width: 375,
     height: 96,
-    position: 'absolute',
+    // position: 'absolute',
   },
   icon: {
     top: 56,
@@ -341,6 +362,128 @@ const styles = StyleSheet.create({
     marginTop: -165,
     marginLeft: 1,
     marginRight: -1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(60,99,130,1)',
+  },
+  cupertinoHeaderWithLargeTitle: {
+    top: 0,
+    left: 0,
+    // width: 375,
+    height: 96,
+  },
+  icon: {
+    top: 56,
+    left: 335,
+    position: 'absolute',
+    color: 'rgba(10,61,98,1)',
+    fontSize: 29,
+  },
+  cupertinoHeaderWithLargeTitleStack: {
+    // width: 375,
+    height: 96,
+  },
+  createAnAccount2: {
+    color: 'rgba(248,194,145,1)',
+    fontSize: 30,
+    fontFamily: 'ArchivoBlack-Regular',
+    marginTop: 32,
+    textAlign: 'center',
+  },
+  cupertinoButtonSuccess2: {
+    width: 315,
+    height: 72,
+    marginTop: 368,
+    marginLeft: 30,
+    backgroundColor: 'rgba(229,80,57,1)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: 16,
+    paddingLeft: 16,
+    borderRadius: 5,
+  },
+  btnStyle: {
+    width: 315,
+    height: 72,
+    backgroundColor: 'rgba(229,80,57,1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: 16,
+    paddingLeft: 16,
+    borderRadius: 5,
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  btnText: {
+    color: '#ffffff',
+    fontSize: 16,
+  },
+
+  day10: {
+    top: 0,
+    left: 0,
+    color: 'rgba(232,173,120,1)',
+    // position: 'absolute',
+    right: 0,
+    fontSize: 24,
+    fontFamily: 'ArchivoBlack-Regular',
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  day10Stack: {
+    // position: 'absolute',
+  },
+  cupertinoButtonSuccess1: {
+    width: 315,
+    height: 72,
+    // position: 'absolute',
+    marginTop: 15,
+  },
+  todaysTask: {
+    color: 'rgba(232,173,120,1)',
+    // position: 'absolute',
+    fontSize: 24,
+    fontFamily: 'ArchivoBlack-Regular',
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  day102: {
+    color: 'rgba(232,173,120,1)',
+    // position: 'absolute',
+    fontSize: 24,
+    fontFamily: 'ArchivoBlack-Regular',
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  completed: {
+    color: 'rgba(232,173,120,1)',
+    // position: 'absolute',
+    fontSize: 24,
+    fontFamily: 'ArchivoBlack-Regular',
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  yes: {
+    color: 'rgba(232,173,120,1)',
+    // position: 'absolute',
+    fontSize: 24,
+    fontFamily: 'ArchivoBlack-Regular',
+    textAlign: 'center',
+  },
+  day10StackStack: {
+    // position: 'absolute',
+  },
+  challengeProgress: {
+    color: 'rgba(232,173,120,1)',
+    // position: 'absolute',
+    fontSize: 24,
+    fontFamily: 'ArchivoBlack-Regular',
+    textAlign: 'center',
+  },
+  cupertinoHeaderWithLargeTitleStackColumnFiller: {
+    flex: 1,
   },
 });
 

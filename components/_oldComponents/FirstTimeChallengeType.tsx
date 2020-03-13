@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, StatusBar, Alert} from 'react-native';
-import ChallengeType from '../src/sub-components/ChallengeType';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import ChallengeType from '../../src/sub-components/ChallengeType';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import CupertinoButtonSuccess from '../../src/sub-components/CupertinoButtonSuccess';
 
 function FirstTimeChallengeType(props) {
   return (
@@ -13,7 +13,7 @@ function FirstTimeChallengeType(props) {
           state={props}
           text1="Pick this if you want to increase the duration you do something. For example: Read for 10 minutes longer everyday."
           text2="Quantitiy Challenge"
-          style={styles.challengeType} 
+          style={styles.challengeType}
         />
         {/* <ChallengeType
           text1="Pick this if you want to increase the duration you do something. For example: Read for 10 minutes longer everyday."
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     left: 0,
     // width: 375,
     height: 96,
-    position: 'absolute',
   },
   icon: {
     top: 56,
