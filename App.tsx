@@ -30,10 +30,11 @@ import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallen
 import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
 import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/FirstTimeChallengeTypeQuantityConfirm';
 import CreateChallenge from './components/CreateChallenge/Index';
-import ChallengeStatus from './components/ChallengeStatus/Index';
 import Settings from './components/Settings/Index';
 import Home from './components/Home/Index';
+import HomeFirstTime from './components/Home/HomeFirstTime';
 import Search from './components/Search/Index';
+import ChallengeStatus from './components/ChallengeStatus/Index';
 
 Amplify.configure(awsconfig);
 
@@ -347,7 +348,6 @@ const App: () => React$Node = () => {
       </View>
     );
   }
-
   return (
     <>
       {state.loading && <Splash />}
@@ -366,16 +366,49 @@ const App: () => React$Node = () => {
               activeTintColor: Colors.primary,
               inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen
-              name="Home"
-              component={Home}
-              initialParams={{userName: state.user.username}}
-              options={{
-                tabBarIcon: () => (
-                  <Icon name="ios-trophy" color={Colors.primary} size={24} />
-                ),
-              }}
-            />
+            {(stateA.userFirstTime && (
+              <Tab.Screen
+                name="Home"
+                component={HomeFirstTime}
+                initialParams={{userName: state.user.username}}
+                options={{
+                  tabBarIcon: () => (
+                    <Icon name="ios-trophy" color={Colors.primary} size={24} />
+                  ),
+                }}
+              />
+            )) ||
+              (stateA.userHasActiveChallenge && (
+                <Tab.Screen
+                  name="Home"
+                  component={ChallengeStatus}
+                  initialParams={{userName: state.user.username}}
+                  options={{
+                    tabBarIcon: () => (
+                      <Icon
+                        name="ios-trophy"
+                        color={Colors.primary}
+                        size={24}
+                      />
+                    ),
+                  }}
+                />
+              )) || (
+                <Tab.Screen
+                  name="Home"
+                  component={Home} // this is an Active user w/o an Active Challenge view
+                  initialParams={{userName: state.user.username}}
+                  options={{
+                    tabBarIcon: () => (
+                      <Icon
+                        name="ios-trophy"
+                        color={Colors.primary}
+                        size={24}
+                      />
+                    ),
+                  }}
+                />
+              )}
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
