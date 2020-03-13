@@ -21,7 +21,6 @@ import {
 import useStore from '../../state/state';
 
 function Form02ChallengeType({navigation}, props) {
-  // const testCount = useStore(state => state.count);
   const state = useStore(state => state);
 
   console.log('state in Form02ChallengeTypetsx: ', state);

@@ -18,7 +18,6 @@ import {
 import useStore from '../../state/state';
 
 function Form01TitleAndDate({navigation}, props) {
-  // const testCount = useStore(state => state.count);
   const state = useStore(state => state);
 
   console.log('state in Form01TitleAndDate.tsx: ', state);
