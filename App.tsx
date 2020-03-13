@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /**
  * oneMoon React Native App
  * @format
@@ -16,6 +17,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
+
+import useStore from './state/state';
 
 // Components Import
 import Login from './components/_oldComponents/Login';
@@ -162,14 +165,20 @@ const App: () => React$Node = () => {
   const [isDone, setIsDone] = useState(false);
   const [isSplashLoading, setIsSplashLoading] = useState(true);
 
-  console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
+  const testCount = useStore(state => state.count);
+  const stateA = useStore(state => state);
+
+  // console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
 
   useEffect(() => {
     // set listener for auth events
     Hub.listen('auth', data => {
       const {payload} = data;
+      console.log('payload :', payload);
       if (payload.event === 'signIn') {
         setImmediate(() => dispatch({type: 'SET_USER', user: payload.data}));
+        setImmediate(() => stateA.setUser({username: payload.data.username}));
+
         setFormState('base');
       }
       if (payload.event === 'signOut') {
