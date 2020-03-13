@@ -10,7 +10,7 @@ import Form04ChallengeConfirmation from './Form04ChallengeConfirmation';
 const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
 
-function CreateChallenge({navigation}) {
+function CreateChallenge({navigation, route}) {
   //   console.log('props in CreateChallenge.tsx: ', props);
   return (
     <Stack.Navigator
@@ -55,6 +55,7 @@ function CreateChallenge({navigation}) {
       <Stack.Screen
         name="ChallengeQuantityInfo"
         component={Form03ChallengeQuantity}
+        initialParams={{userName: route.params.userName}}
         options={{
           title: 'Task Quantity Info',
           // headerRight: () => (
@@ -68,6 +69,7 @@ function CreateChallenge({navigation}) {
       <Stack.Screen
         name="ChallengeConfirmation"
         component={Form04ChallengeConfirmation}
+        initialParams={{userName: route.params.userName}}
         options={{
           title: 'Challenge Confirmation',
           // headerRight: () => (

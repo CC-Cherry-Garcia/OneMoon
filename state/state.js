@@ -11,9 +11,6 @@ const [useStore] = create(set => ({
   setUserCurrentChallenge: value => set({userCurrentChallenge: value}),
   currentChallengeId: '0',
   setCurrentChallengeId: value => set({currentChallengeId: value}),
-  // USER State
-  user: {},
-  setUser: value => set({user: value}),
 }));
 
 export default useStore;

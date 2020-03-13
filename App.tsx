@@ -168,7 +168,7 @@ const App: () => React$Node = () => {
   const testCount = useStore(state => state.count);
   const stateA = useStore(state => state);
 
-  // console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
+  // console.log('currentChallenge!!!!!!!!  ', stateA.currentChallengeId);
 
   useEffect(() => {
     // set listener for auth events
@@ -177,7 +177,6 @@ const App: () => React$Node = () => {
       console.log('payload :', payload);
       if (payload.event === 'signIn') {
         setImmediate(() => dispatch({type: 'SET_USER', user: payload.data}));
-        setImmediate(() => stateA.setUser({username: payload.data.username}));
 
         setFormState('base');
       }
@@ -370,6 +369,7 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Home"
               component={Home}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-trophy" color={Colors.primary} size={24} />
@@ -379,6 +379,7 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-create" color={Colors.primary} size={24} />
@@ -388,6 +389,7 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Search"
               component={Search}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-search" color={Colors.primary} size={24} />
@@ -397,6 +399,7 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Settings"
               component={Settings}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-settings" color={Colors.primary} size={24} />

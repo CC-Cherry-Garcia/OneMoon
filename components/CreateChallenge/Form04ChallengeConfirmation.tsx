@@ -29,7 +29,7 @@ import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 
-function Form04ChallengeConfirmation({navigation}, props) {
+function Form04ChallengeConfirmation({navigation, route}, props) {
   // const testCount = useStore(state => state.count);
   console.log('state in Form04ChallengeConfirmation.tsx: ', state);
 
@@ -50,7 +50,7 @@ function Form04ChallengeConfirmation({navigation}, props) {
 
   const challengeInput = {
     id: state.challengeInput.title,
-    userID: state.user.username,
+    userID: route.params.userName,
     title: state.challengeInput.title,
     startDate: state.challengeInput.startDate,
     increase: increaseRate,

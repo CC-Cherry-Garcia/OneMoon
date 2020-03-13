@@ -20,7 +20,7 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 
-function Form03ChallengeQuantity({navigation}, props) {
+function Form03ChallengeQuantity({navigation, route}, props) {
   // const testCount = useStore(state => state.count);
   const state = useStore(state => state);
 
