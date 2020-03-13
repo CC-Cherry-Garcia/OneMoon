@@ -166,7 +166,6 @@ const App: () => React$Node = () => {
   const [isDone, setIsDone] = useState(false);
   const [isSplashLoading, setIsSplashLoading] = useState(true);
 
-  const testCount = useStore(state => state.count);
   const stateA = useStore(state => state);
 
   // console.log('currentChallenge!!!!!!!!  ', stateA.currentChallengeId);
