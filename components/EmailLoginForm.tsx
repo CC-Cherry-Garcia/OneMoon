@@ -148,6 +148,9 @@ function SignUp(props) {
         }}
         style={styles.input}
         placeholder="username"
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="done"
       />
       <TextInput
         type="password"
@@ -158,6 +161,8 @@ function SignUp(props) {
         }}
         style={styles.input}
         placeholder="password"
+        secureTextEntry={true}
+        returnKeyType="go"
       />
       <TextInput
         name="email"
@@ -184,6 +189,9 @@ function SignIn(props) {
         }}
         style={styles.Input}
         placeholder="username"
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="done"
       />
       <TextInput
         type="password"
@@ -194,6 +202,10 @@ function SignIn(props) {
         }}
         style={styles.input}
         placeholder="password"
+        secureTextEntry={true}
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="go"
       />
       <Button title="Sign In" style={styles.button} onPress={props.signIn} />
     </View>
