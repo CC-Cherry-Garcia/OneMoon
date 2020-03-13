@@ -4,28 +4,33 @@
  * @flow
  */
 
-import 'react-native-gesture-handler';
+import 'react-native-gesture-handler'; // Should be first import per docs
 import React, {useReducer, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-// import {Ionicons} from 'react-native-vector-icons/Ionicons';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
 
+// Components Import
 import Login from './components/_oldComponents/Login';
-import EmailLoginForm from './components/_oldComponents/EmailLoginForm';
+import EmailLoginForm from './components/EmailLoginForm';
 import UserChallengeStatus from './components/_oldComponents/UserChallengeStatus';
-import Splash from './components/_oldComponents/Splash';
+import Splash from './components/Splash';
 import FirstTime from './components/_oldComponents/FirstTime';
 import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
 import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/FirstTimeChallengeTypeQuantityConfirm';
 import CreateChallenge from './components/CreateChallenge/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
+import Settings from './components/Settings/Index';
+import Home from './components/Home/Index';
+import Search from './components/Search/Index';
 
 Amplify.configure(awsconfig);
 
@@ -145,56 +150,17 @@ const reducer = (state: any, action: {type: string}) => {
   }
 };
 
-function HomeScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-function SplashScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Splash />
-    </View>
-  );
-}
-
-function DetailsScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
-    </View>
-  );
-}
-
 const Tab = createBottomTabNavigator();
-
-const Stack = createStackNavigator();
+import Colors from './variablesColors';
 
 const App: () => React$Node = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [formState, updateFormState] = useState('base');
+  const [formState, setFormState] = useState('email');
   const [challengeInput, setChallengeInput] = useState({});
   const [currentChallengeId, setCurrentChallengeId] = useState({});
   const [userCurrentChallenge, setUserCurrentChallenge] = useState({});
   const [isDone, setIsDone] = useState(false);
+  const [isSplashLoading, setIsSplashLoading] = useState(true);
 
   console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
 
@@ -204,7 +170,7 @@ const App: () => React$Node = () => {
       const {payload} = data;
       if (payload.event === 'signIn') {
         setImmediate(() => dispatch({type: 'SET_USER', user: payload.data}));
-        updateFormState('base');
+        setFormState('base');
       }
       if (payload.event === 'signOut') {
         setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
@@ -212,19 +178,19 @@ const App: () => React$Node = () => {
     });
     checkUser(dispatch);
 
-    // // // get user's current active challenge
-    // const getUserCurrentChallenge = async () => {
-    //   const data = await API.graphql(
-    //     graphqlOperation(queries.getChallenge, {id: '1'}),
-    //   );
-    //   const payload = data.data.getChallenge;
-    //   dispatch({
-    //     type: 'SET_USER_CURRENT_CHALLENGE',
-    //     userCurrentChallenge: payload,
-    //   });
-    //   // console.log(data);
-    // };
-    // getUserCurrentChallenge();
+    // get user's current active challenge
+    const getUserCurrentChallenge = async () => {
+      const data = await API.graphql(
+        graphqlOperation(queries.getChallenge, {id: '1'}),
+      );
+      const payload = data.data.getChallenge;
+      dispatch({
+        type: 'SET_USER_CURRENT_CHALLENGE',
+        userCurrentChallenge: payload,
+      });
+      // console.log(data);
+    };
+    getUserCurrentChallenge();
   }, []);
 
   // function reducer(state: any, action: {type: string}) {
@@ -248,31 +214,31 @@ const App: () => React$Node = () => {
   //   }
   // }
 
-  function setReactView() {
-    dispatch({type: 'SET_REACT_NATIVE_VIEW'});
-  }
+  // function setReactView() {
+  //   dispatch({type: 'SET_REACT_NATIVE_VIEW'});
+  // }
 
-  function setFirstTimeChallengeTypeView() {
-    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW'});
-  }
+  // function setFirstTimeChallengeTypeView() {
+  //   dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW'});
+  // }
 
-  function setFirstTimeChallengeTypeQuantityView() {
-    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW'});
-  }
+  // function setFirstTimeChallengeTypeQuantityView() {
+  //   dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW'});
+  // }
 
-  function setFirstTimeChallengeTypeQuantityConfirmView() {
-    dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'});
-  }
+  // function setFirstTimeChallengeTypeQuantityConfirmView() {
+  //   dispatch({type: 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'});
+  // }
 
-  function setChallengeStatusView() {
-    dispatch({type: 'SET_CHALLENGE_STATUS_VIEW'});
-  }
+  // function setChallengeStatusView() {
+  //   dispatch({type: 'SET_CHALLENGE_STATUS_VIEW'});
+  // }
 
   useEffect(() => {
     // load app with Spalsh screen, change to login screen after 2 seconds
-    // setTimeout(() => {
-    //   dispatch({type: 'SET_FIRST_VIEW'});
-    // }, 2000);
+    setTimeout(() => {
+      setIsSplashLoading(false);
+    }, 2000);
   }, []);
 
   // let body = <Splash changeView={setReactView} />;
@@ -284,75 +250,77 @@ const App: () => React$Node = () => {
     return;
   };
 
-  let body = <Splash />;
-  console.log('currentView: ', state.currentView);
-  if (state.currentView === 'FIRST_TIME') {
-    body = (
-      <FirstTime
-        state={state}
-        challengeInput={challengeInput}
-        setChallengeInput={setChallengeInput}
-        changeView={setFirstTimeChallengeTypeView}
-      />
-    );
-  } else if (state.currentView === 'USER_MAIN_VIEW') {
-    body = <Login changeView={setReactView} />;
-  } else if (state.currentView === 'LOGIN_VIEW') {
-    body = <Login changeView={setReactView} />;
-  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
-    console.log('challengeInput: ', challengeInput);
-    body = (
-      <FirstTimeChallengeType
-        state={state}
-        changeView={setFirstTimeChallengeTypeQuantityView}
-      />
-    );
-  } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
-    body = (
-      <FirstTimeChallengeTypeQuantity
-        state={state}
-        challengeInput={challengeInput}
-        setChallengeInput={setChallengeInput}
-        changeView={setFirstTimeChallengeTypeQuantityConfirmView}
-      />
-    );
-  } else if (
-    state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'
-  ) {
-    body = (
-      <FirstTimeChallengeTypeQuantityConfirm
-        state={state}
-        challengeInput={challengeInput}
-        changeView={setChallengeStatusView}
-        currentChallengeId={currentChallengeId}
-        setCurrentChallengeId={setCurrentChallengeId}
-        setUserCurrentChallenge={setUserCurrentChallenge}
-      />
-    );
-  } else if (state.currentView === 'CHALLENGE_STATUS_VIEW') {
-    body = (
-      <ChallengeStatus
-        state={state}
-        currentChallengeId={currentChallengeId}
-        data={state.userCurrentChallenge}
-        markComplete={markComplete}
-        isDone={isDone}
-      />
-    );
-  }
+  // let body = <Splash />;
+  // console.log('currentView: ', state.currentView);
+  // if (state.currentView === 'FIRST_TIME') {
+  //   body = (
+  //     <FirstTime
+  //       state={state}
+  //       challengeInput={challengeInput}
+  //       setChallengeInput={setChallengeInput}
+  //       changeView={setFirstTimeChallengeTypeView}
+  //     />
+  //   );
+  // } else if (state.currentView === 'USER_MAIN_VIEW') {
+  //   body = <Login changeView={setReactView} />;
+  // } else if (state.currentView === 'LOGIN_VIEW') {
+  //   body = <Login changeView={setReactView} />;
+  // } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_VIEW') {
+  //   console.log('challengeInput: ', challengeInput);
+  //   body = (
+  //     <FirstTimeChallengeType
+  //       state={state}
+  //       changeView={setFirstTimeChallengeTypeQuantityView}
+  //     />
+  //   );
+  // } else if (state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW') {
+  //   body = (
+  //     <FirstTimeChallengeTypeQuantity
+  //       state={state}
+  //       challengeInput={challengeInput}
+  //       setChallengeInput={setChallengeInput}
+  //       changeView={setFirstTimeChallengeTypeQuantityConfirmView}
+  //     />
+  //   );
+  // } else if (
+  //   state.currentView === 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW'
+  // ) {
+  //   body = (
+  //     <FirstTimeChallengeTypeQuantityConfirm
+  //       state={state}
+  //       challengeInput={challengeInput}
+  //       changeView={setChallengeStatusView}
+  //       currentChallengeId={currentChallengeId}
+  //       setCurrentChallengeId={setCurrentChallengeId}
+  //       setUserCurrentChallenge={setUserCurrentChallenge}
+  //     />
+  //   );
+  // } else if (state.currentView === 'CHALLENGE_STATUS_VIEW') {
+  //   body = (
+  //     <ChallengeStatus
+  //       state={state}
+  //       currentChallengeId={currentChallengeId}
+  //       data={state.userCurrentChallenge}
+  //       markComplete={markComplete}
+  //       isDone={isDone}
+  //     />
+  //   );
+  // }
 
   // User authentication
   async function checkUser(dispatch) {
     try {
       const user = await Auth.currentAuthenticatedUser();
       dispatch({type: 'SET_USER', user});
+      setFormState('loggedIn');
+      // setFormState('base')
     } catch (err) {
       console.log('err: ', err);
       dispatch({type: 'LOADED'});
     }
   }
 
-  // Sign out; Don't delete
+  // User sign out
   function signOut() {
     console.log('signOut :');
     Auth.signOut()
@@ -372,114 +340,68 @@ const App: () => React$Node = () => {
     );
   }
 
-  // let body = <ReactNative signOut={signOut} user={state.user} />;
-
   return (
     <>
-      <NavigationContainer>
-        {/* <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#0a3d62',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-          initialRouteName="Splash">
-          <Stack.Screen
-            name="Splash"
-            component={SplashScreen}
-            options={{
-              title: 'splashzz',
-              headerRight: () => (
-                <Button
-                  onPress={() => alert('This is a button!')}
-                  title="Alert"
-                  color="#fff"
-                />
-              ),
-            }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              title: 'One Moon',
-            }}
-          />
-          <Stack.Screen
-            name="Details"
-            component={DetailsScreen}
-            options={{
-              title: 'Detailz',
-            }}
-          />
-        </Stack.Navigator> */}
-        <Tab.Navigator
-          tabBarOptions={{
-            activeTintColor: '#0a3d62',
-            inactiveTintColor: 'gray',
-          }}>
-          <Tab.Screen name="Home" component={ChallengeStatus} />
-          <Tab.Screen name="Create" component={CreateChallenge} />
-          <Tab.Screen name="Search" component={Splash} />
-          <Tab.Screen name="Settings" component={Splash} />
-        </Tab.Navigator>
-        {/* <View style={styles.scrollView}>{body}</View>
+      {state.loading && <Splash />}
+      {!state.user && !state.loading && (
+        <View style={styles.appContainer}>
+          <EmailLoginForm />
+        </View>
+      )}
+      {state.user && state.user.signInUserSession && isSplashLoading && (
+        <Splash />
+      )}
+      {state.user && state.user.signInUserSession && !isSplashLoading && (
+        <NavigationContainer>
+          <Tab.Navigator
+            tabBarOptions={{
+              activeTintColor: Colors.primary,
+              inactiveTintColor: 'gray',
+            }}>
+            <Tab.Screen
+              name="Home"
+              component={Home}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-trophy" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Create"
+              component={CreateChallenge}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-create" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Search"
+              component={Search}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-search" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Settings"
+              component={Settings}
+              options={{
+                tabBarIcon: () => (
+                  <Icon name="ios-settings" color={Colors.primary} size={24} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+          {/* <View style={styles.scrollView}>{body}</View>
         {body} */}
-        {/* <Splash /> */}
-      </NavigationContainer>
+          {/* <Splash /> */}
+        </NavigationContainer>
+      )}
+      <>{/* <ChallengeStatus data={state.userCurrentChallenge} /> */}</>
     </>
-    // <View style={styles.appContainer}>
-    //   {state.loading && (
-    //     <View style={styles.body}>
-    //       <Text>Loading...</Text>
-    //     </View>
-    //   )}
-    //   {!state.user && !state.loading && (
-    //     <View>
-    //       <View style={styles.container}>
-    //         <Button
-    //           title="Sign in with Facebook"
-    //           onPress={() => {
-    //             console.log('Auth :', Auth);
-    //             Auth.federatedSignIn({provider: 'Facebook'});
-    //           }}
-    //         />
-    //         <Button
-    //           title="Sign in with Google"
-    //           onPress={async () => {
-    //             const result = await Auth.federatedSignIn({provider: 'Google'});
-    //             console.log(
-    //               'get aws Auth.federatedSignI google credentials',
-    //               result,
-    //             );
-    //           }}
-    //         />
-    //         <Button
-    //           title="Sign in with Email"
-    //           onPress={() => updateFormState('email')}
-    //         />
-    //       </View>
-    //     </View>
-    //   )}
-    //   {state.user && state.user.signInUserSession && (
-    //     <View style={styles.scrollView}>{body}</View>
-    //   )}
-    //   {/* If you want to use Sign out, please use it :)
-    //       <Button
-    //         title="Sign Out"
-    //         style={{...styles.button, ...styles.signOut}}
-    //         onPress={signOut}>
-    //         <FaSignOutAlt color="white" />
-    //       </Button>
-    //   */}
-    // </View>
-    //   <>
-    //     <ChallengeStatus data={state.userCurrentChallenge} />
-    //   </>
   );
 };
 

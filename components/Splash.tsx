@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import Colors from '../variablesColors';
+
 function Splash(props) {
   return (
     <View style={styles.container}>
@@ -17,7 +19,7 @@ function Splash(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(60,99,130,1)',
+    backgroundColor: Colors.primary,
   },
   icon: {
     color: 'rgba(130,204,221,1)',

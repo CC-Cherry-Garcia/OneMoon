@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, Alert, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Form01TitleAndDate from './Form01TitleAndDate';
-import Form02ChallengeType from './Form02ChallengeType';
+import HomeUser from './HomeUser';
+import HomeFirstTime from './HomeFirstTime';
 
 const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
 
-function CreateChallenge({navigation}) {
-  //   console.log('props in CreateChallenge.tsx: ', props);
+function HomeScreen({navigation}) {
+  //   console.log('props in HomeScreen.tsx: ', props);
   return (
     <Stack.Navigator
-      initialRouteName="ChallengeTitle"
+      initialRouteName="One Moon"
       screenOptions={{
         headerStyle: {
           backgroundColor: Colors.primary,
@@ -25,29 +25,22 @@ function CreateChallenge({navigation}) {
         },
       }}>
       <Stack.Screen
-        name="ChallengeTitle"
-        component={Form01TitleAndDate}
+        name="One Moon"
+        component={HomeUser}
         options={{
-          title: 'Challenge Title',
           headerRight: () => (
             <Button
-              onPress={() => navigation.navigate('ChallengeType')}
-              title="Type"
+              onPress={() => navigation.navigate('HomeFirstTime')}
+              title="Switch"
             />
           ),
         }}
       />
       <Stack.Screen
-        name="ChallengeType"
-        component={Form02ChallengeType}
+        name="HomeFirstTime"
+        component={HomeFirstTime}
         options={{
-          title: 'Challenge Type',
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate('ChallengeTitle')}
-              title="Title"
-            />
-          ),
+          title: 'One Moon',
         }}
       />
     </Stack.Navigator>
@@ -56,4 +49,4 @@ function CreateChallenge({navigation}) {
 
 const styles = StyleSheet.create({});
 
-export default CreateChallenge;
+export default HomeScreen;
