@@ -151,6 +151,7 @@ const reducer = (state: any, action: {type: string}) => {
 };
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 import Colors from './variablesColors';
 
 const App: () => React$Node = () => {
@@ -334,9 +335,29 @@ const App: () => React$Node = () => {
   // This renders the sign-in form
   if (formState === 'email') {
     return (
-      <View style={styles.appContainer}>
-        <EmailLoginForm />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="SearchMain"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: Colors.primary,
+              borderBottomWidth: 0,
+              shadowColor: 'transparent',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}>
+          <Stack.Screen
+            name="SearchMain"
+            component={EmailLoginForm}
+            options={{
+              title: 'One Moon',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 
