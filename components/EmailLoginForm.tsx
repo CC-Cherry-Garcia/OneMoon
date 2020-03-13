@@ -76,7 +76,7 @@ async function signIn({username, password}) {
 }
 
 export default function EmailLoginForm() {
-  const [formType, updateFormType] = useState('signUp');
+  const [formType, updateFormType] = useState('signIn');
   const [formState, updateFormState] = useReducer(reducer, initialFormState);
   function renderForm() {
     switch (formType) {

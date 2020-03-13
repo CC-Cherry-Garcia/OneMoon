@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, StatusBar, TextInput, Button, Alert} from 'react-native';
-import CupertinoHeaderWithLargeTitle from '../src/sub-components/CupertinoHeaderWithLargeTitle';
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  TextInput,
+  Button,
+  Alert,
+} from 'react-native';
+import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHeaderWithLargeTitle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CupertinoButtonSuccess from '../src/sub-components/CupertinoButtonSuccess';
+import CupertinoButtonSuccess from '../../src/sub-components/CupertinoButtonSuccess';
 
 function FirstTimeChallengeTypeQuantity(props) {
   return (
@@ -25,24 +33,31 @@ function FirstTimeChallengeTypeQuantity(props) {
       <StatusBar animated={false} hidden={true} />
       <Text style={styles.dailyTask}>Daily Task:</Text>
       <TextInput
-        onChangeText={TextInputValue => props.setChallengeInput({
-          ...props.challengeInput, 
-          taskName: TextInputValue,
-        })}
-        placeholder=" Squats" style={styles.email1} />
+        onChangeText={TextInputValue =>
+          props.setChallengeInput({
+            ...props.challengeInput,
+            taskName: TextInputValue,
+          })
+        }
+        placeholder=" Squats"
+        style={styles.email1}
+      />
       <Text style={styles.dailyTask2}>Increase Quantity by:</Text>
-      <TextInput 
-        onChangeText={TextInputValue => props.setChallengeInput({
-          ...props.challengeInput, 
-          increase: TextInputValue
-        })}
-        placeholder=" 5" 
-        style={styles.textInput} />
+      <TextInput
+        onChangeText={TextInputValue =>
+          props.setChallengeInput({
+            ...props.challengeInput,
+            increase: TextInputValue,
+          })
+        }
+        placeholder=" 5"
+        style={styles.textInput}
+      />
       <Button
         title="Review your Challege"
         onPress={() => {
           console.log('props: ', props);
-          props.changeView()
+          props.changeView();
         }}
       />
       {/* <View style={styles.day1Row}>
@@ -75,7 +90,7 @@ const styles = StyleSheet.create({
     left: 0,
     // width: 375,
     height: 96,
-    position: 'absolute',
+    // position: 'absolute',
   },
   icon: {
     top: 56,
