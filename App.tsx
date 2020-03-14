@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /**
  * oneMoon React Native App
  * @format
@@ -17,6 +18,8 @@ import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
 
+import useStore from './state/state';
+
 // Components Import
 import Login from './components/_oldComponents/Login';
 import EmailLoginForm from './components/EmailLoginForm';
@@ -26,11 +29,12 @@ import FirstTime from './components/_oldComponents/FirstTime';
 import FirstTimeChallengeType from './components/_oldComponents/FirstTimeChallengeType';
 import FirstTimeChallengeTypeQuantity from './components/_oldComponents/FirstTimeChallengeTypeQuantity';
 import FirstTimeChallengeTypeQuantityConfirm from './components/_oldComponents/FirstTimeChallengeTypeQuantityConfirm';
-import ChallengeStatus from './components/_oldComponents/ChallengeStatus';
 import CreateChallenge from './components/CreateChallenge/Index';
 import Settings from './components/Settings/Index';
 import Home from './components/Home/Index';
+import HomeFirstTime from './components/Home/HomeFirstTime';
 import Search from './components/Search/Index';
+import ChallengeStatus from './components/ChallengeStatus/Index';
 
 Amplify.configure(awsconfig);
 
@@ -162,14 +166,18 @@ const App: () => React$Node = () => {
   const [isDone, setIsDone] = useState(false);
   const [isSplashLoading, setIsSplashLoading] = useState(true);
 
-  console.log('currentChallenge!!!!!!!!  ', currentChallengeId);
+  const stateA = useStore(state => state);
+
+  // console.log('currentChallenge!!!!!!!!  ', stateA.currentChallengeId);
 
   useEffect(() => {
     // set listener for auth events
     Hub.listen('auth', data => {
       const {payload} = data;
+      console.log('payload :', payload);
       if (payload.event === 'signIn') {
         setImmediate(() => dispatch({type: 'SET_USER', user: payload.data}));
+
         setFormState('base');
       }
       if (payload.event === 'signOut') {
@@ -339,7 +347,6 @@ const App: () => React$Node = () => {
       </View>
     );
   }
-
   return (
     <>
       {state.loading && <Splash />}
@@ -358,18 +365,53 @@ const App: () => React$Node = () => {
               activeTintColor: Colors.primary,
               inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen
-              name="Home"
-              component={Home}
-              options={{
-                tabBarIcon: () => (
-                  <Icon name="ios-trophy" color={Colors.primary} size={24} />
-                ),
-              }}
-            />
+            {(stateA.userFirstTime && (
+              <Tab.Screen
+                name="Home"
+                component={HomeFirstTime}
+                initialParams={{userName: state.user.username}}
+                options={{
+                  tabBarIcon: () => (
+                    <Icon name="ios-trophy" color={Colors.primary} size={24} />
+                  ),
+                }}
+              />
+            )) ||
+              (stateA.userHasActiveChallenge && (
+                <Tab.Screen
+                  name="Home"
+                  component={ChallengeStatus}
+                  initialParams={{userName: state.user.username}}
+                  options={{
+                    tabBarIcon: () => (
+                      <Icon
+                        name="ios-trophy"
+                        color={Colors.primary}
+                        size={24}
+                      />
+                    ),
+                  }}
+                />
+              )) || (
+                <Tab.Screen
+                  name="Home"
+                  component={Home} // this is an Active user w/o an Active Challenge view
+                  initialParams={{userName: state.user.username}}
+                  options={{
+                    tabBarIcon: () => (
+                      <Icon
+                        name="ios-trophy"
+                        color={Colors.primary}
+                        size={24}
+                      />
+                    ),
+                  }}
+                />
+              )}
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-create" color={Colors.primary} size={24} />
@@ -379,6 +421,7 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Search"
               component={Search}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-search" color={Colors.primary} size={24} />
@@ -388,6 +431,7 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Settings"
               component={Settings}
+              initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-settings" color={Colors.primary} size={24} />
