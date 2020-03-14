@@ -60,7 +60,16 @@ const _registerLocalNotification = () => {
 };
 
 export default {
-  register: async (
+  confirm: () => {
+    PushNotification.configure({
+      onNotification: function(notification) {
+        notification.finish(PushNotificationIOS.FetchResult.NoData);
+      },
+      popInitialNotification: true, // default: true
+      requestPermissions: true, //(optional) default: true
+    });
+  },
+  register: (
     reminderPushHour,
     reminderPushMin,
     reminderPushSec,
@@ -89,13 +98,6 @@ export default {
     PushNotificationSetting.reminderMessage = reminderMessage;
     PushNotificationSetting.checkInMessage = checkInMessage;
 
-    PushNotification.configure({
-      onNotification: function(notification) {
-        notification.finish(PushNotificationIOS.FetchResult.NoData);
-      },
-      popInitialNotification: true, // default: true
-      requestPermissions: true, //(optional) default: true
-    });
     _registerLocalNotification();
 
     //When a user close or open this app
