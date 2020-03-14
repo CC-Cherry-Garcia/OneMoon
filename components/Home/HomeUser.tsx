@@ -16,9 +16,12 @@ import {
   DatePicker,
 } from 'native-base';
 import {Auth} from 'aws-amplify';
+import useStore from '../../state/state';
 
 function Home(props) {
-  console.log('props in Home.tsx: ', props);
+  const state = useStore(state => state);
+
+  console.log('state in Home.tsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content>

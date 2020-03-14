@@ -4,9 +4,10 @@ import CupertinoHeaderWithLargeTitle from '../../src/sub-components/CupertinoHea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CupertinoButtonSuccess from '../../src/sub-components/CupertinoButtonSuccess';
 import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
+import useStore from '../../state/state';
 
 function FirstTime(props) {
-  console.log('props in FirstTime.tsx: ', props);
+  console.log('state in FirstTime.tsx: ', state);
   return (
     <View style={styles.container}>
       <View style={styles.cupertinoHeaderWithLargeTitleStack}>

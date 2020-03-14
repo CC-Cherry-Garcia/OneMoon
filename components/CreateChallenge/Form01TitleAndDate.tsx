@@ -15,9 +15,12 @@ import {
   Button,
   DatePicker,
 } from 'native-base';
+import useStore from '../../state/state';
 
-function Form01TitleAndDate(props) {
-  console.log('props in Form01TitleAndDate.tsx: ', props);
+function Form01TitleAndDate({navigation}, props) {
+  const state = useStore(state => state);
+
+  console.log('state in Form01TitleAndDate.tsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content>
@@ -29,14 +32,22 @@ function Form01TitleAndDate(props) {
         <Form>
           <Label style={styles.Title}>Challenge Title</Label>
           <Item>
-            <Input placeholder="Squat Til You Drop" />
+            <Input
+              placeholder="Squat Til You Drop"
+              onChangeText={TextInputValue =>
+                state.setChallengeInput({
+                  ...state.challengeInput,
+                  title: TextInputValue,
+                })
+              }
+            />
           </Item>
           <Label style={styles.Title}>Start Date</Label>
           <Item fixedLabel last>
             <DatePicker
-              defaultDate={new Date(2020, 2, 4)}
-              minimumDate={new Date(2020, 2, 12)}
-              maximumDate={new Date(2021, 12, 31)}
+              defaultDate={new Date()}
+              minimumDate={new Date()}
+              maximumDate={new Date(2030, 12, 31)}
               locale={'en'}
               timeZoneOffsetInMinutes={undefined}
               modalTransparent={false}
@@ -45,11 +56,16 @@ function Form01TitleAndDate(props) {
               placeHolderText="Select date"
               textStyle={{color: '#0a3d62'}}
               placeHolderTextStyle={{color: '#d3d3d3'}}
-              onDateChange={this.setDate}
+              onDateChange={value =>
+                state.setChallengeInput({
+                  ...state.challengeInput,
+                  startDate: value.toString(),
+                })
+              }
               disabled={false}
             />
           </Item>
-          <Button block onPress={() => props.changeView()}>
+          <Button block onPress={() => navigation.navigate('ChallengeType')}>
             <Text>Next Step</Text>
           </Button>
         </Form>
