@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
 
-function ListSchedule({navigation}, props) {
+function ListSchedule({navigation}) {
 
   const dummy30 = ['dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy','dummy'];
 

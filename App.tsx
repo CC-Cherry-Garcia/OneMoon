@@ -188,15 +188,22 @@ const App: () => React$Node = () => {
 
     // get user's current active challenge
     const getUserCurrentChallenge = async () => {
-      const data = await API.graphql(
-        graphqlOperation(queries.getChallenge, {id: '1'}),
-      );
-      const payload = data.data.getChallenge;
-      dispatch({
-        type: 'SET_USER_CURRENT_CHALLENGE',
-        userCurrentChallenge: payload,
-      });
-      // console.log(data);
+      console.log('state.user: *******', state.user);
+
+        API.graphql(
+          graphqlOperation(queries.getChallenge, {id: state.user.attributes.email}),
+        ).then((data) => {
+          const payload = data.data.getChallenge;
+          // dispatch({
+          //   type: 'SET_USER_CURRENT_CHALLENGE',
+          //   userCurrentChallenge: payload,
+          // });
+          stateA.setCurrentChallengeId(state.user.attributes.email);
+          if (payload.data !== null) {
+            stateA.setUserCurrentChallenge(payload);
+            stateA.setUserHasActiveChallenge(true);
+          }
+        }).catch((error) => Promise.reject(error));
     };
     getUserCurrentChallenge();
   }, []);
@@ -367,7 +374,7 @@ const App: () => React$Node = () => {
             }}>
             {(stateA.userFirstTime && (
               <Tab.Screen
-                name="Home"
+                name="Home1"
                 component={HomeFirstTime}
                 initialParams={{userName: state.user.username}}
                 options={{
@@ -379,7 +386,7 @@ const App: () => React$Node = () => {
             )) ||
               (stateA.userHasActiveChallenge && (
                 <Tab.Screen
-                  name="Home"
+                  name="Home2"
                   component={ChallengeStatus}
                   initialParams={{userName: state.user.username}}
                   options={{
@@ -394,7 +401,7 @@ const App: () => React$Node = () => {
                 />
               )) || (
                 <Tab.Screen
-                  name="Home"
+                  name="Home3"
                   component={Home} // this is an Active user w/o an Active Challenge view
                   initialParams={{userName: state.user.username}}
                   options={{

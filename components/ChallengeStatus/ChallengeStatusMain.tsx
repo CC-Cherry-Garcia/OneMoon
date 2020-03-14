@@ -13,8 +13,13 @@ import {
   Left,
   Right,
 } from 'native-base';
+import useStore from '../../state/state';
 
-function ChallengeStatusMain({navigation}, props) {
+function ChallengeStatusMain({navigation}) {
+
+  const state = useStore(state => state);
+
+  console.log('state in ChallengeStatusMain.tsx: ', state);
   
   const tableData = [
     ['1', '2', '3', '4', '5', '6'],
@@ -40,7 +45,6 @@ function ChallengeStatusMain({navigation}, props) {
   }
   let progress = Math.ceil(completedCount / 30 * 100);
 
-  console.log('props in ChallengeStatusMain.tsx: ', props);
   
 
   return (
