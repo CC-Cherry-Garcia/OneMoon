@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, Alert, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ChallengeStatusMain from './ChallengeStatusMain';
+import ListSchedule from './ListSchedule';
 
 const Stack = createStackNavigator();
 
-function CreateChallenge({navigation}) {
+function ChallengeStatus({navigation}) {
   //   console.log('props in CreateChallenge.tsx: ', props);
   return (
     <Stack.Navigator
@@ -22,10 +23,17 @@ function CreateChallenge({navigation}) {
         },
       }}>
       <Stack.Screen
-        name="ChallengeTitle"
+        name="ChallengeStatus"
         component={ChallengeStatusMain}
         options={{
           title: 'Challenge Status',
+        }}
+      />
+      <Stack.Screen
+        name="ListSchedule"
+        component={ListSchedule}
+        options={{
+          title: 'Challnege Schedule',
         }}
       />
     </Stack.Navigator>
@@ -34,4 +42,4 @@ function CreateChallenge({navigation}) {
 
 const styles = StyleSheet.create({});
 
-export default CreateChallenge;
+export default ChallengeStatus;

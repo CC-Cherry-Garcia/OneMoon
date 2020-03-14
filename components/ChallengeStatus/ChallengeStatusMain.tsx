@@ -14,7 +14,7 @@ import {
   Right,
 } from 'native-base';
 
-function ChallengeStatusMain(props) {
+function ChallengeStatusMain({navigation}, props) {
   
   const tableData = [
     ['1', '2', '3', '4', '5', '6'],
@@ -41,6 +41,7 @@ function ChallengeStatusMain(props) {
   let progress = Math.ceil(completedCount / 30 * 100);
 
   console.log('props in ChallengeStatusMain.tsx: ', props);
+  
 
   return (
   <>
@@ -86,7 +87,8 @@ function ChallengeStatusMain(props) {
                 backgroundColor: 'lightgrey',
                 borderBottomRightRadius: 10, 
                 borderTopRightRadius: 10
-              }}></View>
+              }}>
+              </View>
             </View>
           </CardItem>
         </Card>
@@ -106,7 +108,7 @@ function ChallengeStatusMain(props) {
           </Table>
         </Card>
 
-        <Button block onPress={() => props.changeView()}>
+        <Button block onPress={() => navigation.navigate('ListSchedule')}>
           <Text>VIEW SCHEDULE</Text>
         </Button>
       </Content>
