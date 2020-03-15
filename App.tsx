@@ -453,7 +453,7 @@ const App: () => React$Node = () => {
               initialParams={{userName: state.user.username}}
               options={{
                 tabBarIcon: () => (
-                  <Icon name="ios-settings" color={Colors.primary} size={24} />
+                  <Icon name="ios-person" color={Colors.primary} size={24} />
                 ),
               }}
             />
