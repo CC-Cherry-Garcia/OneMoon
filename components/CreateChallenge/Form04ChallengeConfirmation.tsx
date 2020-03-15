@@ -34,23 +34,26 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
 
   const state = useStore(state => state);
 
+  const taskQuantityArray = [];
+  const taskName = state.challengeInput.taskName;
+
   let unitsVariable = ''; // used for Repeating Task
   if (state.challengeType === 'quantity') {
     unitsVariable = 'times';
   } else if (state.challengeType === 'time') {
     unitsVariable = 'minutes';
   }
-
-  const taskQuantityArray = [];
-  const taskName = state.challengeInput.taskName;
-
   // const taskName = props.challengeInput.taskName;
   const increaseRate = Number(state.challengeInput.increase);
   let i = 1;
   while (i <= 30) {
-    taskQuantityArray.push(
-      `Day ${i} Task: ${taskName} ${increaseRate * i} ${unitsVariable}`,
-    );
+    if (state.challengeType === 'quantity' || state.challengeType === 'time') {
+      taskQuantityArray.push(
+        `Day ${i} Task: ${taskName} ${increaseRate * i} ${unitsVariable}`,
+      );
+    } else {
+      taskQuantityArray.push(`Day ${i} Task: ${taskName}`);
+    }
     ++i;
   }
 

@@ -66,12 +66,15 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem header button onPress={() => alert('Not set up yet')}>
+          <CardItem
+            header
+            button
+            onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
             <Text>Same Daily Goal Challenge</Text>
           </CardItem>
           <CardItem
             button
-            onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+            onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
             <Body>
               <Text>
                 Pick this if you want to complete the same goal for 30 days. For

@@ -6,6 +6,7 @@ import Form01TitleAndDate from './Form01TitleAndDate';
 import Form02ChallengeType from './Form02ChallengeType';
 import Form03ChallengeQuantity from './Form03ChallengeQuantity';
 import Form03ChallengeTime from './Form03ChallengeTime';
+import Form03ChallengeRepeat from './Form03ChallengeRepeat';
 import Form04ChallengeConfirmation from './Form04ChallengeConfirmation';
 
 const Stack = createStackNavigator();
@@ -73,6 +74,14 @@ function CreateChallenge({navigation, route}) {
         initialParams={{userName: route.params.userName}}
         options={{
           title: 'Task Time Info',
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeRepeatInfo"
+        component={Form03ChallengeRepeat}
+        initialParams={{userName: route.params.userName}}
+        options={{
+          title: 'Repeating Daily Task',
         }}
       />
       <Stack.Screen
