@@ -23,7 +23,6 @@ import useStore from '../../state/state';
 function Form03ChallengeQuantity({navigation, route}, props) {
   const state = useStore(state => state);
 
-  console.log('state in Form03ChallengeQuantitytsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>

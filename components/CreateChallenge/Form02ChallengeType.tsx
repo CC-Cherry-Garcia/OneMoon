@@ -23,7 +23,6 @@ import useStore from '../../state/state';
 function Form02ChallengeType({navigation}, props) {
   const state = useStore(state => state);
 
-  console.log('state in Form02ChallengeTypetsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
