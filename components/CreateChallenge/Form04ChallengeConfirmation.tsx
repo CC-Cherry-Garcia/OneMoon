@@ -129,7 +129,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
         state.setUserCurrentChallenge(res.data.createChallenge);
         state.setUserHasActiveChallenge(true);
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log('Error happens in createChallenge: ', error));
   };
 
   return (
