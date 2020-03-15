@@ -19,6 +19,8 @@ function ChallengeStatusMain({navigation}) {
 
   const state = useStore(state => state);
 
+  const cc = state.userCurrentChallenge;
+
   console.log('state in ChallengeStatusMain.tsx: ', state);
   
   const tableData = [
@@ -30,22 +32,22 @@ function ChallengeStatusMain({navigation}) {
   ]
   
   const completedDates = [
-    ['1', '1', '1', '0', '0', '1'],
-    ['1', '0', '0', '0', '0', '0'],
-    ['1', '1', '1', '1', '0', '0'],
-    ['1', '1', '1', '0', '1', '1'],
-    ['1', '1', '1', '0', '0', '0']
+    [ cc.task1IsDone, cc.task2IsDone, cc.task3IsDone, cc.task4IsDone, cc.task5IsDone, cc.task6IsDone],
+    [ cc.task7IsDone, cc.task8IsDone, cc.task9IsDone, cc.task10IsDone, cc.task11IsDone, cc.task12IsDone],
+    [ cc.task13IsDone, cc.task14IsDone, cc.task15IsDone, cc.task16IsDone, cc.task17IsDone, cc.task18IsDone],
+    [ cc.task19IsDone, cc.task20IsDone, cc.task21IsDone, cc.task22IsDone, cc.task23IsDone, cc.task24IsDone],
+    [ cc.task25IsDone, cc.task26IsDone, cc.task27IsDone, cc.task28IsDone, cc.task29IsDone, cc.task30IsDone]
   ]
+
+  console.table('completedDates', completedDates);
 
   let completedCount = 0;
   for (const row of completedDates) {
     for (const col of row) {
-      if (col === '1') ++completedCount;
+      if (col === true) ++completedCount;
     }
   }
   let progress = Math.ceil(completedCount / 30 * 100);
-
-  
 
   return (
   <>
@@ -103,7 +105,7 @@ function ChallengeStatusMain({navigation}) {
               <TableWrapper key={index} style={styles.row}>
               {
                 rowData.map((cellData, cellIndex) => (
-                  <Cell key={cellIndex} data={cellData} style={completedDates[index][cellIndex] === '1' ? {backgroundColor: '#5cb85c', width: 53} : {backgroundColor: 'transparent', width: 53}} textStyle={styles.text}/>
+                  <Cell key={cellIndex} data={cellData} style={completedDates[index][cellIndex] === true ? {backgroundColor: '#5cb85c', width: 53} : {backgroundColor: 'transparent', width: 53}} textStyle={styles.text}/>
                 ))
               }
               </TableWrapper>
