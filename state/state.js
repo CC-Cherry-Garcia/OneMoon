@@ -16,6 +16,16 @@ const [useStore] = create(set => ({
   setUserHasActiveChallenge: value => set({userHasActiveChallenge: value}),
   userFirstTime: false,
   setUserFirstTime: value => set({userFirstTime: value}),
+
+  // LOADING State
+  isSplashLoading: true,
+  setIsSplashLoading: value => set({isSplashLoading: value}),
+  isLoading: true,
+  setIsLoading: value => set({isLoading: value}),
+
+  // DAILY TASK State
+  isDone: false,
+  setIsDone: value => set({isDone: value}),
 }));
 
 export default useStore;

@@ -32,116 +32,16 @@ import ChallengeStatus from './components/ChallengeStatus/Index';
 Amplify.configure(awsconfig);
 
 const initialState = {
-  currentView: 'SPLASH_VIEW',
   user: null,
   loading: true,
-  userCurrentChallenge: {
-    id: '1',
-    userID: 'Travis',
-    title: 'Squat til you Drop',
-    startDate: '2020-03-6',
-    increase: null,
-    isValid: 'valid',
-    task1Name: '5 Squats',
-    task1IsDone: false,
-    task2Name: '10 Squats',
-    task2IsDone: false,
-    task3Name: '15 Squats',
-    task3IsDone: false,
-    task4Name: '20 Squats',
-    task4IsDone: false,
-    task5Name: 'taskName',
-    task5IsDone: false,
-    task6Name: 'taskName',
-    task6IsDone: false,
-    task7Name: 'taskName',
-    task7IsDone: false,
-    task8Name: 'taskName',
-    task8IsDone: false,
-    task9Name: 'taskName',
-    task9IsDone: false,
-    task10Name: 'taskName',
-    task10IsDone: false,
-    task11Name: 'taskName',
-    task11IsDone: false,
-    task12Name: 'taskName',
-    task12IsDone: false,
-    task13Name: 'taskName',
-    task13IsDone: false,
-    task14Name: 'taskName',
-    task14IsDone: false,
-    task15Name: 'taskName',
-    task15IsDone: false,
-    task16Name: 'taskName',
-    task16IsDone: false,
-    task17Name: 'taskName',
-    task17IsDone: false,
-    task18Name: 'taskName',
-    task18IsDone: false,
-    task19Name: 'taskName',
-    task19IsDone: false,
-    task20Name: 'taskName',
-    task20IsDone: false,
-    task21Name: 'taskName',
-    task21IsDone: false,
-    task22Name: 'taskName',
-    task22IsDone: false,
-    task23Name: 'taskName',
-    task23IsDone: false,
-    task24Name: 'taskName',
-    task24IsDone: false,
-    task25Name: 'taskName',
-    task25IsDone: false,
-    task26Name: 'taskName',
-    task26IsDone: false,
-    task27Name: 'taskName',
-    task27IsDone: false,
-    task28Name: 'taskName',
-    task28IsDone: false,
-    task29Name: 'taskName',
-    task29IsDone: false,
-    task30Name: 'taskName',
-    task30IsDone: false,
-  },
-  isDone: false,
 };
 
 const reducer = (state: any, action: {type: string}) => {
-  let newState = {...state};
   switch (action.type) {
-    case 'SET_LOGIN_VIEW':
-      newState.currentView = 'LOGIN_VIEW';
-      return newState;
-    case 'SET_FIRST_VIEW':
-      newState.currentView = 'FIRST_TIME';
-      return newState;
-    case 'SET_USER_VIEW':
-      newState.currentView = 'USER_MAIN_VIEW';
-      return newState;
-    case 'SET_REACT_NATIVE_VIEW':
-      newState.currentView = 'REACT_NATIVE_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW';
-      return newState;
-    case 'SET_CHALLENGE_STATUS_VIEW':
-      newState.currentView = 'CHALLENGE_STATUS_VIEW';
-      return newState;
     case 'SET_USER':
       return {...state, user: action.user, loading: false};
     case 'LOADED':
       return {...state, loading: false};
-    // case 'SET_USER_CURRENT_CHALLENGE':
-    //   return {...state, userCurrentChallenge: action.userCurrentChallenge};
     default:
       return state;
   }
@@ -157,11 +57,7 @@ import Colors from './variablesColors';
 const App: () => React$Node = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [formState, setFormState] = useState('email');
-  const [challengeInput, setChallengeInput] = useState({});
-  const [currentChallengeId, setCurrentChallengeId] = useState({});
-  const [userCurrentChallenge, setUserCurrentChallenge] = useState({});
   const [isDone, setIsDone] = useState(false);
-  const [isSplashLoading, setIsSplashLoading] = useState(true);
 
   const stateA = useStore(state => state);
 
@@ -197,7 +93,7 @@ const App: () => React$Node = () => {
   useEffect(() => {
     // load app with Spalsh screen, change to login or home screen after 2 seconds
     setTimeout(() => {
-      setIsSplashLoading(false);
+      stateA.setIsSplashLoading(false);
     }, 2000);
   }, []);
 
@@ -252,10 +148,10 @@ const App: () => React$Node = () => {
   return (
     <>
       {state.loading && <Splash />}
-      {state.user && state.user.signInUserSession && isSplashLoading && (
+      {state.user && state.user.signInUserSession && stateA.isSplashLoading && (
         <Splash />
       )}
-      {state.user && state.user.signInUserSession && !isSplashLoading && (
+      {state.user && state.user.signInUserSession && !stateA.isSplashLoading && (
         <NavigationContainer>
           <Tab.Navigator
             tabBarOptions={{
