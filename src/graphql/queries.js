@@ -168,77 +168,6 @@ export const getChallenge = /* GraphQL */ `
     }
   }
 `;
-export const getChallengeByUser = /* GraphQL */ `
-  query GetChallengeByUser($userID: String!) {
-    getChallengeByUser(userID: $userID) {
-      id
-      userID
-      title
-      increase
-      isValid
-      task1Name
-      task1IsDone
-      task2Name
-      task2IsDone
-      task3Name
-      task3IsDone
-      task4Name
-      task4IsDone
-      task5Name
-      task5IsDone
-      task6Name
-      task6IsDone
-      task7Name
-      task7IsDone
-      task8Name
-      task8IsDone
-      task9Name
-      task9IsDone
-      task10Name
-      task10IsDone
-      task11Name
-      task11IsDone
-      task12Name
-      task12IsDone
-      task13Name
-      task13IsDone
-      task14Name
-      task14IsDone
-      task15Name
-      task15IsDone
-      task16Name
-      task16IsDone
-      task17Name
-      task17IsDone
-      task18Name
-      task18IsDone
-      task19Name
-      task19IsDone
-      task20Name
-      task20IsDone
-      task21Name
-      task21IsDone
-      task22Name
-      task22IsDone
-      task23Name
-      task23IsDone
-      task24Name
-      task24IsDone
-      task25Name
-      task25IsDone
-      task26Name
-      task26IsDone
-      task27Name
-      task27IsDone
-      task28Name
-      task28IsDone
-      task29Name
-      task29IsDone
-      task30Name
-      task30IsDone
-    }
-  }
-`;
 export const listChallenges = /* GraphQL */ `
   query ListChallenges(
     $filter: ModelChallengeFilterInput
@@ -314,6 +243,79 @@ export const listChallenges = /* GraphQL */ `
         task30IsDone
       }
       nextToken
+    }
+  }
+`;
+export const searchChallengeByUser = /* GraphQL */ `
+  query searchChallengeByUser($userID: String!) {
+    listChallenges(filter: {userID: {eq: $userID}}) {
+      items {
+        id
+        userID
+        title
+        increase
+        isValid
+        task1Name
+        task1IsDone
+        task2Name
+        task2IsDone
+        task3Name
+        task3IsDone
+        task4Name
+        task4IsDone
+        task5Name
+        task5IsDone
+        task6Name
+        task6IsDone
+        task7Name
+        task7IsDone
+        task8Name
+        task8IsDone
+        task9Name
+        task9IsDone
+        task10Name
+        task10IsDone
+        task11Name
+        task11IsDone
+        task12Name
+        task12IsDone
+        task13Name
+        task13IsDone
+        task14Name
+        task14IsDone
+        task15Name
+        task15IsDone
+        task16Name
+        task16IsDone
+        task17Name
+        task17IsDone
+        task18Name
+        task18IsDone
+        task19Name
+        task19IsDone
+        task20Name
+        task20IsDone
+        task21Name
+        task21IsDone
+        task22Name
+        task22IsDone
+        task23Name
+        task23IsDone
+        task24Name
+        task24IsDone
+        task25Name
+        task25IsDone
+        task26Name
+        task26IsDone
+        task27Name
+        task27IsDone
+        task28Name
+        task28IsDone
+        task29Name
+        task29IsDone
+        task30Name
+        task30IsDone
+      }
     }
   }
 `;
