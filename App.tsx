@@ -47,27 +47,10 @@ const reducer = (state: any, action: {type: string}) => {
     case 'SET_REACT_NATIVE_VIEW':
       newState.currentView = 'REACT_NATIVE_VIEW';
       return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_VIEW';
-      return newState;
-    case 'SET_FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW':
-      newState.currentView = 'FIRST_TIME_CHALLENGE_TYPE_QUANTITY_CONFIRM_VIEW';
-      return newState;
-    case 'SET_CHALLENGE_STATUS_VIEW':
-      newState.currentView = 'CHALLENGE_STATUS_VIEW';
-      return newState;
     case 'SET_USER':
       return {...state, user: action.user, loading: false};
     case 'LOADED':
       return {...state, loading: false};
-    // case 'SET_USER_CURRENT_CHALLENGE':
-    //   return {...state, userCurrentChallenge: action.userCurrentChallenge};
     default:
       return state;
   }
