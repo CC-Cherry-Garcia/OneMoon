@@ -190,13 +190,11 @@ const App: () => React$Node = () => {
     // get user's current active challenge
     const getUserCurrentChallenge = async () => {
       const data = await API.graphql(
-        graphqlOperation(queries.getChallenge, {id: '1'}),
+        graphqlOperation(queries.getChallenge, {id: 'Asdf'}),
       );
       const payload = data.data.getChallenge;
-      dispatch({
-        type: 'SET_USER_CURRENT_CHALLENGE',
-        userCurrentChallenge: payload,
-      });
+      stateA.setUserCurrentChallenge(payload);
+      stateA.setUserHasActiveChallenge(true);
       // console.log(data);
     };
     getUserCurrentChallenge();
