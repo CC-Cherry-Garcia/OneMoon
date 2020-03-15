@@ -26,7 +26,7 @@ function reducer(state: any, action: {type: string}) {
 
 async function signUp({username, password, email}, updateFormType) {
   try {
-    console.log('sign up try!', username, password, email, updateFormType);
+    console.log('sign up try!', username, email, updateFormType);
     await Auth.signUp({
       username,
       password,
@@ -38,7 +38,7 @@ async function signUp({username, password, email}, updateFormType) {
     console.log('error signing up..', err);
     Alert.alert(
       'Error',
-      err,
+      err.message,
       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
       {cancelable: false},
     );
@@ -55,7 +55,7 @@ async function confirmSignUp({username, confirmationCode}, updateFormType) {
     console.log('error signing up..', err);
     Alert.alert(
       'Error',
-      err,
+      err.message,
       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
       {cancelable: false},
     );
@@ -64,14 +64,14 @@ async function confirmSignUp({username, confirmationCode}, updateFormType) {
 
 async function signIn({username, password}) {
   try {
-    console.log('try sign in :', username, password);
+    console.log('try sign in :', username);
     const result = await Auth.signIn(username, password);
     console.log('sign in success!', result);
   } catch (err) {
-    console.log('error signing up..', err);
+    console.log('error signing in..', err);
     Alert.alert(
       'Error',
-      err,
+      err.message,
       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
       {cancelable: false},
     );

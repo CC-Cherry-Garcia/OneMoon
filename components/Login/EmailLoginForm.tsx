@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react';
 import {TextInput, Alert} from 'react-native';
-import {Text, Button, Icon, View} from 'native-base';
+import {Text, Button, Icon, View, H1} from 'native-base';
 import {Auth} from 'aws-amplify';
 
 const initialFormState = {
@@ -9,6 +9,8 @@ const initialFormState = {
   email: '',
   confirmationCode: '',
 };
+let passwordEmpty = true;
+let usernameEmpty = true;
 
 function reducer(state: any, action: {type: string}) {
   switch (action.type) {
@@ -24,7 +26,7 @@ function reducer(state: any, action: {type: string}) {
 
 async function signUp({username, password, email}, updateFormType) {
   try {
-    console.log('sign up try!', username, password, email, updateFormType);
+    console.log('sign up try!', username, email, updateFormType);
     await Auth.signUp({
       username,
       password,
@@ -36,7 +38,7 @@ async function signUp({username, password, email}, updateFormType) {
     console.log('error signing up..', err);
     Alert.alert(
       'Error',
-      err,
+      err.message,
       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
       {cancelable: false},
     );
@@ -53,7 +55,7 @@ async function confirmSignUp({username, confirmationCode}, updateFormType) {
     console.log('error signing up..', err);
     Alert.alert(
       'Error',
-      err,
+      err.message,
       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
       {cancelable: false},
     );
@@ -62,14 +64,14 @@ async function confirmSignUp({username, confirmationCode}, updateFormType) {
 
 async function signIn({username, password}) {
   try {
-    console.log('try sign in :', username, password);
+    console.log('try sign in :', username);
     const result = await Auth.signIn(username, password);
     console.log('sign in success!', result);
   } catch (err) {
-    console.log('error signing up..', err);
+    console.log('error signing in..', err);
     Alert.alert(
       'Error',
-      err,
+      err.message,
       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
       {cancelable: false},
     );
@@ -117,7 +119,6 @@ export default function EmailLoginForm() {
 
   return (
     <View>
-      {console.log('password entered' + initialFormState.password)}
       <View>{renderForm(formState)}</View>
       {formType === 'signUp' && (
         <Text style={styles.footer}>
@@ -188,11 +189,18 @@ function SignUp(props) {
 function SignIn(props) {
   return (
     <View style={styles.container}>
+      <H1>Login</H1>
       <TextInput
         name="username"
         onChange={e => {
+          console.log(e.nativeEvent.text);
           e.persist();
           props.updateFormState('username', e);
+          if (e.nativeEvent.text.length > 0) {
+            usernameEmpty = false;
+          } else {
+            usernameEmpty = true;
+          }
         }}
         style={styles.input}
         placeholder="username"
@@ -210,6 +218,11 @@ function SignIn(props) {
         onChange={e => {
           e.persist();
           props.updateFormState('password', e);
+          if (e.nativeEvent.text) {
+            passwordEmpty = false;
+          } else {
+            passwordEmpty = true;
+          }
         }}
         style={styles.input}
         placeholder="password"
@@ -219,7 +232,15 @@ function SignIn(props) {
         returnKeyType="go"
         onSubmitEditing={props.signIn}
       />
-      <Button title="Sign In" style={styles.button} onPress={props.signIn} />
+      <Button
+        disabled={passwordEmpty || usernameEmpty}
+        title="Sign In"
+        style={
+          passwordEmpty || usernameEmpty ? styles.buttonDisabled : styles.button
+        }
+        onPress={props.signIn}>
+        <Text style={styles.buttonText}>Log in</Text>
+      </Button>
     </View>
   );
 }
@@ -261,15 +282,20 @@ const styles = {
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#006bfc',
-    color: 'white',
     width: 300,
-    height: 45,
-    marginTop: 10,
-    fontWeight: '600',
-    fontSize: 12,
-    borderRadius: 3,
-    boxShadow: '0px 1px 3px rgba(0, 0, 0, .3)',
+    backgroundColor: 'rgba(24, 61, 95, 1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonDisabled: {
+    width: 300,
+    backgroundColor: 'lightgray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
   },
   footer: {
     fontWeight: '600',
