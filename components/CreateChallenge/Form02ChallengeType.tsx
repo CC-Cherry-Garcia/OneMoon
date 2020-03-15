@@ -34,7 +34,7 @@ function Form02ChallengeType({navigation}, props) {
             header
             button
             onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
-            <Text>Quantiy Challenge</Text>
+            <Text>Quantity Challenge</Text>
           </CardItem>
           <CardItem
             button

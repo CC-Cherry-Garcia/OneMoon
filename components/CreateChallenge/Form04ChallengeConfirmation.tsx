@@ -251,7 +251,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           onPress={() => {
             insertChallenge();
             // props.changeView();
-            navigation.navigate('One Moon');
+            navigation.navigate('Home', {screen: 'HomeUser'});
           }}>
           <Text>Save Challenge</Text>
         </Button>

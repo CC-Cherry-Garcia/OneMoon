@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Share} from 'react-native';
 import {Table, TableWrapper, Cell} from 'react-native-table-component';
 import {
   Container,
@@ -17,6 +17,26 @@ import useStore from '../../state/state';
 
 function ChallengeStatusMain(props) {
   const state = useStore(state => state);
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'I just completed Day X of my Challenge Title. #30DayChallenge',
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   const tableData = [
     ['1', '2', '3', '4', '5', '6'],
@@ -67,6 +87,13 @@ function ChallengeStatusMain(props) {
                   <Text> Not yet </Text>
                 </Button>
               </Right>
+            </CardItem>
+          </Card>
+          <Card style={{marginTop: 30}}>
+            <CardItem>
+              <Button success onPress={() => onShare()}>
+                <Text> Share your Progress! </Text>
+              </Button>
             </CardItem>
           </Card>
           <Card style={{marginTop: 15}}>
