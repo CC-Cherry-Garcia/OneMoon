@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Form01TitleAndDate from './Form01TitleAndDate';
 import Form02ChallengeType from './Form02ChallengeType';
 import Form03ChallengeQuantity from './Form03ChallengeQuantity';
+import Form03ChallengeTime from './Form03ChallengeTime';
 import Form04ChallengeConfirmation from './Form04ChallengeConfirmation';
 
 const Stack = createStackNavigator();
@@ -64,6 +65,14 @@ function CreateChallenge({navigation, route}) {
           //     title="Title"
           //   />
           // ),
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeTimeInfo"
+        component={Form03ChallengeTime}
+        initialParams={{userName: route.params.userName}}
+        options={{
+          title: 'Task Time Info',
         }}
       />
       <Stack.Screen

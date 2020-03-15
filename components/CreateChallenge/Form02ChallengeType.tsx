@@ -48,12 +48,15 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem header button onPress={() => alert('Not set up yet')}>
+          <CardItem
+            header
+            button
+            onPress={() => navigation.navigate('ChallengeTimeInfo')}>
             <Text>Time Challenge</Text>
           </CardItem>
           <CardItem
             button
-            onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+            onPress={() => navigation.navigate('ChallengeTimeInfo')}>
             <Body>
               <Text>
                 Pick this if you want to increase the duration you do something.

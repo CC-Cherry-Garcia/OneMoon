@@ -34,6 +34,13 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
 
   const state = useStore(state => state);
 
+  let unitsVariable = ''; // used for Repeating Task
+  if (state.challengeType === 'quantity') {
+    unitsVariable = 'times';
+  } else if (state.challengeType === 'time') {
+    unitsVariable = 'minutes';
+  }
+
   const taskQuantityArray = [];
   const taskName = state.challengeInput.taskName;
 
@@ -42,7 +49,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   let i = 1;
   while (i <= 30) {
     taskQuantityArray.push(
-      `Day${i} Task: ${taskName} ${increaseRate * i} times`,
+      `Day ${i} Task: ${taskName} ${increaseRate * i} ${unitsVariable}`,
     );
     ++i;
   }
@@ -134,11 +141,14 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     <Container style={styles.Container}>
       <Content padder>
         <H1>Double check your Challenge</H1>
-        <Text>Intro text</Text>
-        <Text style={styles.createAnAccount2}>
+        <Text style={styles.textDefault}>
+          See your 30-day challenge below. Use the back button if you need to
+          make any changes.
+        </Text>
+        <Text style={styles.textDefault}>
           Title: {state.challengeInput.title}
         </Text>
-        <Text style={styles.taskText}>
+        <Text style={styles.textDefault}>
           Start Date: {state.challengeInput.startDate}
         </Text>
         <List>
@@ -254,6 +264,15 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontWeight: 'bold',
+    marginTop: 20,
+  },
+  textDefault: {
+    marginTop: 20,
+  },
+  textInputDefault: {
+    margin: 10,
+  },
+  btn: {
     marginTop: 20,
   },
 });
