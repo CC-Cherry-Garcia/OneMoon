@@ -103,6 +103,7 @@ export const getChallenge = /* GraphQL */ `
       id
       userID
       title
+      startDate
       increase
       isValid
       task1Name

@@ -21,20 +21,15 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 
-function Form03ChallengeQuantity({navigation, route}, props) {
+function Form03ChallengeRepeat({navigation, route}, props) {
   const state = useStore(state => state);
-  useEffect(() => {
-    state.setChallengeType('quantity');
-  }, []);
 
+  console.log('state in Form03ChallengeRepeattsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
         <H1>Set your Daily Task</H1>
-        <Text>
-          Enter your Daily Task and how much you want the quantity to increase
-          by daily.
-        </Text>
+        <Text>Enter a Daily Task that you will repeat for the 30 days.</Text>
         <Text style={styles.textDefault}>Daily Task:</Text>
         <TextInput
           onChangeText={TextInputValue =>
@@ -43,19 +38,8 @@ function Form03ChallengeQuantity({navigation, route}, props) {
               taskName: TextInputValue,
             })
           }
-          placeholder=" Squats"
+          placeholder=" Do something kind for someone else"
           style={styles.textInputDefault}
-        />
-        <Text style={styles.textDefault}>Increase Daily Quantity by:</Text>
-        <TextInput
-          onChangeText={TextInputValue =>
-            state.setChallengeInput({
-              ...state.challengeInput,
-              increase: TextInputValue,
-            })
-          }
-          placeholder=" 5"
-          style={styles.textDefault}
         />
         <Button
           title="Review your Challege"
@@ -88,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form03ChallengeQuantity;
+export default Form03ChallengeRepeat;

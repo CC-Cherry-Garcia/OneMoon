@@ -21,19 +21,20 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 
-function Form03ChallengeQuantity({navigation, route}, props) {
+function Form03ChallengeTime({navigation, route}, props) {
   const state = useStore(state => state);
   useEffect(() => {
-    state.setChallengeType('quantity');
+    state.setChallengeType('time');
   }, []);
 
+  console.log('state in Form03ChallengeTimetsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
         <H1>Set your Daily Task</H1>
         <Text>
-          Enter your Daily Task and how much you want the quantity to increase
-          by daily.
+          Enter your Daily Task and choose how many minutes per day you want to
+          increase the task by daily.
         </Text>
         <Text style={styles.textDefault}>Daily Task:</Text>
         <TextInput
@@ -43,10 +44,10 @@ function Form03ChallengeQuantity({navigation, route}, props) {
               taskName: TextInputValue,
             })
           }
-          placeholder=" Squats"
+          placeholder=" Read a Book"
           style={styles.textInputDefault}
         />
-        <Text style={styles.textDefault}>Increase Daily Quantity by:</Text>
+        <Text style={styles.textDefault}>Increase Daily Minutes by:</Text>
         <TextInput
           onChangeText={TextInputValue =>
             state.setChallengeInput({
@@ -54,8 +55,8 @@ function Form03ChallengeQuantity({navigation, route}, props) {
               increase: TextInputValue,
             })
           }
-          placeholder=" 5"
-          style={styles.textDefault}
+          placeholder=" 10 minutes"
+          style={styles.textInputDefault}
         />
         <Button
           title="Review your Challege"
@@ -88,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form03ChallengeQuantity;
+export default Form03ChallengeTime;

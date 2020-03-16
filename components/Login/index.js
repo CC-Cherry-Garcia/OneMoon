@@ -2,17 +2,16 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, Alert, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import SettingsMain from './SettingsMain';
-import SettingsProfile from './SettingsProfile';
+import SearchMain from './SearchMain';
 
 const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
 
-function Settings({navigation, route}) {
-  //   console.log('props in Settings.tsx: ', props);
+function Search({navigation}) {
+  //   console.log('props in Search.tsx: ', props);
   return (
     <Stack.Navigator
-      initialRouteName="SettingsProfile"
+      initialRouteName="SearchMain"
       screenOptions={{
         headerStyle: {
           backgroundColor: Colors.primary,
@@ -25,16 +24,8 @@ function Settings({navigation, route}) {
         },
       }}>
       <Stack.Screen
-        name="SettingsMain"
-        component={SettingsMain}
-        options={{
-          title: 'One Moon',
-        }}
-      />
-      <Stack.Screen
-        name="SettingsProfile"
-        component={SettingsProfile}
-        initialParams={{userName: route.params.userName}}
+        name="SearchMain"
+        component={SearchMain}
         options={{
           title: 'One Moon',
         }}
@@ -45,4 +36,4 @@ function Settings({navigation, route}) {
 
 const styles = StyleSheet.create({});
 
-export default Settings;
+export default Search;
