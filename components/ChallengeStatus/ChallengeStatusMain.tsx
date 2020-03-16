@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 
-function ChallengeStatusMain(props) {
+function ChallengeStatusMain({navigation}, props) {
   const state = useStore(state => state);
   const onShare = async () => {
     try {
