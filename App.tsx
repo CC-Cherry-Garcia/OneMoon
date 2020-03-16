@@ -152,7 +152,7 @@ const App: () => React$Node = () => {
             }}>
             {(stateA.userFirstTime && (
               <Tab.Screen
-                name="Home1"
+                name="Home"
                 component={HomeFirstTime}
                 initialParams={{userEmail: state.user.email}}
                 options={{
@@ -164,7 +164,7 @@ const App: () => React$Node = () => {
             )) ||
               (stateA.userHasActiveChallenge && (
                 <Tab.Screen
-                  name="Home2"
+                  name="Home"
                   component={ChallengeStatus}
                   initialParams={{userName: state.user.username}}
                   options={{
@@ -179,7 +179,7 @@ const App: () => React$Node = () => {
                 />
               )) || (
                 <Tab.Screen
-                  name="Home3"
+                  name="Home"
                   component={Home} // this is an Active user w/o an Active Challenge view
                   initialParams={{userName: state.user.username}}
                   options={{
