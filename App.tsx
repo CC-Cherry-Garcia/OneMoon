@@ -81,22 +81,35 @@ const App: () => React$Node = () => {
   }, []);
 
   useEffect(() => {
-    if(!state.user) return;
+    if (!state.user) return;
 
     API.graphql(
-      graphqlOperation(customQueries.searchChallengeByUser, {userID: state.user.username}),
-    ).then((data) => {
-      const payload = data.data.listChallenges.items;
-      if (payload.length !== 0) {
-        stateA.setUserCurrentChallenge(payload[0]);
-        stateA.setUserHasActiveChallenge(true);
-      }
-    }).catch((error) => {
-      console.log(error);
-    });
-  }, [state.user])
+      graphqlOperation(customQueries.searchChallengeByUser, {
+        userId: state.user.username,
+      }),
+    )
+      .then(data => {
+        console.log('data :', data.listUserChallenges);
+        const userChallengePayload = data.data.listUserChallenges.items;
+        const groupChallengePayload = data.data.listGroupChallenges.items;
+        //Check user challenge
+        if (userChallengePayload.length !== 0) {
+          stateA.setUserCurrentChallenge(userChallengePayload[0]);
+        }
+        //Check group challenge
+        if (groupChallengePayload.length !== 0) {
+          stateA.setGroupCurrentChallenge(groupChallengePayload[0]);
+        }
+        if (groupChallengePayload !== 0 || groupChallengePayload !== 0) {
+          stateA.setUserHasActiveChallenge(true);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [state.user]);
 
-  console.log("stateA updated", stateA.userHasActiveChallenge ? "1" : "0");
+  console.log('stateA updated', stateA.userHasActiveChallenge ? '1' : '0');
 
   // User authentication
   async function checkUser(dispatch) {

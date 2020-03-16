@@ -26,7 +26,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
-import * as mutations from '../../src/graphql/mutations';
+import * as mutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 
 function Form04ChallengeConfirmation({navigation, route}, props) {
@@ -59,79 +59,88 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
 
   const challengeInput = {
     id: `${route.params.userName}#${state.challengeInput.title}`,
-    userID: route.params.userName,
     title: state.challengeInput.title,
-    startDate: state.challengeInput.startDate,
+    createdByUserId: route.params.userName,
     increase: increaseRate,
-    isValid: true,
     task1Name: taskQuantityArray[0].split(':')[1].trim(),
-    task1IsDone: false,
     task2Name: taskQuantityArray[1].split(':')[1].trim(),
-    task2IsDone: false,
     task3Name: taskQuantityArray[2].split(':')[1].trim(),
-    task3IsDone: false,
     task4Name: taskQuantityArray[3].split(':')[1].trim(),
-    task4IsDone: false,
     task5Name: taskQuantityArray[4].split(':')[1].trim(),
-    task5IsDone: false,
     task6Name: taskQuantityArray[5].split(':')[1].trim(),
-    task6IsDone: false,
     task7Name: taskQuantityArray[6].split(':')[1].trim(),
-    task7IsDone: false,
     task8Name: taskQuantityArray[7].split(':')[1].trim(),
-    task8IsDone: false,
     task9Name: taskQuantityArray[8].split(':')[1].trim(),
-    task9IsDone: false,
     task10Name: taskQuantityArray[9].split(':')[1].trim(),
-    task10IsDone: false,
     task11Name: taskQuantityArray[10].split(':')[1].trim(),
-    task11IsDone: false,
     task12Name: taskQuantityArray[11].split(':')[1].trim(),
-    task12IsDone: false,
     task13Name: taskQuantityArray[12].split(':')[1].trim(),
-    task13IsDone: false,
     task14Name: taskQuantityArray[13].split(':')[1].trim(),
-    task14IsDone: false,
     task15Name: taskQuantityArray[14].split(':')[1].trim(),
-    task15IsDone: false,
     task16Name: taskQuantityArray[15].split(':')[1].trim(),
-    task16IsDone: false,
     task17Name: taskQuantityArray[16].split(':')[1].trim(),
-    task17IsDone: false,
     task18Name: taskQuantityArray[17].split(':')[1].trim(),
-    task18IsDone: false,
     task19Name: taskQuantityArray[18].split(':')[1].trim(),
-    task19IsDone: false,
     task20Name: taskQuantityArray[19].split(':')[1].trim(),
-    task20IsDone: false,
     task21Name: taskQuantityArray[20].split(':')[1].trim(),
-    task21IsDone: false,
     task22Name: taskQuantityArray[21].split(':')[1].trim(),
-    task22IsDone: false,
     task23Name: taskQuantityArray[22].split(':')[1].trim(),
-    task23IsDone: false,
     task24Name: taskQuantityArray[23].split(':')[1].trim(),
-    task24IsDone: false,
     task25Name: taskQuantityArray[24].split(':')[1].trim(),
-    task25IsDone: false,
     task26Name: taskQuantityArray[25].split(':')[1].trim(),
-    task26IsDone: false,
     task27Name: taskQuantityArray[26].split(':')[1].trim(),
-    task27IsDone: false,
     task28Name: taskQuantityArray[27].split(':')[1].trim(),
-    task28IsDone: false,
     task29Name: taskQuantityArray[28].split(':')[1].trim(),
-    task29IsDone: false,
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
+  };
+  const userChallengeInput = {
+    challengeId: `${route.params.userName}#${state.challengeInput.title}`,
+    userId: route.params.userName,
+    startDate: state.challengeInput.startDate,
+    isValid: true,
+    task1IsDone: false,
+    task2IsDone: false,
+    task3IsDone: false,
+    task4IsDone: false,
+    task5IsDone: false,
+    task6IsDone: false,
+    task7IsDone: false,
+    task8IsDone: false,
+    task9IsDone: false,
+    task10IsDone: false,
+    task11IsDone: false,
+    task12IsDone: false,
+    task13IsDone: false,
+    task14IsDone: false,
+    task15IsDone: false,
+    task16IsDone: false,
+    task17IsDone: false,
+    task18IsDone: false,
+    task19IsDone: false,
+    task20IsDone: false,
+    task21IsDone: false,
+    task22IsDone: false,
+    task23IsDone: false,
+    task24IsDone: false,
+    task25IsDone: false,
+    task26IsDone: false,
+    task27IsDone: false,
+    task28IsDone: false,
+    task29IsDone: false,
     task30IsDone: false,
   };
-
   const insertChallenge = () => {
     API.graphql(
-      graphqlOperation(mutations.createChallenge, {input: challengeInput}),
+      graphqlOperation(mutations.createNewUserChallenge, {
+        inputChallenge: challengeInput,
+        inputUserChallenge: userChallengeInput,
+      }),
     )
-    .then(res => state.setUserHasActiveChallenge(true))
-    .catch(error => console.log('Error happens in createChallenge: ', error));
+      .then(res => {
+        console.log('res:', res);
+        state.setUserHasActiveChallenge(true);
+      })
+      .catch(error => console.log('Error happens in createChallenge: ', error));
   };
 
   return (

@@ -10,6 +10,8 @@ const [useStore] = create(set => ({
   // USER State
   userCurrentChallenge: {},
   setUserCurrentChallenge: value => set({userCurrentChallenge: value}),
+  groupCurrentChallenge: {},
+  setGroupCurrentChallenge: value => set({groupCurrentChallenge: value}),
   userHasActiveChallenge: false,
   setUserHasActiveChallenge: value => set({userHasActiveChallenge: value}),
   userFirstTime: false,

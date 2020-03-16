@@ -44,15 +44,50 @@ function ChallengeStatusMain({navigation}, props) {
     ['13', '14', '15', '16', '17', '18'],
     ['19', '20', '21', '22', '23', '24'],
     ['25', '26', '27', '28', '29', '30'],
-  ]
+  ];
   const cc = state.userCurrentChallenge;
   const completedDates = [
-    [ cc.task1IsDone, cc.task2IsDone, cc.task3IsDone, cc.task4IsDone, cc.task5IsDone, cc.task6IsDone],
-    [ cc.task7IsDone, cc.task8IsDone, cc.task9IsDone, cc.task10IsDone, cc.task11IsDone, cc.task12IsDone],
-    [ cc.task13IsDone, cc.task14IsDone, cc.task15IsDone, cc.task16IsDone, cc.task17IsDone, cc.task18IsDone],
-    [ cc.task19IsDone, cc.task20IsDone, cc.task21IsDone, cc.task22IsDone, cc.task23IsDone, cc.task24IsDone],
-    [ cc.task25IsDone, cc.task26IsDone, cc.task27IsDone, cc.task28IsDone, cc.task29IsDone, cc.task30IsDone]
-  ]
+    [
+      cc.task1IsDone,
+      cc.task2IsDone,
+      cc.task3IsDone,
+      cc.task4IsDone,
+      cc.task5IsDone,
+      cc.task6IsDone,
+    ],
+    [
+      cc.task7IsDone,
+      cc.task8IsDone,
+      cc.task9IsDone,
+      cc.task10IsDone,
+      cc.task11IsDone,
+      cc.task12IsDone,
+    ],
+    [
+      cc.task13IsDone,
+      cc.task14IsDone,
+      cc.task15IsDone,
+      cc.task16IsDone,
+      cc.task17IsDone,
+      cc.task18IsDone,
+    ],
+    [
+      cc.task19IsDone,
+      cc.task20IsDone,
+      cc.task21IsDone,
+      cc.task22IsDone,
+      cc.task23IsDone,
+      cc.task24IsDone,
+    ],
+    [
+      cc.task25IsDone,
+      cc.task26IsDone,
+      cc.task27IsDone,
+      cc.task28IsDone,
+      cc.task29IsDone,
+      cc.task30IsDone,
+    ],
+  ];
   console.table('completedDates', completedDates);
 
   let completedCount = 0;
@@ -64,15 +99,15 @@ function ChallengeStatusMain({navigation}, props) {
   let progress = Math.ceil((completedCount / 30) * 100);
 
   return (
-  <>
-    <Container style={styles.container}>
-      <Content>
-        <H1>{state.userCurrentChallenge.title}</H1>
-        <Card style={{marginTop: 30}}>
-          <CardItem header>
-            <H3>Day ? : task name</H3>
-          </CardItem>
-          <CardItem>
+    <>
+      <Container style={styles.container}>
+        <Content>
+          <H1>{state.userCurrentChallenge.challenge.title}</H1>
+          <Card style={{marginTop: 30}}>
+            <CardItem header>
+              <H3>Day ? : task name</H3>
+            </CardItem>
+            <CardItem>
               <Left>
                 <Button success>
                   <Text> Complete </Text>
@@ -142,11 +177,11 @@ function ChallengeStatusMain({navigation}, props) {
             </Table>
           </Card>
 
-        <Button block onPress={() => navigation.navigate('ListSchedule')}>
-          <Text>VIEW SCHEDULE</Text>
-        </Button>
-      </Content>
-    </Container>
+          <Button block onPress={() => navigation.navigate('ListSchedule')}>
+            <Text>VIEW SCHEDULE</Text>
+          </Button>
+        </Content>
+      </Container>
     </>
   );
 }
