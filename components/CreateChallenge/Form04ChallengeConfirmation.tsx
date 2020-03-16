@@ -58,8 +58,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   }
 
   const challengeInput = {
-    id: `${route.params.userName}#${state.challengeInput.title}`,
-    userID: route.params.userName,
+    userID: route.params.userEmail,
     title: state.challengeInput.title,
     startDate: state.challengeInput.startDate,
     increase: increaseRate,
