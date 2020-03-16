@@ -81,22 +81,28 @@ const App: () => React$Node = () => {
   }, []);
 
   useEffect(() => {
-    if(!state.user) return;
+    if (!state.user) {
+      return;
+    }
 
     API.graphql(
-      graphqlOperation(customQueries.searchChallengeByUser, {userID: state.user.username}),
-    ).then((data) => {
-      const payload = data.data.listChallenges.items;
-      if (payload.length !== 0) {
-        stateA.setUserCurrentChallenge(payload[0]);
-        stateA.setUserHasActiveChallenge(true);
-      }
-    }).catch((error) => {
-      console.log(error);
-    });
-  }, [state.user])
+      graphqlOperation(customQueries.searchChallengeByUser, {
+        userID: state.user.username,
+      }),
+    )
+      .then(data => {
+        const payload = data.data.listChallenges.items;
+        if (payload.length !== 0) {
+          stateA.setUserCurrentChallenge(payload[0]);
+          stateA.setUserHasActiveChallenge(true);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [state.user]);
 
-  console.log("stateA updated", stateA.userHasActiveChallenge ? "1" : "0");
+  console.log('stateA updated', stateA.userHasActiveChallenge ? '1' : '0');
 
   // User authentication
   async function checkUser(dispatch) {
