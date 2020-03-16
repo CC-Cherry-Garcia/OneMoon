@@ -18,9 +18,6 @@ import useStore from '../../state/state';
 function ChallengeStatusMain({navigation}) {
 
   const state = useStore(state => state);
-
-  const cc = state.userCurrentChallenge;
-
   console.log('state in ChallengeStatusMain.tsx: ', state);
   
   const tableData = [
@@ -30,7 +27,7 @@ function ChallengeStatusMain({navigation}) {
     ['19', '20', '21', '22', '23', '24'],
     ['25', '26', '27', '28', '29', '30']
   ]
-  
+  const cc = state.userCurrentChallenge;
   const completedDates = [
     [ cc.task1IsDone, cc.task2IsDone, cc.task3IsDone, cc.task4IsDone, cc.task5IsDone, cc.task6IsDone],
     [ cc.task7IsDone, cc.task8IsDone, cc.task9IsDone, cc.task10IsDone, cc.task11IsDone, cc.task12IsDone],
@@ -38,7 +35,6 @@ function ChallengeStatusMain({navigation}) {
     [ cc.task19IsDone, cc.task20IsDone, cc.task21IsDone, cc.task22IsDone, cc.task23IsDone, cc.task24IsDone],
     [ cc.task25IsDone, cc.task26IsDone, cc.task27IsDone, cc.task28IsDone, cc.task29IsDone, cc.task30IsDone]
   ]
-
   console.table('completedDates', completedDates);
 
   let completedCount = 0;
@@ -49,11 +45,17 @@ function ChallengeStatusMain({navigation}) {
   }
   let progress = Math.ceil(completedCount / 30 * 100);
 
+
+
+  
+
+
+
   return (
   <>
     <Container style={styles.container}>
       <Content>
-        <H1>Challenge Title</H1>
+        <H1>{state.userCurrentChallenge.title}</H1>
         <Card style={{marginTop: 30}}>
           <CardItem header>
             <H3>Day ? : task name</H3>
