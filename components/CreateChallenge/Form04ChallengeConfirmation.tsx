@@ -30,7 +30,7 @@ import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 
 function Form04ChallengeConfirmation({navigation, route}, props) {
-  console.log('state in Form04ChallengeConfirmation.tsx: ', state);
+  // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
 
   const state = useStore(state => state);
 

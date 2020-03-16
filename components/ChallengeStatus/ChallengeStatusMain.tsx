@@ -53,7 +53,9 @@ function ChallengeStatusMain({navigation}, props) {
     [ cc.task19IsDone, cc.task20IsDone, cc.task21IsDone, cc.task22IsDone, cc.task23IsDone, cc.task24IsDone],
     [ cc.task25IsDone, cc.task26IsDone, cc.task27IsDone, cc.task28IsDone, cc.task29IsDone, cc.task30IsDone]
   ]
-  console.table('completedDates', completedDates);
+  // console.table('completedDates', completedDates);
+  // console.log('userCurrentChallnege: ********', state.userCurrentChallenge);
+  // console.log('state in ChallengeStatusMain: ***** : ', state);
 
   let completedCount = 0;
   for (const row of completedDates) {
@@ -70,7 +72,7 @@ function ChallengeStatusMain({navigation}, props) {
         <H1>{state.userCurrentChallenge.title}</H1>
         <Card style={{marginTop: 30}}>
           <CardItem header>
-            <H3>Day ? : task name</H3>
+            <H3>Day {state.currentChallengeTodayDate} : {state.currentChallengeTodayTaskName}</H3>
           </CardItem>
           <CardItem>
               <Left>
