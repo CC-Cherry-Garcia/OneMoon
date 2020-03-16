@@ -20,7 +20,6 @@ import useStore from '../../state/state';
 function Form01TitleAndDate({navigation}, props) {
   const state = useStore(state => state);
 
-  console.log('state in Form01TitleAndDate.tsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content>

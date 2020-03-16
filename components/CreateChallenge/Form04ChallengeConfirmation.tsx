@@ -58,7 +58,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   }
 
   const challengeInput = {
-    id: state.challengeInput.title,
+    id: `${route.params.userName}#${state.challengeInput.title}`,
     userID: route.params.userName,
     title: state.challengeInput.title,
     startDate: state.challengeInput.startDate,
@@ -126,18 +126,12 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task30IsDone: false,
   };
 
-  console.log('*************challenge: ', challengeInput);
-
   const insertChallenge = () => {
-    console.log('insert-challengeInput :', challengeInput);
     API.graphql(
       graphqlOperation(mutations.createChallenge, {input: challengeInput}),
     )
-      .then(res => {
-        state.setCurrentChallengeId(res.data.id);
-        state.setUserCurrentChallenge(challengeInput);
-      })
-      .catch(error => console.log('error', error));
+    .then(res => state.setUserHasActiveChallenge(true))
+    .catch(error => console.log('Error happens in createChallenge: ', error));
   };
 
   return (

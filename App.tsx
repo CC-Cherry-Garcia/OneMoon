@@ -10,13 +10,10 @@ import React, {useReducer, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
 import * as queries from './src/graphql/queries';
 import awsconfig from './aws-exports';
-
 import useStore from './state/state';
 
 // Components Import
@@ -65,7 +62,7 @@ const App: () => React$Node = () => {
     // set listener for user authentication events
     Hub.listen('auth', data => {
       const {payload} = data;
-      console.log('payload :', payload);
+      // console.log('payload :', payload);
       if (payload.event === 'signIn') {
         setImmediate(() => dispatch({type: 'SET_USER', user: payload.data}));
 
@@ -77,32 +74,28 @@ const App: () => React$Node = () => {
     });
     checkUser(dispatch);
 
-    // get user's current active challenge
-    const getUserCurrentChallenge = async () => {
-      const data = await API.graphql(
-        graphqlOperation(queries.getChallenge, {id: 'Asdf'}),
-      );
-      const payload = data.data.getChallenge;
-      stateA.setUserCurrentChallenge(payload);
-      stateA.setUserHasActiveChallenge(true);
-      // console.log(data);
-    };
-    getUserCurrentChallenge();
-  }, []);
-
-  useEffect(() => {
-    // load app with Spalsh screen, change to login or home screen after 2 seconds
     setTimeout(() => {
       stateA.setIsSplashLoading(false);
     }, 2000);
   }, []);
 
-  // mark task complete
-  const markComplete = () => {
-    setIsDone(true);
-    console.log('markComplete', isDone);
-    return;
-  };
+  useEffect(() => {
+    if(!state.user) return;
+
+    API.graphql(
+      graphqlOperation(queries.searchChallengeByUser, {userID: state.user.username}),
+    ).then((data) => {
+      const payload = data.data.listChallenges.items;
+      if (payload.length !== 0) {
+        stateA.setUserCurrentChallenge(payload[0]);
+        stateA.setUserHasActiveChallenge(true);
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, [state.user])
+
+  console.log("stateA updated", stateA.userHasActiveChallenge ? "1" : "0");
 
   // User authentication
   async function checkUser(dispatch) {
@@ -112,7 +105,6 @@ const App: () => React$Node = () => {
       setFormState('loggedIn');
       // setFormState('base')
     } catch (err) {
-      console.log('err: ', err);
       dispatch({type: 'LOADED'});
     }
   }
@@ -160,7 +152,7 @@ const App: () => React$Node = () => {
             }}>
             {(stateA.userFirstTime && (
               <Tab.Screen
-                name="Home"
+                name="Home1"
                 component={HomeFirstTime}
                 initialParams={{userName: state.user.username}}
                 options={{
@@ -172,7 +164,7 @@ const App: () => React$Node = () => {
             )) ||
               (stateA.userHasActiveChallenge && (
                 <Tab.Screen
-                  name="Home"
+                  name="Home2"
                   component={ChallengeStatus}
                   initialParams={{userName: state.user.username}}
                   options={{
@@ -187,7 +179,7 @@ const App: () => React$Node = () => {
                 />
               )) || (
                 <Tab.Screen
-                  name="Home"
+                  name="Home3"
                   component={Home} // this is an Active user w/o an Active Challenge view
                   initialParams={{userName: state.user.username}}
                   options={{

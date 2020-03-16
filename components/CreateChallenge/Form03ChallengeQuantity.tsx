@@ -27,7 +27,6 @@ function Form03ChallengeQuantity({navigation, route}, props) {
     state.setChallengeType('quantity');
   }, []);
 
-  console.log('state in Form03ChallengeQuantitytsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
