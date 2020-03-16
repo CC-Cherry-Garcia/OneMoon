@@ -12,7 +12,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Amplify, {Hub, Auth, API, graphqlOperation} from 'aws-amplify';
-import * as queries from './src/graphql/queries';
+import * as customQueries from './src/graphql/customQueries';
+
 import awsconfig from './aws-exports';
 import useStore from './state/state';
 
@@ -83,7 +84,7 @@ const App: () => React$Node = () => {
     if(!state.user) return;
 
     API.graphql(
-      graphqlOperation(queries.searchChallengeByUser, {userID: state.user.username}),
+      graphqlOperation(customQueries.searchChallengeByUser, {userID: state.user.username}),
     ).then((data) => {
       const payload = data.data.listChallenges.items;
       if (payload.length !== 0) {
