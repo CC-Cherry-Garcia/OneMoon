@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
 
 function CreateChallenge({navigation, route}) {
-  //   console.log('props in CreateChallenge.tsx: ', props);
+
   return (
     <Stack.Navigator
       initialRouteName="ChallengeTitle"

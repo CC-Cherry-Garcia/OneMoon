@@ -154,7 +154,7 @@ const App: () => React$Node = () => {
               <Tab.Screen
                 name="Home"
                 component={HomeFirstTime}
-                initialParams={{userEmail: state.user.email}}
+                initialParams={{userName: state.user.username}}
                 options={{
                   tabBarIcon: () => (
                     <Icon name="ios-trophy" color={Colors.primary} size={24} />

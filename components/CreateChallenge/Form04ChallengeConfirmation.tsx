@@ -43,7 +43,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   } else if (state.challengeType === 'time') {
     unitsVariable = 'minutes';
   }
-  // const taskName = props.challengeInput.taskName;
+
   const increaseRate = Number(state.challengeInput.increase);
   let i = 1;
   while (i <= 30) {
@@ -61,12 +61,11 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     const standardDate = new Date(state.challengeInput.startDate);
     const startDate = standardDate.getDate();
     standardDate.setDate(startDate + ordinalDate - 1);
-    return standardDate.getDate().toString();
+    return standardDate.toString();
   }
 
-  console.log('******route.params********: ', route.params);
   const challengeInput = {
-    userID: route.params.userEmail,
+    userID: route.params.userName,
     title: state.challengeInput.title,
     startDate: state.challengeInput.startDate,
     increase: increaseRate,
