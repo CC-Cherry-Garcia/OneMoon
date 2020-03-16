@@ -100,13 +100,13 @@ const App: () => React$Node = () => {
     const today = new Date();
     const monthOfToday = today.getMonth() + 1;
     const dateOfToday = today.getDate();
-    console.log('montheOfToday, dateOfToday ************: ', monthOfToday, dateOfToday);
+    // console.log('montheOfToday, dateOfToday ************: ', monthOfToday, dateOfToday);
     for (let [key, value] of Object.entries(stateA.userCurrentChallenge)) {
       if (key.slice(0, 4) === "task" && key.slice(-4) === "Date") {
         const targetDate = new Date(value);
-        console.log('targetDate.getMonth() + 1, targetDate.getDate() ****************: ', targetDate.getMonth() + 1, targetDate.getDate());
+        // console.log('targetDate.getMonth() + 1, targetDate.getDate() ****************: ', targetDate.getMonth() + 1, targetDate.getDate());
         if (monthOfToday === targetDate.getMonth() + 1 && dateOfToday === targetDate.getDate()) {
-          console.log('aaaaaaaaa');
+          // console.log('aaaaaaaaa');
           const currentDateStr = key.substring(key.indexOf('k') + 1, key.indexOf('D'));
           stateA.setCurrentChallengeTodayDate(currentDateStr);
           stateA.setCurrentChallengeTodayTaskName(stateA.userCurrentChallenge[`task${currentDateStr}Name`]);
