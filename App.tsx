@@ -26,6 +26,7 @@ import Home from './components/Home/Index';
 import HomeFirstTime from './components/Home/HomeFirstTime';
 import Search from './components/Search/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
+import HomeUserActiveChallenge from './components/Home/HomeUserActiveChallenge';
 
 Amplify.configure(awsconfig);
 
@@ -93,6 +94,17 @@ const App: () => React$Node = () => {
       .then(data => {
         const payload = data.data.listChallenges.items;
         if (payload.length !== 0) {
+          ///////////////////////////////////////
+          ///// KOTA PLEASE FIX THESE!
+          ///////////////////////////////////////
+          ///////////////////////////////////////
+          ///////////////////////////////////////
+          ///////////////////////////////////////
+          ///////////////////////////////////////
+          ///////////////////////////////////////
+          ///////////////////////////////////////
+          stateA.setUserActiveChallengesList(payload);
+          stateA.setUserInactiveChallengesList(payload);
           stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
         }
@@ -144,6 +156,8 @@ const App: () => React$Node = () => {
       </NavigationContainer>
     );
   }
+  // console.log('app state', state);
+  // console.log('app stateA', stateA);
   return (
     <>
       {state.loading && <Splash />}
@@ -159,9 +173,12 @@ const App: () => React$Node = () => {
             }}>
             {(stateA.userFirstTime && (
               <Tab.Screen
-                name="Home1"
-                component={HomeFirstTime}
-                initialParams={{userName: state.user.username}}
+                name="Home"
+                component={Home}
+                initialParams={{
+                  userName: state.user.username,
+                  screen: 'HomeFirstTime',
+                }}
                 options={{
                   tabBarIcon: () => (
                     <Icon name="ios-trophy" color={Colors.primary} size={24} />
@@ -171,9 +188,12 @@ const App: () => React$Node = () => {
             )) ||
               (stateA.userHasActiveChallenge && (
                 <Tab.Screen
-                  name="Home2"
-                  component={ChallengeStatus}
-                  initialParams={{userName: state.user.username}}
+                  name="Home"
+                  component={Home}
+                  initialParams={{
+                    userName: state.user.username,
+                    screen: 'HomeUserActiveChallenge',
+                  }}
                   options={{
                     tabBarIcon: () => (
                       <Icon
@@ -186,9 +206,11 @@ const App: () => React$Node = () => {
                 />
               )) || (
                 <Tab.Screen
-                  name="Home3"
+                  name="Home"
                   component={Home} // this is an Active user w/o an Active Challenge view
-                  initialParams={{userName: state.user.username}}
+                  initialParams={{
+                    userName: state.user.username,
+                  }}
                   options={{
                     tabBarIcon: () => (
                       <Icon
