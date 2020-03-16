@@ -143,6 +143,7 @@ export default function EmailLoginForm() {
 function SignUp(props) {
   return (
     <View style={styles.container}>
+      <H1>Sign Up</H1>
       <TextInput
         name="username"
         onChange={e => {
@@ -168,9 +169,9 @@ function SignUp(props) {
         }}
         style={styles.input}
         placeholder="password"
+        autoCapitalize="none"
+        autoCorrect={false}
         secureTextEntry={true}
-        returnKeyType="go"
-        onSubmitEditing={props.signIn}
       />
       <TextInput
         name="email"
@@ -180,8 +181,18 @@ function SignUp(props) {
         }}
         style={styles.input}
         placeholder="email"
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="go"
+        onSubmitEditing={props.signUp}
       />
-      <Button title="Sign Up" onPress={props.signUp} style={styles.button} />
+      <Button
+        disabled={passwordEmpty || usernameEmpty}
+        title="Sign Up"
+        onPress={props.signUp}
+        style={styles.button}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </Button>
     </View>
   );
 }
