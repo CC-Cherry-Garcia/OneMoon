@@ -95,8 +95,6 @@ const App: () => React$Node = () => {
       .then(data => {
         const payload = data.data.listChallenges.items;
         if (payload.length !== 0) {
-
-
           ///////////////////////////////////////
           ///// KOTA PLEASE FIX THESE!
           ///////////////////////////////////////
@@ -106,8 +104,6 @@ const App: () => React$Node = () => {
           ///////////////////////////////////////
           ///////////////////////////////////////
           ///////////////////////////////////////
-
-
 
           stateA.setUserActiveChallengesList(payload);
           stateA.setUserInactiveChallengesList(payload);
@@ -122,29 +118,45 @@ const App: () => React$Node = () => {
   }, [state.user]);
 
   useEffect(() => {
-    if (isEmpty(stateA.userCurrentChallenge)) return;
-    console.log('*****@*@*@*@**@*@* stateA.userCurrentChallenge: ', stateA.userCurrentChallenge);
+    if (isEmpty(stateA.userCurrentChallenge)) {
+      return;
+    }
+    console.log(
+      '*****@*@*@*@**@*@* stateA.userCurrentChallenge: ',
+      stateA.userCurrentChallenge,
+    );
     const today = new Date();
     const monthOfToday = today.getMonth() + 1;
     const dateOfToday = today.getDate();
     for (let [key, value] of Object.entries(stateA.userCurrentChallenge)) {
-      if (key.slice(0, 4) === "task" && key.slice(-4) === "Date") {
+      if (key.slice(0, 4) === 'task' && key.slice(-4) === 'Date') {
         const targetDate = new Date(value);
-        if (monthOfToday === targetDate.getMonth() + 1 && dateOfToday === targetDate.getDate()) {
-          const currentDateStr = key.substring(key.indexOf('k') + 1, key.indexOf('D'));
+        if (
+          monthOfToday === targetDate.getMonth() + 1 &&
+          dateOfToday === targetDate.getDate()
+        ) {
+          const currentDateStr = key.substring(
+            key.indexOf('k') + 1,
+            key.indexOf('D'),
+          );
           stateA.setCurrentChallengeTodayDate(currentDateStr);
-          stateA.setCurrentChallengeTodayTaskName(stateA.userCurrentChallenge[`task${currentDateStr}Name`]);
-          stateA.setCurrentChallengeTodayTaskIsDone(stateA.userCurrentChallenge[`task${currentDateStr}IsDone`]);
+          stateA.setCurrentChallengeTodayTaskName(
+            stateA.userCurrentChallenge[`task${currentDateStr}Name`],
+          );
+          stateA.setCurrentChallengeTodayTaskIsDone(
+            stateA.userCurrentChallenge[`task${currentDateStr}IsDone`],
+          );
           break;
         }
       }
     }
-  }, [stateA.userCurrentChallenge])
+  }, [stateA.userCurrentChallenge]);
 
   function isEmpty(obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
     }
     return true;
   }
