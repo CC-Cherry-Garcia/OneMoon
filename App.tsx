@@ -109,9 +109,10 @@ const App: () => React$Node = () => {
 
 
 
-          // stateA.setUserActiveChallengesList(payload);
-          // stateA.setUserInactiveChallengesList(payload);
-          stateA.setUserCurrentChallenge(payload[0]);
+          stateA.setUserActiveChallengesList(payload);
+          stateA.setUserInactiveChallengesList(payload);
+          console.log('payload: *****#*#*#*#* ', payload);
+          // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
         }
       })
@@ -121,6 +122,8 @@ const App: () => React$Node = () => {
   }, [state.user]);
 
   useEffect(() => {
+    if (isEmpty(stateA.userCurrentChallenge)) return;
+    console.log('*****@*@*@*@**@*@* stateA.userCurrentChallenge: ', stateA.userCurrentChallenge);
     const today = new Date();
     const monthOfToday = today.getMonth() + 1;
     const dateOfToday = today.getDate();
@@ -137,6 +140,14 @@ const App: () => React$Node = () => {
       }
     }
   }, [stateA.userCurrentChallenge])
+
+  function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
 
   // User authentication
   async function checkUser(dispatch) {

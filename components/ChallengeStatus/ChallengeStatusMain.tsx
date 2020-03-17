@@ -78,7 +78,7 @@ function ChallengeStatusMain({navigation}, props) {
     ['25', '26', '27', '28', '29', '30'],
   ]
   const cc = state.userCurrentChallenge;
-  console.log('$$$$$ cc $$$$$$: ', cc);
+  console.log('$$$$$ state in ChallengeStatusMain.tsx $$$$$$: ', state);
   const completedDates = [
     [ cc.task1IsDone, cc.task2IsDone, cc.task3IsDone, cc.task4IsDone, cc.task5IsDone, cc.task6IsDone],
     [ cc.task7IsDone, cc.task8IsDone, cc.task9IsDone, cc.task10IsDone, cc.task11IsDone, cc.task12IsDone],
