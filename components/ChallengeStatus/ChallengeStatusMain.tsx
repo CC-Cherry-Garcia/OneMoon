@@ -19,8 +19,14 @@ import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 
 function ChallengeStatusMain({navigation}, props) {
-  
   const state = useStore(state => state);
+  const tableData = [
+    ['1', '2', '3', '4', '5', '6'],
+    ['7', '8', '9', '10', '11', '12'],
+    ['13', '14', '15', '16', '17', '18'],
+    ['19', '20', '21', '22', '23', '24'],
+    ['25', '26', '27', '28', '29', '30'],
+  ]
   
   async function onShare() {
     try {
@@ -43,10 +49,8 @@ function ChallengeStatusMain({navigation}, props) {
     }
   };
 
+  
   async function completeTask() {
-    console.log('id ****', state.userCurrentChallenge.id);
-    console.log(`*#*#*#*#*#*#*#*#*#*#* task${state.currentChallengeTodayDate}IsDone`);
-
     const input = {
       id: state.userCurrentChallenge.id,
       [`task${state.currentChallengeTodayDate}IsDone`]: true
@@ -54,48 +58,46 @@ function ChallengeStatusMain({navigation}, props) {
 
     API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
     .then(res => {
-      console.log('res: ', res);
       state.setCurrentChallengeTodayTaskIsDone(true);
+      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: true})
     })
     .catch(error => console.error(error));
   }
 
+
   useEffect(() => {
     API.graphql(graphqlOperation(queries.getChallenge, {id: state.userCurrentChallenge.id}))
     .then(res => {
-      // change query
-      const isDone = res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`]
-      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: isDone})
+      const isDone = res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`];
+      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: isDone});
     })
     .catch(err => console.log(err));
-  }, [state.currentChallengeTodayIsDone])
-  
-  const tableData = [
-    ['1', '2', '3', '4', '5', '6'],
-    ['7', '8', '9', '10', '11', '12'],
-    ['13', '14', '15', '16', '17', '18'],
-    ['19', '20', '21', '22', '23', '24'],
-    ['25', '26', '27', '28', '29', '30'],
-  ]
-  const cc = state.userCurrentChallenge;
-  console.log('$$$$$ state in ChallengeStatusMain.tsx $$$$$$: ', state);
-  const completedDates = [
-    [ cc.task1IsDone, cc.task2IsDone, cc.task3IsDone, cc.task4IsDone, cc.task5IsDone, cc.task6IsDone],
-    [ cc.task7IsDone, cc.task8IsDone, cc.task9IsDone, cc.task10IsDone, cc.task11IsDone, cc.task12IsDone],
-    [ cc.task13IsDone, cc.task14IsDone, cc.task15IsDone, cc.task16IsDone, cc.task17IsDone, cc.task18IsDone],
-    [ cc.task19IsDone, cc.task20IsDone, cc.task21IsDone, cc.task22IsDone, cc.task23IsDone, cc.task24IsDone],
-    [ cc.task25IsDone, cc.task26IsDone, cc.task27IsDone, cc.task28IsDone, cc.task29IsDone, cc.task30IsDone]
-  ]
+  }, [])
 
-  console.log('state in ChallengeStatusMain: ***** : ', state);
 
-  let completedCount = 0;
-  for (const row of completedDates) {
-    for (const col of row) {
-      if (col === true) ++completedCount;
+  useEffect(() => {
+    const completedDates = [
+      [ state.userCurrentChallenge.task1IsDone, state.userCurrentChallenge.task2IsDone, state.userCurrentChallenge.task3IsDone, state.userCurrentChallenge.task4IsDone, state.userCurrentChallenge.task5IsDone, state.userCurrentChallenge.task6IsDone],
+      [ state.userCurrentChallenge.task7IsDone, state.userCurrentChallenge.task8IsDone, state.userCurrentChallenge.task9IsDone, state.userCurrentChallenge.task10IsDone, state.userCurrentChallenge.task11IsDone, state.userCurrentChallenge.task12IsDone],
+      [ state.userCurrentChallenge.task13IsDone, state.userCurrentChallenge.task14IsDone, state.userCurrentChallenge.task15IsDone, state.userCurrentChallenge.task16IsDone, state.userCurrentChallenge.task17IsDone, state.userCurrentChallenge.task18IsDone],
+      [ state.userCurrentChallenge.task19IsDone, state.userCurrentChallenge.task20IsDone, state.userCurrentChallenge.task21IsDone, state.userCurrentChallenge.task22IsDone, state.userCurrentChallenge.task23IsDone, state.userCurrentChallenge.task24IsDone],
+      [ state.userCurrentChallenge.task25IsDone, state.userCurrentChallenge.task26IsDone, state.userCurrentChallenge.task27IsDone, state.userCurrentChallenge.task28IsDone, state.userCurrentChallenge.task29IsDone, state.userCurrentChallenge.task30IsDone]
+    ];
+    state.setCurrentChallengeCompletedDatesList(completedDates);
+  }, [state.userCurrentChallenge])
+
+
+  useEffect(() => {
+    if(!state.currentChallengeCompletedDatesList) return;
+    let completedCount = 0;
+    for (const row of state.currentChallengeCompletedDatesList) {
+      for (const col of row) {
+        if (col === true) ++completedCount;
+      }
     }
-  }
-  let progress = Math.ceil((completedCount / 30) * 100);
+    state.setCurrentChallengeProgress(Math.ceil((completedCount / 30) * 100));
+  }, [state.currentChallengeCompletedDatesList])
+
 
   return (
   <>
@@ -128,13 +130,13 @@ function ChallengeStatusMain({navigation}, props) {
           </Card>
           <Card style={{marginTop: 15}}>
             <CardItem style={{flex: 1}}>
-              <H3 style={{alignSelf: 'center'}}>{progress} %</H3>
+              <H3 style={{alignSelf: 'center'}}>{state.currentChallengeProgress} %</H3>
             </CardItem>
             <CardItem>
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <View
                   style={{
-                    flex: progress,
+                    flex: state.currentChallengeProgress,
                     flexDirection: 'row',
                     height: 20,
                     backgroundColor: '#5cb85c',
@@ -144,7 +146,7 @@ function ChallengeStatusMain({navigation}, props) {
                 />
                 <View
                   style={{
-                    flex: 100 - progress,
+                    flex: 100 - state.currentChallengeProgress,
                     flexDirection: 'row',
                     height: 20,
                     backgroundColor: 'lightgrey',
@@ -164,7 +166,9 @@ function ChallengeStatusMain({navigation}, props) {
                       key={cellIndex}
                       data={cellData}
                       style={
-                        completedDates[index][cellIndex] === true
+                        state.currentChallengeCompletedDatesList 
+                          && state.currentChallengeCompletedDatesList[index] 
+                          && state.currentChallengeCompletedDatesList[index][cellIndex] === true
                           ? {backgroundColor: '#5cb85c', width: 53}
                           : {backgroundColor: 'transparent', width: 53}
                       }
