@@ -72,6 +72,7 @@ const App: () => React$Node = () => {
         setFormState('base');
       }
       if (payload.event === 'signOut') {
+        setFormState('email');
         setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
       }
     });
