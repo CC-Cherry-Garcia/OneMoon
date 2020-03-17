@@ -32,19 +32,19 @@ function Form00CreateTop({navigation}, props) {
         <Button
           style={styles.btn}
           block
-          onPress={() => navigation.navigate('ChallengeType')}>
+          onPress={() => navigation.navigate('ChallengeTitle')}>
           <Text>Make an Individual Challenge</Text>
         </Button>
         <Button
           style={styles.btn}
           block
-          onPress={() => navigation.navigate('ChallengeType')}>
+          onPress={() => navigation.navigate('ChallengeTitle')}>
           <Text>Start a Group Challenge</Text>
         </Button>
         <Button
           style={styles.btn}
           block
-          onPress={() => navigation.navigate('ChallengeType')}>
+          onPress={() => navigation.navigate('ChallengeTitle')}>
           <Text>Join a Group Challenge</Text>
         </Button>
       </Content>
