@@ -1,5 +1,5 @@
 import React, {Component, useEffect} from 'react';
-import {StyleSheet, View, Share} from 'react-native';
+import {StyleSheet, View, Share, Alert} from 'react-native';
 import {Table, TableWrapper, Cell} from 'react-native-table-component';
 import {
   Container,
@@ -59,7 +59,8 @@ function ChallengeStatusMain({navigation}, props) {
     API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
     .then(res => {
       state.setCurrentChallengeTodayTaskIsDone(true);
-      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: true})
+      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: true});
+      Alert.alert("Great Job!!!");
     })
     .catch(error => console.error(error));
   }
