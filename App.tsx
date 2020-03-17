@@ -27,6 +27,7 @@ import HomeFirstTime from './components/Home/HomeFirstTime';
 import Search from './components/Search/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
 import HomeUserActiveChallenge from './components/Home/HomeUserActiveChallenge';
+import ChallengeTop from './components/CreateChallenge/Form00CreateTop';
 
 Amplify.configure(awsconfig);
 
@@ -87,7 +88,7 @@ const App: () => React$Node = () => {
     }
 
     API.graphql(
-      graphqlOperation(queries.searchChallengeByUser, {
+      graphqlOperation(customQueries.searchChallengeByUser, {
         userID: state.user.username,
       }),
     )
@@ -225,7 +226,10 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
-              initialParams={{userName: state.user.username}}
+              initialParams={{
+                userName: state.user.username,
+                screen: 'ChallengeTop',
+              }}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-create" color={Colors.primary} size={24} />
