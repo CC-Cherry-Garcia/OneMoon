@@ -25,11 +25,10 @@ import {
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 
-function Form04ChallengeConfirmation({navigation, route}, props) {
+function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
 
   const state = useStore(state => state);
@@ -99,7 +98,13 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task29Name: taskQuantityArray[28].split(':')[1].trim(),
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
   };
-  const userChallengeInput = {
+  const groupInput = {
+    name: state.challengeInput.groupName,
+  };
+  const useGroupInput = {
+    userId: route.params.userName,
+  };
+  const groupChallengeInput = {
     userId: route.params.userName,
     startDate: state.challengeInput.startDate,
     isValid: true,
@@ -136,37 +141,64 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
+    console.log('createNewGroupAndChallenge:  ********  ', challengeInput);
+    console.log('groupInput:  ********  ', groupInput);
     console.log('challengeInput:  ********  ', challengeInput);
     API.graphql(
-      graphqlOperation(mutations.createNewChallenge, {
+      graphqlOperation(mutations.createNewGroupAndChallenge, {
+        inputGroup: groupInput,
         inputChallenge: challengeInput,
       }),
     )
       .then(res => {
-        console.log('userChallengeInput:  ********  ', {
-          ...userChallengeInput,
-          challengeId: res.data.createChallenge.id,
+        console.log('res.data.createGroup.id :', res.data.createGroup.id);
+        console.log(
+          'res.data.createChallenge.id :',
+          res.data.createChallenge.id,
+        );
+        console.log('useGroupInput:  ********  ', {
+          ...useGroupInput,
+          groupId: res.data.createGroup.id,
         });
+        console.log('groupChallengeInput:  ********  ', {
+          ...groupChallengeInput,
+          challengeId: res.data.createChallenge.id,
+          groupId: res.data.createGroup.id,
+        });
+
         API.graphql(
-          graphqlOperation(mutations.createUserChallengeWithChallenge, {
-            inputUserChallenge: {
-              ...userChallengeInput,
-              challengeId: res.data.createChallenge.id,
+          graphqlOperation(
+            mutations.createGroupChallengeWithUserAndGroupAndChallenge,
+            {
+              inputUserGroup: {
+                ...useGroupInput,
+                groupId: res.data.createGroup.id,
+              },
+              inputGroupChallenge: {
+                ...groupChallengeInput,
+                challengeId: res.data.createChallenge.id,
+                groupId: res.data.createGroup.id,
+              },
             },
-          }),
+          ),
         )
           .then(res => {
-            console.log('res createUserChallengeWithChallenge:', res);
+            console.log(
+              'res createGroupChallengeWithUserAndGroupAndChallenge:',
+              res,
+            );
             state.setUserHasActiveChallenge(true);
           })
           .catch(error =>
             console.log(
-              'Error happens in createUserChallengeWithChallenge: ',
+              'Error happens in createGroupChallengeWithUserAndGroupAndChallenge: ',
               error,
             ),
           );
       })
-      .catch(error => console.log('Error happens in createChallenge: ', error));
+      .catch(error =>
+        console.log('Error happens in createGroupChallenge: ', error),
+      );
   };
 
   return (
@@ -276,7 +308,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           </ListItem>
         </List>
         <Button
-          title="Start Challenge"
+          title="Start Group Challenge"
           onPress={() => {
             insertChallenge();
             // props.changeView();
@@ -309,4 +341,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form04ChallengeConfirmation;
+export default FormGroup04ChallengeConfirmation;

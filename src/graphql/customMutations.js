@@ -1,46 +1,52 @@
-export const createNewUserChallenge = /* GraphQL */ `
-  mutation createNewUserChallenge(
-    $inputChallenge: CreateChallengeInput!
-    $inputUserChallenge: CreateUserChallengeInput!
-  ) {
+export const createNewChallenge = /* GraphQL */ `
+  mutation createNewUserChallenge($inputChallenge: CreateChallengeInput!) {
     createChallenge(input: $inputChallenge) {
       id
-      title
-      createdByUserId
-      increase
-      task1Name
-      task2Name
-      task3Name
-      task4Name
-      task5Name
-      task6Name
-      task7Name
-      task8Name
-      task9Name
-      task10Name
-      task11Name
-      task12Name
-      task13Name
-      task14Name
-      task15Name
-      task16Name
-      task17Name
-      task18Name
-      task19Name
-      task20Name
-      task21Name
-      task22Name
-      task23Name
-      task24Name
-      task25Name
-      task26Name
-      task27Name
-      task28Name
-      task29Name
-      task30Name
     }
+  }
+`;
+
+export const createUserChallengeWithGroupAndChallenge = /* GraphQL */ `
+  mutation createUserChallengeWithChallenge(
+    $inputUserChallenge: CreateUserChallengeInput!
+  ) {
     createUserChallenge(input: $inputUserChallenge) {
       challengeId
+      challenge {
+        id
+        title
+        increase
+        task1Name
+        task2Name
+        task3Name
+        task4Name
+        task5Name
+        task6Name
+        task7Name
+        task8Name
+        task9Name
+        task10Name
+        task11Name
+        task12Name
+        task13Name
+        task14Name
+        task15Name
+        task16Name
+        task17Name
+        task18Name
+        task19Name
+        task20Name
+        task21Name
+        task22Name
+        task23Name
+        task24Name
+        task25Name
+        task26Name
+        task27Name
+        task28Name
+        task29Name
+        task30Name
+      }
       userId
       startDate
       isValid
@@ -77,81 +83,77 @@ export const createNewUserChallenge = /* GraphQL */ `
   }
 `;
 
+export const createNewGroupAndChallenge = /* GraphQL */ `
+  mutation createNewGroup(
+    $inputGroup: CreateGroupInput!
+    $inputChallenge: CreateChallengeInput!
+  ) {
+    createGroup(input: $inputGroup) {
+      id
+      name
+    }
+    createChallenge(input: $inputChallenge) {
+      id
+    }
+  }
+`;
 /**
 This mutation is to create new challenge group.
 We have to create record of group, userGroup, challenge, groupChallenge
 Input examples!
-    $inputGroup: CreateGroupInput!
-      example:{id: "newGroup1", name: "newGroup1"}
-
     $inputUserGroup: CreateUserGroupInput!
       example:{id: "Miki", userId: "Miki", groupId: "newGroup1"}
 
-    $inputChallenge: CreateChallengeInput!
-      example:{
-        id: "8"
-        createdByUserId: "Miki"
-        title: "TestChallenge"
-        isValid: "valid"
-        task1Name: "task1Name"...
-        task30Name: "taskName"
-      }
     $inputGroupChallenge: CreateGroupChallengeInput!
       example: {id: 2, userId: "Miki", groupId: "newGroup1", challengeId: "8"}
 
  */
-export const createGroupChallengeByUser = /* GraphQL */ `
-  mutation createGroupChallengeByUser(
-    $inputGroup: CreateGroupInput!
+export const createGroupChallengeWithUserAndGroupAndChallenge = /* GraphQL */ `
+  mutation createGroupChallengeWithUserAndGroupAndChallenge(
     $inputUserGroup: CreateUserGroupInput!
-    $inputChallenge: CreateChallengeInput!
     $inputGroupChallenge: CreateGroupChallengeInput!
   ) {
-    createGroup(input: $inputUserGroup) {
-      id
-      name
-    }
     createUserGroup(input: $inputUserGroup) {
-      id
       userId
       groupId
     }
-    createChallenge(input: $inputChallenge) {
-      id
-      title
-      task1Name
-      task2Name
-      task3Name
-      task4Name
-      task5Name
-      task6Name
-      task7Name
-      task8Name
-      task9Name
-      task10Name
-      task11Name
-      task12Name
-      task13Name
-      task14Name
-      task15Name
-      task16Name
-      task17Name
-      task18Name
-      task19Name
-      task20Name
-      task21Name
-      task22Name
-      task23Name
-      task24Name
-      task25Name
-      task26Name
-      task27Name
-      task28Name
-      task29Name
-      task30Name
-    }
     createGroupChallenge(input: $inputChallenge) {
-      id
+      challengeId
+      challenge {
+        id
+        title
+        increase
+        task1Name
+        task2Name
+        task3Name
+        task4Name
+        task5Name
+        task6Name
+        task7Name
+        task8Name
+        task9Name
+        task10Name
+        task11Name
+        task12Name
+        task13Name
+        task14Name
+        task15Name
+        task16Name
+        task17Name
+        task18Name
+        task19Name
+        task20Name
+        task21Name
+        task22Name
+        task23Name
+        task24Name
+        task25Name
+        task26Name
+        task27Name
+        task28Name
+        task29Name
+        task30Name
+      }
       groupId
       startDate
       isValid
@@ -199,8 +201,8 @@ Input examples!
     $inputGroupChallenge: CreateGroupChallengeInput!
       example: {id: 2, userId: "Nel", groupId: "newGroup1", challengeId: "8"}
  */
-export const joinGroupByUser = /* GraphQL */ `
-  mutation joinGroupByUser(
+export const joinGroupWithUserAndGroupAndChallenge = /* GraphQL */ `
+  mutation joinGroupWithUserAndGroupAndChallenge(
     $inputUserGroup: CreateUserGroupInput!
     $inputGroupChallenge: CreateGroupChallengeInput!
   ) {
