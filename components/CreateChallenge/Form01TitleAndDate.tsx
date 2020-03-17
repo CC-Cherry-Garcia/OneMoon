@@ -45,7 +45,7 @@ function Form01TitleAndDate({navigation}, props) {
           <Item fixedLabel last>
             <DatePicker
               defaultDate={new Date()}
-              minimumDate={new Date()}
+              minimumDate={new Date(2020, 0, 1)}
               maximumDate={new Date(2030, 12, 31)}
               locale={'en'}
               timeZoneOffsetInMinutes={undefined}

@@ -30,7 +30,7 @@ import * as mutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 
 function Form04ChallengeConfirmation({navigation, route}, props) {
-  console.log('state in Form04ChallengeConfirmation.tsx: ', state);
+  // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
 
   const state = useStore(state => state);
 
@@ -43,7 +43,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   } else if (state.challengeType === 'time') {
     unitsVariable = 'minutes';
   }
-  // const taskName = props.challengeInput.taskName;
+
   const increaseRate = Number(state.challengeInput.increase);
   let i = 1;
   while (i <= 30) {
@@ -55,6 +55,13 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
       taskQuantityArray.push(`Day ${i} Task: ${taskName}`);
     }
     ++i;
+  }
+
+  function getDateOfChallenge(ordinalDate) {
+    const standardDate = new Date(state.challengeInput.startDate);
+    const startDate = standardDate.getDate();
+    standardDate.setDate(startDate + ordinalDate - 1);
+    return standardDate.toString();
   }
 
   const challengeInput = {
@@ -128,8 +135,10 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task28IsDone: false,
     task29IsDone: false,
     task30IsDone: false,
+    task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
+    console.log('challengeInput:  ********  ', challengeInput);
     API.graphql(
       graphqlOperation(mutations.createNewUserChallenge, {
         inputChallenge: challengeInput,

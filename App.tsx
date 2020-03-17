@@ -26,6 +26,8 @@ import Home from './components/Home/Index';
 import HomeFirstTime from './components/Home/HomeFirstTime';
 import Search from './components/Search/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
+import HomeUserActiveChallenge from './components/Home/HomeUserActiveChallenge';
+import ChallengeTop from './components/CreateChallenge/Form00CreateTop';
 
 Amplify.configure(awsconfig);
 
@@ -89,18 +91,18 @@ const App: () => React$Node = () => {
       }),
     )
       .then(data => {
-        console.log('data :', data.listUserChallenges);
         const userChallengePayload = data.data.listUserChallenges.items;
         const groupChallengePayload = data.data.listGroupChallenges.items;
+        const userChallenges = groupChallengePayload.concat(
+          userChallengePayload,
+        );
+        console.log('userChallenges :', userChallenges);
+        console.log('userChallenges :', userChallenges[0].challenge.title);
         //Check user challenge
         if (userChallengePayload.length !== 0) {
-          stateA.setUserCurrentChallenge(userChallengePayload[0]);
-        }
-        //Check group challenge
-        if (groupChallengePayload.length !== 0) {
-          stateA.setGroupCurrentChallenge(groupChallengePayload[0]);
-        }
-        if (groupChallengePayload !== 0 || groupChallengePayload !== 0) {
+          stateA.setUserActiveChallengesList(userChallenges); //TODO
+          stateA.setUserInactiveChallengesList(userChallenges); //TODO
+          stateA.setUserCurrentChallenge(userChallenges[0]);
           stateA.setUserHasActiveChallenge(true);
         }
       })
@@ -109,7 +111,45 @@ const App: () => React$Node = () => {
       });
   }, [state.user]);
 
-  console.log('stateA updated', stateA.userHasActiveChallenge ? '1' : '0');
+  useEffect(() => {
+    if (isEmpty(stateA.userCurrentChallenge)) return;
+    console.log(
+      '*****@*@*@*@**@*@* stateA.userCurrentChallenge: ',
+      stateA.userCurrentChallenge,
+    );
+    const today = new Date();
+    const monthOfToday = today.getMonth() + 1;
+    const dateOfToday = today.getDate();
+    for (let [key, value] of Object.entries(stateA.userCurrentChallenge)) {
+      if (key.slice(0, 4) === 'task' && key.slice(-4) === 'Date') {
+        const targetDate = new Date(value);
+        if (
+          monthOfToday === targetDate.getMonth() + 1 &&
+          dateOfToday === targetDate.getDate()
+        ) {
+          const currentDateStr = key.substring(
+            key.indexOf('k') + 1,
+            key.indexOf('D'),
+          );
+          stateA.setCurrentChallengeTodayDate(currentDateStr);
+          stateA.setCurrentChallengeTodayTaskName(
+            stateA.userCurrentChallenge.challenge[`task${currentDateStr}Name`],
+          );
+          stateA.setCurrentChallengeTodayTaskIsDone(
+            stateA.userCurrentChallenge[`task${currentDateStr}IsDone`],
+          );
+          break;
+        }
+      }
+    }
+  }, [stateA.userCurrentChallenge]);
+
+  function isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
+  }
 
   // User authentication
   async function checkUser(dispatch) {
@@ -151,6 +191,8 @@ const App: () => React$Node = () => {
       </NavigationContainer>
     );
   }
+  // console.log('app state', state);
+  // console.log('app stateA', stateA);
   return (
     <>
       {state.loading && <Splash />}
@@ -167,7 +209,7 @@ const App: () => React$Node = () => {
             {(stateA.userFirstTime && (
               <Tab.Screen
                 name="Home"
-                component={HomeFirstTime}
+                component={Home}
                 initialParams={{
                   userName: state.user.username,
                   screen: 'HomeFirstTime',
@@ -182,7 +224,7 @@ const App: () => React$Node = () => {
               (stateA.userHasActiveChallenge && (
                 <Tab.Screen
                   name="Home"
-                  component={ChallengeStatus}
+                  component={Home}
                   initialParams={{
                     userName: state.user.username,
                     screen: 'HomeUserActiveChallenge',
@@ -219,7 +261,10 @@ const App: () => React$Node = () => {
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
-              initialParams={{userName: state.user.username}}
+              initialParams={{
+                userName: state.user.username,
+                screen: 'ChallengeTop',
+              }}
               options={{
                 tabBarIcon: () => (
                   <Icon name="ios-create" color={Colors.primary} size={24} />
