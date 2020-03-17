@@ -1,6 +1,6 @@
 export const searchChallengeByUser = /* GraphQL */ `
   query searchChallengeByUser($userID: String!) {
-    listChallenges(filter: {userID: {eq: $userID}}) {
+    listChallenges(limit: 1000, filter: {userID: {eq: $userID}}) {
       items {
         id
         userID
