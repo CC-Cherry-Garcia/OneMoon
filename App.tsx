@@ -95,19 +95,7 @@ const App: () => React$Node = () => {
       .then(data => {
         const payload = data.data.listChallenges.items;
         if (payload.length !== 0) {
-          ///////////////////////////////////////
-          ///// KOTA PLEASE FIX THESE!
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-
-          stateA.setUserActiveChallengesList(payload);
-          stateA.setUserInactiveChallengesList(payload);
-          console.log('payload: *****#*#*#*#* ', payload);
+          stateA.setUserChallengesList(payload);
           // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
         }
