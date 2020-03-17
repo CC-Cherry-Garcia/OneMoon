@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, Share} from 'react-native';
 import {Table, TableWrapper, Cell} from 'react-native-table-component';
 import {
@@ -13,11 +13,16 @@ import {
   Left,
   Right,
 } from 'native-base';
+import Amplify, { API, graphqlOperation } from "aws-amplify";
+import * as queries from '../../src/graphql/queries';
+import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 
 function ChallengeStatusMain({navigation}, props) {
+  
   const state = useStore(state => state);
-  const onShare = async () => {
+  
+  async function onShare() {
     try {
       const result = await Share.share({
         message:
@@ -38,6 +43,33 @@ function ChallengeStatusMain({navigation}, props) {
     }
   };
 
+  async function completeTask() {
+    console.log('id ****', state.userCurrentChallenge.id);
+    console.log(`*#*#*#*#*#*#*#*#*#*#* task${state.currentChallengeTodayDate}IsDone`);
+
+    const input = {
+      id: state.userCurrentChallenge.id,
+      [`task${state.currentChallengeTodayDate}IsDone`]: true
+    };
+
+    API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
+    .then(res => {
+      console.log('res: ', res);
+      state.setCurrentChallengeTodayTaskIsDone(true);
+    })
+    .catch(error => console.error(error));
+  }
+
+  useEffect(() => {
+    API.graphql(graphqlOperation(queries.getChallenge, {id: state.userCurrentChallenge.id}))
+    .then(res => {
+      // change query
+      const isDone = res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`]
+      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: isDone})
+    })
+    .catch(err => console.log(err));
+  }, [state.currentChallengeTodayIsDone])
+  
   const tableData = [
     ['1', '2', '3', '4', '5', '6'],
     ['7', '8', '9', '10', '11', '12'],
@@ -46,6 +78,7 @@ function ChallengeStatusMain({navigation}, props) {
     ['25', '26', '27', '28', '29', '30'],
   ]
   const cc = state.userCurrentChallenge;
+  console.log('$$$$$ state in ChallengeStatusMain.tsx $$$$$$: ', state);
   const completedDates = [
     [ cc.task1IsDone, cc.task2IsDone, cc.task3IsDone, cc.task4IsDone, cc.task5IsDone, cc.task6IsDone],
     [ cc.task7IsDone, cc.task8IsDone, cc.task9IsDone, cc.task10IsDone, cc.task11IsDone, cc.task12IsDone],
@@ -53,7 +86,8 @@ function ChallengeStatusMain({navigation}, props) {
     [ cc.task19IsDone, cc.task20IsDone, cc.task21IsDone, cc.task22IsDone, cc.task23IsDone, cc.task24IsDone],
     [ cc.task25IsDone, cc.task26IsDone, cc.task27IsDone, cc.task28IsDone, cc.task29IsDone, cc.task30IsDone]
   ]
-  console.table('completedDates', completedDates);
+
+  console.log('state in ChallengeStatusMain: ***** : ', state);
 
   let completedCount = 0;
   for (const row of completedDates) {
@@ -70,11 +104,11 @@ function ChallengeStatusMain({navigation}, props) {
         <H1>{state.userCurrentChallenge.title}</H1>
         <Card style={{marginTop: 30}}>
           <CardItem header>
-            <H3>Day ? : task name</H3>
+            <H3>Day {state.currentChallengeTodayDate} : {state.currentChallengeTodayTaskName}</H3>
           </CardItem>
           <CardItem>
               <Left>
-                <Button success>
+                <Button success onPress={() => completeTask()}>
                   <Text> Complete </Text>
                 </Button>
               </Left>

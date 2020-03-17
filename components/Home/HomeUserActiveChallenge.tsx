@@ -36,7 +36,7 @@ function HomeUserActiveChallenge({navigation, route}) {
                 onPress={() => {
                   state.setUserCurrentChallenge(
                     state.userActiveChallengesList.find(
-                      x => x.id === item.title,
+                      x => x.id === item.id,
                     ),
                   );
                   navigation.navigate('Home', {
