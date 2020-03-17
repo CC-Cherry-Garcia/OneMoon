@@ -4,11 +4,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeUser from './HomeUser';
 import HomeFirstTime from './HomeFirstTime';
+import HomeUserActiveChallenge from './HomeUserActiveChallenge';
+import ChallengeStatusMain from '../ChallengeStatus/ChallengeStatusMain';
 
 const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
 
-function HomeScreen({navigation}) {
+function HomeScreen({navigation, route}) {
   //   console.log('props in HomeScreen.tsx: ', props);
   return (
     <Stack.Navigator
@@ -27,14 +29,14 @@ function HomeScreen({navigation}) {
       <Stack.Screen
         name="One Moon"
         component={HomeUser}
-        options={{
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate('HomeFirstTime')}
-              title="Switch"
-            />
-          ),
-        }}
+        // options={{
+        //   headerRight: () => (
+        //     <Button
+        //       onPress={() => navigation.navigate('HomeFirstTime')}
+        //       title="Switch"
+        //     />
+        //   ),
+        // }}
       />
       <Stack.Screen
         name="HomeFirstTime"
@@ -42,6 +44,23 @@ function HomeScreen({navigation}) {
         options={{
           title: 'One Moon',
         }}
+      />
+      <Stack.Screen
+        name="HomeUserActiveChallenge"
+        component={HomeUserActiveChallenge}
+        options={{
+          title: 'One Moon',
+        }}
+        initialParams={{userName: route.params.userName}}
+      />
+      <Stack.Screen
+        name="ChallengeStatusMain"
+        component={ChallengeStatusMain}
+        options={{
+          title: 'One Moon',
+          headerLeft: null,
+        }}
+        initialParams={{userName: route.params.userName}}
       />
     </Stack.Navigator>
   );
