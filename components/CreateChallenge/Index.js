@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, Alert, Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import Form00CreateTop from './Form00CreateTop';
 import Form01TitleAndDate from './Form01TitleAndDate';
 import Form02ChallengeType from './Form02ChallengeType';
 import Form03ChallengeQuantity from './Form03ChallengeQuantity';
@@ -28,6 +29,19 @@ function CreateChallenge({navigation, route}) {
           fontWeight: 'bold',
         },
       }}>
+      <Stack.Screen
+        name="ChallengeTop"
+        component={Form00CreateTop}
+        options={{
+          title: 'One Moon',
+          // headerRight: () => (
+          //   <Button
+          //     onPress={() => navigation.navigate('ChallengeType')}
+          //     title="Type"
+          //   />
+          // ),
+        }}
+      />
       <Stack.Screen
         name="ChallengeTitle"
         component={Form01TitleAndDate}
