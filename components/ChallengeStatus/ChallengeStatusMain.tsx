@@ -67,6 +67,22 @@ function ChallengeStatusMain({navigation, route}, props) {
   }
 
 
+  async function notYet() {
+    const input = {
+      id: state.userCurrentChallenge.id,
+      [`task${state.currentChallengeTodayDate}IsDone`]: false
+    };
+
+    API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
+    .then(res => {
+      state.setCurrentChallengeTodayTaskIsDone(false);
+      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: false});
+      Alert.alert("Not complete yet");
+    })
+    .catch(error => console.error(error));
+  }
+
+
   useEffect(() => {
     API.graphql(graphqlOperation(queries.getChallenge, {id: state.userCurrentChallenge.id}))
     .then(res => {
@@ -122,7 +138,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </Button>
               </Left>
               <Right>
-                <Button bordered dark>
+                <Button bordered dark onPress={() => notYet()}>
                   <Text> Not yet </Text>
                 </Button>
               </Right>
