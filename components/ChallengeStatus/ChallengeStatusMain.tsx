@@ -59,7 +59,6 @@ function ChallengeStatusMain({navigation, route}, props) {
 
     API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
     .then(res => {
-      console.log(state.userCurrentChallenge);
       state.setCurrentChallengeTodayTaskIsDone(true);
       state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: true});
       Alert.alert("Great Job!!!");
