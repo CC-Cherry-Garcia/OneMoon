@@ -31,7 +31,7 @@ const _registerLocalNotification = () => {
     playSound: false,
     date: PushNotificationSetting.reminderPushDate,
     // Trigger each month, week, day, hour, minute, time
-    repeatType: 'minute', //TODO it should be 'day' in production
+    repeatType: 'hour', //TODO it should be 'day' in production
     repeatTime: 1,
   });
   console.log(

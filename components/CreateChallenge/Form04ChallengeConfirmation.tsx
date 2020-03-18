@@ -174,12 +174,12 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           challengeInput,
         ]);
         LocalPushNotificationSetting.register(
-          9,
-          0,
+          11,
+          47,
           0,
           'You have a daily goal to complete',
-          21,
-          0,
+          11,
+          48,
           0,
           'Did you complete your goal for today?',
         );

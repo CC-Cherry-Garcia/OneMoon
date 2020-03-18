@@ -281,7 +281,7 @@ const App: () => React$Node = () => {
                 ),
               }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Search"
               component={Search}
               initialParams={{userName: state.user.username}}
@@ -290,7 +290,7 @@ const App: () => React$Node = () => {
                   <Icon name="ios-search" color={Colors.primary} size={24} />
                 ),
               }}
-            />
+            /> */}
             <Tab.Screen
               name="Settings"
               component={Settings}

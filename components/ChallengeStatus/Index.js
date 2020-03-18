@@ -33,7 +33,7 @@ function ChallengeStatus({navigation}) {
         name="ListSchedule"
         component={ListSchedule}
         options={{
-          title: 'Challnege Schedule',
+          title: 'Challenge Schedule',
         }}
       />
     </Stack.Navigator>

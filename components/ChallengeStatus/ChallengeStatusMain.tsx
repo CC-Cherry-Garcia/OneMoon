@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, Share, Alert} from 'react-native';
 import {Table, TableWrapper, Cell} from 'react-native-table-component';
@@ -18,7 +19,7 @@ import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 
-function ChallengeStatusMain({navigation}, props) {
+function ChallengeStatusMain({navigation, route}, props) {
   const state = useStore(state => state);
   const tableData = [
     ['1', '2', '3', '4', '5', '6'],
@@ -106,6 +107,11 @@ function ChallengeStatusMain({navigation}, props) {
       <Content>
         <H1>{state.userCurrentChallenge.title}</H1>
         <Card style={{marginTop: 30}}>
+          <CardItem>
+            <H3>Start Date: {`${new Date(state.userCurrentChallenge.startDate).getFullYear()}/${new Date(state.userCurrentChallenge.startDate).getMonth() + 1}/${new Date(state.userCurrentChallenge.startDate).getDate()}`}</H3>
+          </CardItem>
+        </Card>
+        <Card>
           <CardItem header>
             <H3>Day {state.currentChallengeTodayDate} : {state.currentChallengeTodayTaskName}</H3>
           </CardItem>
@@ -122,7 +128,7 @@ function ChallengeStatusMain({navigation}, props) {
               </Right>
             </CardItem>
           </Card>
-          <Card style={{marginTop: 30}}>
+          <Card style={{marginTop: 15}}>
             <CardItem>
               <Button success onPress={() => onShare()}>
                 <Text> Share your Progress! </Text>
@@ -158,7 +164,7 @@ function ChallengeStatusMain({navigation}, props) {
               </View>
             </CardItem>
           </Card>
-          <Card style={{marginTop: 15, marginBottom: 20, padding: 10}}>
+          <Card style={{marginBottom: 20, padding: 10}}>
             <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
               {tableData.map((rowData, index) => (
                 <TableWrapper key={index} style={styles.row}>
@@ -181,7 +187,7 @@ function ChallengeStatusMain({navigation}, props) {
             </Table>
           </Card>
 
-        <Button block onPress={() => navigation.navigate('ListSchedule')}>
+        <Button block onPress={() => navigation.navigate('Home', {screen: 'ChallengeStatusSchedule'})}>
           <Text>VIEW SCHEDULE</Text>
         </Button>
       </Content>
