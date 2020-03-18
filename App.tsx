@@ -295,7 +295,7 @@ const App: () => React$Node = () => {
               }}
             /> */}
             <Tab.Screen
-              name="Settings"
+              name="Profile"
               component={Settings}
               initialParams={{userName: state.user.username}}
               options={{

@@ -34,7 +34,7 @@ function ChallengeStatusMain({navigation, route}, props) {
     try {
       const result = await Share.share({
         message:
-          'I just completed Day X of my Challenge Title. #30DayChallenge',
+          `I just completed Day ${state.currentChallengeTodayDate} of my ${state.userCurrentChallenge.title}. #30DayChallenge`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -74,6 +74,22 @@ function ChallengeStatusMain({navigation, route}, props) {
         }
       })
       .catch(error => console.error(error));
+  }
+
+
+  async function notYet() {
+    const input = {
+      id: state.userCurrentChallenge.id,
+      [`task${state.currentChallengeTodayDate}IsDone`]: false
+    };
+
+    API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
+    .then(res => {
+      state.setCurrentChallengeTodayTaskIsDone(false);
+      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: false});
+      Alert.alert("Not complete yet");
+    })
+    .catch(error => console.error(error));
   }
 
   useEffect(() => {
@@ -183,7 +199,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </Button>
               </Left>
               <Right>
-                <Button bordered dark>
+                <Button bordered dark onPress={() => notYet()}>
                   <Text> Not yet </Text>
                 </Button>
               </Right>
@@ -236,13 +252,14 @@ function ChallengeStatusMain({navigation, route}, props) {
                       key={cellIndex}
                       data={cellData}
                       style={
-                        state.currentChallengeCompletedDatesList &&
-                        state.currentChallengeCompletedDatesList[index] &&
-                        state.currentChallengeCompletedDatesList[index][
-                          cellIndex
-                        ] === true
-                          ? {backgroundColor: '#5cb85c', width: 53}
-                          : {backgroundColor: 'transparent', width: 53}
+
+                        state.currentChallengeCompletedDatesList 
+                          && state.currentChallengeCompletedDatesList[index] 
+                          && state.currentChallengeCompletedDatesList[index][cellIndex] === true
+                          ? {backgroundColor: '#5cb85c', width: 59}
+                          : Number(tableData[index][cellIndex]) < state.currentChallengeTodayDate
+                            ? {backgroundColor: 'lightgrey', width: 59}
+                            : {backgroundColor: 'transparent', width: 59}
                       }
                       textStyle={styles.text}
                     />

@@ -59,7 +59,7 @@ function HomeScreen({navigation, route}) {
         component={ChallengeStatusMain}
         options={{
           title: 'One Moon',
-          headerLeft: null,
+          headerBackTitle: 'Back',
         }}
         initialParams={{userName: route.params.userName}}
       />
@@ -68,7 +68,7 @@ function HomeScreen({navigation, route}) {
         component={ListSchedule}
         options={{
           title: 'One Moon',
-          headerLeft: null,
+          headerBackTitle: 'Back',
         }}
         initialParams={{userName: route.params.userName}}
       />
