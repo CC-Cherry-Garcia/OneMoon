@@ -1,8 +1,5 @@
-# oneMoon ![Test Image 3](/src/assets/img/oneMoon-logo.png)
+![oneMoon app](/src/assets/img/oneMoonHeader.png)
 
-<img src="/src/assets/img/oneMoon-logo.png" width="200">
-
-<img src="drawing.jpg" alt="drawing" width="200"/>
 A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
 
 ## Achieve your goals in 30 days.
@@ -94,5 +91,3 @@ _- **Nemanja Milenkovic** - [GitHub](https://github.com/NemanjaMilenkovic) - [Li
 ## Acknowledgments
 
 Many thanks to the amazing Code Chrysalis staff - none of this would be possible without. ❤️
-
----
