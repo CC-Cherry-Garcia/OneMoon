@@ -43,7 +43,13 @@ function HomeUserActiveChallenge({navigation, route}) {
             </ListItem>
           ))}
         </List>
-        <Button style={styles.btn}>
+        <Button
+          style={styles.btn}
+          onPress={() => {
+            navigation.navigate('Create', {
+              screen: 'ChallengeTop',
+            });
+          }}>
           <Text>Create a New Challenge</Text>
         </Button>
       </Content>
