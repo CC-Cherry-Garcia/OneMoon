@@ -72,6 +72,7 @@ const App: () => React$Node = () => {
         setFormState('base');
       }
       if (payload.event === 'signOut') {
+        setFormState('email');
         setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
       }
     });
@@ -242,7 +243,25 @@ const App: () => React$Node = () => {
                     ),
                   }}
                 />
-              ))}
+              )) || (
+                <Tab.Screen
+                  name="Home"
+                  component={CreateChallenge} // this is an Active user w/o an Active Challenge view
+                  initialParams={{
+                    userName: state.user.username,
+                    screen: 'ChallengeTopFirstTime',
+                  }}
+                  options={{
+                    tabBarIcon: () => (
+                      <Icon
+                        name="ios-trophy"
+                        color={Colors.primary}
+                        size={24}
+                      />
+                    ),
+                  }}
+                />
+              )}
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
