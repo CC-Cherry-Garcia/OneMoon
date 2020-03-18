@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, Share, Alert} from 'react-native';
 import {Table, TableWrapper, Cell} from 'react-native-table-component';
@@ -18,7 +19,7 @@ import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 
-function ChallengeStatusMain({navigation}, props) {
+function ChallengeStatusMain({navigation, route}, props) {
   const state = useStore(state => state);
   const tableData = [
     ['1', '2', '3', '4', '5', '6'],
@@ -181,7 +182,7 @@ function ChallengeStatusMain({navigation}, props) {
             </Table>
           </Card>
 
-        <Button block onPress={() => navigation.navigate('ListSchedule')}>
+        <Button block onPress={() => navigation.navigate('Home', {screen: 'ChallengeStatusSchedule'})}>
           <Text>VIEW SCHEDULE</Text>
         </Button>
       </Content>
