@@ -22,7 +22,6 @@ import useStore from '../../state/state';
 
 function HomeUserActiveChallenge({navigation, route}) {
   const state = useStore(state => state);
-  // console.log('state in HomeUserActiveChallenge.tsx: ', state);
 
   return (
     <Container style={styles.Container}>
@@ -34,11 +33,7 @@ function HomeUserActiveChallenge({navigation, route}) {
             <ListItem key={item.id}>
               <Text
                 onPress={() => {
-                  state.setUserCurrentChallenge(
-                    state.userActiveChallengesList.find(
-                      x => x.id === item.id,
-                    ),
-                  );
+                  state.setUserCurrentChallenge(item);
                   navigation.navigate('Home', {
                     screen: 'ChallengeStatusMain',
                   });

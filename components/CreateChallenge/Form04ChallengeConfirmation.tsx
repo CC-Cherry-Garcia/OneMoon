@@ -163,11 +163,13 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   };
 
   const insertChallenge = () => {
-    console.log('challengeInput:  ********  ', challengeInput);
     API.graphql(
       graphqlOperation(mutations.createChallenge, {input: challengeInput}),
     )
-    .then(res => state.setUserHasActiveChallenge(true))
+    .then(res => {
+      state.setUserHasActiveChallenge(true);
+      state.setUserActiveChallengesList([...state.userActiveChallengesList, challengeInput]);
+    })
     .catch(error => console.log('Error happens in createChallenge: ', error));
   };
 
