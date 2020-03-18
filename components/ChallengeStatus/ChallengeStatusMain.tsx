@@ -107,6 +107,11 @@ function ChallengeStatusMain({navigation, route}, props) {
       <Content>
         <H1>{state.userCurrentChallenge.title}</H1>
         <Card style={{marginTop: 30}}>
+          <CardItem>
+            <H3>Start Date: {`${new Date(state.userCurrentChallenge.startDate).getFullYear()}/${new Date(state.userCurrentChallenge.startDate).getMonth() + 1}/${new Date(state.userCurrentChallenge.startDate).getDate()}`}</H3>
+          </CardItem>
+        </Card>
+        <Card>
           <CardItem header>
             <H3>Day {state.currentChallengeTodayDate} : {state.currentChallengeTodayTaskName}</H3>
           </CardItem>
@@ -123,7 +128,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </Right>
             </CardItem>
           </Card>
-          <Card style={{marginTop: 30}}>
+          <Card style={{marginTop: 15}}>
             <CardItem>
               <Button success onPress={() => onShare()}>
                 <Text> Share your Progress! </Text>
@@ -159,7 +164,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </View>
             </CardItem>
           </Card>
-          <Card style={{marginTop: 15, marginBottom: 20, padding: 10}}>
+          <Card style={{marginBottom: 20, padding: 10}}>
             <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
               {tableData.map((rowData, index) => (
                 <TableWrapper key={index} style={styles.row}>
