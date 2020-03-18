@@ -1,4 +1,4 @@
-![oneMoon app](/src/assets/img/oneMoonHeader.png)
+![oneMoon app](/src/assets/img/oneMoonHeader-white.png)
 
 A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
 
