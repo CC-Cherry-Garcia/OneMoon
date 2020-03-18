@@ -59,6 +59,7 @@ function ChallengeStatusMain({navigation, route}, props) {
 
     API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
     .then(res => {
+      console.log(state.userCurrentChallenge);
       state.setCurrentChallengeTodayTaskIsDone(true);
       state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: true});
       Alert.alert("Great Job!!!");
@@ -176,8 +177,10 @@ function ChallengeStatusMain({navigation, route}, props) {
                         state.currentChallengeCompletedDatesList 
                           && state.currentChallengeCompletedDatesList[index] 
                           && state.currentChallengeCompletedDatesList[index][cellIndex] === true
-                          ? {backgroundColor: '#5cb85c', width: 53}
-                          : {backgroundColor: 'transparent', width: 53}
+                          ? {backgroundColor: '#5cb85c', width: 59}
+                          : Number(tableData[index][cellIndex]) < state.currentChallengeTodayDate
+                            ? {backgroundColor: 'lightgrey', width: 59}
+                            : {backgroundColor: 'transparent', width: 59}
                       }
                       textStyle={styles.text}
                     />
