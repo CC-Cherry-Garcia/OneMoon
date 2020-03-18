@@ -15,6 +15,8 @@ import FormGroup03ChallengeQuantity from './FormGroup03ChallengeQuantity';
 import FormGroup03ChallengeTime from './FormGroup03ChallengeTime';
 import FormGroup03ChallengeRepeat from './FormGroup03ChallengeRepeat';
 import FormGroup04ChallengeConfirmation from './FormGroup04ChallengeConfirmation';
+import FormJoin01Group from './FormJoin01Group';
+import FormJoin02GroupConfirmation from './FormJoin02GroupConfirmation';
 
 const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
@@ -181,6 +183,35 @@ function CreateChallenge({navigation, route}) {
         initialParams={{userName: route.params.userName}}
         options={{
           title: 'Group Challenge Confirmation',
+          // headerRight: () => (
+          //   <Button
+          //     onPress={() => navigation.navigate('ChallengeTitle')}
+          //     title="Title"
+          //   />
+          // ),
+        }}
+      />
+
+      {/* Join Group Challenge */}
+      <Stack.Screen
+        name="JoinGroupChallenge"
+        component={FormJoin01Group}
+        options={{
+          title: 'Join Group Challenge',
+          // headerRight: () => (
+          //   <Button
+          //     onPress={() => navigation.navigate('ChallengeType')}
+          //     title="Type"
+          //   />
+          // ),
+        }}
+      />
+      <Stack.Screen
+        name="JoinGroupChallengeConfirmation"
+        component={FormJoin02GroupConfirmation}
+        initialParams={{userName: route.params.userName}}
+        options={{
+          title: 'Join Group Challenge Confirmation',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}

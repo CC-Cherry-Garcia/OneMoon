@@ -207,12 +207,10 @@ export const joinGroupWithUserAndGroupAndChallenge = /* GraphQL */ `
     $inputGroupChallenge: CreateGroupChallengeInput!
   ) {
     createUserGroup(input: $inputUserGroup) {
-      id
       userId
       groupId
     }
     createGroupChallenge(input: $inputGroupChallenge) {
-      id
       groupId
       startDate
       isValid
