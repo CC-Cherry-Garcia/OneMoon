@@ -39,6 +39,12 @@ function HomeUserActiveChallenge({navigation, route}) {
                   });
                 }}>
                 {item.title}
+                {'\n'}
+                <Text style={styles.startDate}>
+                  Started: {new Date(item.startDate).getFullYear()}/
+                  {new Date(item.startDate).getMonth() + 1}/
+                  {new Date(item.startDate).getDate()}
+                </Text>
               </Text>
             </ListItem>
           ))}
@@ -71,6 +77,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: 10,
+  },
+  startDate: {
+    color: 'gray',
   },
 });
 

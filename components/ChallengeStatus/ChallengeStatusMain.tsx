@@ -33,7 +33,7 @@ function ChallengeStatusMain({navigation, route}, props) {
     try {
       const result = await Share.share({
         message:
-          'I just completed Day X of my Challenge Title. #30DayChallenge',
+          `I just completed Day ${state.currentChallengeTodayDate} of my ${state.userCurrentChallenge.title}. #30DayChallenge`,
       });
 
       if (result.action === Share.sharedAction) {
