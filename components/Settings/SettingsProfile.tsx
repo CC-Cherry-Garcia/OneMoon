@@ -34,9 +34,6 @@ function signOut() {
 function SettingsMain({navigation, route}) {
   const state = useStore(state => state);
   // console.log('state in SettingsMain.tsx: ', state);
-  const inactiveChallenges = state.userChallengesList.filter(
-    item => item.isValid === 'false',
-  );
 
   return (
     <Container style={styles.Container}>
@@ -46,7 +43,7 @@ function SettingsMain({navigation, route}) {
           here.
         </H1>
         <H2 style={styles.H2}>Past Challenges:</H2>
-        {inactiveChallenges.map(item => (
+        {state.userInactiveChallengesList.map(item => (
           <ListItem key={item.id}>
             <Text
               onPress={() => {
