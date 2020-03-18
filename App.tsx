@@ -72,6 +72,7 @@ const App: () => React$Node = () => {
         setFormState('base');
       }
       if (payload.event === 'signOut') {
+        setFormState('email');
         setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
       }
     });
@@ -95,7 +96,11 @@ const App: () => React$Node = () => {
       .then(data => {
         const payload = data.data.listChallenges.items;
         if (payload.length !== 0) {
-          stateA.setUserChallengesList(payload);
+          const activeChallenges = payload.filter(x => x.isValid === 'true');
+          const inactiveChallenges = payload.filter(x => x.isValid === 'false');
+
+          stateA.setUserActiveChallengesList(activeChallenges);
+          stateA.setUserInactiveChallengesList(inactiveChallenges);
           // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
         }
@@ -109,10 +114,6 @@ const App: () => React$Node = () => {
     if (isEmpty(stateA.userCurrentChallenge)) {
       return;
     }
-    console.log(
-      '*****@*@*@*@**@*@* stateA.userCurrentChallenge: ',
-      stateA.userCurrentChallenge,
-    );
     const today = new Date();
     const monthOfToday = today.getMonth() + 1;
     const dateOfToday = today.getDate();
@@ -240,9 +241,10 @@ const App: () => React$Node = () => {
               )) || (
                 <Tab.Screen
                   name="Home"
-                  component={Home} // this is an Active user w/o an Active Challenge view
+                  component={CreateChallenge} // this is an Active user w/o an Active Challenge view
                   initialParams={{
                     userName: state.user.username,
+                    screen: 'ChallengeTopFirstTime',
                   }}
                   options={{
                     tabBarIcon: () => (

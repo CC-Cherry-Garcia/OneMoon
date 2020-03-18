@@ -15,12 +15,20 @@ const [useStore] = create(set => ({
   currentChallengeTodayTaskIsDone: false,
   setCurrentChallengeTodayTaskIsDone: value =>
     set({currentChallengeTodayTaskIsDone: value}),
+  currentChallengeCompletedDatesList: [],
+  setCurrentChallengeCompletedDatesList: value =>
+    set({currentChallengeCompletedDatesList: value}),
+  currentChallengeProgress: 0,
+  setCurrentChallengeProgress: value => set({currentChallengeProgress: value}),
 
   // USER State
   userCurrentChallenge: {},
   setUserCurrentChallenge: value => set({userCurrentChallenge: value}),
-  userChallengesList: [],
-  setUserChallengesList: value => set({userChallengesList: value}),
+  userActiveChallengesList: [],
+  setUserActiveChallengesList: value => set({userActiveChallengesList: value}),
+  userInactiveChallengesList: [],
+  setUserInactiveChallengesList: value =>
+    set({userInactiveChallengesList: value}),
   userHasActiveChallenge: false,
   setUserHasActiveChallenge: value => set({userHasActiveChallenge: value}),
   userFirstTime: false,
