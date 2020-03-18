@@ -115,6 +115,9 @@ const App: () => React$Node = () => {
             'Did you complete your goal for today?',
           );
         }
+        if (state.userActiveChallengesList.length == 0) {
+          LocalPushNotificationSetting.unregister();
+        }
       })
       .catch(error => {
         console.log(error);

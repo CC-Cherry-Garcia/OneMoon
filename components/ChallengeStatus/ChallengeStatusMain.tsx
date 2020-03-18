@@ -66,6 +66,12 @@ function ChallengeStatusMain({navigation, route}, props) {
         });
         Alert.alert('Great Job!!!');
         LocalPushNotificationSetting.completeTodayTask();
+        if (
+          state.currentChallengeTodayDate == 30 &&
+          state.userActiveChallengesList.length == 1
+        ) {
+          LocalPushNotificationSetting.unregister();
+        }
       })
       .catch(error => console.error(error));
   }
