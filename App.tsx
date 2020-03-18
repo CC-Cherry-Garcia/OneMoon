@@ -105,12 +105,12 @@ const App: () => React$Node = () => {
           // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
           LocalPushNotificationSetting.register(
-            11,
-            25,
+            9,
+            0,
             0,
             'You have a daily goal to complete',
-            11,
-            26,
+            21,
+            0,
             0,
             'Did you complete your goal for today?',
           );
