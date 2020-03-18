@@ -25,8 +25,9 @@ import {
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import * as mutations from '../../src/graphql/customMutations';
+import * as customMutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
+import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
 
 function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
@@ -107,7 +108,7 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   const groupChallengeInput = {
     userId: route.params.userName,
     startDate: state.challengeInput.startDate,
-    isValid: true,
+    isValid: true ? 'true' : 'false',
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,
@@ -145,7 +146,7 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
     console.log('groupInput:  ********  ', groupInput);
     console.log('challengeInput:  ********  ', challengeInput);
     API.graphql(
-      graphqlOperation(mutations.createNewGroupAndChallenge, {
+      graphqlOperation(customMutations.createNewGroupAndChallenge, {
         inputGroup: groupInput,
         inputChallenge: challengeInput,
       }),
@@ -168,7 +169,7 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
 
         API.graphql(
           graphqlOperation(
-            mutations.createGroupChallengeWithUserAndGroupAndChallenge,
+            customMutations.createGroupChallengeWithUserAndGroupAndChallenge,
             {
               inputUserGroup: {
                 ...useGroupInput,
@@ -183,11 +184,21 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
           ),
         )
           .then(res => {
-            console.log(
-              'res createGroupChallengeWithUserAndGroupAndChallenge:',
-              res,
-            );
             state.setUserHasActiveChallenge(true);
+            state.setUserActiveChallengesList([
+              ...state.userActiveChallengesList,
+              res.data.createGroupChallenge,
+            ]);
+            LocalPushNotificationSetting.register(
+              9,
+              0,
+              0,
+              'You have a daily goal to complete',
+              21,
+              0,
+              0,
+              'Did you complete your goal for today?',
+            );
           })
           .catch(error =>
             console.log(

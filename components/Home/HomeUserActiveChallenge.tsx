@@ -22,7 +22,6 @@ import useStore from '../../state/state';
 
 function HomeUserActiveChallenge({navigation, route}) {
   const state = useStore(state => state);
-  // console.log('state in HomeUserActiveChallenge.tsx: ', state);
 
   return (
     <Container style={styles.Container}>
@@ -34,21 +33,29 @@ function HomeUserActiveChallenge({navigation, route}) {
             <ListItem key={item.id}>
               <Text
                 onPress={() => {
-                  state.setUserCurrentChallenge(
-                    state.userActiveChallengesList.find(
-                      x => x.challenge.id === item.challenge.id,
-                    ),
-                  );
+                  state.setUserCurrentChallenge(item);
                   navigation.navigate('Home', {
                     screen: 'ChallengeStatusMain',
                   });
                 }}>
                 {item.challenge.title}
+                {'\n'}
+                <Text style={styles.startDate}>
+                  Started: {new Date(item.startDate).getFullYear()}/
+                  {new Date(item.startDate).getMonth() + 1}/
+                  {new Date(item.startDate).getDate()}
+                </Text>
               </Text>
             </ListItem>
           ))}
         </List>
-        <Button style={styles.btn}>
+        <Button
+          style={styles.btn}
+          onPress={() => {
+            navigation.navigate('Create', {
+              screen: 'ChallengeTop',
+            });
+          }}>
           <Text>Create a New Challenge</Text>
         </Button>
       </Content>
@@ -70,6 +77,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: 10,
+  },
+  startDate: {
+    color: 'gray',
   },
 });
 

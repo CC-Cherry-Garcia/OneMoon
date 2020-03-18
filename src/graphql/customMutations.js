@@ -7,7 +7,7 @@ export const createNewChallenge = /* GraphQL */ `
 `;
 
 export const createUserChallengeWithGroupAndChallenge = /* GraphQL */ `
-  mutation createUserChallengeWithChallenge(
+  mutation createUserChallengeWithGroupAndChallenge(
     $inputUserChallenge: CreateUserChallengeInput!
   ) {
     createUserChallenge(input: $inputUserChallenge) {
@@ -117,7 +117,7 @@ export const createGroupChallengeWithUserAndGroupAndChallenge = /* GraphQL */ `
       userId
       groupId
     }
-    createGroupChallenge(input: $inputChallenge) {
+    createGroupChallenge(input: $inputGroupChallenge) {
       challengeId
       challenge {
         id

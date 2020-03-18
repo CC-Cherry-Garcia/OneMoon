@@ -44,14 +44,10 @@ function SettingsMain({navigation, route}) {
         </H1>
         <H2 style={styles.H2}>Past Challenges:</H2>
         {state.userInactiveChallengesList.map(item => (
-          <ListItem>
+          <ListItem key={item.id}>
             <Text
               onPress={() => {
-                state.setUserCurrentChallenge(
-                  state.userActiveChallengesList.find(
-                    x => x.challenge.id === item.challenge.id,
-                  ),
-                );
+                state.setUserCurrentChallenge(item);
                 navigation.navigate('Home', {
                   screen: 'ChallengeStatusMain',
                 });

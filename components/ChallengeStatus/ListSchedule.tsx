@@ -18,7 +18,6 @@ function ListSchedule({navigation}) {
   return (
     <>
       <Container>
-        <Header />
         <Content>
           <Card>
             <CardItem>

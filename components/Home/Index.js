@@ -6,6 +6,7 @@ import HomeUser from './HomeUser';
 import HomeFirstTime from './HomeFirstTime';
 import HomeUserActiveChallenge from './HomeUserActiveChallenge';
 import ChallengeStatusMain from '../ChallengeStatus/ChallengeStatusMain';
+import ListSchedule from '../ChallengeStatus/ListSchedule';
 
 const Stack = createStackNavigator();
 import Colors from '../../variablesColors';
@@ -58,7 +59,16 @@ function HomeScreen({navigation, route}) {
         component={ChallengeStatusMain}
         options={{
           title: 'One Moon',
-          headerLeft: null,
+          headerBackTitle: 'Back',
+        }}
+        initialParams={{userName: route.params.userName}}
+      />
+      <Stack.Screen
+        name="ChallengeStatusSchedule"
+        component={ListSchedule}
+        options={{
+          title: 'One Moon',
+          headerBackTitle: 'Back',
         }}
         initialParams={{userName: route.params.userName}}
       />

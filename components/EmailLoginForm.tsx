@@ -2,6 +2,7 @@ import React, {useState, useReducer} from 'react';
 import {TextInput, Alert} from 'react-native';
 import {Text, Button, Icon, View, H1} from 'native-base';
 import {Auth} from 'aws-amplify';
+import LocalPushNotificationSetting from './LocalPushNotificationSetting';
 
 const initialFormState = {
   username: '',
@@ -11,6 +12,8 @@ const initialFormState = {
 };
 let passwordEmpty = true;
 let usernameEmpty = true;
+let emailEmpty = true;
+let confirmationEmpty = true;
 
 function reducer(state: any, action: {type: string}) {
   switch (action.type) {
@@ -67,6 +70,7 @@ async function signIn({username, password}) {
     console.log('try sign in :', username);
     const result = await Auth.signIn(username, password);
     console.log('sign in success!', result);
+    LocalPushNotificationSetting.confirm();
   } catch (err) {
     console.log('error signing in..', err);
     Alert.alert(
@@ -149,6 +153,11 @@ function SignUp(props) {
         onChange={e => {
           e.persist();
           props.updateFormState('username', e);
+          if (e.nativeEvent.text.length > 0) {
+            usernameEmpty = false;
+          } else {
+            usernameEmpty = true;
+          }
         }}
         style={styles.input}
         placeholder="username"
@@ -166,6 +175,11 @@ function SignUp(props) {
         onChange={e => {
           e.persist();
           props.updateFormState('password', e);
+          if (e.nativeEvent.text.length > 0) {
+            passwordEmpty = false;
+          } else {
+            passwordEmpty = true;
+          }
         }}
         style={styles.input}
         placeholder="password"
@@ -178,6 +192,11 @@ function SignUp(props) {
         onChange={e => {
           e.persist();
           props.updateFormState('email', e);
+          if (e.nativeEvent.text.length > 0) {
+            emailEmpty = false;
+          } else {
+            emailEmpty = true;
+          }
         }}
         style={styles.input}
         placeholder="email"
@@ -187,10 +206,14 @@ function SignUp(props) {
         onSubmitEditing={props.signUp}
       />
       <Button
-        disabled={passwordEmpty || usernameEmpty}
+        disabled={passwordEmpty || usernameEmpty || emailEmpty}
         title="Sign Up"
         onPress={props.signUp}
-        style={styles.button}>
+        style={
+          passwordEmpty || usernameEmpty || emailEmpty
+            ? styles.buttonDisabled
+            : styles.button
+        }>
         <Text style={styles.buttonText}>Sign Up</Text>
       </Button>
     </View>
@@ -259,20 +282,32 @@ function SignIn(props) {
 function ConfirmSignUp(props) {
   return (
     <View style={styles.container}>
+      <Text>Please enter the confirmation code bellow:</Text>
       <TextInput
         name="confirmationCode"
         placeholder="Confirmation Code"
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="go"
+        onSubmitEditing={props.confirmSignUp}
         onChange={e => {
           e.persist();
           props.updateFormState('confirmationCode', e);
+          if (e.nativeEvent.text) {
+            confirmationEmpty = false;
+          } else {
+            confirmationEmpty = true;
+          }
         }}
         style={styles.input}
       />
       <Button
-        title="Confirm Sign Up"
-        onPress={props.confirmSignUp}
-        style={styles.button}
-      />
+        disabled={confirmationEmpty}
+        title="Sign In"
+        style={confirmationEmpty ? styles.buttonDisabled : styles.button}
+        onPress={props.confirmSignUp}>
+        <Text style={styles.buttonText}>Confirm Sign Up</Text>
+      </Button>
     </View>
   );
 }
@@ -286,8 +321,11 @@ const styles = {
     alignItems: 'center',
   },
   input: {
-    height: 45,
-    marginTop: 8,
+    borderColor: 'lightgray',
+    borderWidth: 0.3,
+    height: 35,
+    marginTop: 38,
+    marginBottom: 8,
     width: 300,
     maxWidth: 300,
     fontSize: 16,

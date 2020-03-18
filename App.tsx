@@ -28,6 +28,7 @@ import Search from './components/Search/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
 import HomeUserActiveChallenge from './components/Home/HomeUserActiveChallenge';
 import ChallengeTop from './components/CreateChallenge/Form00CreateTop';
+import LocalPushNotificationSetting from './components/LocalPushNotificationSetting';
 
 Amplify.configure(awsconfig);
 
@@ -72,6 +73,7 @@ const App: () => React$Node = () => {
         setFormState('base');
       }
       if (payload.event === 'signOut') {
+        setFormState('email');
         setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
       }
     });
@@ -96,14 +98,32 @@ const App: () => React$Node = () => {
         const userChallenges = groupChallengePayload.concat(
           userChallengePayload,
         );
-        console.log('userChallenges :', userChallenges);
-        console.log('userChallenges :', userChallenges[0].challenge.title);
         //Check user challenge
-        if (userChallengePayload.length !== 0) {
-          stateA.setUserActiveChallengesList(userChallenges); //TODO
-          stateA.setUserInactiveChallengesList(userChallenges); //TODO
-          stateA.setUserCurrentChallenge(userChallenges[0]);
+        if (userChallenges.length !== 0) {
+          const activeChallenges = userChallenges.filter(
+            x => x.isValid === 'true',
+          );
+          const inactiveChallenges = userChallenges.filter(
+            x => x.isValid === 'false',
+          );
+
+          stateA.setUserActiveChallengesList(activeChallenges);
+          stateA.setUserInactiveChallengesList(inactiveChallenges);
+          // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
+          LocalPushNotificationSetting.register(
+            9,
+            0,
+            0,
+            'You have a daily goal to complete',
+            21,
+            0,
+            0,
+            'Did you complete your goal for today?',
+          );
+        }
+        if (stateA.userActiveChallengesList.length === 0) {
+          LocalPushNotificationSetting.unregister();
         }
       })
       .catch(error => {
@@ -112,11 +132,9 @@ const App: () => React$Node = () => {
   }, [state.user]);
 
   useEffect(() => {
-    if (isEmpty(stateA.userCurrentChallenge)) return;
-    console.log(
-      '*****@*@*@*@**@*@* stateA.userCurrentChallenge: ',
-      stateA.userCurrentChallenge,
-    );
+    if (isEmpty(stateA.userCurrentChallenge)) {
+      return;
+    }
     const today = new Date();
     const monthOfToday = today.getMonth() + 1;
     const dateOfToday = today.getDate();
@@ -146,7 +164,9 @@ const App: () => React$Node = () => {
 
   function isEmpty(obj) {
     for (var key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
     }
     return true;
   }
@@ -242,10 +262,10 @@ const App: () => React$Node = () => {
               )) || (
                 <Tab.Screen
                   name="Home"
-                  component={Home} // this is an Active user w/o an Active Challenge view
+                  component={CreateChallenge} // this is an Active user w/o an Active Challenge view
                   initialParams={{
                     userName: state.user.username,
-                    screen: 'Home',
+                    screen: 'ChallengeTopFirstTime',
                   }}
                   options={{
                     tabBarIcon: () => (
@@ -271,7 +291,7 @@ const App: () => React$Node = () => {
                 ),
               }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
               name="Search"
               component={Search}
               initialParams={{userName: state.user.username}}
@@ -280,9 +300,9 @@ const App: () => React$Node = () => {
                   <Icon name="ios-search" color={Colors.primary} size={24} />
                 ),
               }}
-            />
+            /> */}
             <Tab.Screen
-              name="Settings"
+              name="Profile"
               component={Settings}
               initialParams={{userName: state.user.username}}
               options={{

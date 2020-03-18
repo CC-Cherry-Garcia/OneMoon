@@ -26,7 +26,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
-import * as mutations from '../../src/graphql/customMutations';
+import * as customMutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 
 function FormJoin02GroupConfirmation({navigation, route}, props) {
@@ -76,7 +76,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   const groupChallengeInput = {
     groupId: state.challengeInput.groupId,
     userId: route.params.userName,
-    isValid: true,
+    isValid: true ? 'true' : 'false',
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,
@@ -118,7 +118,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     });
 
     API.graphql(
-      graphqlOperation(mutations.joinGroupWithUserAndGroupAndChallenge, {
+      graphqlOperation(customMutations.joinGroupWithUserAndGroupAndChallenge, {
         inputUserGroup: useGroupInput,
         inputGroupChallenge: {
           ...groupChallengeInput,
