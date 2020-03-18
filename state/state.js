@@ -7,13 +7,17 @@ const [useStore] = create(set => ({
   challengeType: '',
   setChallengeType: value => set({challengeType: value}),
   currentChallengeTodayDate: '',
-  setCurrentChallengeTodayDate: value => set({currentChallengeTodayDate: value}),
+  setCurrentChallengeTodayDate: value =>
+    set({currentChallengeTodayDate: value}),
   currentChallengeTodayTaskName: '',
-  setCurrentChallengeTodayTaskName: value => set({currentChallengeTodayTaskName: value}),
+  setCurrentChallengeTodayTaskName: value =>
+    set({currentChallengeTodayTaskName: value}),
   currentChallengeTodayTaskIsDone: false,
-  setCurrentChallengeTodayTaskIsDone: value => set({currentChallengeTodayTaskIsDone: value}),
+  setCurrentChallengeTodayTaskIsDone: value =>
+    set({currentChallengeTodayTaskIsDone: value}),
   currentChallengeCompletedDatesList: [],
-  setCurrentChallengeCompletedDatesList: value => set({currentChallengeCompletedDatesList: value}),
+  setCurrentChallengeCompletedDatesList: value =>
+    set({currentChallengeCompletedDatesList: value}),
   currentChallengeProgress: 0,
   setCurrentChallengeProgress: value => set({currentChallengeProgress: value}),
 
@@ -23,7 +27,8 @@ const [useStore] = create(set => ({
   userActiveChallengesList: [],
   setUserActiveChallengesList: value => set({userActiveChallengesList: value}),
   userInactiveChallengesList: [],
-  setUserInactiveChallengesList: value => set({userInactiveChallengesList: value}),
+  setUserInactiveChallengesList: value =>
+    set({userInactiveChallengesList: value}),
   userHasActiveChallenge: false,
   setUserHasActiveChallenge: value => set({userHasActiveChallenge: value}),
   userFirstTime: false,

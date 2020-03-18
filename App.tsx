@@ -96,18 +96,11 @@ const App: () => React$Node = () => {
       .then(data => {
         const payload = data.data.listChallenges.items;
         if (payload.length !== 0) {
-          ///////////////////////////////////////
-          ///// KOTA PLEASE FIX THESE!
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
-          ///////////////////////////////////////
+          const activeChallenges = payload.filter(x => x.isValid === 'true');
+          const inactiveChallenges = payload.filter(x => x.isValid === 'false');
 
-          stateA.setUserActiveChallengesList(payload);
-          stateA.setUserInactiveChallengesList(payload);
+          stateA.setUserActiveChallengesList(activeChallenges);
+          stateA.setUserInactiveChallengesList(inactiveChallenges);
           // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
         }
@@ -118,7 +111,9 @@ const App: () => React$Node = () => {
   }, [state.user]);
 
   useEffect(() => {
-    if (isEmpty(stateA.userCurrentChallenge)) return;
+    if (isEmpty(stateA.userCurrentChallenge)) {
+      return;
+    }
     const today = new Date();
     const monthOfToday = today.getMonth() + 1;
     const dateOfToday = today.getDate();
@@ -148,12 +143,12 @@ const App: () => React$Node = () => {
 
   function isEmpty(obj) {
     for (var key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
     }
     return true;
   }
-
-  
 
   // User authentication
   async function checkUser(dispatch) {
