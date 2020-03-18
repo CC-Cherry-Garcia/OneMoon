@@ -61,6 +61,7 @@ const _registerLocalNotification = () => {
 
 export default {
   confirm: () => {
+    console.log('confirm :');
     PushNotification.configure({
       onNotification: function(notification) {
         notification.finish(PushNotificationIOS.FetchResult.NoData);

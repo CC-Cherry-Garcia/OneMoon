@@ -28,6 +28,7 @@ import Search from './components/Search/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
 import HomeUserActiveChallenge from './components/Home/HomeUserActiveChallenge';
 import ChallengeTop from './components/CreateChallenge/Form00CreateTop';
+import LocalPushNotificationSetting from './components/LocalPushNotificationSetting';
 
 Amplify.configure(awsconfig);
 
@@ -103,6 +104,16 @@ const App: () => React$Node = () => {
           stateA.setUserInactiveChallengesList(inactiveChallenges);
           // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
+          LocalPushNotificationSetting.register(
+            11,
+            25,
+            0,
+            'You have a daily goal to complete',
+            11,
+            26,
+            0,
+            'Did you complete your goal for today?',
+          );
         }
       })
       .catch(error => {

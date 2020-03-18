@@ -2,6 +2,7 @@ import React, {useState, useReducer} from 'react';
 import {TextInput, Alert} from 'react-native';
 import {Text, Button, Icon, View, H1} from 'native-base';
 import {Auth} from 'aws-amplify';
+import LocalPushNotificationSetting from './LocalPushNotificationSetting';
 
 const initialFormState = {
   username: '',
@@ -69,6 +70,7 @@ async function signIn({username, password}) {
     console.log('try sign in :', username);
     const result = await Auth.signIn(username, password);
     console.log('sign in success!', result);
+    LocalPushNotificationSetting.confirm();
   } catch (err) {
     console.log('error signing in..', err);
     Alert.alert(
