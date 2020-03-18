@@ -47,9 +47,7 @@ function SettingsMain({navigation, route}) {
           <ListItem key={item.id}>
             <Text
               onPress={() => {
-                state.setUserCurrentChallenge(
-                  state.userChallengesList.find(x => x.id === item.id),
-                );
+                state.setUserCurrentChallenge(item);
                 navigation.navigate('Home', {
                   screen: 'ChallengeStatusMain',
                 });
