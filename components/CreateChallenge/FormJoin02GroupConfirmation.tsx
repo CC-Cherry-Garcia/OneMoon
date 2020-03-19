@@ -26,8 +26,9 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
-import * as customMutations from '../../src/graphql/customMutations';
+import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
+import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
 
 function FormJoin02GroupConfirmation({navigation, route}, props) {
   const state = useStore(state => state);
@@ -48,7 +49,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         }),
       );
 
-      setTest(10);
       console.log(
         'result listGroupChallenges userEffect:',
         result.data.listGroupChallenges.items[0],
@@ -78,10 +78,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   //   standardDate.setDate(startDate + ordinalDate - 1);
   //   return standardDate.toString();
   // }
-  const useGroupInput = {
-    userId: route.params.userName,
-    groupId: state.challengeInput.groupId,
-  };
   const groupChallengeInput = {
     groupId: state.challengeInput.groupId,
     userId: route.params.userName,
@@ -118,7 +114,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     task30IsDone: false,
   };
   const insertChallenge = () => {
-    console.log('useGroupInput:  ********  ', useGroupInput);
     console.log('groupChallengeInput:  ********  ', {
       ...groupChallengeInput,
       challengeId: state.groupChallengeInformation.challengeId,
@@ -127,9 +122,8 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     });
 
     API.graphql(
-      graphqlOperation(customMutations.joinGroupWithUserAndGroupAndChallenge, {
-        inputUserGroup: useGroupInput,
-        inputGroupChallenge: {
+      graphqlOperation(mutations.createGroupChallenge, {
+        input: {
           ...groupChallengeInput,
           challengeId: state.groupChallengeInformation.challengeId,
           startDate: state.groupChallengeInformation.startDate,
@@ -138,14 +132,25 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
       }),
     )
       .then(res => {
-        console.log('res joinGroupWithUserAndGroupAndChallenge:', res);
+        console.log('res createGroupChallenge:', res);
         state.setUserHasActiveChallenge(true);
+        state.setUserActiveChallengesList([
+          ...state.userActiveChallengesList,
+          res.data.createGroupChallenge,
+        ]);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
       })
       .catch(error =>
-        console.log(
-          'Error happens in joinGroupWithUserAndGroupAndChallenge: ',
-          error,
-        ),
+        console.log('Error happens in createGroupChallenge: ', error),
       );
   };
   console.log(

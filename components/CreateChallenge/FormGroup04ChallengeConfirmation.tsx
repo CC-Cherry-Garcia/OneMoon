@@ -25,6 +25,7 @@ import {
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
+import * as mutations from '../../src/graphql/mutations';
 import * as customMutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
@@ -102,9 +103,6 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   const groupInput = {
     name: state.challengeInput.groupName,
   };
-  const useGroupInput = {
-    userId: route.params.userName,
-  };
   const groupChallengeInput = {
     userId: route.params.userName,
     startDate: state.challengeInput.startDate,
@@ -151,37 +149,26 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
         inputChallenge: challengeInput,
       }),
     )
-      .then(res => {
-        console.log('res.data.createGroup.id :', res.data.createGroup.id);
+      .then(resultIds => {
+        console.log('res.data.createGroup.id :', resultIds.data.createGroup.id);
         console.log(
-          'res.data.createChallenge.id :',
-          res.data.createChallenge.id,
+          'resultIds.data.createChallenge.id :',
+          resultIds.data.createChallenge.id,
         );
-        console.log('useGroupInput:  ********  ', {
-          ...useGroupInput,
-          groupId: res.data.createGroup.id,
-        });
         console.log('groupChallengeInput:  ********  ', {
           ...groupChallengeInput,
-          challengeId: res.data.createChallenge.id,
-          groupId: res.data.createGroup.id,
+          challengeId: resultIds.data.createChallenge.id,
+          groupId: resultIds.data.createGroup.id,
         });
 
         API.graphql(
-          graphqlOperation(
-            customMutations.createGroupChallengeWithUserAndGroupAndChallenge,
-            {
-              inputUserGroup: {
-                ...useGroupInput,
-                groupId: res.data.createGroup.id,
-              },
-              inputGroupChallenge: {
-                ...groupChallengeInput,
-                challengeId: res.data.createChallenge.id,
-                groupId: res.data.createGroup.id,
-              },
+          graphqlOperation(mutations.createGroupChallenge, {
+            input: {
+              ...groupChallengeInput,
+              challengeId: resultIds.data.createChallenge.id,
+              groupId: resultIds.data.createGroup.id,
             },
-          ),
+          }),
         )
           .then(res => {
             state.setUserHasActiveChallenge(true);
@@ -201,14 +188,11 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
             );
           })
           .catch(error =>
-            console.log(
-              'Error happens in createGroupChallengeWithUserAndGroupAndChallenge: ',
-              error,
-            ),
+            console.log('Error happens in createGroupChallenge : ', error),
           );
       })
       .catch(error =>
-        console.log('Error happens in createGroupChallenge: ', error),
+        console.log('Error happens in createNewGroupAndChallenge: ', error),
       );
   };
 

@@ -137,7 +137,6 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
-    console.log('challengeInput:  ********  ', challengeInput);
     API.graphql(
       graphqlOperation(customMutations.createNewChallenge, {
         inputChallenge: challengeInput,
