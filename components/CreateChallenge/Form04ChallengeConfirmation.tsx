@@ -28,6 +28,7 @@ import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
+import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
 
 function Form04ChallengeConfirmation({navigation, route}, props) {
   // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
@@ -166,11 +167,24 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     API.graphql(
       graphqlOperation(mutations.createChallenge, {input: challengeInput}),
     )
-    .then(res => {
-      state.setUserHasActiveChallenge(true);
-      state.setUserActiveChallengesList([...state.userActiveChallengesList, challengeInput]);
-    })
-    .catch(error => console.log('Error happens in createChallenge: ', error));
+      .then(res => {
+        state.setUserHasActiveChallenge(true);
+        state.setUserActiveChallengesList([
+          ...state.userActiveChallengesList,
+          challengeInput,
+        ]);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
+      })
+      .catch(error => console.log('Error happens in createChallenge: ', error));
   };
 
   return (

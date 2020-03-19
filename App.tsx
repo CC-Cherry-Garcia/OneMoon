@@ -28,6 +28,7 @@ import Search from './components/Search/Index';
 import ChallengeStatus from './components/ChallengeStatus/Index';
 import HomeUserActiveChallenge from './components/Home/HomeUserActiveChallenge';
 import ChallengeTop from './components/CreateChallenge/Form00CreateTop';
+import LocalPushNotificationSetting from './components/LocalPushNotificationSetting';
 
 Amplify.configure(awsconfig);
 
@@ -103,6 +104,19 @@ const App: () => React$Node = () => {
           stateA.setUserInactiveChallengesList(inactiveChallenges);
           // stateA.setUserCurrentChallenge(payload[0]);
           stateA.setUserHasActiveChallenge(true);
+          LocalPushNotificationSetting.register(
+            9,
+            0,
+            0,
+            'You have a daily goal to complete',
+            21,
+            0,
+            0,
+            'Did you complete your goal for today?',
+          );
+        }
+        if (state.userActiveChallengesList.length == 0) {
+          LocalPushNotificationSetting.unregister();
         }
       })
       .catch(error => {
@@ -281,7 +295,7 @@ const App: () => React$Node = () => {
               }}
             /> */}
             <Tab.Screen
-              name="Settings"
+              name="Profile"
               component={Settings}
               initialParams={{userName: state.user.username}}
               options={{
