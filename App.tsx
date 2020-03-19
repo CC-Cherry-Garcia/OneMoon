@@ -81,7 +81,7 @@ const App: () => React$Node = () => {
 
     setTimeout(() => {
       stateA.setIsSplashLoading(false);
-    }, 2000);
+    }, 1300);
   }, []);
 
   useEffect(() => {
@@ -130,6 +130,15 @@ const App: () => React$Node = () => {
         console.log(error);
       });
   }, [state.user]);
+
+  function isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   useEffect(() => {
     if (isEmpty(stateA.userCurrentChallenge)) {
@@ -216,9 +225,7 @@ const App: () => React$Node = () => {
   return (
     <>
       {state.loading && <Splash />}
-      {state.user && state.user.signInUserSession && stateA.isSplashLoading && (
-        <Splash />
-      )}
+      {state.user && stateA.isSplashLoading && <Splash />}
       {state.user && state.user.signInUserSession && !stateA.isSplashLoading && (
         <NavigationContainer>
           <Tab.Navigator
@@ -240,44 +247,21 @@ const App: () => React$Node = () => {
                   ),
                 }}
               />
-            )) ||
-              (stateA.userHasActiveChallenge && (
-                <Tab.Screen
-                  name="Home"
-                  component={Home}
-                  initialParams={{
-                    userName: state.user.username,
-                    screen: 'HomeUserActiveChallenge',
-                  }}
-                  options={{
-                    tabBarIcon: () => (
-                      <Icon
-                        name="ios-trophy"
-                        color={Colors.primary}
-                        size={24}
-                      />
-                    ),
-                  }}
-                />
-              )) || (
-                <Tab.Screen
-                  name="Home"
-                  component={CreateChallenge} // this is an Active user w/o an Active Challenge view
-                  initialParams={{
-                    userName: state.user.username,
-                    screen: 'ChallengeTopFirstTime',
-                  }}
-                  options={{
-                    tabBarIcon: () => (
-                      <Icon
-                        name="ios-trophy"
-                        color={Colors.primary}
-                        size={24}
-                      />
-                    ),
-                  }}
-                />
-              )}
+            )) || (
+              <Tab.Screen
+                name="Home"
+                component={Home}
+                initialParams={{
+                  userName: state.user.username,
+                  screen: 'HomeUserActiveChallenge',
+                }}
+                options={{
+                  tabBarIcon: () => (
+                    <Icon name="ios-trophy" color={Colors.primary} size={24} />
+                  ),
+                }}
+              />
+            )}
             <Tab.Screen
               name="Create"
               component={CreateChallenge}
