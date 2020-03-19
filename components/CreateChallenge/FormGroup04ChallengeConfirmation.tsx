@@ -108,7 +108,7 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   const groupChallengeInput = {
     userId: route.params.userName,
     startDate: state.challengeInput.startDate,
-    isValid: true ? 'true' : 'false',
+    isValid: true,
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,

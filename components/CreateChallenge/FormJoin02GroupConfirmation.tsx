@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {StyleSheet, TextInput, Alert} from 'react-native';
 import {
   Container,
@@ -31,30 +31,39 @@ import useStore from '../../state/state';
 
 function FormJoin02GroupConfirmation({navigation, route}, props) {
   const state = useStore(state => state);
-
+  const [test, setTest] = useState(0);
   const taskQuantityArray = [];
   // const taskName = state.challengeInput.taskName;
 
   //To get group challenge data
   useEffect(() => {
+    setTest(2000);
     console.log('state.challengeInput.groupId :', state.challengeInput.groupId);
-    API.graphql(
-      graphqlOperation(queries.listGroupChallenges, {
-        groupId: state.challengeInput.groupId,
-      }),
-    )
-      .then(res => {
-        console.log(
-          'res listGroupChallenges userEffect:',
-          res.data.listGroupChallenges.items,
-        );
-        state.setGroupChallengeInformation(
-          res.data.listGroupChallenges.items[0],
-        );
-      })
-      .catch(error =>
-        console.log('Error happens in getGroupChallenge: ', error),
+    const getGroupChallenge = async () => {
+      setTest(11000);
+      const result = await API.graphql(
+        graphqlOperation(queries.listGroupChallenges, {
+          limit: 1000, //Just in case
+          filter: {groupId: {eq: state.challengeInput.groupId}},
+        }),
       );
+
+      setTest(10);
+      console.log(
+        'result listGroupChallenges userEffect:',
+        result.data.listGroupChallenges.items[0],
+      );
+
+      state.setGroupChallengeInformation(
+        result.data.listGroupChallenges.items[0],
+      );
+
+      console.log(
+        'state.groupChallengeInformation :',
+        state.groupChallengeInformation,
+      );
+    };
+    getGroupChallenge();
   }, []);
 
   // if (state.challengeType === 'quantity') {
@@ -76,7 +85,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   const groupChallengeInput = {
     groupId: state.challengeInput.groupId,
     userId: route.params.userName,
-    isValid: true ? 'true' : 'false',
+    isValid: true,
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,
@@ -139,26 +148,32 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         ),
       );
   };
-  // if (!state.groupChallengeInformation) {
-  //   Alert.alert(
-  //     'Error',
-  //     'There is no group challenge id',
-  //     [
-  //       {
-  //         text: 'OK',
-  //         onPress: () => navigation.navigate('JoinGroupChallenge'),
-  //       },
-  //     ],
-  //     {cancelable: false},
-  //   );
-  // }
-  return (
-    <Container style={styles.Container}>
-      <Content padder>
-        <Text style={styles.textDefault}>
-          {/* Title: {state.groupChallengeInformation.challenge.title} */}
-        </Text>
-        {/*   <H1>Double check your Challenge</H1>
+  console.log(
+    'state.groupChallengeInformation :',
+    state.groupChallengeInformation,
+  );
+  if (state.groupChallengeInformation === {}) {
+    Alert.alert(
+      'Error',
+      'There is no group challenge id',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('JoinGroupChallenge'),
+        },
+      ],
+      {cancelable: false},
+    );
+    return <></>;
+  } else {
+    return (
+      <Container style={styles.Container}>
+        <Content padder>
+          <Text style={styles.textDefault}>
+            data={test}
+            {/* Title: {state.groupChallengeInformation.challenge.title} */}
+          </Text>
+          {/*   <H1>Double check your Challenge</H1>
         <Text style={styles.textDefault}>
           See your 30-day challenge below. Use the back button if you need to
           make any changes.
@@ -259,18 +274,19 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
             <Text>{taskQuantityArray[29]}</Text>
           </ListItem>
         </List> */}
-        <Button
-          title="Start Group Challenge"
-          onPress={() => {
-            insertChallenge();
-            // props.changeView();
-            navigation.navigate('Home', {screen: 'HomeUser'});
-          }}>
-          <Text>Save Challenge</Text>
-        </Button>
-      </Content>
-    </Container>
-  );
+          <Button
+            title="Start Group Challenge"
+            onPress={() => {
+              insertChallenge();
+              // props.changeView();
+              navigation.navigate('Home', {screen: 'HomeUser'});
+            }}>
+            <Text>Save Challenge</Text>
+          </Button>
+        </Content>
+      </Container>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

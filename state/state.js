@@ -15,7 +15,7 @@ const [useStore] = create(set => ({
   currentChallengeTodayTaskIsDone: false,
   setCurrentChallengeTodayTaskIsDone: value =>
     set({currentChallengeTodayTaskIsDone: value}),
-  groupChallengeInformation: false,
+  groupChallengeInformation: {},
   setGroupChallengeInformation: value =>
     set({groupChallengeInformation: value}),
   currentChallengeCompletedDatesList: [],
