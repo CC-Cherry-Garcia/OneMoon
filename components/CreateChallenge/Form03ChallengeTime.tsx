@@ -57,6 +57,7 @@ function Form03ChallengeTime({navigation, route}, props) {
           }
           placeholder=" 10 minutes"
           style={styles.textInputDefault}
+          keyboardType="numeric"
         />
         <Button
           title="Review your Challege"
