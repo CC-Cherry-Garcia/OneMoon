@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, TextInput, Alert} from 'react-native';
 import {
   Container,
@@ -19,6 +20,19 @@ import useStore from '../../state/state';
 
 function Form01TitleAndDate({navigation}, props) {
   const state = useStore(state => state);
+
+  // create placeholder for datepicker to show today on load
+  const datePlaceholder = `${new Date().getFullYear()}/${new Date().getMonth() +
+    1}/${new Date().getDate()}`;
+
+  // we have to pass today into state on load for datepicker to display correctly
+  const today = new Date();
+  useEffect(() => {
+    state.setChallengeInput({
+      ...state.challengeInput,
+      startDate: today.toString(),
+    });
+  }, []);
 
   return (
     <Container style={styles.Container}>
@@ -48,13 +62,14 @@ function Form01TitleAndDate({navigation}, props) {
               minimumDate={new Date(2020, 0, 1)}
               maximumDate={new Date(2030, 12, 31)}
               locale={'en'}
+              mode="datetime"
               timeZoneOffsetInMinutes={undefined}
               modalTransparent={false}
               animationType={'fade'}
               androidMode={'default'}
-              placeHolderText="Select date"
+              placeHolderText={datePlaceholder}
               textStyle={{color: '#0a3d62'}}
-              placeHolderTextStyle={{color: '#d3d3d3'}}
+              // placeHolderTextStyle={{color: '#d3d3d3'}}
               onDateChange={value =>
                 state.setChallengeInput({
                   ...state.challengeInput,
