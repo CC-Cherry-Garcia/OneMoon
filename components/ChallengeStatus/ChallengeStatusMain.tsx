@@ -258,9 +258,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                         state.currentChallengeCompletedDatesList 
                           && state.currentChallengeCompletedDatesList[index] 
                           && state.currentChallengeCompletedDatesList[index][cellIndex] === true
-                          ? tableData[index][cellIndex] == state.currentChallengeTodayDate
-                            ? {backgroundColor: '#5cb85c', flex: 1, borderWidth: 3, borderBottomColor: '#007aff'}
-                            : {backgroundColor: '#5cb85c', flex: 1}
+                          ? {backgroundColor: '#5cb85c', flex: 1}
                           : Number(tableData[index][cellIndex]) < state.currentChallengeTodayDate
                             ? {backgroundColor: '#ffa39e', flex: 1}
                             : tableData[index][cellIndex] == state.currentChallengeTodayDate
@@ -269,7 +267,9 @@ function ChallengeStatusMain({navigation, route}, props) {
                       }
                       textStyle={
                         tableData[index][cellIndex] == state.currentChallengeTodayDate
-                        ? styles.todayText
+                        ? state.currentChallengeTodayTaskIsDone
+                          ? styles.todayCompletedText
+                          : styles.todayText
                         : styles.text
                       }
                     />
@@ -296,6 +296,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
   text: {margin: 6, textAlign: 'center'},
   todayText: {margin: 6, textAlign: 'center', fontWeight: '700', fontStyle: 'italic', color: '#007aff', fontSize: 18},
+  todayCompletedText: {margin: 6, textAlign: 'center', fontWeight: '700', fontStyle: 'italic', color: '#ffffff', fontSize: 20},
   row: {flex: 6, flexDirection: 'row', backgroundColor: '#FFF1C1', height: 40},
 });
 
