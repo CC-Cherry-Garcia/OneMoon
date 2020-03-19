@@ -199,8 +199,25 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           Title: {state.challengeInput.title}
         </Text>
         <Text style={styles.textDefault}>
-          Start Date: {state.challengeInput.startDate}
+          Start Date:{' '}
+          {`${new Date(
+            state.challengeInput.startDate,
+          ).getFullYear()}/${new Date(
+            state.challengeInput.startDate,
+          ).getMonth() + 1}/${new Date(
+            state.challengeInput.startDate,
+          ).getDate()}`}
         </Text>
+        <Button
+          style={styles.btn}
+          title="Start Challenge"
+          onPress={() => {
+            insertChallenge();
+            // props.changeView();
+            navigation.navigate('Home', {screen: 'HomeUser'});
+          }}>
+          <Text>Save Challenge</Text>
+        </Button>
         <List>
           <ListItem>
             <Text>{taskQuantityArray[0]}</Text>
@@ -294,6 +311,7 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           </ListItem>
         </List>
         <Button
+          style={styles.btn}
           title="Start Challenge"
           onPress={() => {
             insertChallenge();
