@@ -187,10 +187,6 @@ function ChallengeStatusMain({navigation, route}, props) {
                 <Text> Complete! </Text>
               </Button>
           }
-          {/* <Button style={{flex:1, marginTop: 30}} block primary onPress={() => completeTask()}>
-            <Text> Complete! </Text>
-          </Button> */}
-
           <Card style={{marginTop: 30}}>
             <CardItem>
               <H2>{state.userCurrentChallenge.title}</H2>
