@@ -24,14 +24,15 @@
     "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-push-notification": "^3.1.9",
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.3.0",
+    "react-native-table-component": "^1.2.1",
     "react-native-vector-icons": "^6.6.0",
-    "zustand": "^2.2.3",
-    "react-native-table-component": "^1.2.1"
+    "zustand": "^2.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
