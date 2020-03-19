@@ -6,6 +6,7 @@ import {
   Container,
   Content,
   H1,
+  H2,
   H3,
   Text,
   Button,
@@ -13,6 +14,10 @@ import {
   CardItem,
   Left,
   Right,
+  List,
+  ListItem,
+  Icon,
+  Fab,
 } from 'native-base';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
@@ -33,8 +38,7 @@ function ChallengeStatusMain({navigation, route}, props) {
   async function onShare() {
     try {
       const result = await Share.share({
-        message:
-          `I just completed Day ${state.currentChallengeTodayDate} of my ${state.userCurrentChallenge.title}. #30DayChallenge`,
+        message: `I just completed Day ${state.currentChallengeTodayDate} of my ${state.userCurrentChallenge.title}. #30DayChallenge`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -76,20 +80,22 @@ function ChallengeStatusMain({navigation, route}, props) {
       .catch(error => console.error(error));
   }
 
-
   async function notYet() {
     const input = {
       id: state.userCurrentChallenge.id,
-      [`task${state.currentChallengeTodayDate}IsDone`]: false
+      [`task${state.currentChallengeTodayDate}IsDone`]: false,
     };
 
     API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
-    .then(res => {
-      state.setCurrentChallengeTodayTaskIsDone(false);
-      state.setUserCurrentChallenge({...state.userCurrentChallenge, [`task${state.currentChallengeTodayDate}IsDone`]: false});
-      Alert.alert("Not complete yet");
-    })
-    .catch(error => console.error(error));
+      .then(res => {
+        state.setCurrentChallengeTodayTaskIsDone(false);
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: false,
+        });
+        Alert.alert('Not complete yet');
+      })
+      .catch(error => console.error(error));
   }
 
   useEffect(() => {
@@ -170,52 +176,40 @@ function ChallengeStatusMain({navigation, route}, props) {
     <>
       <Container style={styles.container}>
         <Content>
-          <H1>{state.userCurrentChallenge.title}</H1>
+          <H1>
+            Day {state.currentChallengeTodayDate} :{' '}
+            {state.currentChallengeTodayTaskName}
+          </H1>
+          {state.currentChallengeTodayTaskIsDone ? (
+            <Button
+              style={{flex: 1, marginTop: 30, width: 100}}
+              danger
+              bordered
+              onPress={() => notYet()}>
+              <Text> Not yet </Text>
+            </Button>
+          ) : (
+            <Button
+              style={{flex: 1, marginTop: 30}}
+              block
+              primary
+              onPress={() => completeTask()}>
+              <Text> Complete! </Text>
+            </Button>
+          )}
           <Card style={{marginTop: 30}}>
             <CardItem>
-              <H3>
-                Start Date:{' '}
-                {`${new Date(
-                  state.userCurrentChallenge.startDate,
-                ).getFullYear()}/${new Date(
-                  state.userCurrentChallenge.startDate,
-                ).getMonth() + 1}/${new Date(
-                  state.userCurrentChallenge.startDate,
-                ).getDate()}`}
-              </H3>
+              <H2>{state.userCurrentChallenge.title}</H2>
             </CardItem>
-          </Card>
-          <Card>
-            <CardItem header>
-              <H3>
-                Day {state.currentChallengeTodayDate} :{' '}
-                {state.currentChallengeTodayTaskName}
-              </H3>
-            </CardItem>
+            <View
+              style={{
+                borderBottomColor: 'lightgrey',
+                borderBottomWidth: 0.7,
+              }}
+            />
             <CardItem>
-              <Left>
-                <Button success onPress={() => completeTask()}>
-                  <Text> Complete </Text>
-                </Button>
-              </Left>
-              <Right>
-                <Button bordered dark onPress={() => notYet()}>
-                  <Text> Not yet </Text>
-                </Button>
-              </Right>
-            </CardItem>
-          </Card>
-          <Card style={{marginTop: 15}}>
-            <CardItem>
-              <Button success onPress={() => onShare()}>
-                <Text> Share your Progress! </Text>
-              </Button>
-            </CardItem>
-          </Card>
-          <Card style={{marginTop: 15}}>
-            <CardItem style={{flex: 1}}>
               <H3 style={{alignSelf: 'center'}}>
-                {state.currentChallengeProgress} %
+                Progress {state.currentChallengeProgress} %
               </H3>
             </CardItem>
             <CardItem>
@@ -244,7 +238,21 @@ function ChallengeStatusMain({navigation, route}, props) {
             </CardItem>
           </Card>
           <Card style={{marginBottom: 20, padding: 10}}>
-            <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
+            <CardItem>
+              <Text style={styles.startDate}>
+                Start Date:{' '}
+                {`${new Date(
+                  state.userCurrentChallenge.startDate,
+                ).getFullYear()}/${new Date(
+                  state.userCurrentChallenge.startDate,
+                ).getMonth() + 1}/${new Date(
+                  state.userCurrentChallenge.startDate,
+                ).getDate()}`}
+              </Text>
+            </CardItem>
+            <Table
+              borderStyle={{flex: 1, borderColor: 'transparent'}}
+              style={{borderColor: 'red'}}>
               {tableData.map((rowData, index) => (
                 <TableWrapper key={index} style={styles.row}>
                   {rowData.map((cellData, cellIndex) => (
@@ -252,30 +260,56 @@ function ChallengeStatusMain({navigation, route}, props) {
                       key={cellIndex}
                       data={cellData}
                       style={
-
-                        state.currentChallengeCompletedDatesList 
-                          && state.currentChallengeCompletedDatesList[index] 
-                          && state.currentChallengeCompletedDatesList[index][cellIndex] === true
-                          ? {backgroundColor: '#5cb85c', width: 59}
-                          : Number(tableData[index][cellIndex]) < state.currentChallengeTodayDate
-                            ? {backgroundColor: 'lightgrey', width: 59}
-                            : {backgroundColor: 'transparent', width: 59}
+                        state.currentChallengeCompletedDatesList &&
+                        state.currentChallengeCompletedDatesList[index] &&
+                        state.currentChallengeCompletedDatesList[index][
+                          cellIndex
+                        ] === true
+                          ? {backgroundColor: '#5cb85c', flex: 1}
+                          : Number(tableData[index][cellIndex]) <
+                            state.currentChallengeTodayDate
+                          ? {backgroundColor: '#ffa39e', flex: 1}
+                          : tableData[index][cellIndex] ==
+                            state.currentChallengeTodayDate
+                          ? {
+                              backgroundColor: 'transparent',
+                              flex: 1,
+                              borderWidth: 3,
+                              borderBottomColor: '#007aff',
+                            }
+                          : {backgroundColor: 'transparent', flex: 1}
                       }
-                      textStyle={styles.text}
+                      textStyle={
+                        tableData[index][cellIndex] ==
+                        state.currentChallengeTodayDate
+                          ? state.currentChallengeTodayTaskIsDone
+                            ? styles.todayCompletedText
+                            : styles.todayText
+                          : styles.text
+                      }
                     />
                   ))}
                 </TableWrapper>
               ))}
             </Table>
           </Card>
-
           <Button
-            block
+            iconRight
+            light
+            style={{
+              width: 130,
+              marginTop: 20,
+              marginBottom: 20,
+            }}
             onPress={() =>
               navigation.navigate('Home', {screen: 'ChallengeStatusSchedule'})
             }>
-            <Text>VIEW SCHEDULE</Text>
+            <Text>Schedule</Text>
+            <Icon name="arrow-forward" />
           </Button>
+          <Fab style={{backgroundColor: '#5067FF'}} position="bottomRight">
+            <Icon name="share" onPress={() => onShare()} />
+          </Fab>
         </Content>
       </Container>
     </>
@@ -285,7 +319,24 @@ function ChallengeStatusMain({navigation, route}, props) {
 const styles = StyleSheet.create({
   container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
   text: {margin: 6, textAlign: 'center'},
-  row: {flexDirection: 'row', backgroundColor: '#FFF1C1', height: 40},
+  todayText: {
+    margin: 6,
+    textAlign: 'center',
+    fontWeight: '700',
+    fontStyle: 'italic',
+    color: '#007aff',
+    fontSize: 18,
+  },
+  todayCompletedText: {
+    margin: 6,
+    textAlign: 'center',
+    fontWeight: '700',
+    fontStyle: 'italic',
+    color: '#ffffff',
+    fontSize: 20,
+  },
+  row: {flex: 6, flexDirection: 'row', backgroundColor: '#FFF1C1', height: 40},
+  startDate: {color: 'gray'},
 });
 
 export default ChallengeStatusMain;
