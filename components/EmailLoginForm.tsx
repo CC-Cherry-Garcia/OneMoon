@@ -282,7 +282,10 @@ function SignIn(props) {
 function ConfirmSignUp(props) {
   return (
     <View style={styles.container}>
-      <Text>Please enter the confirmation code bellow:</Text>
+      <Text>
+        Please check your email for a verification email and enter the
+        confirmation code below:
+      </Text>
       <TextInput
         name="confirmationCode"
         placeholder="Confirmation Code"
