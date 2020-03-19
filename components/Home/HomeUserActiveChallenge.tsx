@@ -53,7 +53,7 @@ function HomeUserActiveChallenge({navigation, route}) {
           style={styles.btn}
           onPress={() => {
             navigation.navigate('Create', {
-              screen: 'ChallengeTop',
+              screen: 'ChallengeTitle',
             });
           }}>
           <Text>Create a New Challenge</Text>

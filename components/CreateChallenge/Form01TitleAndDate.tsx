@@ -25,8 +25,8 @@ function Form01TitleAndDate({navigation}, props) {
       <Content>
         <H1>Create your Challenge!</H1>
         <Text>
-          Design your first 30-day challenge in less than 5 minutes and get
-          started achieving your goals.
+          Design your 30-day challenge in less than 5 minutes and get started
+          achieving your goals.
         </Text>
         <Form>
           <Label style={styles.Title}>Challenge Title</Label>
