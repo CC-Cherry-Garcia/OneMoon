@@ -13,6 +13,8 @@ import {
   CardItem,
   Left,
   Right,
+  List,
+  ListItem,
 } from 'native-base';
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import * as queries from '../../src/graphql/queries';
@@ -138,7 +140,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </Button>
               </Left>
               <Right>
-                <Button bordered dark onPress={() => notYet()}>
+                <Button bordered danger onPress={() => notYet()}>
                   <Text> Not yet </Text>
                 </Button>
               </Right>
@@ -181,7 +183,7 @@ function ChallengeStatusMain({navigation, route}, props) {
             </CardItem>
           </Card>
           <Card style={{marginBottom: 20, padding: 10}}>
-            <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
+            <Table borderStyle={{flex: 1, borderColor: 'transparent'}} style={{borderColor: 'red'}}>
               {tableData.map((rowData, index) => (
                 <TableWrapper key={index} style={styles.row}>
                   {rowData.map((cellData, cellIndex) => (
@@ -192,12 +194,20 @@ function ChallengeStatusMain({navigation, route}, props) {
                         state.currentChallengeCompletedDatesList 
                           && state.currentChallengeCompletedDatesList[index] 
                           && state.currentChallengeCompletedDatesList[index][cellIndex] === true
-                          ? {backgroundColor: '#5cb85c', width: 59}
+                          ? tableData[index][cellIndex] == state.currentChallengeTodayDate
+                            ? {backgroundColor: '#5cb85c', flex: 1, borderWidth: 3, borderBottomColor: '#007aff'}
+                            : {backgroundColor: '#5cb85c', flex: 1}
                           : Number(tableData[index][cellIndex]) < state.currentChallengeTodayDate
-                            ? {backgroundColor: 'lightgrey', width: 59}
-                            : {backgroundColor: 'transparent', width: 59}
+                            ? {backgroundColor: '#ffa39e', flex: 1}
+                            : tableData[index][cellIndex] == state.currentChallengeTodayDate
+                              ? {backgroundColor: 'transparent', flex: 1, borderWidth: 3, borderBottomColor: '#007aff'}
+                              : {backgroundColor: 'transparent', flex: 1}
                       }
-                      textStyle={styles.text}
+                      textStyle={
+                        tableData[index][cellIndex] == state.currentChallengeTodayDate
+                        ? styles.todayText
+                        : styles.text
+                      }
                     />
                   ))}
                 </TableWrapper>
@@ -217,7 +227,8 @@ function ChallengeStatusMain({navigation, route}, props) {
 const styles = StyleSheet.create({
   container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
   text: {margin: 6, textAlign: 'center'},
-  row: {flexDirection: 'row', backgroundColor: '#FFF1C1', height: 40},
+  todayText: {margin: 6, textAlign: 'center', fontWeight: '700', fontStyle: 'italic', color: '#007aff', fontSize: 18},
+  row: {flex: 6, flexDirection: 'row', backgroundColor: '#FFF1C1', height: 40},
 });
 
 export default ChallengeStatusMain;
