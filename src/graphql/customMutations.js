@@ -11,6 +11,7 @@ export const createUserChallengeWithGroupAndChallenge = /* GraphQL */ `
     $inputUserChallenge: CreateUserChallengeInput!
   ) {
     createUserChallenge(input: $inputUserChallenge) {
+      id
       challengeId
       challenge {
         id
