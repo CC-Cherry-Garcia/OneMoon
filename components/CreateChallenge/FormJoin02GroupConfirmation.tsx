@@ -73,7 +73,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   // }
 
   function getDateOfChallenge(ordinalDate) {
-    const standardDate = new Date(state.challengeInput.startDate);
+    const standardDate = new Date(state.groupChallengeInformation.startDate);
     const startDate = standardDate.getDate();
     standardDate.setDate(startDate + ordinalDate - 1);
     return standardDate.toString();
@@ -83,6 +83,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     groupId: state.challengeInput.groupId,
     userId: route.params.userName,
     isValid: true,
+    startDate: state.groupChallengeInformation.startDate,
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,
@@ -148,8 +149,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     console.log('groupChallengeInput:  ********  ', {
       ...groupChallengeInput,
       challengeId: state.groupChallengeInformation.challengeId,
-      startDate: state.groupChallengeInformation.startDate,
-      task30Date: state.groupChallengeInformation.task30Date,
     });
 
     API.graphql(
@@ -158,7 +157,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
           ...groupChallengeInput,
           challengeId: state.groupChallengeInformation.challengeId,
           startDate: state.groupChallengeInformation.startDate,
-          task30Date: state.groupChallengeInformation.task30Date,
         },
       }),
     )
