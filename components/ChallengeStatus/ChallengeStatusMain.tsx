@@ -125,6 +125,20 @@ function ChallengeStatusMain({navigation, route}, props) {
         });
       })
       .catch(err => console.log(err));
+
+    // fetch group users
+    API.graphql(
+      graphqlOperation(queries.listGroupChallenges, {
+        groupId: state.userCurrentChallenge.groupId,
+      }),
+    )
+      .then(res => {
+        const payload = res.data.listGroupChallenges.items.map(
+          item => item.userId,
+        );
+        state.setGroupUsers(payload);
+      })
+      .catch(err => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -183,7 +197,6 @@ function ChallengeStatusMain({navigation, route}, props) {
     }
     state.setCurrentChallengeProgress(Math.ceil((completedCount / 30) * 100));
   }, [state.currentChallengeCompletedDatesList]);
-
   return (
     <>
       <Container style={styles.container}>
@@ -195,47 +208,60 @@ function ChallengeStatusMain({navigation, route}, props) {
           </Card>
 
           <Card style={styles.viewCard}>
-            <CardItem header>
-              <Text style={{textAlign: 'center'}}>Today's Task:</Text>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <H2>{state.currentChallengeTodayTaskName}</H2>
-                <Button 
-                  full 
-                  onPress={() => completeTask()}
-                  style={{marginTop: 10, marginBottom: 10, backgroundColor: Colors.primary}}>
-                  <Text> Did you Complete Today's Task? </Text>
-                </Button>
-                <Button 
-                  full 
-                  onPress={() => onShare()}
-                  style={{marginTop: 10, marginBottom: 10, backgroundColor: Colors.primary}}
-                  >
-                  <Text> Share your Success! </Text>
-                </Button>
-              </Body>
-            </CardItem>
+            <Body>
+              <CardItem header>
+                <Text>Today's Task:</Text>
+              </CardItem>
+            </Body>
+            <Body>
+              <H2 style={{color: Colors.primary, fontSize: 28, lineHeight: 32}}>
+                {state.currentChallengeTodayTaskName}
+              </H2>
+
+              <Button
+                full
+                onPress={() => completeTask()}
+                style={{
+                  marginTop: 10,
+                  marginBottom: 10,
+                  backgroundColor: Colors.primary,
+                }}>
+                <Text> Did you Complete Today's Task? </Text>
+              </Button>
+              <Button
+                full
+                onPress={() => onShare()}
+                style={{
+                  marginTop: 10,
+                  marginBottom: 10,
+                  backgroundColor: Colors.primary,
+                }}>
+                <Text> Share your Success! </Text>
+              </Button>
+            </Body>
           </Card>
 
           <Card style={styles.viewCard}>
-            <CardItem header>
-              <Text>
-                Started on{' '}
-                {`${new Date(
-                  state.userCurrentChallenge.startDate,
-                ).getFullYear()}/${new Date(
-                  state.userCurrentChallenge.startDate,
-                ).getMonth() + 1}/${new Date(
-                  state.userCurrentChallenge.startDate,
-                ).getDate()}`}
-              </Text>
-            </CardItem>
-            <CardItem style={{flex: 1}}>
-              <H3 style={{alignSelf: 'center'}}>
-                {state.currentChallengeProgress} % Complete
-              </H3>
-            </CardItem>
+            <Body>
+              <CardItem header>
+                <Text>
+                  Started on{' '}
+                  {`${new Date(
+                    state.userCurrentChallenge.startDate,
+                  ).getFullYear()}/${new Date(
+                    state.userCurrentChallenge.startDate,
+                  ).getMonth() + 1}/${new Date(
+                    state.userCurrentChallenge.startDate,
+                  ).getDate()}`}
+                </Text>
+              </CardItem>
+              <CardItem>
+                <H2
+                  style={{color: Colors.primary, fontSize: 28, lineHeight: 32}}>
+                  {state.currentChallengeProgress} % Complete
+                </H2>
+              </CardItem>
+            </Body>
             <CardItem>
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <View
@@ -292,7 +318,12 @@ function ChallengeStatusMain({navigation, route}, props) {
             </CardItem>
           </Card>
 
-          <Button style={{marginTop: 10, marginBottom: 10, backgroundColor: Colors.primary}}
+          <Button
+            style={{
+              marginTop: 10,
+              marginBottom: 10,
+              backgroundColor: Colors.primary,
+            }}
             block
             onPress={() =>
               navigation.navigate('Home', {screen: 'ChallengeStatusSchedule'})
@@ -300,64 +331,53 @@ function ChallengeStatusMain({navigation, route}, props) {
             <Text>View Challenge</Text>
           </Button>
 
-          {/* <Card>
-            <CardItem>
-              <Left>
-                <Button success onPress={() => completeTask()}>
-                  <Text> Complete </Text>
-                </Button>
-              </Left>
-              <Right>
-                <Button bordered dark onPress={() => notYet()}>
-                  <Text> Not yet </Text>
-                </Button>
-              </Right>
-            </CardItem>
-          </Card> */}
-          <Card style={styles.viewCard}>
-            <CardItem header>
-              <Text>
-              Group Progress
-            </Text>
-            </CardItem>
-            <CardItem>
-              <Text>
-              50% Complete
-            </Text>
-            </CardItem>
-          <CardItem>
-              <View style={styles.tableContainer}>
-                <Table borderStyle={{borderWidth: 1}}>
-                  <Row
-                    data={['', 'today', 'total']}
-                    flexArr={[1, 1, 1]}
-                    style={styles.tableHead}
-                    textStyle={styles.tableText}
-                  />
-                  <TableWrapper style={styles.tableWrapper}>
-                    <Col
-                      data={['Miki', 'Kota', 'Nel', 'Travis']}
-                      style={styles.tableTitle}
-                      heightArr={[28, 28]}
+          {state.userCurrentChallenge.groupId !== undefined && (
+            <Card style={styles.viewCard}>
+              <Body>
+                <CardItem header>
+                  <Text>Group Progress</Text>
+                </CardItem>
+              </Body>
+
+              <CardItem>
+                <Text>50% Complete</Text>
+              </CardItem>
+              <CardItem>
+                <View style={styles.tableContainer}>
+                  <Table borderStyle={{borderWidth: 1}}>
+                    <Row
+                      data={['', 'today', 'total']}
+                      flexArr={[1, 1, 1]}
+                      style={styles.tableHead}
                       textStyle={styles.tableText}
                     />
-                    <Rows
-                      data={[
-                        ['👍🏻', '20%'],
-                        ['👍🏻', '20%'],
-                        ['❓', '5%'],
-                        ['👍🏻', '100%'],
-                      ]}
-                      flexArr={[ 1, 1]}
-                      style={styles.tableRow}
-                      textStyle={styles.tableText}
-                    />
-                  </TableWrapper>
-                </Table>
-              </View>
-            </CardItem>
+                    <TableWrapper style={styles.tableWrapper}>
+                      <Col
+                        data={state.groupUsers}
+                        style={styles.tableTitle}
+                        heightArr={[28, 28]}
+                        textStyle={styles.tableText}
+                      />
+                      <Rows
+                        data={[
+                          ['👍🏻', '20%'],
+                          ['👍🏻', '20%'],
+                          ['❓', '5%'],
+                          ['👍🏻', '100%'],
+                          ['👍🏻', '100%'],
+                          ['👍🏻', '100%'],
+                        ]}
+                        flexArr={[1, 1]}
+                        style={styles.tableRow}
+                        textStyle={styles.tableText}
+                      />
+                    </TableWrapper>
+                  </Table>
+                </View>
+              </CardItem>
             </Card>
-          </Content>
+          )}
+        </Content>
       </Container>
     </>
   );
