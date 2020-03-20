@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, Share, Alert} from 'react-native';
-import {Table, TableWrapper, Cell} from 'react-native-table-component';
 import {
   Container,
   Content,
   H1,
+  H2,
   H3,
   Text,
   Button,
@@ -13,12 +13,23 @@ import {
   CardItem,
   Left,
   Right,
+  Body,
 } from 'native-base';
+import {
+  Table,
+  TableWrapper,
+  Row,
+  Rows,
+  Col,
+  Cols,
+  Cell,
+} from 'react-native-table-component';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
+import Colors from '../../variablesColors';
 
 function ChallengeStatusMain({navigation, route}, props) {
   const state = useStore(state => state);
@@ -177,11 +188,40 @@ function ChallengeStatusMain({navigation, route}, props) {
     <>
       <Container style={styles.container}>
         <Content>
-          <H1>{state.userCurrentChallenge.challenge.title}</H1>
-          <Card style={{marginTop: 30}}>
+          <Card style={styles.viewPad}>
+            <Body>
+              <H1>{state.userCurrentChallenge.challenge.title}</H1>
+            </Body>
+          </Card>
+
+          <Card style={styles.viewCard}>
+            <CardItem header>
+              <Text style={{textAlign: 'center'}}>Today's Task:</Text>
+            </CardItem>
             <CardItem>
-              <H3>
-                Start Date:{' '}
+              <Body>
+                <H2>{state.currentChallengeTodayTaskName}</H2>
+                <Button 
+                  full 
+                  onPress={() => completeTask()}
+                  style={{marginTop: 10, marginBottom: 10, backgroundColor: Colors.primary}}>
+                  <Text> Did you Complete Today's Task? </Text>
+                </Button>
+                <Button 
+                  full 
+                  onPress={() => onShare()}
+                  style={{marginTop: 10, marginBottom: 10, backgroundColor: Colors.primary}}
+                  >
+                  <Text> Share your Success! </Text>
+                </Button>
+              </Body>
+            </CardItem>
+          </Card>
+
+          <Card style={styles.viewCard}>
+            <CardItem header>
+              <Text>
+                Started on{' '}
                 {`${new Date(
                   state.userCurrentChallenge.startDate,
                 ).getFullYear()}/${new Date(
@@ -189,40 +229,11 @@ function ChallengeStatusMain({navigation, route}, props) {
                 ).getMonth() + 1}/${new Date(
                   state.userCurrentChallenge.startDate,
                 ).getDate()}`}
-              </H3>
+              </Text>
             </CardItem>
-          </Card>
-          <Card>
-            <CardItem header>
-              <H3>
-                Day {state.currentChallengeTodayDate} :{' '}
-                {state.currentChallengeTodayTaskName}
-              </H3>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button success onPress={() => completeTask()}>
-                  <Text> Complete </Text>
-                </Button>
-              </Left>
-              <Right>
-                <Button bordered dark onPress={() => notYet()}>
-                  <Text> Not yet </Text>
-                </Button>
-              </Right>
-            </CardItem>
-          </Card>
-          <Card style={{marginTop: 15}}>
-            <CardItem>
-              <Button success onPress={() => onShare()}>
-                <Text> Share your Progress! </Text>
-              </Button>
-            </CardItem>
-          </Card>
-          <Card style={{marginTop: 15}}>
             <CardItem style={{flex: 1}}>
               <H3 style={{alignSelf: 'center'}}>
-                {state.currentChallengeProgress} %
+                {state.currentChallengeProgress} % Complete
               </H3>
             </CardItem>
             <CardItem>
@@ -249,52 +260,135 @@ function ChallengeStatusMain({navigation, route}, props) {
                 />
               </View>
             </CardItem>
-          </Card>
-          <Card style={{marginBottom: 20, padding: 10}}>
-            <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
-              {tableData.map((rowData, index) => (
-                <TableWrapper key={index} style={styles.row}>
-                  {rowData.map((cellData, cellIndex) => (
-                    <Cell
-                      key={cellIndex}
-                      data={cellData}
-                      style={
-                        state.currentChallengeCompletedDatesList &&
-                        state.currentChallengeCompletedDatesList[index] &&
-                        state.currentChallengeCompletedDatesList[index][
-                          cellIndex
-                        ] === true
-                          ? {backgroundColor: '#5cb85c', width: 59}
-                          : Number(tableData[index][cellIndex]) <
-                            state.currentChallengeTodayDate
-                          ? {backgroundColor: 'lightgrey', width: 59}
-                          : {backgroundColor: 'transparent', width: 59}
-                      }
-                      textStyle={styles.text}
-                    />
-                  ))}
-                </TableWrapper>
-              ))}
-            </Table>
+            <CardItem style={{padding: 10}}>
+              <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
+                {tableData.map((rowData, index) => (
+                  <TableWrapper key={index} style={styles.row}>
+                    {rowData.map((cellData, cellIndex) => (
+                      <Cell
+                        key={cellIndex}
+                        data={cellData}
+                        style={
+                          state.currentChallengeCompletedDatesList &&
+                          state.currentChallengeCompletedDatesList[index] &&
+                          state.currentChallengeCompletedDatesList[index][
+                            cellIndex
+                          ] === true
+                            ? {backgroundColor: '#5cb85c', width: 59}
+                            : Number(tableData[index][cellIndex]) <
+                              state.currentChallengeTodayDate
+                            ? {backgroundColor: 'lightgrey', width: 59}
+                            : {backgroundColor: 'transparent', width: 59}
+                        }
+                        textStyle={styles.text}
+                      />
+                    ))}
+                  </TableWrapper>
+                ))}
+              </Table>
+            </CardItem>
+            <CardItem>
+              <Text>✅: Completed ⬜: Incomplete</Text>
+            </CardItem>
           </Card>
 
-          <Button
+          <Button style={{marginTop: 10, marginBottom: 10, backgroundColor: Colors.primary}}
             block
             onPress={() =>
               navigation.navigate('Home', {screen: 'ChallengeStatusSchedule'})
             }>
-            <Text>VIEW SCHEDULE</Text>
+            <Text>View Challenge</Text>
           </Button>
-        </Content>
+
+          {/* <Card>
+            <CardItem>
+              <Left>
+                <Button success onPress={() => completeTask()}>
+                  <Text> Complete </Text>
+                </Button>
+              </Left>
+              <Right>
+                <Button bordered dark onPress={() => notYet()}>
+                  <Text> Not yet </Text>
+                </Button>
+              </Right>
+            </CardItem>
+          </Card> */}
+          <Card style={styles.viewCard}>
+            <CardItem header>
+              <Text>
+              Group Progress
+            </Text>
+            </CardItem>
+            <CardItem>
+              <Text>
+              50% Complete
+            </Text>
+            </CardItem>
+          <CardItem>
+              <View style={styles.tableContainer}>
+                <Table borderStyle={{borderWidth: 1}}>
+                  <Row
+                    data={['', 'today', 'total']}
+                    flexArr={[1, 1, 1]}
+                    style={styles.tableHead}
+                    textStyle={styles.tableText}
+                  />
+                  <TableWrapper style={styles.tableWrapper}>
+                    <Col
+                      data={['Miki', 'Kota', 'Nel', 'Travis']}
+                      style={styles.tableTitle}
+                      heightArr={[28, 28]}
+                      textStyle={styles.tableText}
+                    />
+                    <Rows
+                      data={[
+                        ['👍🏻', '20%'],
+                        ['👍🏻', '20%'],
+                        ['❓', '5%'],
+                        ['👍🏻', '100%'],
+                      ]}
+                      flexArr={[ 1, 1]}
+                      style={styles.tableRow}
+                      textStyle={styles.tableText}
+                    />
+                  </TableWrapper>
+                </Table>
+              </View>
+            </CardItem>
+            </Card>
+          </Content>
       </Container>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
+  container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#F2F2F2'},
   text: {margin: 6, textAlign: 'center'},
   row: {flexDirection: 'row', backgroundColor: '#FFF1C1', height: 40},
+  viewCard: {
+    backgroundColor: '#fff',
+    borderColor: Colors.primary,
+    borderWidth: 1,
+  },
+  viewPad: {
+    backgroundColor: '#fff',
+    padding: 10,
+    borderColor: Colors.primary,
+    borderWidth: 1,
+  },
+  tableContainer: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 30,
+    backgroundColor: '#fff',
+  },
+  tableHead: {height: 40, backgroundColor: '#f1f8ff'},
+  tableWrapper: {flexDirection: 'row'},
+  tableTitle: {flex: 1, backgroundColor: '#f6f8fa'},
+  tableRow: {height: 28},
+  tableText: {textAlign: 'center'},
 });
 
 export default ChallengeStatusMain;
