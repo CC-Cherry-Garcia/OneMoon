@@ -54,7 +54,7 @@ function ChallengeStatusMain({navigation, route}, props) {
     console.log('userCurrentChallenge:', state.userCurrentChallenge);
     console.log('currentChallengeTodayDate:', state.currentChallengeTodayDate);
     const input = {
-      userId: state.userCurrentChallenge.userId,
+      id: state.userCurrentChallenge.id,
       [`task${state.currentChallengeTodayDate}IsDone`]: true,
     };
     console.log('input :', input);
@@ -86,8 +86,11 @@ function ChallengeStatusMain({navigation, route}, props) {
       id: state.userCurrentChallenge.id,
       [`task${state.currentChallengeTodayDate}IsDone`]: false,
     };
-
-    API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
+    let mutation = mutations.updateUserChallenge;
+    if (state.userCurrentChallenge.groupId) {
+      mutation = mutations.updateGroupChallenge;
+    }
+    API.graphql(graphqlOperation(mutation, {input}))
       .then(res => {
         state.setCurrentChallengeTodayTaskIsDone(false);
         state.setUserCurrentChallenge({
