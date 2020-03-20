@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {StyleSheet, TextInput, Alert} from 'react-native';
 import {
   Container,
@@ -26,84 +26,64 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
-import * as customMutations from '../../src/graphql/customMutations';
+import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
 
-function Form04ChallengeConfirmation({navigation, route}, props) {
-  // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
-
+function FormJoin02GroupConfirmation({navigation, route}, props) {
   const state = useStore(state => state);
-
+  const [test, setTest] = useState(0);
   const taskQuantityArray = [];
-  const taskName = state.challengeInput.taskName;
+  // const taskName = state.challengeInput.taskName;
 
-  let unitsVariable = ''; // used for Repeating Task
-  if (state.challengeType === 'quantity') {
-    unitsVariable = 'times';
-  } else if (state.challengeType === 'time') {
-    unitsVariable = 'minutes';
-  }
-
-  const increaseRate = Number(state.challengeInput.increase);
-  let i = 1;
-  while (i <= 30) {
-    if (state.challengeType === 'quantity' || state.challengeType === 'time') {
-      taskQuantityArray.push(
-        `Day ${i} Task: ${taskName} ${increaseRate * i} ${unitsVariable}`,
+  //To get group challenge data
+  useEffect(() => {
+    setTest(2000);
+    console.log('state.challengeInput.groupId :', state.challengeInput.groupId);
+    const getGroupChallenge = async () => {
+      setTest(11000);
+      const result = await API.graphql(
+        graphqlOperation(queries.listGroupChallenges, {
+          limit: 1000, //Just in case
+          filter: {groupId: {eq: state.challengeInput.groupId}},
+        }),
       );
-    } else {
-      taskQuantityArray.push(`Day ${i} Task: ${taskName}`);
-    }
-    ++i;
-  }
+
+      console.log(
+        'result listGroupChallenges userEffect:',
+        result.data.listGroupChallenges.items[0],
+      );
+
+      state.setGroupChallengeInformation(
+        result.data.listGroupChallenges.items[0],
+      );
+
+      console.log(
+        'state.groupChallengeInformation :',
+        state.groupChallengeInformation,
+      );
+    };
+    getGroupChallenge();
+  }, []);
+
+  // if (state.challengeType === 'quantity') {
+  //   unitsVariable = 'times';
+  // } else if (state.challengeType === 'time') {
+  //   unitsVariable = 'minutes';
+  // }
 
   function getDateOfChallenge(ordinalDate) {
-    const standardDate = new Date(state.challengeInput.startDate);
+    const standardDate = new Date(state.groupChallengeInformation.startDate);
     const startDate = standardDate.getDate();
     standardDate.setDate(startDate + ordinalDate - 1);
     return standardDate.toString();
   }
 
-  const challengeInput = {
-    title: state.challengeInput.title,
-    createdByUserId: route.params.userName,
-    increase: increaseRate,
-    task1Name: taskQuantityArray[0].split(':')[1].trim(),
-    task2Name: taskQuantityArray[1].split(':')[1].trim(),
-    task3Name: taskQuantityArray[2].split(':')[1].trim(),
-    task4Name: taskQuantityArray[3].split(':')[1].trim(),
-    task5Name: taskQuantityArray[4].split(':')[1].trim(),
-    task6Name: taskQuantityArray[5].split(':')[1].trim(),
-    task7Name: taskQuantityArray[6].split(':')[1].trim(),
-    task8Name: taskQuantityArray[7].split(':')[1].trim(),
-    task9Name: taskQuantityArray[8].split(':')[1].trim(),
-    task10Name: taskQuantityArray[9].split(':')[1].trim(),
-    task11Name: taskQuantityArray[10].split(':')[1].trim(),
-    task12Name: taskQuantityArray[11].split(':')[1].trim(),
-    task13Name: taskQuantityArray[12].split(':')[1].trim(),
-    task14Name: taskQuantityArray[13].split(':')[1].trim(),
-    task15Name: taskQuantityArray[14].split(':')[1].trim(),
-    task16Name: taskQuantityArray[15].split(':')[1].trim(),
-    task17Name: taskQuantityArray[16].split(':')[1].trim(),
-    task18Name: taskQuantityArray[17].split(':')[1].trim(),
-    task19Name: taskQuantityArray[18].split(':')[1].trim(),
-    task20Name: taskQuantityArray[19].split(':')[1].trim(),
-    task21Name: taskQuantityArray[20].split(':')[1].trim(),
-    task22Name: taskQuantityArray[21].split(':')[1].trim(),
-    task23Name: taskQuantityArray[22].split(':')[1].trim(),
-    task24Name: taskQuantityArray[23].split(':')[1].trim(),
-    task25Name: taskQuantityArray[24].split(':')[1].trim(),
-    task26Name: taskQuantityArray[25].split(':')[1].trim(),
-    task27Name: taskQuantityArray[26].split(':')[1].trim(),
-    task28Name: taskQuantityArray[27].split(':')[1].trim(),
-    task29Name: taskQuantityArray[28].split(':')[1].trim(),
-    task30Name: taskQuantityArray[29].split(':')[1].trim(),
-  };
-  const userChallengeInput = {
+  const groupChallengeInput = {
+    groupId: state.challengeInput.groupId,
     userId: route.params.userName,
-    startDate: state.challengeInput.startDate,
     isValid: true,
+    startDate: state.groupChallengeInformation.startDate,
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,
@@ -166,88 +146,77 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
+    console.log('groupChallengeInput:  ********  ', {
+      ...groupChallengeInput,
+      challengeId: state.groupChallengeInformation.challengeId,
+    });
+
     API.graphql(
-      graphqlOperation(customMutations.createNewChallenge, {
-        inputChallenge: challengeInput,
+      graphqlOperation(mutations.createGroupChallenge, {
+        input: {
+          ...groupChallengeInput,
+          challengeId: state.groupChallengeInformation.challengeId,
+          startDate: state.groupChallengeInformation.startDate,
+        },
       }),
     )
       .then(res => {
-        console.log('userChallengeInput:  ********  ', {
-          ...userChallengeInput,
-          challengeId: res.data.createChallenge.id,
-        });
-        console.log('res:  ********  ', res);
-        API.graphql(
-          graphqlOperation(
-            customMutations.createUserChallengeWithGroupAndChallenge,
-            {
-              inputUserChallenge: {
-                ...userChallengeInput,
-                challengeId: res.data.createChallenge.id,
-              },
-            },
-          ),
-        )
-          .then(res => {
-            console.log('res createUserChallengeWithChallenge:', res);
-            state.setUserHasActiveChallenge(true);
-            state.setUserActiveChallengesList([
-              ...state.userActiveChallengesList,
-              res.data.createUserChallenge,
-            ]);
-            LocalPushNotificationSetting.register(
-              9,
-              0,
-              0,
-              'You have a daily goal to complete',
-              21,
-              0,
-              0,
-              'Did you complete your goal for today?',
-            );
-          })
-          .catch(error =>
-            console.log(
-              'Error happens in createUserChallengeWithChallenge: ',
-              error,
-            ),
-          );
+        console.log('res createGroupChallenge:', res);
+        state.setUserHasActiveChallenge(true);
+        state.setUserActiveChallengesList([
+          ...state.userActiveChallengesList,
+          res.data.createGroupChallenge,
+        ]);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
       })
-      .catch(error => console.log('Error happens in createChallenge: ', error));
+      .catch(error =>
+        console.log('Error happens in createGroupChallenge: ', error),
+      );
   };
-
-  return (
-    <Container style={styles.Container}>
-      <Content padder>
-        <H1>Double check your Challenge</H1>
+  console.log(
+    'state.groupChallengeInformation :',
+    state.groupChallengeInformation,
+  );
+  if (state.groupChallengeInformation === {}) {
+    Alert.alert(
+      'Error',
+      'There is no group challenge id',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('JoinGroupChallenge'),
+        },
+      ],
+      {cancelable: false},
+    );
+    return <></>;
+  } else {
+    return (
+      <Container style={styles.Container}>
+        <Content padder>
+          <Text style={styles.textDefault}>
+            data={test}
+            {/* Title: {state.groupChallengeInformation.challenge.title} */}
+          </Text>
+          {/*   <H1>Double check your Challenge</H1>
         <Text style={styles.textDefault}>
           See your 30-day challenge below. Use the back button if you need to
           make any changes.
         </Text>
+        
         <Text style={styles.textDefault}>
-          Title: {state.challengeInput.title}
+          Start Date: {state.groupChallengeInformation.startDate}
         </Text>
-        <Text style={styles.textDefault}>
-          Start Date:{' '}
-          {`${new Date(
-            state.challengeInput.startDate,
-          ).getFullYear()}/${new Date(
-            state.challengeInput.startDate,
-          ).getMonth() + 1}/${new Date(
-            state.challengeInput.startDate,
-          ).getDate()}`}
-        </Text>
-        <Button
-          style={styles.btn}
-          title="Start Challenge"
-          onPress={() => {
-            insertChallenge();
-            // props.changeView();
-            navigation.navigate('Home', {screen: 'HomeUser'});
-          }}>
-          <Text>Save Challenge</Text>
-        </Button>
-        <List>
+        {/* <List>
           <ListItem>
             <Text>{taskQuantityArray[0]}</Text>
           </ListItem>
@@ -338,20 +307,20 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           <ListItem>
             <Text>{taskQuantityArray[29]}</Text>
           </ListItem>
-        </List>
-        <Button
-          style={styles.btn}
-          title="Start Challenge"
-          onPress={() => {
-            insertChallenge();
-            // props.changeView();
-            navigation.navigate('Home', {screen: 'HomeUser'});
-          }}>
-          <Text>Save Challenge</Text>
-        </Button>
-      </Content>
-    </Container>
-  );
+        </List> */}
+          <Button
+            title="Start Group Challenge"
+            onPress={() => {
+              insertChallenge();
+              // props.changeView();
+              navigation.navigate('Home', {screen: 'HomeUser'});
+            }}>
+            <Text>Save Challenge</Text>
+          </Button>
+        </Content>
+      </Container>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -374,4 +343,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form04ChallengeConfirmation;
+export default FormJoin02GroupConfirmation;

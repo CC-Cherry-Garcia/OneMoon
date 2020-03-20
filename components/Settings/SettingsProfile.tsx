@@ -52,7 +52,7 @@ function SettingsMain({navigation, route}) {
                   screen: 'ChallengeStatusMain',
                 });
               }}>
-              {item.title}
+              {item.challenge.title}
             </Text>
           </ListItem>
         ))}

@@ -38,7 +38,7 @@ function HomeUserActiveChallenge({navigation, route}) {
                     screen: 'ChallengeStatusMain',
                   });
                 }}>
-                {item.title}
+                {item.challenge.title}
                 {'\n'}
                 <Text style={styles.startDate}>
                   Started: {new Date(item.startDate).getFullYear()}/
