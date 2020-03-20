@@ -137,6 +137,35 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
     task28IsDone: false,
     task29IsDone: false,
     task30IsDone: false,
+    task1Date: getDateOfChallenge(1),
+    task2Date: getDateOfChallenge(2),
+    task3Date: getDateOfChallenge(3),
+    task4Date: getDateOfChallenge(4),
+    task5Date: getDateOfChallenge(5),
+    task6Date: getDateOfChallenge(6),
+    task7Date: getDateOfChallenge(7),
+    task8Date: getDateOfChallenge(8),
+    task9Date: getDateOfChallenge(9),
+    task10Date: getDateOfChallenge(10),
+    task11Date: getDateOfChallenge(11),
+    task12Date: getDateOfChallenge(12),
+    task13Date: getDateOfChallenge(13),
+    task14Date: getDateOfChallenge(14),
+    task15Date: getDateOfChallenge(15),
+    task16Date: getDateOfChallenge(16),
+    task17Date: getDateOfChallenge(17),
+    task18Date: getDateOfChallenge(18),
+    task19Date: getDateOfChallenge(19),
+    task20Date: getDateOfChallenge(20),
+    task21Date: getDateOfChallenge(21),
+    task22Date: getDateOfChallenge(22),
+    task23Date: getDateOfChallenge(23),
+    task24Date: getDateOfChallenge(24),
+    task25Date: getDateOfChallenge(25),
+    task26Date: getDateOfChallenge(26),
+    task27Date: getDateOfChallenge(27),
+    task28Date: getDateOfChallenge(28),
+    task29Date: getDateOfChallenge(29),
     task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
@@ -155,6 +184,10 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
           'resultIds.data.createChallenge.id :',
           resultIds.data.createChallenge.id,
         );
+        state.setChallengeInput({
+          ...state.challengeInput,
+          groupId: resultIds.data.createGroup.id,
+        });
         console.log('groupChallengeInput:  ********  ', {
           ...groupChallengeInput,
           challengeId: resultIds.data.createChallenge.id,
@@ -201,11 +234,14 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
       <Content padder>
         <H1>Double check your Challenge</H1>
         <Text style={styles.textDefault}>
-          See your 30-day challenge below. Use the back button if you need to
-          make any changes.
+          See your 30-day group challenge below. Use the back button if you need
+          to make any changes.
         </Text>
         <Text style={styles.textDefault}>
           Title: {state.challengeInput.title}
+        </Text>
+        <Text style={styles.textDefault}>
+          Challenge Group name: {state.challengeInput.groupName}
         </Text>
         <Text style={styles.textDefault}>
           Start Date: {state.challengeInput.startDate}
@@ -306,10 +342,9 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
           title="Start Group Challenge"
           onPress={() => {
             insertChallenge();
-            // props.changeView();
-            navigation.navigate('Home', {screen: 'HomeUser'});
+            navigation.navigate('GroupChallengeSharingInformation');
           }}>
-          <Text>Save Challenge</Text>
+          <Text>Save Group Challenge</Text>
         </Button>
       </Content>
     </Container>

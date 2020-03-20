@@ -16,6 +16,7 @@ import FormGroup03ChallengeQuantity from './FormGroup03ChallengeQuantity';
 import FormGroup03ChallengeTime from './FormGroup03ChallengeTime';
 import FormGroup03ChallengeRepeat from './FormGroup03ChallengeRepeat';
 import FormGroup04ChallengeConfirmation from './FormGroup04ChallengeConfirmation';
+import FormGroup05SharingInformation from './FormGroup05SharingInformation';
 import FormJoin01Group from './FormJoin01Group';
 import FormJoin02GroupConfirmation from './FormJoin02GroupConfirmation';
 
@@ -197,6 +198,20 @@ function CreateChallenge({navigation, route}) {
         initialParams={{userName: route.params.userName}}
         options={{
           title: 'Group Challenge Confirmation',
+          // headerRight: () => (
+          //   <Button
+          //     onPress={() => navigation.navigate('ChallengeTitle')}
+          //     title="Title"
+          //   />
+          // ),
+        }}
+      />
+      <Stack.Screen
+        name="GroupChallengeSharingInformation"
+        component={FormGroup05SharingInformation}
+        initialParams={{userName: route.params.userName}}
+        options={{
+          title: 'Group Challenge Sharing Information',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}

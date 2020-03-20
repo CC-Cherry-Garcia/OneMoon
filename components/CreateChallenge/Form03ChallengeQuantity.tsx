@@ -56,6 +56,7 @@ function Form03ChallengeQuantity({navigation, route}, props) {
           }
           placeholder=" 5"
           style={styles.textDefault}
+          keyboardType="numeric"
         />
         <Button
           title="Review your Challege"

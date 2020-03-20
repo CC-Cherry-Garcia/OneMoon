@@ -72,12 +72,13 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   //   unitsVariable = 'minutes';
   // }
 
-  // function getDateOfChallenge(ordinalDate) {
-  //   const standardDate = new Date(state.challengeInput.startDate);
-  //   const startDate = standardDate.getDate();
-  //   standardDate.setDate(startDate + ordinalDate - 1);
-  //   return standardDate.toString();
-  // }
+  function getDateOfChallenge(ordinalDate) {
+    const standardDate = new Date(state.challengeInput.startDate);
+    const startDate = standardDate.getDate();
+    standardDate.setDate(startDate + ordinalDate - 1);
+    return standardDate.toString();
+  }
+
   const groupChallengeInput = {
     groupId: state.challengeInput.groupId,
     userId: route.params.userName,
@@ -112,6 +113,36 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     task28IsDone: false,
     task29IsDone: false,
     task30IsDone: false,
+    task1Date: getDateOfChallenge(1),
+    task2Date: getDateOfChallenge(2),
+    task3Date: getDateOfChallenge(3),
+    task4Date: getDateOfChallenge(4),
+    task5Date: getDateOfChallenge(5),
+    task6Date: getDateOfChallenge(6),
+    task7Date: getDateOfChallenge(7),
+    task8Date: getDateOfChallenge(8),
+    task9Date: getDateOfChallenge(9),
+    task10Date: getDateOfChallenge(10),
+    task11Date: getDateOfChallenge(11),
+    task12Date: getDateOfChallenge(12),
+    task13Date: getDateOfChallenge(13),
+    task14Date: getDateOfChallenge(14),
+    task15Date: getDateOfChallenge(15),
+    task16Date: getDateOfChallenge(16),
+    task17Date: getDateOfChallenge(17),
+    task18Date: getDateOfChallenge(18),
+    task19Date: getDateOfChallenge(19),
+    task20Date: getDateOfChallenge(20),
+    task21Date: getDateOfChallenge(21),
+    task22Date: getDateOfChallenge(22),
+    task23Date: getDateOfChallenge(23),
+    task24Date: getDateOfChallenge(24),
+    task25Date: getDateOfChallenge(25),
+    task26Date: getDateOfChallenge(26),
+    task27Date: getDateOfChallenge(27),
+    task28Date: getDateOfChallenge(28),
+    task29Date: getDateOfChallenge(29),
+    task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
     console.log('groupChallengeInput:  ********  ', {
