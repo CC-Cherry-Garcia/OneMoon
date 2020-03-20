@@ -37,7 +37,7 @@ function HomeUserActiveChallenge({navigation, route}) {
           <ListItem
             style={{
               marginRight: 20,
-              backgroundColor: 'rgba(24, 61, 95, 0.06)',
+              backgroundColor: 'rgba(24, 61, 95, 0.03)',
             }}
             key={item.id}
             onPress={() => {
@@ -63,7 +63,7 @@ function HomeUserActiveChallenge({navigation, route}) {
                 </Text>
               </Text>
             </Body>
-            {console.log(state.currentChallengeTodayDate)}
+            {console.log(item)}
             <Right>
               <Icon active style={styles.checkmark} name="checkmark-circle" />
               {/* <Icon active name="arrow-forward" /> */}
