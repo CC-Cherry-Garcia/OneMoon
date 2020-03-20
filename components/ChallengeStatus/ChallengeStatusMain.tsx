@@ -173,6 +173,8 @@ function ChallengeStatusMain({navigation, route}, props) {
     state.setCurrentChallengeProgress(Math.ceil((completedCount / 30) * 100));
   }, [state.currentChallengeCompletedDatesList]);
 
+  console.log('*********####### state.userCurrentChallenge in ChallengeStatusMain: ', state.userCurrentChallenge);
+
   return (
     <>
       <Container style={styles.container}>

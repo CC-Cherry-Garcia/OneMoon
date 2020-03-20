@@ -20,7 +20,7 @@ import useStore from '../../state/state';
 
 function HomeUserActiveChallenge({navigation, route}) {
   const state = useStore(state => state);
-
+  console.log('state: ***** ', state);
   return (
     <Container>
       <Content>
@@ -63,7 +63,7 @@ function HomeUserActiveChallenge({navigation, route}) {
                 </Text>
               </Text>
             </Body>
-            {console.log(item)}
+            {/* {console.log(item)} */}
             <Right>
               <Icon active style={styles.checkmark} name="checkmark-circle" />
               {/* <Icon active name="arrow-forward" /> */}

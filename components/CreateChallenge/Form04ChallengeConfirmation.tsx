@@ -171,49 +171,49 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
         inputChallenge: challengeInput,
       }),
     )
-      .then(res => {
-        console.log('userChallengeInput:  ********  ', {
-          ...userChallengeInput,
-          challengeId: res.data.createChallenge.id,
-        });
-        console.log('res:  ********  ', res);
-        API.graphql(
-          graphqlOperation(
-            customMutations.createUserChallengeWithGroupAndChallenge,
-            {
-              inputUserChallenge: {
-                ...userChallengeInput,
-                challengeId: res.data.createChallenge.id,
-              },
+    .then(res => {
+      console.log('userChallengeInput:  ********  ', {
+        ...userChallengeInput,
+        challengeId: res.data.createChallenge.id,
+      });
+      console.log('res:  ********  ', res);
+      API.graphql(
+        graphqlOperation(
+          customMutations.createUserChallengeWithGroupAndChallenge,
+          {
+            inputUserChallenge: {
+              ...userChallengeInput,
+              challengeId: res.data.createChallenge.id,
             },
-          ),
-        )
-          .then(res => {
-            console.log('res createUserChallengeWithChallenge:', res);
-            state.setUserHasActiveChallenge(true);
-            state.setUserActiveChallengesList([
-              ...state.userActiveChallengesList,
-              res.data.createUserChallenge,
-            ]);
-            LocalPushNotificationSetting.register(
-              9,
-              0,
-              0,
-              'You have a daily goal to complete',
-              21,
-              0,
-              0,
-              'Did you complete your goal for today?',
-            );
-          })
-          .catch(error =>
-            console.log(
-              'Error happens in createUserChallengeWithChallenge: ',
-              error,
-            ),
-          );
+          },
+        ),
+      )
+      .then(res => {
+        console.log('res createUserChallengeWithChallenge:', res);
+        state.setUserHasActiveChallenge(true);
+        state.setUserActiveChallengesList([
+          ...state.userActiveChallengesList,
+          res.data.createUserChallenge,
+        ]);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
       })
-      .catch(error => console.log('Error happens in createChallenge: ', error));
+      .catch(error =>
+        console.log(
+          'Error happens in createUserChallengeWithChallenge: ',
+          error,
+        ),
+      );
+    })
+    .catch(error => console.log('Error happens in createChallenge: ', error));
   };
 
   return (
