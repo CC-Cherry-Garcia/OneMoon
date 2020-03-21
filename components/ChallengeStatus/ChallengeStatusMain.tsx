@@ -63,22 +63,22 @@ function ChallengeStatusMain({navigation, route}, props) {
       mutation = mutations.updateGroupChallenge;
     }
     API.graphql(graphqlOperation(mutation, {input}))
-      .then(res => {
-        state.setCurrentChallengeTodayTaskIsDone(true);
-        state.setUserCurrentChallenge({
-          ...state.userCurrentChallenge,
-          [`task${state.currentChallengeTodayDate}IsDone`]: true,
-        });
-        Alert.alert('Great Job!!!');
-        LocalPushNotificationSetting.completeTodayTask();
-        if (
-          state.currentChallengeTodayDate === 30 &&
-          state.userActiveChallengesList.length === 1
-        ) {
-          LocalPushNotificationSetting.unregister();
-        }
-      })
-      .catch(error => console.error(error));
+    .then(res => {
+      state.setCurrentChallengeTodayTaskIsDone(true);
+      state.setUserCurrentChallenge({
+        ...state.userCurrentChallenge,
+        [`task${state.currentChallengeTodayDate}IsDone`]: true,
+      });
+      Alert.alert('Great Job!!!');
+      LocalPushNotificationSetting.completeTodayTask();
+      if (
+        state.currentChallengeTodayDate === 30 &&
+        state.userActiveChallengesList.length === 1
+      ) {
+        LocalPushNotificationSetting.unregister();
+      }
+    })
+    .catch(error => console.error(error));
   }
 
   async function notYet() {
@@ -91,15 +91,15 @@ function ChallengeStatusMain({navigation, route}, props) {
       mutation = mutations.updateGroupChallenge;
     }
     API.graphql(graphqlOperation(mutation, {input}))
-      .then(res => {
-        state.setCurrentChallengeTodayTaskIsDone(false);
-        state.setUserCurrentChallenge({
-          ...state.userCurrentChallenge,
-          [`task${state.currentChallengeTodayDate}IsDone`]: false,
-        });
-        Alert.alert('Not complete yet');
-      })
-      .catch(error => console.error(error));
+    .then(res => {
+      state.setCurrentChallengeTodayTaskIsDone(false);
+      state.setUserCurrentChallenge({
+        ...state.userCurrentChallenge,
+        [`task${state.currentChallengeTodayDate}IsDone`]: false,
+      });
+      Alert.alert('Not complete yet');
+    })
+    .catch(error => console.error(error));
   }
 
   useEffect(() => {
@@ -108,15 +108,15 @@ function ChallengeStatusMain({navigation, route}, props) {
         id: state.userCurrentChallenge.id,
       }),
     )
-      .then(res => {
-        const isDone =
-          res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`];
-        state.setUserCurrentChallenge({
-          ...state.userCurrentChallenge,
-          [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
-        });
-      })
-      .catch(err => console.log(err));
+    .then(res => {
+      const isDone =
+        res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`];
+      state.setUserCurrentChallenge({
+        ...state.userCurrentChallenge,
+        [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
+      });
+    })
+    .catch(err => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -175,8 +175,6 @@ function ChallengeStatusMain({navigation, route}, props) {
     }
     state.setCurrentChallengeProgress(Math.ceil((completedCount / 30) * 100));
   }, [state.currentChallengeCompletedDatesList]);
-
-  console.log('*********####### state.userCurrentChallenge in ChallengeStatusMain: ', state.userCurrentChallenge);
 
   return (
     <>
