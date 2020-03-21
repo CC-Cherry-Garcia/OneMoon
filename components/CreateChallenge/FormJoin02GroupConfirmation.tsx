@@ -154,6 +154,13 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         console.log('Error happens in createGroupChallenge: ', error),
       );
   };
+
+  const checkUserHasGroupChallenge = () => {
+    return state.userActiveChallengesList.find(x => {
+      console.log('x.groupId :', x.groupId);
+      return x.groupId && x.groupId === state.challengeInput.groupId;
+    });
+  };
   if (loading) {
     return (
       <Container>
@@ -163,6 +170,19 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         </Content>
       </Container>
     );
+  } else if (checkUserHasGroupChallenge()) {
+    Alert.alert(
+      'Error',
+      'You have already joined this group challenge',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('JoinGroupChallenge'),
+        },
+      ],
+      {cancelable: false},
+    );
+    return <></>;
   } else if (
     typeof state.groupChallengeInformation !== 'object' ||
     Object.keys(state.groupChallengeInformation).length === 0
