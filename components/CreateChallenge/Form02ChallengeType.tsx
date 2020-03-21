@@ -1,22 +1,14 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, TextInput, Alert} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import {
   Container,
-  Header,
   Content,
   H1,
-  H2,
-  H3,
   Text,
-  Form,
-  Item,
-  Input,
-  Label,
-  Button,
-  DatePicker,
   Card,
   CardItem,
   Body,
+  Icon,
 } from 'native-base';
 import useStore from '../../state/state';
 
@@ -26,14 +18,18 @@ function Form02ChallengeType({navigation}, props) {
   return (
     <Container style={styles.Container}>
       <Content padder>
-        <H1>Choose your Challenge Type</H1>
-        <Text>Intro text</Text>
+        <H1 style={styles.H1}>Choose your Challenge Type</H1>
         <Card>
           <CardItem
             header
             button
             onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
-            <Text>Quantity Challenge</Text>
+            <Icon
+              active
+              style={styles.QuantIcon}
+              name="arrow-round-forward-outline"
+            />
+            <Text style={{paddingLeft: 120}}>Quantity Challenge</Text>
           </CardItem>
           <CardItem
             button
@@ -51,7 +47,8 @@ function Form02ChallengeType({navigation}, props) {
             header
             button
             onPress={() => navigation.navigate('ChallengeTimeInfo')}>
-            <Text>Time Challenge</Text>
+            <Icon active style={styles.QuantIcon} name="md-time" />
+            <Text style={{paddingLeft: 120}}>Time Challenge</Text>
           </CardItem>
           <CardItem
             button
@@ -69,7 +66,7 @@ function Form02ChallengeType({navigation}, props) {
             header
             button
             onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
-            <Text>Same Daily Goal Challenge</Text>
+            <Text style={{paddingLeft: 120}}>Same Daily Goal Challenge</Text>
           </CardItem>
           <CardItem
             button
@@ -90,11 +87,23 @@ function Form02ChallengeType({navigation}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',
     marginTop: 20,
+  },
+  H1: {
+    marginBottom: 20,
+  },
+  QuantIcon: {
+    position: 'absolute',
+    color: 'rgba(24, 61, 95, 0.4)',
+    marginLeft: 10,
+    paddingTop: 20,
+    fontSize: 100,
+    width: 120,
+    height: 120,
+    // marginLeft: 200,
   },
 });
 

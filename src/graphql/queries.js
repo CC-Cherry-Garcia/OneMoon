@@ -266,6 +266,7 @@ export const listChallenges = /* GraphQL */ `
 export const getUserChallenge = /* GraphQL */ `
   query GetUserChallenge($id: ID!) {
     getUserChallenge(id: $id) {
+      id
       challengeId
       challenge {
         id
@@ -388,6 +389,7 @@ export const listUserChallenges = /* GraphQL */ `
   ) {
     listUserChallenges(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         challengeId
         challenge {
           id
@@ -500,6 +502,7 @@ export const listUserChallenges = /* GraphQL */ `
 export const getGroupChallenge = /* GraphQL */ `
   query GetGroupChallenge($id: ID!) {
     getGroupChallenge(id: $id) {
+      id
       challengeId
       challenge {
         id
@@ -630,6 +633,7 @@ export const listGroupChallenges = /* GraphQL */ `
   ) {
     listGroupChallenges(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         challengeId
         challenge {
           id

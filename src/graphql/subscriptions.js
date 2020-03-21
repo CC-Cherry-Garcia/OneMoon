@@ -379,6 +379,7 @@ export const onDeleteChallenge = /* GraphQL */ `
 export const onCreateUserChallenge = /* GraphQL */ `
   subscription OnCreateUserChallenge {
     onCreateUserChallenge {
+      id
       challengeId
       challenge {
         id
@@ -496,6 +497,7 @@ export const onCreateUserChallenge = /* GraphQL */ `
 export const onUpdateUserChallenge = /* GraphQL */ `
   subscription OnUpdateUserChallenge {
     onUpdateUserChallenge {
+      id
       challengeId
       challenge {
         id
@@ -613,6 +615,7 @@ export const onUpdateUserChallenge = /* GraphQL */ `
 export const onDeleteUserChallenge = /* GraphQL */ `
   subscription OnDeleteUserChallenge {
     onDeleteUserChallenge {
+      id
       challengeId
       challenge {
         id
@@ -730,6 +733,7 @@ export const onDeleteUserChallenge = /* GraphQL */ `
 export const onCreateGroupChallenge = /* GraphQL */ `
   subscription OnCreateGroupChallenge {
     onCreateGroupChallenge {
+      id
       challengeId
       challenge {
         id
@@ -855,6 +859,7 @@ export const onCreateGroupChallenge = /* GraphQL */ `
 export const onUpdateGroupChallenge = /* GraphQL */ `
   subscription OnUpdateGroupChallenge {
     onUpdateGroupChallenge {
+      id
       challengeId
       challenge {
         id
@@ -980,6 +985,7 @@ export const onUpdateGroupChallenge = /* GraphQL */ `
 export const onDeleteGroupChallenge = /* GraphQL */ `
   subscription OnDeleteGroupChallenge {
     onDeleteGroupChallenge {
+      id
       challengeId
       challenge {
         id

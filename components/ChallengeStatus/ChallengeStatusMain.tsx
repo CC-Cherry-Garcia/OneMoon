@@ -62,34 +62,31 @@ function ChallengeStatusMain({navigation, route}, props) {
   }
 
   async function completeTask() {
-    console.log('userCurrentChallenge:', state.userCurrentChallenge);
-    console.log('currentChallengeTodayDate:', state.currentChallengeTodayDate);
     const input = {
-      userId: state.userCurrentChallenge.userId,
+      id: state.userCurrentChallenge.id,
       [`task${state.currentChallengeTodayDate}IsDone`]: true,
     };
-    console.log('input :', input);
     let mutation = mutations.updateUserChallenge;
     if (state.userCurrentChallenge.groupId) {
       mutation = mutations.updateGroupChallenge;
     }
     API.graphql(graphqlOperation(mutation, {input}))
-      .then(res => {
-        state.setCurrentChallengeTodayTaskIsDone(true);
-        state.setUserCurrentChallenge({
-          ...state.userCurrentChallenge,
-          [`task${state.currentChallengeTodayDate}IsDone`]: true,
-        });
-        Alert.alert('Great Job!!!');
-        LocalPushNotificationSetting.completeTodayTask();
-        if (
-          state.currentChallengeTodayDate === 30 &&
-          state.userActiveChallengesList.length === 1
-        ) {
-          LocalPushNotificationSetting.unregister();
-        }
-      })
-      .catch(error => console.error(error));
+    .then(res => {
+      state.setCurrentChallengeTodayTaskIsDone(true);
+      state.setUserCurrentChallenge({
+        ...state.userCurrentChallenge,
+        [`task${state.currentChallengeTodayDate}IsDone`]: true,
+      });
+      Alert.alert('Great Job!!!');
+      LocalPushNotificationSetting.completeTodayTask();
+      if (
+        state.currentChallengeTodayDate === 30 &&
+        state.userActiveChallengesList.length === 1
+      ) {
+        LocalPushNotificationSetting.unregister();
+      }
+    })
+    .catch(error => console.error(error));
   }
 
   async function notYet() {
@@ -97,17 +94,20 @@ function ChallengeStatusMain({navigation, route}, props) {
       id: state.userCurrentChallenge.id,
       [`task${state.currentChallengeTodayDate}IsDone`]: false,
     };
-
-    API.graphql(graphqlOperation(mutations.updateChallenge, {input}))
-      .then(res => {
-        state.setCurrentChallengeTodayTaskIsDone(false);
-        state.setUserCurrentChallenge({
-          ...state.userCurrentChallenge,
-          [`task${state.currentChallengeTodayDate}IsDone`]: false,
-        });
-        Alert.alert('Not complete yet');
-      })
-      .catch(error => console.error(error));
+    let mutation = mutations.updateUserChallenge;
+    if (state.userCurrentChallenge.groupId) {
+      mutation = mutations.updateGroupChallenge;
+    }
+    API.graphql(graphqlOperation(mutation, {input}))
+    .then(res => {
+      state.setCurrentChallengeTodayTaskIsDone(false);
+      state.setUserCurrentChallenge({
+        ...state.userCurrentChallenge,
+        [`task${state.currentChallengeTodayDate}IsDone`]: false,
+      });
+      Alert.alert('Not complete yet');
+    })
+    .catch(error => console.error(error));
   }
 
   useEffect(() => {
@@ -116,29 +116,15 @@ function ChallengeStatusMain({navigation, route}, props) {
         id: state.userCurrentChallenge.id,
       }),
     )
-      .then(res => {
-        const isDone =
-          res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`];
-        state.setUserCurrentChallenge({
-          ...state.userCurrentChallenge,
-          [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
-        });
-      })
-      .catch(err => console.log(err));
-
-    // fetch group users
-    API.graphql(
-      graphqlOperation(queries.listGroupChallenges, {
-        groupId: state.userCurrentChallenge.groupId,
-      }),
-    )
-      .then(res => {
-        const payload = res.data.listGroupChallenges.items.map(
-          item => item.userId,
-        );
-        state.setGroupUsers(payload);
-      })
-      .catch(err => console.log(err));
+    .then(res => {
+      const isDone =
+        res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`];
+      state.setUserCurrentChallenge({
+        ...state.userCurrentChallenge,
+        [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
+      });
+    })
+    .catch(err => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -197,6 +183,7 @@ function ChallengeStatusMain({navigation, route}, props) {
     }
     state.setCurrentChallengeProgress(Math.ceil((completedCount / 30) * 100));
   }, [state.currentChallengeCompletedDatesList]);
+
   return (
     <>
       <Container style={styles.container}>
@@ -230,7 +217,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </Button>
               <Button
                 full
-                onPress={() => onShare()}
+                onPress={() => notYet()} // for developing
                 style={{
                   marginTop: 10,
                   marginBottom: 10,

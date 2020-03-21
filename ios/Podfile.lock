@@ -393,4 +393,10 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6122124b04ae4629217b505ba2c02fe9c34041b6
 
+<<<<<<< HEAD
 COCOAPODS: 1.8.4
+||||||| merged common ancestors
+COCOAPODS: 1.9.0
+=======
+COCOAPODS: 1.9.1
+>>>>>>> d9d00d9bf6b1c6ced8850a11a7ebe0d015c41981
