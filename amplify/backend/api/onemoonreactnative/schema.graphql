@@ -73,6 +73,7 @@ type UserChallenge
   @model
   @key(name: "byChallenge", fields: ["challengeId"])
   @key(name: "byUser", fields: ["userId"]) {
+  id: ID
   challengeId: String!
   challenge: Challenge @connection(fields: ["challengeId"])
   userId: String!
@@ -145,6 +146,7 @@ type GroupChallenge
   @model
   @key(name: "byChallenge", fields: ["challengeId"])
   @key(name: "byUser", fields: ["userId"]) {
+  id: ID
   challengeId: String!
   challenge: Challenge @connection(fields: ["challengeId"])
   userId: String!

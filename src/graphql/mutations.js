@@ -427,6 +427,7 @@ export const createUserChallenge = /* GraphQL */ `
     $condition: ModelUserChallengeConditionInput
   ) {
     createUserChallenge(input: $input, condition: $condition) {
+      id
       challengeId
       challenge {
         id
@@ -547,6 +548,7 @@ export const updateUserChallenge = /* GraphQL */ `
     $condition: ModelUserChallengeConditionInput
   ) {
     updateUserChallenge(input: $input, condition: $condition) {
+      id
       challengeId
       challenge {
         id
@@ -667,6 +669,7 @@ export const deleteUserChallenge = /* GraphQL */ `
     $condition: ModelUserChallengeConditionInput
   ) {
     deleteUserChallenge(input: $input, condition: $condition) {
+      id
       challengeId
       challenge {
         id
@@ -787,6 +790,7 @@ export const createGroupChallenge = /* GraphQL */ `
     $condition: ModelGroupChallengeConditionInput
   ) {
     createGroupChallenge(input: $input, condition: $condition) {
+      id
       challengeId
       challenge {
         id
@@ -915,6 +919,7 @@ export const updateGroupChallenge = /* GraphQL */ `
     $condition: ModelGroupChallengeConditionInput
   ) {
     updateGroupChallenge(input: $input, condition: $condition) {
+      id
       challengeId
       challenge {
         id
@@ -1043,6 +1048,7 @@ export const deleteGroupChallenge = /* GraphQL */ `
     $condition: ModelGroupChallengeConditionInput
   ) {
     deleteGroupChallenge(input: $input, condition: $condition) {
+      id
       challengeId
       challenge {
         id
