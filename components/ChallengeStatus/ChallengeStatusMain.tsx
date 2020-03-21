@@ -51,13 +51,10 @@ function ChallengeStatusMain({navigation, route}, props) {
   }
 
   async function completeTask() {
-    console.log('userCurrentChallenge:', state.userCurrentChallenge);
-    console.log('currentChallengeTodayDate:', state.currentChallengeTodayDate);
     const input = {
       id: state.userCurrentChallenge.id,
       [`task${state.currentChallengeTodayDate}IsDone`]: true,
     };
-    console.log('input :', input);
     let mutation = mutations.updateUserChallenge;
     if (state.userCurrentChallenge.groupId) {
       mutation = mutations.updateGroupChallenge;
