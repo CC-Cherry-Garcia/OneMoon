@@ -58,10 +58,10 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         result.data.listGroupChallenges.items[0],
       );
 
-      console.log(
-        'state.groupChallengeInformation :',
-        state.groupChallengeInformation,
-      );
+      // console.log(
+      //   'state.groupChallengeInformation :',
+      //   state.groupChallengeInformation,
+      // );
     };
     getGroupChallenge();
   }, []);

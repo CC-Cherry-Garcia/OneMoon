@@ -111,21 +111,29 @@ function ChallengeStatusMain({navigation, route}, props) {
   }
 
   useEffect(() => {
+    let query = queries.getUserChallenge;
+    if (state.userCurrentChallenge.groupId) {
+      query = queries.getGroupChallenge;
+    }
     API.graphql(
-      graphqlOperation(queries.getChallenge, {
+      graphqlOperation(query, {
         id: state.userCurrentChallenge.id,
       }),
     )
     .then(res => {
-      const isDone =
-        res.data.getChallenge[`task${state.currentChallengeTodayDate}IsDone`];
+      let isDone;
+      if (res.data.getUserChallenge) {
+        isDone = res.data.getUserChallenge[`task${state.currentChallengeTodayDate}IsDone`];
+      } else {
+        isDone = res.data.getGroupChallenge[`task${state.currentChallengeTodayDate}IsDone`];
+      }
       state.setUserCurrentChallenge({
         ...state.userCurrentChallenge,
         [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
       });
     })
     .catch(err => console.log(err));
-  }, []);
+  }, [state.currentChallengeTodayDate]);
 
   useEffect(() => {
     const completedDates = [
@@ -184,6 +192,55 @@ function ChallengeStatusMain({navigation, route}, props) {
     state.setCurrentChallengeProgress(Math.ceil((completedCount / 30) * 100));
   }, [state.currentChallengeCompletedDatesList]);
 
+  useEffect(() => {
+    if (!state.currentChallengeTodayDate) return;
+    if (!state.userCurrentChallenge.groupId) return;
+
+    API.graphql(
+      graphqlOperation(queries.listGroupChallenges, {
+        limit: 1000,
+        filter: {groupId: {eq: state.userCurrentChallenge.groupId}},
+      })
+    )
+    .then(res => {
+      const groupChallenges = res.data.listGroupChallenges.items;
+      const groupUsersInput = [];
+      for (const groupChallengeOfOneUser of groupChallenges) {
+        groupUsersInput.push(groupChallengeOfOneUser.userId);
+      }
+      state.setGroupUsers(groupUsersInput);
+      
+      const groupProgressDataInput = [];
+      let countOfTotalTasksDone = 0;
+      for (const groupChallengeOfOneUser of groupChallenges) {
+        const dataInputRow = [];
+
+        if (groupChallengeOfOneUser[`task${state.currentChallengeTodayDate}IsDone`] === true) {
+          dataInputRow.push('👍🏻');
+        } else {
+          dataInputRow.push('❓');
+        }
+
+        let countOfTasksDone = 0;
+        for (let [key, value] of Object.entries(groupChallengeOfOneUser)) {
+          if (key.slice(-6) === "IsDone" && value === true) {
+            countOfTasksDone++;
+          }
+        }
+        const progressOfOneUser = Math.ceil(countOfTasksDone / 30 * 100);
+        dataInputRow.push(`${progressOfOneUser}%`);
+        groupProgressDataInput.push(dataInputRow);
+
+        countOfTotalTasksDone += countOfTasksDone;
+      }
+      const progressOfAllUsersAVG = Math.ceil(countOfTotalTasksDone / (30 * groupChallenges.length) * 100);
+      state.setCurrentGroupTotalProgress(progressOfAllUsersAVG);
+
+      state.setCurrentGroupProgressData(groupProgressDataInput);
+    })
+    .catch(err => console.log(err));
+  }, [state.userCurrentChallenge])
+
   return (
     <>
       <Container style={styles.container}>
@@ -217,7 +274,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </Button>
               <Button
                 full
-                onPress={() => notYet()} // for developing
+                onPress={() => onShare()}
                 style={{
                   marginTop: 10,
                   marginBottom: 10,
@@ -327,7 +384,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </Body>
 
               <CardItem>
-                <Text>50% Complete</Text>
+                <Text>{state.currentGroupTotalProgress}% Complete</Text>
               </CardItem>
               <CardItem>
                 <View style={styles.tableContainer}>
@@ -346,14 +403,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                         textStyle={styles.tableText}
                       />
                       <Rows
-                        data={[
-                          ['👍🏻', '20%'],
-                          ['👍🏻', '20%'],
-                          ['❓', '5%'],
-                          ['👍🏻', '100%'],
-                          ['👍🏻', '100%'],
-                          ['👍🏻', '100%'],
-                        ]}
+                        data={state.currentGroupProgressData}
                         flexArr={[1, 1]}
                         style={styles.tableRow}
                         textStyle={styles.tableText}

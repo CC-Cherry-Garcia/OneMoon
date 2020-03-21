@@ -92,43 +92,43 @@ const App: () => React$Node = () => {
         userId: state.user.username,
       }),
     )
-      .then(data => {
-        const userChallengePayload = data.data.listUserChallenges.items;
-        const groupChallengePayload = data.data.listGroupChallenges.items;
-        const userChallenges = groupChallengePayload.concat(
-          userChallengePayload,
+    .then(data => {
+      const userChallengePayload = data.data.listUserChallenges.items;
+      const groupChallengePayload = data.data.listGroupChallenges.items;
+      const userChallenges = groupChallengePayload.concat(
+        userChallengePayload,
+      );
+      //Check user challenge
+      if (userChallenges.length !== 0) {
+        const activeChallenges = userChallenges.filter(
+          x => x.isValid === 'true',
         );
-        //Check user challenge
-        if (userChallenges.length !== 0) {
-          const activeChallenges = userChallenges.filter(
-            x => x.isValid === 'true',
-          );
-          const inactiveChallenges = userChallenges.filter(
-            x => x.isValid === 'false',
-          );
+        const inactiveChallenges = userChallenges.filter(
+          x => x.isValid === 'false',
+        );
 
-          stateA.setUserActiveChallengesList(activeChallenges);
-          stateA.setUserInactiveChallengesList(inactiveChallenges);
-          // stateA.setUserCurrentChallenge(payload[0]);
-          stateA.setUserHasActiveChallenge(true);
-          LocalPushNotificationSetting.register(
-            9,
-            0,
-            0,
-            'You have a daily goal to complete',
-            21,
-            0,
-            0,
-            'Did you complete your goal for today?',
-          );
-        }
-        if (stateA.userActiveChallengesList.length === 0) {
-          LocalPushNotificationSetting.unregister();
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+        stateA.setUserActiveChallengesList(activeChallenges);
+        stateA.setUserInactiveChallengesList(inactiveChallenges);
+        // stateA.setUserCurrentChallenge(payload[0]);
+        stateA.setUserHasActiveChallenge(true);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
+      }
+      if (stateA.userActiveChallengesList.length === 0) {
+        LocalPushNotificationSetting.unregister();
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }, [state.user]);
 
   function isEmpty(obj) {

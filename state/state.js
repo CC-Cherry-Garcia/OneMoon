@@ -25,6 +25,10 @@ const [useStore] = create(set => ({
   setCurrentChallengeProgress: value => set({currentChallengeProgress: value}),
   groupUsers: [],
   setGroupUsers: value => set({groupUsers: value}),
+  currentGroupProgressData: [],
+  setCurrentGroupProgressData: value => set({currentGroupProgressData: value}),
+  currentGroupTotalProgress: 0,
+  setCurrentGroupTotalProgress: value => set({currentGroupTotalProgress: value}),
 
   // USER State
   userCurrentChallenge: {},
