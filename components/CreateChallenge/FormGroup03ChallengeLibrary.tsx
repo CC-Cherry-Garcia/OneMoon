@@ -98,7 +98,7 @@ function FormGroup03ChallengeLibrary({navigation, route}, props) {
                     taskName: item,
                     title: item.title,
                   });
-                  navigation.navigate('ChallengeConfirmation');
+                  navigation.navigate('GroupChallengeConfirmation');
                 }}>
                 <Body>
                   <Text style={styles.Text}>
