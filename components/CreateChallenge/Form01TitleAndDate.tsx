@@ -17,6 +17,7 @@ import {
   DatePicker,
 } from 'native-base';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
 function Form01TitleAndDate({navigation}, props) {
   const state = useStore(state => state);
@@ -38,12 +39,11 @@ function Form01TitleAndDate({navigation}, props) {
     <Container style={styles.Container}>
       <Content>
         <H1>Create your Challenge!</H1>
-        <Text>
-          Design your first 30-day challenge in less than 5 minutes and get
-          started achieving your goals.
+        <Text style={styles.TextIntro}>
+          First, select a title and pick your start date.
         </Text>
         <Form>
-          <Label style={styles.Title}>Challenge Title</Label>
+          <Label style={styles.Title}>Challenge Title:</Label>
           <Item>
             <Input
               placeholder="Squat Til You Drop"
@@ -53,9 +53,10 @@ function Form01TitleAndDate({navigation}, props) {
                   title: TextInputValue,
                 })
               }
+              style={styles.Text}
             />
           </Item>
-          <Label style={styles.Title}>Start Date</Label>
+          <Label style={styles.Title}>Start Date:</Label>
           <Item fixedLabel last>
             <DatePicker
               defaultDate={new Date()}
@@ -65,11 +66,11 @@ function Form01TitleAndDate({navigation}, props) {
               mode="datetime"
               timeZoneOffsetInMinutes={undefined}
               modalTransparent={false}
-              animationType={'fade'}
+              animationType={'slide'}
               androidMode={'default'}
               placeHolderText={datePlaceholder}
               textStyle={{color: '#0a3d62'}}
-              // placeHolderTextStyle={{color: '#d3d3d3'}}
+              placeHolderTextStyle={{fontSize: 18}}
               onDateChange={value =>
                 state.setChallengeInput({
                   ...state.challengeInput,
@@ -79,7 +80,10 @@ function Form01TitleAndDate({navigation}, props) {
               disabled={false}
             />
           </Item>
-          <Button block onPress={() => navigation.navigate('ChallengeType')}>
+          <Button
+            style={styles.btn}
+            block
+            onPress={() => navigation.navigate('ChallengeType')}>
             <Text>Next Step</Text>
           </Button>
         </Form>
@@ -96,6 +100,17 @@ const styles = StyleSheet.create({
   Title: {
     fontWeight: 'bold',
     marginTop: 20,
+  },
+  TextIntro: {
+    fontSize: 18,
+    marginTop: 20,
+  },
+  Text: {
+    fontSize: 18,
+  },
+  btn: {
+    marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 

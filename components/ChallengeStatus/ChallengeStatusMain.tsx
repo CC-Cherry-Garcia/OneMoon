@@ -44,7 +44,27 @@ function ChallengeStatusMain({navigation, route}, props) {
   async function onShare() {
     try {
       const result = await Share.share({
-        message: `I just completed Day ${state.currentChallengeTodayDate} of my ${state.userCurrentChallenge.challenge.title}. #30DayChallenge`,
+        message: `I completed Day ${state.currentChallengeTodayDate} of my ${state.userCurrentChallenge.challenge.title} using #OneMoon. #30DayChallenge`,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  async function onShareGroup() {
+    try {
+      const result = await Share.share({
+        message: `Join my Group Challenge on One Moon with this code: ${state.userCurrentChallenge.groupId}. #30DayChallenge`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -71,22 +91,22 @@ function ChallengeStatusMain({navigation, route}, props) {
       mutation = mutations.updateGroupChallenge;
     }
     API.graphql(graphqlOperation(mutation, {input}))
-    .then(res => {
-      state.setCurrentChallengeTodayTaskIsDone(true);
-      state.setUserCurrentChallenge({
-        ...state.userCurrentChallenge,
-        [`task${state.currentChallengeTodayDate}IsDone`]: true,
-      });
-      Alert.alert('Great Job!!!');
-      LocalPushNotificationSetting.completeTodayTask();
-      if (
-        state.currentChallengeTodayDate === 30 &&
-        state.userActiveChallengesList.length === 1
-      ) {
-        LocalPushNotificationSetting.unregister();
-      }
-    })
-    .catch(error => console.error(error));
+      .then(res => {
+        state.setCurrentChallengeTodayTaskIsDone(true);
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: true,
+        });
+        Alert.alert('Great Job!!!');
+        LocalPushNotificationSetting.completeTodayTask();
+        if (
+          state.currentChallengeTodayDate === 30 &&
+          state.userActiveChallengesList.length === 1
+        ) {
+          LocalPushNotificationSetting.unregister();
+        }
+      })
+      .catch(error => console.error(error));
   }
 
   async function notYet() {
@@ -99,15 +119,15 @@ function ChallengeStatusMain({navigation, route}, props) {
       mutation = mutations.updateGroupChallenge;
     }
     API.graphql(graphqlOperation(mutation, {input}))
-    .then(res => {
-      state.setCurrentChallengeTodayTaskIsDone(false);
-      state.setUserCurrentChallenge({
-        ...state.userCurrentChallenge,
-        [`task${state.currentChallengeTodayDate}IsDone`]: false,
-      });
-      Alert.alert('Not complete yet');
-    })
-    .catch(error => console.error(error));
+      .then(res => {
+        state.setCurrentChallengeTodayTaskIsDone(false);
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: false,
+        });
+        Alert.alert('Not complete yet');
+      })
+      .catch(error => console.error(error));
   }
 
   useEffect(() => {
@@ -120,19 +140,25 @@ function ChallengeStatusMain({navigation, route}, props) {
         id: state.userCurrentChallenge.id,
       }),
     )
-    .then(res => {
-      let isDone;
-      if (res.data.getUserChallenge) {
-        isDone = res.data.getUserChallenge[`task${state.currentChallengeTodayDate}IsDone`];
-      } else {
-        isDone = res.data.getGroupChallenge[`task${state.currentChallengeTodayDate}IsDone`];
-      }
-      state.setUserCurrentChallenge({
-        ...state.userCurrentChallenge,
-        [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
-      });
-    })
-    .catch(err => console.log(err));
+      .then(res => {
+        let isDone;
+        if (res.data.getUserChallenge) {
+          isDone =
+            res.data.getUserChallenge[
+              `task${state.currentChallengeTodayDate}IsDone`
+            ];
+        } else {
+          isDone =
+            res.data.getGroupChallenge[
+              `task${state.currentChallengeTodayDate}IsDone`
+            ];
+        }
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
+        });
+      })
+      .catch(err => console.log(err));
   }, [state.currentChallengeTodayDate]);
 
   useEffect(() => {
@@ -200,46 +226,52 @@ function ChallengeStatusMain({navigation, route}, props) {
       graphqlOperation(queries.listGroupChallenges, {
         limit: 1000,
         filter: {groupId: {eq: state.userCurrentChallenge.groupId}},
-      })
+      }),
     )
-    .then(res => {
-      const groupChallenges = res.data.listGroupChallenges.items;
-      const groupUsersInput = [];
-      for (const groupChallengeOfOneUser of groupChallenges) {
-        groupUsersInput.push(groupChallengeOfOneUser.userId);
-      }
-      state.setGroupUsers(groupUsersInput);
-      
-      const groupProgressDataInput = [];
-      let countOfTotalTasksDone = 0;
-      for (const groupChallengeOfOneUser of groupChallenges) {
-        const dataInputRow = [];
-
-        if (groupChallengeOfOneUser[`task${state.currentChallengeTodayDate}IsDone`] === true) {
-          dataInputRow.push('👍🏻');
-        } else {
-          dataInputRow.push('❓');
+      .then(res => {
+        const groupChallenges = res.data.listGroupChallenges.items;
+        const groupUsersInput = [];
+        for (const groupChallengeOfOneUser of groupChallenges) {
+          groupUsersInput.push(groupChallengeOfOneUser.userId);
         }
+        state.setGroupUsers(groupUsersInput);
 
-        let countOfTasksDone = 0;
-        for (let [key, value] of Object.entries(groupChallengeOfOneUser)) {
-          if (key.slice(-6) === "IsDone" && value === true) {
-            countOfTasksDone++;
+        const groupProgressDataInput = [];
+        let countOfTotalTasksDone = 0;
+        for (const groupChallengeOfOneUser of groupChallenges) {
+          const dataInputRow = [];
+
+          if (
+            groupChallengeOfOneUser[
+              `task${state.currentChallengeTodayDate}IsDone`
+            ] === true
+          ) {
+            dataInputRow.push('👍🏻');
+          } else {
+            dataInputRow.push('❓');
           }
+
+          let countOfTasksDone = 0;
+          for (let [key, value] of Object.entries(groupChallengeOfOneUser)) {
+            if (key.slice(-6) === 'IsDone' && value === true) {
+              countOfTasksDone++;
+            }
+          }
+          const progressOfOneUser = Math.ceil((countOfTasksDone / 30) * 100);
+          dataInputRow.push(`${progressOfOneUser}%`);
+          groupProgressDataInput.push(dataInputRow);
+
+          countOfTotalTasksDone += countOfTasksDone;
         }
-        const progressOfOneUser = Math.ceil(countOfTasksDone / 30 * 100);
-        dataInputRow.push(`${progressOfOneUser}%`);
-        groupProgressDataInput.push(dataInputRow);
+        const progressOfAllUsersAVG = Math.ceil(
+          (countOfTotalTasksDone / (30 * groupChallenges.length)) * 100,
+        );
+        state.setCurrentGroupTotalProgress(progressOfAllUsersAVG);
 
-        countOfTotalTasksDone += countOfTasksDone;
-      }
-      const progressOfAllUsersAVG = Math.ceil(countOfTotalTasksDone / (30 * groupChallenges.length) * 100);
-      state.setCurrentGroupTotalProgress(progressOfAllUsersAVG);
-
-      state.setCurrentGroupProgressData(groupProgressDataInput);
-    })
-    .catch(err => console.log(err));
-  }, [state.userCurrentChallenge])
+        state.setCurrentGroupProgressData(groupProgressDataInput);
+      })
+      .catch(err => console.log(err));
+  }, [state.userCurrentChallenge]);
 
   return (
     <>
@@ -247,7 +279,9 @@ function ChallengeStatusMain({navigation, route}, props) {
         <Content>
           <Card style={styles.viewPad}>
             <Body>
-              <H1>{state.userCurrentChallenge.challenge.title}</H1>
+              <H1 style={styles.textCenter}>
+                {state.userCurrentChallenge.challenge.title}
+              </H1>
             </Body>
           </Card>
 
@@ -258,30 +292,35 @@ function ChallengeStatusMain({navigation, route}, props) {
               </CardItem>
             </Body>
             <Body>
-              <H2 style={{color: Colors.primary, fontSize: 28, lineHeight: 32}}>
-                {state.currentChallengeTodayTaskName}
-              </H2>
-
-              <Button
-                full
-                onPress={() => completeTask()}
-                style={{
-                  marginTop: 10,
-                  marginBottom: 10,
-                  backgroundColor: Colors.primary,
-                }}>
-                <Text> Did you Complete Today's Task? </Text>
-              </Button>
-              <Button
-                full
-                onPress={() => onShare()}
-                style={{
-                  marginTop: 10,
-                  marginBottom: 10,
-                  backgroundColor: Colors.primary,
-                }}>
-                <Text> Share your Success! </Text>
-              </Button>
+              <H2 style={styles.H2}>{state.currentChallengeTodayTaskName}</H2>
+              {!state.userCurrentChallenge[
+                `task${state.currentChallengeTodayDate}IsDone`
+              ] && (
+                <Button
+                  full
+                  onPress={() => completeTask()}
+                  style={{
+                    marginTop: 10,
+                    marginBottom: 10,
+                    backgroundColor: Colors.primary,
+                  }}>
+                  <Text> Did you Complete Today's Task? </Text>
+                </Button>
+              )}
+              {state.userCurrentChallenge[
+                `task${state.currentChallengeTodayDate}IsDone`
+              ] && (
+                <Button
+                  full
+                  onPress={() => onShare()}
+                  style={{
+                    marginTop: 10,
+                    marginBottom: 10,
+                    backgroundColor: Colors.primary,
+                  }}>
+                  <Text> Share your Success! </Text>
+                </Button>
+              )}
             </Body>
           </Card>
 
@@ -300,8 +339,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </Text>
               </CardItem>
               <CardItem>
-                <H2
-                  style={{color: Colors.primary, fontSize: 28, lineHeight: 32}}>
+                <H2 style={styles.H2}>
                   {state.currentChallengeProgress} % Complete
                 </H2>
               </CardItem>
@@ -381,11 +419,17 @@ function ChallengeStatusMain({navigation, route}, props) {
                 <CardItem header>
                   <Text>Group Progress</Text>
                 </CardItem>
+                <CardItem>
+                  <H2
+                    style={{
+                      color: Colors.primary,
+                      fontSize: 28,
+                      lineHeight: 32,
+                    }}>
+                    {state.currentGroupTotalProgress}% Complete
+                  </H2>
+                </CardItem>
               </Body>
-
-              <CardItem>
-                <Text>{state.currentGroupTotalProgress}% Complete</Text>
-              </CardItem>
               <CardItem>
                 <View style={styles.tableContainer}>
                   <Table borderStyle={{borderWidth: 1}}>
@@ -393,7 +437,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                       data={['', 'today', 'total']}
                       flexArr={[1, 1, 1]}
                       style={styles.tableHead}
-                      textStyle={styles.tableText}
+                      textStyle={styles.tableHeadText}
                     />
                     <TableWrapper style={styles.tableWrapper}>
                       <Col
@@ -412,6 +456,13 @@ function ChallengeStatusMain({navigation, route}, props) {
                   </Table>
                 </View>
               </CardItem>
+              <Button
+                full
+                title="Share Group ID"
+                onPress={() => onShareGroup()}
+                style={styles.btn}>
+                <Text>Share Group ID</Text>
+              </Button>
             </Card>
           )}
         </Content>
@@ -437,15 +488,34 @@ const styles = StyleSheet.create({
   },
   tableContainer: {
     flex: 1,
-    padding: 16,
-    paddingTop: 30,
+    padding: 10,
+    paddingTop: 0,
     backgroundColor: '#fff',
   },
-  tableHead: {height: 40, backgroundColor: '#f1f8ff'},
+  tableHead: {
+    height: 40,
+    backgroundColor: '#f1f8ff',
+  },
   tableWrapper: {flexDirection: 'row'},
   tableTitle: {flex: 1, backgroundColor: '#f6f8fa'},
   tableRow: {height: 28},
+  tableHeadText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
   tableText: {textAlign: 'center'},
+  btn: {
+    backgroundColor: Colors.primary,
+  },
+  textCenter: {
+    textAlign: 'center',
+  },
+  H2: {
+    color: Colors.primary,
+    fontSize: 28,
+    lineHeight: 32,
+    textAlign: 'center',
+  },
 });
 
 export default ChallengeStatusMain;

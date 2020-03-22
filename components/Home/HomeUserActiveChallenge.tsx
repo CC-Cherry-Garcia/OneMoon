@@ -17,6 +17,7 @@ import {
   Body,
 } from 'native-base';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
 function HomeUserActiveChallenge({navigation, route}) {
   const state = useStore(state => state);
@@ -24,7 +25,12 @@ function HomeUserActiveChallenge({navigation, route}) {
   return (
     <Container>
       <Content>
-        <H1 style={styles.H1}>Welcome back, {route.params.userName}!</H1>
+        <H1 style={styles.H1}>
+          Hi{' '}
+          {route.params.userName.charAt(0).toUpperCase() +
+            route.params.userName.substring(1).toLowerCase()}
+          !
+        </H1>
         <View
           style={{
             borderBottomColor: 'lightgray',
@@ -46,7 +52,7 @@ function HomeUserActiveChallenge({navigation, route}) {
                 screen: 'ChallengeStatusMain',
               });
             }}>
-            {(item.groupId != undefined && (
+            {(item.groupId !== undefined && (
               <Icon active style={styles.people} name="people" />
             )) || <Icon active style={styles.people} name="trophy" />}
 
@@ -102,9 +108,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   H1: {
-    marginLeft: 10,
-    marginTop: 20,
-    marginBottom: 20,
+    margin: 20,
   },
   Text: {
     fontSize: 18,
@@ -129,6 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 

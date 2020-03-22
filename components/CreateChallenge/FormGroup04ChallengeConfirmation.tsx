@@ -29,6 +29,7 @@ import * as mutations from '../../src/graphql/mutations';
 import * as customMutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
+import Colors from '../../variablesColors';
 
 function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
@@ -238,14 +239,33 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
           to make any changes.
         </Text>
         <Text style={styles.textDefault}>
-          Title: {state.challengeInput.title}
+          <Text style={{fontWeight: 'bold'}}>Title:</Text>{' '}
+          {state.challengeInput.title}
         </Text>
         <Text style={styles.textDefault}>
-          Challenge Group name: {state.challengeInput.groupName}
+          <Text style={{fontWeight: 'bold'}}>Challenge Group name:</Text>{' '}
+          {state.challengeInput.groupName}
         </Text>
         <Text style={styles.textDefault}>
-          Start Date: {state.challengeInput.startDate}
+          <Text style={{fontWeight: 'bold'}}>Start Date:</Text>{' '}
+          {`${new Date(
+            state.challengeInput.startDate,
+          ).getFullYear()}/${new Date(
+            state.challengeInput.startDate,
+          ).getMonth() + 1}/${new Date(
+            state.challengeInput.startDate,
+          ).getDate()}`}
         </Text>
+        <Button
+          style={styles.btn}
+          title="Start Challenge"
+          onPress={() => {
+            insertChallenge();
+            // props.changeView();
+            navigation.navigate('GroupChallengeSharingInformation');
+          }}>
+          <Text>Save Group Challenge</Text>
+        </Button>
         <List>
           <ListItem>
             <Text>{taskQuantityArray[0]}</Text>
@@ -339,6 +359,7 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
           </ListItem>
         </List>
         <Button
+          style={styles.btn}
           title="Start Group Challenge"
           onPress={() => {
             insertChallenge();
@@ -368,6 +389,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 
