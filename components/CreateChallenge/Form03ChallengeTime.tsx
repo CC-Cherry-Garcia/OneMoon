@@ -56,7 +56,7 @@ function Form03ChallengeTime({navigation, route}, props) {
               increase: TextInputValue,
             })
           }
-          placeholder=" 10 minutes"
+          placeholder=" 10"
           style={styles.textInputDefault}
           keyboardType="numeric"
         />
