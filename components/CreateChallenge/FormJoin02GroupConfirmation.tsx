@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {Component, useEffect, useState} from 'react';
 import {StyleSheet, TextInput, Alert} from 'react-native';
 import {
@@ -52,7 +53,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
       setLoading(false);
     };
     getGroupChallenge();
-  }, [state]);
+  }, []);
 
   const groupChallengeInput = {
     groupId: state.challengeInput.groupId,
