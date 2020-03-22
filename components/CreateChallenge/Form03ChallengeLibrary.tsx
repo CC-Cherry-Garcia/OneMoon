@@ -22,13 +22,14 @@ import {
   StatusBar,
   FlatList,
   List,
+  Icon,
   ListItem,
   Spinner,
 } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
 function Form03ChallengeLibrary({navigation, route}, props) {
   const state = useStore(state => state);
@@ -108,6 +109,9 @@ function Form03ChallengeLibrary({navigation, route}, props) {
                     </Text>
                   </Text>
                 </Body>
+                <Right>
+                  <Icon active style={styles.arrowmark} name="arrow-forward" />
+                </Right>
               </ListItem>
             ))}
           </Form>
@@ -118,22 +122,29 @@ function Form03ChallengeLibrary({navigation, route}, props) {
 }
 
 const styles = StyleSheet.create({
-  Container: {
-    padding: 20,
-    marginTop: 20,
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
   },
   Title: {
     fontWeight: 'bold',
     marginTop: 20,
   },
-  textDefault: {
-    marginTop: 20,
+  H3: {
+    margin: 20,
   },
-  textInputDefault: {
-    margin: 10,
+  H1: {
+    margin: 20,
   },
-  btn: {
-    marginTop: 20,
+  Text: {
+    fontSize: 18,
+  },
+
+  arrowmark: {
+    color: 'rgba(24, 61, 95, 1)',
   },
 });
 
