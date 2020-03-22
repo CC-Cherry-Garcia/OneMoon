@@ -66,7 +66,7 @@ function Form01TitleAndDate({navigation}, props) {
               mode="datetime"
               timeZoneOffsetInMinutes={undefined}
               modalTransparent={false}
-              animationType={'fade'}
+              animationType={'slide'}
               androidMode={'default'}
               placeHolderText={datePlaceholder}
               textStyle={{color: '#0a3d62'}}
