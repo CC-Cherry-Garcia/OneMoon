@@ -49,10 +49,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         result.data.listGroupChallenges.items[0],
       );
       setLoading(false);
-      console.log(
-        'state.groupChallengeInformation :',
-        state.groupChallengeInformation,
-      );
     };
     getGroupChallenge();
   }, []);
