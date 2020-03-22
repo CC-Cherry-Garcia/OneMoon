@@ -279,7 +279,9 @@ function ChallengeStatusMain({navigation, route}, props) {
         <Content>
           <Card style={styles.viewPad}>
             <Body>
-              <H1>{state.userCurrentChallenge.challenge.title}</H1>
+              <H1 style={styles.textCenter}>
+                {state.userCurrentChallenge.challenge.title}
+              </H1>
             </Body>
           </Card>
 
@@ -290,9 +292,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </CardItem>
             </Body>
             <Body>
-              <H2 style={{color: Colors.primary, fontSize: 28, lineHeight: 32}}>
-                {state.currentChallengeTodayTaskName}
-              </H2>
+              <H2 style={styles.H2}>{state.currentChallengeTodayTaskName}</H2>
               {!state.userCurrentChallenge[
                 `task${state.currentChallengeTodayDate}IsDone`
               ] && (
@@ -339,8 +339,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </Text>
               </CardItem>
               <CardItem>
-                <H2
-                  style={{color: Colors.primary, fontSize: 28, lineHeight: 32}}>
+                <H2 style={styles.H2}>
                   {state.currentChallengeProgress} % Complete
                 </H2>
               </CardItem>
@@ -507,6 +506,15 @@ const styles = StyleSheet.create({
   tableText: {textAlign: 'center'},
   btn: {
     backgroundColor: Colors.primary,
+  },
+  textCenter: {
+    textAlign: 'center',
+  },
+  H2: {
+    color: Colors.primary,
+    fontSize: 28,
+    lineHeight: 32,
+    textAlign: 'center',
   },
 });
 
