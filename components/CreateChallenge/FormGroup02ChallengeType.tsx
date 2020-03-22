@@ -119,6 +119,33 @@ function FormGroup02ChallengeType({navigation}, props) {
             </Grid>
           </CardItem>
         </Card>
+        <Card>
+          <CardItem
+            onPress={() => navigation.navigate('GroupChallengeLibrary')}>
+            <Grid style={styles.Grid}>
+              <Col style={{width: 50}}>
+                <Icon
+                  // active
+                  // style={styles.QuantIcon}
+                  name="folder"
+                  style={styles.Icon}
+                  onPress={() => navigation.navigate('GroupChallengeLibrary')}
+                />
+              </Col>
+              <Col>
+                <Text
+                  style={styles.CardTitle}
+                  onPress={() => navigation.navigate('GroupChallengeLibrary')}>
+                  Search Challenge Library
+                </Text>
+                <Text
+                  onPress={() => navigation.navigate('GroupChallengeLibrary')}>
+                  Choose from a library of user-created challenges.
+                </Text>
+              </Col>
+            </Grid>
+          </CardItem>
+        </Card>
       </Content>
     </Container>
   );

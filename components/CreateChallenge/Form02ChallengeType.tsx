@@ -104,6 +104,31 @@ function Form02ChallengeType({navigation}, props) {
             </Grid>
           </CardItem>
         </Card>
+        <Card>
+          <CardItem onPress={() => navigation.navigate('ChallengeLibrary')}>
+            <Grid style={styles.Grid}>
+              <Col style={{width: 50}}>
+                <Icon
+                  // active
+                  // style={styles.QuantIcon}
+                  name="folder"
+                  style={styles.Icon}
+                  onPress={() => navigation.navigate('ChallengeLibrary')}
+                />
+              </Col>
+              <Col>
+                <Text
+                  style={styles.CardTitle}
+                  onPress={() => navigation.navigate('ChallengeLibrary')}>
+                  Search Challenge Library
+                </Text>
+                <Text onPress={() => navigation.navigate('ChallengeLibrary')}>
+                  Choose from a library of user-created challenges.
+                </Text>
+              </Col>
+            </Grid>
+          </CardItem>
+        </Card>
       </Content>
     </Container>
   );

@@ -25,7 +25,6 @@ import Colors from '../../variablesColors';
 function Form03ChallengeRepeat({navigation, route}, props) {
   const state = useStore(state => state);
 
-  console.log('state in Form03ChallengeRepeattsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>

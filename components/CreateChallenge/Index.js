@@ -9,12 +9,14 @@ import Form02ChallengeType from './Form02ChallengeType';
 import Form03ChallengeQuantity from './Form03ChallengeQuantity';
 import Form03ChallengeTime from './Form03ChallengeTime';
 import Form03ChallengeRepeat from './Form03ChallengeRepeat';
+import Form03ChallengeLibrary from './Form03ChallengeLibrary';
 import Form04ChallengeConfirmation from './Form04ChallengeConfirmation';
 import FormGroup01TitleAndDateAndGroup from './FormGroup01TitleAndDateAndGroup';
 import FormGroup02ChallengeType from './FormGroup02ChallengeType';
 import FormGroup03ChallengeQuantity from './FormGroup03ChallengeQuantity';
 import FormGroup03ChallengeTime from './FormGroup03ChallengeTime';
 import FormGroup03ChallengeRepeat from './FormGroup03ChallengeRepeat';
+import FormGroup03ChallengeLibrary from './FormGroup03ChallengeLibrary';
 import FormGroup04ChallengeConfirmation from './FormGroup04ChallengeConfirmation';
 import FormGroup05SharingInformation from './FormGroup05SharingInformation';
 import FormJoin01Group from './FormJoin01Group';
@@ -121,6 +123,14 @@ function CreateChallenge({navigation, route}) {
         }}
       />
       <Stack.Screen
+        name="ChallengeLibrary"
+        component={Form03ChallengeLibrary}
+        initialParams={{userName: route.params.userName}}
+        options={{
+          title: 'Challenge Library',
+        }}
+      />
+      <Stack.Screen
         name="ChallengeConfirmation"
         component={Form04ChallengeConfirmation}
         initialParams={{userName: route.params.userName}}
@@ -190,6 +200,14 @@ function CreateChallenge({navigation, route}) {
         initialParams={{userName: route.params.userName}}
         options={{
           title: 'Repeating Daily Task',
+        }}
+      />
+      <Stack.Screen
+        name="GroupChallengeLibrary"
+        component={FormGroup03ChallengeLibrary}
+        initialParams={{userName: route.params.userName}}
+        options={{
+          title: 'Challenge Library',
         }}
       />
       <Stack.Screen

@@ -53,6 +53,9 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
       taskQuantityArray.push(
         `Day ${i} Task: ${taskName} ${increaseRate * i} ${unitsVariable}`,
       );
+    } else if (state.challengeType === 'library') {
+      const keyName = `task${i}Name`;
+      taskQuantityArray.push(`Day ${i} Task: ${taskName[keyName]}`);
     } else {
       taskQuantityArray.push(`Day ${i} Task: ${taskName}`);
     }
