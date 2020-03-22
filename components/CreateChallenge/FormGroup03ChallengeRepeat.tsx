@@ -30,6 +30,18 @@ function FormGroup03ChallengeRepeat({navigation, route}, props) {
       <Content padder>
         <H1>Set your Daily Task</H1>
         <Text>Enter a Daily Task that you will repeat for the 30 days.</Text>
+        <Text style={styles.textDefault}>Challenge Title</Text>
+        <Item>
+          <Input
+            placeholder="Squat Til You Drop"
+            onChangeText={TextInputValue =>
+              state.setChallengeInput({
+                ...state.challengeInput,
+                title: TextInputValue,
+              })
+            }
+          />
+        </Item>
         <Text style={styles.textDefault}>Daily Task:</Text>
         <TextInput
           onChangeText={TextInputValue =>

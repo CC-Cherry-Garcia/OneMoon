@@ -79,6 +79,24 @@ function Form02ChallengeType({navigation}, props) {
             </Body>
           </CardItem>
         </Card>
+        <Card>
+          <CardItem
+            header
+            button
+            onPress={() => navigation.navigate('ChallengeSearch')}>
+            <Text style={{paddingLeft: 120}}>Search Challenge</Text>
+          </CardItem>
+          <CardItem
+            button
+            onPress={() => navigation.navigate('ChallengeSearch')}>
+            <Body>
+              <Text>
+                Pick challenge that someone created. Challenge title is
+                rewritten by the challenge you selected.
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
       </Content>
     </Container>
   );

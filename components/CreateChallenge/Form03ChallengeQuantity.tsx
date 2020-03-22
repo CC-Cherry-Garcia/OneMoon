@@ -35,6 +35,18 @@ function Form03ChallengeQuantity({navigation, route}, props) {
           Enter your Daily Task and how much you want the quantity to increase
           by daily.
         </Text>
+        <Text style={styles.textDefault}>Challenge Title</Text>
+        <Item>
+          <Input
+            placeholder="Squat Til You Drop"
+            onChangeText={TextInputValue =>
+              state.setChallengeInput({
+                ...state.challengeInput,
+                title: TextInputValue,
+              })
+            }
+          />
+        </Item>
         <Text style={styles.textDefault}>Daily Task:</Text>
         <TextInput
           onChangeText={TextInputValue =>

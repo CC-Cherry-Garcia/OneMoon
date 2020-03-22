@@ -29,18 +29,6 @@ function FormGroup01TitleAndDateAndGroup({navigation}, props) {
           get started achieving your goals.
         </Text>
         <Form>
-          <Label style={styles.Title}>Challenge Title</Label>
-          <Item>
-            <Input
-              placeholder="Squat Til You Drop"
-              onChangeText={TextInputValue =>
-                state.setChallengeInput({
-                  ...state.challengeInput,
-                  title: TextInputValue,
-                })
-              }
-            />
-          </Item>
           <Label style={styles.Title}>Group Name</Label>
           <Item>
             <Input
