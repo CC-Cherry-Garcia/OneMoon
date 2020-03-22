@@ -75,8 +75,8 @@ function Form03ChallengeLibrary({navigation, route}, props) {
       <Container style={styles.Container}>
         <Content padder>
           <Text>
-            Search challenge that you want to do and get started achieving your
-            goals.
+            Search through the challenge library to find one that will get you
+            started achieving your goals.
           </Text>
           <Form>
             <Label style={styles.Title}>Challenge library</Label>

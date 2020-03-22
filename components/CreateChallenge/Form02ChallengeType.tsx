@@ -78,7 +78,7 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem onPress={() => navigation.navigate('ChallengeLibraryInfo')}>
+          <CardItem onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
             <Grid style={styles.Grid}>
               <Col style={{width: 50}}>
                 <Icon
@@ -86,7 +86,7 @@ function Form02ChallengeType({navigation}, props) {
                   // style={styles.QuantIcon}
                   name="refresh"
                   style={styles.Icon}
-                  onPress={() => navigation.navigate('ChallengeLibraryInfo')}
+                  onPress={() => navigation.navigate('ChallengeRepeatInfo')}
                 />
               </Col>
               <Col>
@@ -105,18 +105,28 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem
-            header
-            button
-            onPress={() => navigation.navigate('ChallengeLibrary')}>
-            <Text style={{paddingLeft: 120}}>Search Challenge</Text>
-          </CardItem>
-          <CardItem
-            button
-            onPress={() => navigation.navigate('ChallengeLibrary')}>
-            <Body>
-              <Text>Pick challenge that someone created.</Text>
-            </Body>
+          <CardItem onPress={() => navigation.navigate('ChallengeLibrary')}>
+            <Grid style={styles.Grid}>
+              <Col style={{width: 50}}>
+                <Icon
+                  // active
+                  // style={styles.QuantIcon}
+                  name="folder"
+                  style={styles.Icon}
+                  onPress={() => navigation.navigate('ChallengeLibrary')}
+                />
+              </Col>
+              <Col>
+                <Text
+                  style={styles.CardTitle}
+                  onPress={() => navigation.navigate('ChallengeLibrary')}>
+                  Search Challenge Library
+                </Text>
+                <Text onPress={() => navigation.navigate('ChallengeLibrary')}>
+                  Choose from a library of user-created challenges.
+                </Text>
+              </Col>
+            </Grid>
           </CardItem>
         </Card>
       </Content>

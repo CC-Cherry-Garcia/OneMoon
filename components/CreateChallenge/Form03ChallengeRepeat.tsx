@@ -25,7 +25,6 @@ import Colors from '../../variablesColors';
 function Form03ChallengeRepeat({navigation, route}, props) {
   const state = useStore(state => state);
 
-  console.log('state in Form03ChallengeRepeattsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
@@ -35,16 +34,12 @@ function Form03ChallengeRepeat({navigation, route}, props) {
         </Text>
         <Text style={styles.Title}>Daily Task:</Text>
         <TextInput
-          onChangeText={TextInputValue => {
+          onChangeText={TextInputValue =>
             state.setChallengeInput({
               ...state.challengeInput,
               taskName: TextInputValue,
-            });
-            console.log(
-              'state.challengeInput.taskName :',
-              state.challengeInput.taskName,
-            );
-          }}
+            })
+          }
           placeholder=" Do something kind for someone else"
           style={styles.textInputDefault}
         />
