@@ -17,6 +17,7 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
+let groupIdEmpty = true;
 
 function FormJoin01Group({navigation}, props) {
   const state = useStore(state => state);
@@ -34,16 +35,22 @@ function FormJoin01Group({navigation}, props) {
           <Item>
             <Input
               placeholder="group id that you want to join!"
-              onChangeText={TextInputValue =>
+              onChangeText={TextInputValue => {
                 state.setChallengeInput({
                   ...state.challengeInput,
                   groupId: TextInputValue,
-                })
-              }
+                });
+                if (TextInputValue.length > 0) {
+                  groupIdEmpty = false;
+                } else {
+                  groupIdEmpty = true;
+                }
+              }}
             />
           </Item>
           <Button
             block
+            disabled={groupIdEmpty}
             onPress={() =>
               navigation.navigate('JoinGroupChallengeConfirmation')
             }
