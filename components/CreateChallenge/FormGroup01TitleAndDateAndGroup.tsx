@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, TextInput, Alert} from 'react-native';
 import {
   Container,
@@ -24,6 +25,15 @@ function FormGroup01TitleAndDateAndGroup({navigation}, props) {
   // create placeholder for datepicker to show today on load
   const datePlaceholder = `${new Date().getFullYear()}/${new Date().getMonth() +
     1}/${new Date().getDate()}`;
+
+  // we have to pass today into state on load for datepicker to display correctly
+  const today = new Date();
+  useEffect(() => {
+    state.setChallengeInput({
+      ...state.challengeInput,
+      startDate: today.toString(),
+    });
+  }, []);
 
   return (
     <Container style={styles.Container}>
