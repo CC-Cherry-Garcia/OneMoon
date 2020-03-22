@@ -92,7 +92,7 @@ function FormGroup05SharingInformation({navigation, route}, props) {
           </Fab> */}
         </View>
         <Button
-          title="Back to Home"
+          title="Share Group ID"
           onPress={() => onShare()}
           style={styles.btn}>
           <Text>Share Group ID</Text>

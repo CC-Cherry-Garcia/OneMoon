@@ -61,6 +61,26 @@ function ChallengeStatusMain({navigation, route}, props) {
     }
   }
 
+  async function onShareGroup() {
+    try {
+      const result = await Share.share({
+        message: `Join my Group Challenge on One Moon with this code: ${state.userCurrentChallenge.groupId}. #30DayChallenge`,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   async function completeTask() {
     const input = {
       id: state.userCurrentChallenge.id,
@@ -400,11 +420,17 @@ function ChallengeStatusMain({navigation, route}, props) {
                 <CardItem header>
                   <Text>Group Progress</Text>
                 </CardItem>
+                <CardItem>
+                  <H2
+                    style={{
+                      color: Colors.primary,
+                      fontSize: 28,
+                      lineHeight: 32,
+                    }}>
+                    {state.currentGroupTotalProgress}% Complete
+                  </H2>
+                </CardItem>
               </Body>
-
-              <CardItem>
-                <Text>{state.currentGroupTotalProgress}% Complete</Text>
-              </CardItem>
               <CardItem>
                 <View style={styles.tableContainer}>
                   <Table borderStyle={{borderWidth: 1}}>
@@ -412,7 +438,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                       data={['', 'today', 'total']}
                       flexArr={[1, 1, 1]}
                       style={styles.tableHead}
-                      textStyle={styles.tableText}
+                      textStyle={styles.tableHeadText}
                     />
                     <TableWrapper style={styles.tableWrapper}>
                       <Col
@@ -431,6 +457,13 @@ function ChallengeStatusMain({navigation, route}, props) {
                   </Table>
                 </View>
               </CardItem>
+              <Button
+                full
+                title="Share Group ID"
+                onPress={() => onShareGroup()}
+                style={styles.btn}>
+                <Text>Share Group ID</Text>
+              </Button>
             </Card>
           )}
         </Content>
@@ -456,15 +489,25 @@ const styles = StyleSheet.create({
   },
   tableContainer: {
     flex: 1,
-    padding: 16,
-    paddingTop: 30,
+    padding: 10,
+    paddingTop: 0,
     backgroundColor: '#fff',
   },
-  tableHead: {height: 40, backgroundColor: '#f1f8ff'},
+  tableHead: {
+    height: 40,
+    backgroundColor: '#f1f8ff',
+  },
   tableWrapper: {flexDirection: 'row'},
   tableTitle: {flex: 1, backgroundColor: '#f6f8fa'},
   tableRow: {height: 28},
+  tableHeadText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
   tableText: {textAlign: 'center'},
+  btn: {
+    backgroundColor: Colors.primary,
+  },
 });
 
 export default ChallengeStatusMain;
