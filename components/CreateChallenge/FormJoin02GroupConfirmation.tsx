@@ -22,6 +22,7 @@ import {
   FlatList,
   List,
   ListItem,
+  Spinner,
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
@@ -32,16 +33,11 @@ import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
 
 function FormJoin02GroupConfirmation({navigation, route}, props) {
   const state = useStore(state => state);
-  const [test, setTest] = useState(0);
-  const taskQuantityArray = [];
-  // const taskName = state.challengeInput.taskName;
+  const [loading, setLoading] = useState(true);
 
   //To get group challenge data
   useEffect(() => {
-    setTest(2000);
-    console.log('state.challengeInput.groupId :', state.challengeInput.groupId);
     const getGroupChallenge = async () => {
-      setTest(11000);
       const result = await API.graphql(
         graphqlOperation(queries.listGroupChallenges, {
           limit: 1000, //Just in case
@@ -49,41 +45,18 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         }),
       );
 
-      console.log(
-        'result listGroupChallenges userEffect:',
-        result.data.listGroupChallenges.items[0],
-      );
-
       state.setGroupChallengeInformation(
         result.data.listGroupChallenges.items[0],
       );
-
-      // console.log(
-      //   'state.groupChallengeInformation :',
-      //   state.groupChallengeInformation,
-      // );
+      setLoading(false);
     };
     getGroupChallenge();
   }, []);
-
-  // if (state.challengeType === 'quantity') {
-  //   unitsVariable = 'times';
-  // } else if (state.challengeType === 'time') {
-  //   unitsVariable = 'minutes';
-  // }
-
-  function getDateOfChallenge(ordinalDate) {
-    const standardDate = new Date(state.groupChallengeInformation.startDate);
-    const startDate = standardDate.getDate();
-    standardDate.setDate(startDate + ordinalDate - 1);
-    return standardDate.toString();
-  }
 
   const groupChallengeInput = {
     groupId: state.challengeInput.groupId,
     userId: route.params.userName,
     isValid: true,
-    startDate: state.groupChallengeInformation.startDate,
     task1IsDone: false,
     task2IsDone: false,
     task3IsDone: false,
@@ -114,49 +87,44 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     task28IsDone: false,
     task29IsDone: false,
     task30IsDone: false,
-    task1Date: getDateOfChallenge(1),
-    task2Date: getDateOfChallenge(2),
-    task3Date: getDateOfChallenge(3),
-    task4Date: getDateOfChallenge(4),
-    task5Date: getDateOfChallenge(5),
-    task6Date: getDateOfChallenge(6),
-    task7Date: getDateOfChallenge(7),
-    task8Date: getDateOfChallenge(8),
-    task9Date: getDateOfChallenge(9),
-    task10Date: getDateOfChallenge(10),
-    task11Date: getDateOfChallenge(11),
-    task12Date: getDateOfChallenge(12),
-    task13Date: getDateOfChallenge(13),
-    task14Date: getDateOfChallenge(14),
-    task15Date: getDateOfChallenge(15),
-    task16Date: getDateOfChallenge(16),
-    task17Date: getDateOfChallenge(17),
-    task18Date: getDateOfChallenge(18),
-    task19Date: getDateOfChallenge(19),
-    task20Date: getDateOfChallenge(20),
-    task21Date: getDateOfChallenge(21),
-    task22Date: getDateOfChallenge(22),
-    task23Date: getDateOfChallenge(23),
-    task24Date: getDateOfChallenge(24),
-    task25Date: getDateOfChallenge(25),
-    task26Date: getDateOfChallenge(26),
-    task27Date: getDateOfChallenge(27),
-    task28Date: getDateOfChallenge(28),
-    task29Date: getDateOfChallenge(29),
-    task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
-    console.log('groupChallengeInput:  ********  ', {
-      ...groupChallengeInput,
-      challengeId: state.groupChallengeInformation.challengeId,
-    });
-
     API.graphql(
       graphqlOperation(mutations.createGroupChallenge, {
         input: {
           ...groupChallengeInput,
           challengeId: state.groupChallengeInformation.challengeId,
           startDate: state.groupChallengeInformation.startDate,
+          task1Date: state.groupChallengeInformation.task1Date,
+          task2Date: state.groupChallengeInformation.task2Date,
+          task3Date: state.groupChallengeInformation.task3Date,
+          task4Date: state.groupChallengeInformation.task4Date,
+          task5Date: state.groupChallengeInformation.task5Date,
+          task6Date: state.groupChallengeInformation.task6Date,
+          task7Date: state.groupChallengeInformation.task7Date,
+          task8Date: state.groupChallengeInformation.task8Date,
+          task9Date: state.groupChallengeInformation.task9Date,
+          task10Date: state.groupChallengeInformation.task10Date,
+          task11Date: state.groupChallengeInformation.task11Date,
+          task12Date: state.groupChallengeInformation.task12Date,
+          task13Date: state.groupChallengeInformation.task13Date,
+          task14Date: state.groupChallengeInformation.task14Date,
+          task15Date: state.groupChallengeInformation.task15Date,
+          task16Date: state.groupChallengeInformation.task16Date,
+          task17Date: state.groupChallengeInformation.task17Date,
+          task18Date: state.groupChallengeInformation.task18Date,
+          task19Date: state.groupChallengeInformation.task19Date,
+          task20Date: state.groupChallengeInformation.task20Date,
+          task21Date: state.groupChallengeInformation.task21Date,
+          task22Date: state.groupChallengeInformation.task22Date,
+          task23Date: state.groupChallengeInformation.task23Date,
+          task24Date: state.groupChallengeInformation.task24Date,
+          task25Date: state.groupChallengeInformation.task25Date,
+          task26Date: state.groupChallengeInformation.task26Date,
+          task27Date: state.groupChallengeInformation.task27Date,
+          task28Date: state.groupChallengeInformation.task28Date,
+          task29Date: state.groupChallengeInformation.task29Date,
+          task30Date: state.groupChallengeInformation.task30Date,
         },
       }),
     )
@@ -182,11 +150,39 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
         console.log('Error happens in createGroupChallenge: ', error),
       );
   };
-  console.log(
-    'state.groupChallengeInformation :',
-    state.groupChallengeInformation,
-  );
-  if (state.groupChallengeInformation === {}) {
+
+  const checkUserHasGroupChallenge = () => {
+    return state.userActiveChallengesList.find(x => {
+      console.log('x.groupId :', x.groupId);
+      return x.groupId && x.groupId === state.challengeInput.groupId;
+    });
+  };
+  if (loading) {
+    return (
+      <Container>
+        <Header />
+        <Content>
+          <Spinner color="blue" />
+        </Content>
+      </Container>
+    );
+  } else if (checkUserHasGroupChallenge()) {
+    Alert.alert(
+      'Error',
+      'You have already joined this group challenge',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('JoinGroupChallenge'),
+        },
+      ],
+      {cancelable: false},
+    );
+    return <></>;
+  } else if (
+    typeof state.groupChallengeInformation !== 'object' ||
+    Object.keys(state.groupChallengeInformation).length === 0
+  ) {
     Alert.alert(
       'Error',
       'There is no group challenge id',
@@ -204,110 +200,151 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
       <Container style={styles.Container}>
         <Content padder>
           <Text style={styles.textDefault}>
-            data={test}
-            {/* Title: {state.groupChallengeInformation.challenge.title} */}
+            Title: {state.groupChallengeInformation.challenge.title}
           </Text>
-          {/*   <H1>Double check your Challenge</H1>
-        <Text style={styles.textDefault}>
-          See your 30-day challenge below. Use the back button if you need to
-          make any changes.
-        </Text>
-        
-        <Text style={styles.textDefault}>
-          Start Date: {state.groupChallengeInformation.startDate}
-        </Text>
-        {/* <List>
-          <ListItem>
-            <Text>{taskQuantityArray[0]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[1]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[2]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[3]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[4]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[5]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[6]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[7]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[8]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[9]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[10]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[11]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[12]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[13]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[14]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[15]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[16]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[17]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[18]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[19]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[20]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[21]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[22]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[23]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[24]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[25]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[26]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[27]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[28]}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>{taskQuantityArray[29]}</Text>
-          </ListItem>
-        </List> */}
+          <H1>Double check your Challenge</H1>
+          <Text style={styles.textDefault}>
+            See your 30-day challenge below. Use the back button if you need to
+            make any changes.
+          </Text>
+
+          <Text style={styles.textDefault}>
+            Start Date: {state.groupChallengeInformation.startDate}
+          </Text>
+          <List>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task1Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task2Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task3Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task4Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task5Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task6Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task7Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task8Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{state.groupChallengeInformation.challenge.task9Name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task10Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task11Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task12Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task13Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task14Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task15Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task16Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task17Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task18Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task19Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task20Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task21Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task22Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task23Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task24Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task25Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task26Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task27Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task28Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task29Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                {state.groupChallengeInformation.challenge.task30Name}
+              </Text>
+            </ListItem>
+          </List>
           <Button
             title="Start Group Challenge"
             onPress={() => {

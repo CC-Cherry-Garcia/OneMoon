@@ -23,8 +23,11 @@ function FormJoin01Group({navigation}, props) {
   return (
     <Container style={styles.Container}>
       <Content>
-        <H1>Input your Challenge group!</H1>
-        <Text>xxxxx.</Text>
+        <H1>Input Challenge group id!</H1>
+        <Text>
+          Input your group challenge that you want to join and get started
+          achieving your goals.
+        </Text>
         <Form>
           <Label style={styles.Title}>Group id</Label>
           <Item>
