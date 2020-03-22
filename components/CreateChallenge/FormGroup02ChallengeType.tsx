@@ -124,12 +124,12 @@ function FormGroup02ChallengeType({navigation}, props) {
           <CardItem
             header
             button
-            onPress={() => navigation.navigate('GroupChallengeSearch')}>
+            onPress={() => navigation.navigate('GroupChallengeLibrary')}>
             <Text style={{paddingLeft: 120}}>Search Challenge</Text>
           </CardItem>
           <CardItem
             button
-            onPress={() => navigation.navigate('GroupChallengeSearch')}>
+            onPress={() => navigation.navigate('GroupChallengeLibrary')}>
             <Body>
               <Text>
                 Pick challenge that someone created. Challenge title is
