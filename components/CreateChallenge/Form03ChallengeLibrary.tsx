@@ -30,7 +30,7 @@ import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
 import useStore from '../../state/state';
 
-function FormSearch01Challenge({navigation, route}, props) {
+function Form03ChallengeLibrary({navigation, route}, props) {
   const state = useStore(state => state);
   const [loading, setLoading] = useState(true);
   const [allChallengeList, setAllChallengeList] = useState([]);
@@ -78,7 +78,7 @@ function FormSearch01Challenge({navigation, route}, props) {
             goals.
           </Text>
           <Form>
-            <Label style={styles.Title}>Search challenges</Label>
+            <Label style={styles.Title}>Challenge library</Label>
             <Item>
               <Input
                 placeholder="Search"
@@ -137,4 +137,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FormSearch01Challenge;
+export default Form03ChallengeLibrary;

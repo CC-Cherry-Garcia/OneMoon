@@ -29,6 +29,7 @@ import * as queries from '../../src/graphql/queries';
 import * as customMutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
+import Colors from '../../variablesColors';
 
 function Form04ChallengeConfirmation({navigation, route}, props) {
   // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
@@ -228,10 +229,11 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           make any changes.
         </Text>
         <Text style={styles.textDefault}>
-          Title: {state.challengeInput.title}
+          <Text style={{fontWeight: 'bold'}}>Title:</Text>{' '}
+          {state.challengeInput.title}
         </Text>
         <Text style={styles.textDefault}>
-          Start Date:{' '}
+          <Text style={{fontWeight: 'bold'}}>Start Date:</Text>{' '}
           {`${new Date(
             state.challengeInput.startDate,
           ).getFullYear()}/${new Date(
@@ -374,6 +376,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 

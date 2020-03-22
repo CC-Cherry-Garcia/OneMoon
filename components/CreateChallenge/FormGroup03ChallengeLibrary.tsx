@@ -29,8 +29,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
 import * as queries from '../../src/graphql/queries';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
-function FormGroup03ChallengeSearch({navigation, route}, props) {
+function FormGroup03ChallengeLibrary({navigation, route}, props) {
   const state = useStore(state => state);
   const [loading, setLoading] = useState(true);
   const [allChallengeList, setAllChallengeList] = useState([]);
@@ -78,7 +79,7 @@ function FormGroup03ChallengeSearch({navigation, route}, props) {
             goals.
           </Text>
           <Form>
-            <Label style={styles.Title}>Search challenges</Label>
+            <Label style={styles.Title}>Challenge library</Label>
             <Item>
               <Input
                 placeholder="Search"
@@ -128,13 +129,16 @@ const styles = StyleSheet.create({
   },
   textDefault: {
     marginTop: 20,
+    fontSize: 18,
   },
   textInputDefault: {
     margin: 10,
+    fontSize: 18,
   },
   btn: {
     marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 
-export default FormGroup03ChallengeSearch;
+export default FormGroup03ChallengeLibrary;

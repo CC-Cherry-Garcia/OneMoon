@@ -9,8 +9,12 @@ import {
   CardItem,
   Body,
   Icon,
+  Col,
+  Row,
+  Grid,
 } from 'native-base';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
 function Form02ChallengeType({navigation}, props) {
   const state = useStore(state => state);
@@ -21,79 +25,97 @@ function Form02ChallengeType({navigation}, props) {
         <H1 style={styles.H1}>Choose your Challenge Type</H1>
         <Card>
           <CardItem
-            header
-            button
             onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
-            <Icon
-              active
-              style={styles.QuantIcon}
-              name="arrow-round-forward-outline"
-            />
-            <Text style={{paddingLeft: 120}}>Quantity Challenge</Text>
+            <Grid style={styles.Grid}>
+              <Col style={{width: 50}}>
+                <Icon
+                  // active
+                  // style={styles.QuantIcon}
+                  name="apps"
+                  style={styles.Icon}
+                  onPress={() => navigation.navigate('ChallengeQuantityInfo')}
+                />
+              </Col>
+              <Col>
+                <Text
+                  style={styles.CardTitle}
+                  onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+                  Quantity Challenge
+                </Text>
+                <Text
+                  onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+                  Pick this if you want to increase the amount of times you do
+                  something. For example: 5 more squats everyday.
+                </Text>
+              </Col>
+            </Grid>
           </CardItem>
-          <CardItem
-            button
-            onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
-            <Body>
-              <Text>
-                Pick this if you want to increase the amount of times you do
-                something. For example: 5 more squats everyday.
-              </Text>
-            </Body>
+        </Card>
+        <Card>
+          <CardItem onPress={() => navigation.navigate('ChallengeTimeInfo')}>
+            <Grid style={styles.Grid}>
+              <Col style={{width: 50}}>
+                <Icon
+                  // active
+                  // style={styles.QuantIcon}
+                  name="md-time"
+                  style={styles.Icon}
+                  onPress={() => navigation.navigate('ChallengeTimeInfo')}
+                />
+              </Col>
+              <Col>
+                <Text
+                  style={styles.CardTitle}
+                  onPress={() => navigation.navigate('ChallengeTimeInfo')}>
+                  Time Challenge
+                </Text>
+                <Text onPress={() => navigation.navigate('ChallengeTimeInfo')}>
+                  Pick this if you want to increase the duration you do
+                  something. For example: Read for 10 minutes longer everyday.
+                </Text>
+              </Col>
+            </Grid>
+          </CardItem>
+        </Card>
+        <Card>
+          <CardItem onPress={() => navigation.navigate('ChallengeLibraryInfo')}>
+            <Grid style={styles.Grid}>
+              <Col style={{width: 50}}>
+                <Icon
+                  // active
+                  // style={styles.QuantIcon}
+                  name="refresh"
+                  style={styles.Icon}
+                  onPress={() => navigation.navigate('ChallengeLibraryInfo')}
+                />
+              </Col>
+              <Col>
+                <Text
+                  style={styles.CardTitle}
+                  onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
+                  Same Daily Goal Challenge
+                </Text>
+                <Text
+                  onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
+                  Pick this if you want to increase the duration you do
+                  something. For example: Read for 10 minutes longer everyday.
+                </Text>
+              </Col>
+            </Grid>
           </CardItem>
         </Card>
         <Card>
           <CardItem
             header
             button
-            onPress={() => navigation.navigate('ChallengeTimeInfo')}>
-            <Icon active style={styles.QuantIcon} name="md-time" />
-            <Text style={{paddingLeft: 120}}>Time Challenge</Text>
-          </CardItem>
-          <CardItem
-            button
-            onPress={() => navigation.navigate('ChallengeTimeInfo')}>
-            <Body>
-              <Text>
-                Pick this if you want to increase the duration you do something.
-                For example: Read for 10 minutes longer everyday.
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem
-            header
-            button
-            onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
-            <Text style={{paddingLeft: 120}}>Same Daily Goal Challenge</Text>
-          </CardItem>
-          <CardItem
-            button
-            onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
-            <Body>
-              <Text>
-                Pick this if you want to complete the same goal for 30 days. For
-                example: Go for a walk.
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem
-            header
-            button
-            onPress={() => navigation.navigate('ChallengeSearch')}>
+            onPress={() => navigation.navigate('ChallengeLibrary')}>
             <Text style={{paddingLeft: 120}}>Search Challenge</Text>
           </CardItem>
           <CardItem
             button
-            onPress={() => navigation.navigate('ChallengeSearch')}>
+            onPress={() => navigation.navigate('ChallengeLibrary')}>
             <Body>
-              <Text>
-                Pick challenge that someone created. Challenge title is
-                rewritten by the challenge you selected.
-              </Text>
+              <Text>Pick challenge that someone created.</Text>
             </Body>
           </CardItem>
         </Card>
@@ -114,14 +136,28 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   QuantIcon: {
-    position: 'absolute',
+    // position: 'absolute',
     color: 'rgba(24, 61, 95, 0.4)',
-    marginLeft: 10,
-    paddingTop: 20,
-    fontSize: 100,
-    width: 120,
-    height: 120,
+    // marginLeft: 10,
+    // paddingTop: 75,
+    // fontSize: 100,
+    // width: 120,
+    // height: 250,
+    // lineHeight: 120,
+    marginBottom: 20,
     // marginLeft: 200,
+  },
+  Grid: {
+    // padding: 20,
+  },
+  CardTitle: {
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  Icon: {
+    color: Colors.primary,
+    fontSize: 50,
+    width: 50,
   },
 });
 

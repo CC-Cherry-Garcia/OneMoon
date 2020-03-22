@@ -20,6 +20,7 @@ import {
   Body,
 } from 'native-base';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
 function Form03ChallengeQuantity({navigation, route}, props) {
   const state = useStore(state => state);
@@ -31,23 +32,11 @@ function Form03ChallengeQuantity({navigation, route}, props) {
     <Container style={styles.Container}>
       <Content padder>
         <H1>Set your Daily Task</H1>
-        <Text>
+        <Text style={styles.textDefault}>
           Enter your Daily Task and how much you want the quantity to increase
           by daily.
         </Text>
-        <Text style={styles.textDefault}>Challenge Title</Text>
-        <Item>
-          <Input
-            placeholder="Squat Til You Drop"
-            onChangeText={TextInputValue =>
-              state.setChallengeInput({
-                ...state.challengeInput,
-                title: TextInputValue,
-              })
-            }
-          />
-        </Item>
-        <Text style={styles.textDefault}>Daily Task:</Text>
+        <Text style={styles.Title}>Daily Task:</Text>
         <TextInput
           onChangeText={TextInputValue =>
             state.setChallengeInput({
@@ -58,7 +47,7 @@ function Form03ChallengeQuantity({navigation, route}, props) {
           placeholder=" Squats"
           style={styles.textInputDefault}
         />
-        <Text style={styles.textDefault}>Increase Daily Quantity by:</Text>
+        <Text style={styles.Title}>Increase Daily Quantity by:</Text>
         <TextInput
           onChangeText={TextInputValue =>
             state.setChallengeInput({
@@ -92,12 +81,15 @@ const styles = StyleSheet.create({
   },
   textDefault: {
     marginTop: 20,
+    fontSize: 18,
   },
   textInputDefault: {
     margin: 10,
+    fontSize: 18,
   },
   btn: {
     marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 

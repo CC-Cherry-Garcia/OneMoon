@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {Component, useEffect, useState} from 'react';
 import {StyleSheet, TextInput, Alert} from 'react-native';
 import {
@@ -30,6 +31,7 @@ import * as queries from '../../src/graphql/queries';
 import * as mutations from '../../src/graphql/mutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
+import Colors from '../../variablesColors';
 
 function FormJoin02GroupConfirmation({navigation, route}, props) {
   const state = useStore(state => state);
@@ -199,18 +201,32 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
     return (
       <Container style={styles.Container}>
         <Content padder>
+          <H1>Double check your Group Challenge</H1>
           <Text style={styles.textDefault}>
-            Title: {state.groupChallengeInformation.challenge.title}
-          </Text>
-          <H1>Double check your Challenge</H1>
-          <Text style={styles.textDefault}>
-            See your 30-day challenge below. Use the back button if you need to
-            make any changes.
+            <Text style={{fontWeight: 'bold'}}>Title:</Text>{' '}
+            {state.groupChallengeInformation.challenge.title}
           </Text>
 
           <Text style={styles.textDefault}>
-            Start Date: {state.groupChallengeInformation.startDate}
+            <Text style={{fontWeight: 'bold'}}>Start Date:</Text>{' '}
+            {`${new Date(
+              state.groupChallengeInformation.startDate,
+            ).getFullYear()}/${new Date(
+              state.groupChallengeInformation.startDate,
+            ).getMonth() + 1}/${new Date(
+              state.groupChallengeInformation.startDate,
+            ).getDate()}`}
           </Text>
+          <Button
+            title="Start Group Challenge"
+            onPress={() => {
+              insertChallenge();
+              // props.changeView();
+              navigation.navigate('Home', {screen: 'HomeUser'});
+            }}
+            style={styles.btn}>
+            <Text>Join Group Challenge</Text>
+          </Button>
           <List>
             <ListItem>
               <Text>{state.groupChallengeInformation.challenge.task1Name}</Text>
@@ -351,8 +367,9 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
               insertChallenge();
               // props.changeView();
               navigation.navigate('Home', {screen: 'HomeUser'});
-            }}>
-            <Text>Save Challenge</Text>
+            }}
+            style={styles.btn}>
+            <Text>Join Group Challenge</Text>
           </Button>
         </Content>
       </Container>
@@ -368,15 +385,19 @@ const styles = StyleSheet.create({
   Title: {
     fontWeight: 'bold',
     marginTop: 20,
+    fontSize: 18,
   },
   textDefault: {
     marginTop: 20,
+    fontSize: 18,
   },
   textInputDefault: {
     margin: 10,
+    fontSize: 18,
   },
   btn: {
     marginTop: 20,
+    backgroundColor: Colors.primary,
   },
 });
 

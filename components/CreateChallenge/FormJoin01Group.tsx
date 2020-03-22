@@ -16,6 +16,7 @@ import {
   DatePicker,
 } from 'native-base';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 let groupIdEmpty = true;
 
 function FormJoin01Group({navigation}, props) {
@@ -52,7 +53,8 @@ function FormJoin01Group({navigation}, props) {
             disabled={groupIdEmpty}
             onPress={() =>
               navigation.navigate('JoinGroupChallengeConfirmation')
-            }>
+            }
+            style={styles.btn}>
             <Text>Next Step</Text>
           </Button>
         </Form>
@@ -68,6 +70,10 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontWeight: 'bold',
+    marginTop: 20,
+  },
+  btn: {
+    backgroundColor: Colors.primary,
     marginTop: 20,
   },
 });
