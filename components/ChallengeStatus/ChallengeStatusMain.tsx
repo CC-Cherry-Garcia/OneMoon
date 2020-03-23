@@ -232,7 +232,7 @@ function ChallengeStatusMain({navigation, route}, props) {
         const groupChallenges = res.data.listGroupChallenges.items;
         const groupUsersInput = [];
         for (const groupChallengeOfOneUser of groupChallenges) {
-          groupUsersInput.push(groupChallengeOfOneUser.userId);
+          groupUsersInput.push(groupChallengeOfOneUser.userId.charAt(0).toUpperCase() + groupChallengeOfOneUser.userId.substring(1).toLowerCase());
         }
         state.setGroupUsers(groupUsersInput);
 
