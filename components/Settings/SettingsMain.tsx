@@ -22,6 +22,7 @@ function SettingsMain(props) {
   const state = useStore(state => state);
   function signOut() {
     state.setUserActiveChallengesList([]);
+    state.setUserInactiveChallengesList([]);
     Auth.signOut()
       .then(data => {
         // setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);

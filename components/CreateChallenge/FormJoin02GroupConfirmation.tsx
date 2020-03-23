@@ -210,6 +210,12 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
       <Container style={styles.Container}>
         <Content padder>
           <H1>Double check your Group Challenge</H1>
+          <View
+            style={{
+              borderBottomColor: 'lightgray',
+              borderBottomWidth: 1,
+            }}
+          />
           <Text style={styles.textDefault}>
             <Text style={{fontWeight: 'bold'}}>Title:</Text>{' '}
             {state.groupChallengeInformation.challenge.title}
@@ -388,7 +394,6 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',

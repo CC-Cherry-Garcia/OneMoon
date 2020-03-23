@@ -26,6 +26,12 @@ function Form00CreateTop({navigation}, props) {
     <Container style={styles.Container}>
       <Content>
         <H1>You're only 30 days away from achieving a new goal</H1>
+        <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+          }}
+        />
         <Text style={styles.Text}>
           You can create an individual challenge, group challenge with your
           friends, or join an existing group challenge.
@@ -60,7 +66,6 @@ function Form00CreateTop({navigation}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',
