@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react';
-import {TextInput, Alert} from 'react-native';
-import {Text, Button, Icon, View, H1} from 'native-base';
+import {TextInput, Alert, Image} from 'react-native';
+import {Text, Button, View, H1, Item, Label, Input} from 'native-base';
 import {Auth} from 'aws-amplify';
 import LocalPushNotificationSetting from './LocalPushNotificationSetting';
 
@@ -15,6 +15,13 @@ let usernameEmpty = true;
 let emailEmpty = true;
 let confirmationEmpty = true;
 
+function emptyFlags() {
+  passwordEmpty = true;
+  usernameEmpty = true;
+  emailEmpty = true;
+  confirmationEmpty = true;
+}
+
 function reducer(state: any, action: {type: string}) {
   switch (action.type) {
     case 'updateFormState':
@@ -28,6 +35,7 @@ function reducer(state: any, action: {type: string}) {
 }
 
 async function signUp({username, password, email}, updateFormType) {
+  emptyFlags();
   try {
     console.log('sign up try!', username, email, updateFormType);
     await Auth.signUp({
@@ -49,6 +57,7 @@ async function signUp({username, password, email}, updateFormType) {
 }
 
 async function confirmSignUp({username, confirmationCode}, updateFormType) {
+  emptyFlags();
   try {
     console.log('try confirm sign up :', username, confirmationCode);
     await Auth.confirmSignUp(username, confirmationCode);
@@ -66,6 +75,7 @@ async function confirmSignUp({username, confirmationCode}, updateFormType) {
 }
 
 async function signIn({username, password}) {
+  emptyFlags();
   try {
     console.log('try sign in :', username);
     const result = await Auth.signIn(username, password);
@@ -127,7 +137,12 @@ export default function EmailLoginForm() {
       {formType === 'signUp' && (
         <Text style={styles.footer}>
           Already have an account?{' '}
-          <Text style={styles.anchor} onPress={() => updateFormType('signIn')}>
+          <Text
+            style={styles.anchor}
+            onPress={() => {
+              updateFormType('signIn');
+              emptyFlags();
+            }}>
             Sign In
           </Text>
         </Text>
@@ -135,8 +150,26 @@ export default function EmailLoginForm() {
       {formType === 'signIn' && (
         <Text style={styles.footer}>
           Need an account?{' '}
-          <Text style={styles.anchor} onPress={() => updateFormType('signUp')}>
+          <Text
+            style={styles.anchor}
+            onPress={() => {
+              emptyFlags();
+              updateFormType('signUp');
+            }}>
             Sign Up
+          </Text>
+        </Text>
+      )}
+      {formType === 'confirmSignUp' && (
+        <Text style={styles.footer}>
+          Go back to the{' '}
+          <Text
+            style={styles.anchor}
+            onPress={() => {
+              emptyFlags();
+              updateFormType('signUp');
+            }}>
+            Sign Up Page
           </Text>
         </Text>
       )}
@@ -147,64 +180,91 @@ export default function EmailLoginForm() {
 function SignUp(props) {
   return (
     <View style={styles.container}>
-      <H1>Sign Up</H1>
-      <TextInput
-        name="username"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('username', e);
-          if (e.nativeEvent.text.length > 0) {
-            usernameEmpty = false;
-          } else {
-            usernameEmpty = true;
-          }
+      <H1 style={{marginBottom: 60, marginTop: 20}}>Sign Up</H1>
+      <Image
+        style={{
+          width: 160,
+          height: 130,
+          marginBottom: 30,
         }}
-        style={styles.input}
-        placeholder="username"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="next"
-        onSubmitEditing={() => this.secondInput.focus()}
+        source={require('../src/assets/img/oneMoonLogo-white-background.png')}
       />
-      <TextInput
-        ref={ref => {
-          this.secondInput = ref;
-        }}
-        type="password"
-        name="password"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('password', e);
-          if (e.nativeEvent.text.length > 0) {
-            passwordEmpty = false;
-          } else {
-            passwordEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="password"
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry={true}
-      />
-      <TextInput
-        name="email"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('email', e);
-          if (e.nativeEvent.text.length > 0) {
-            emailEmpty = false;
-          } else {
-            emailEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="email"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        onSubmitEditing={props.signUp}
-      />
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>username</Label>
+
+        <Input
+          name="username"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('username', e);
+            if (e.nativeEvent.text.length > 0) {
+              usernameEmpty = false;
+            } else {
+              usernameEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          onSubmitEditing={() => this.password._root.focus()}
+        />
+      </Item>
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>password</Label>
+
+        <Input
+          getRef={input => {
+            this.password = input;
+          }}
+          type="password"
+          name="password"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('password', e);
+            if (e.nativeEvent.text.length > 0) {
+              passwordEmpty = false;
+            } else {
+              passwordEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          secureTextEntry={true}
+          onSubmitEditing={() => this.email._root.focus()}
+        />
+      </Item>
+      <Item
+        floatingLabel
+        style={{marginBottom: 40, marginLeft: 15, marginRight: 15}}>
+        <Label>email</Label>
+
+        <Input
+          getRef={input => {
+            this.email = input;
+          }}
+          name="email"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('email', e);
+            if (e.nativeEvent.text.length > 0) {
+              emailEmpty = false;
+            } else {
+              emailEmpty = true;
+            }
+          }}
+          placeholder="email"
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="go"
+          onSubmitEditing={props.signUp}
+        />
+      </Item>
+
       <Button
         disabled={passwordEmpty || usernameEmpty || emailEmpty}
         title="Sign Up"
@@ -219,53 +279,69 @@ function SignUp(props) {
     </View>
   );
 }
-
 function SignIn(props) {
   return (
     <View style={styles.container}>
-      <H1>Login</H1>
-      <TextInput
-        name="username"
-        onChange={e => {
-          console.log(e.nativeEvent.text);
-          e.persist();
-          props.updateFormState('username', e);
-          if (e.nativeEvent.text.length > 0) {
-            usernameEmpty = false;
-          } else {
-            usernameEmpty = true;
-          }
+      <H1 style={{marginBottom: 60, marginTop: 20}}>Login</H1>
+      <Image
+        style={{
+          width: 160,
+          height: 130,
+          marginBottom: 30,
         }}
-        style={styles.input}
-        placeholder="username"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="next"
-        onSubmitEditing={() => this.secondInput.focus()}
+        source={require('../src/assets/img/oneMoonLogo-white-background.png')}
       />
-      <TextInput
-        ref={ref => {
-          this.secondInput = ref;
-        }}
-        type="password"
-        name="password"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('password', e);
-          if (e.nativeEvent.text) {
-            passwordEmpty = false;
-          } else {
-            passwordEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="password"
-        secureTextEntry={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        onSubmitEditing={props.signIn}
-      />
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>username</Label>
+
+        <Input
+          name="username"
+          onChange={e => {
+            console.log(e.nativeEvent.text);
+            e.persist();
+            props.updateFormState('username', e);
+            if (e.nativeEvent.text.length > 0) {
+              usernameEmpty = false;
+            } else {
+              usernameEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          onSubmitEditing={() => this.password._root.focus()}
+        />
+      </Item>
+
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>password</Label>
+
+        <Input
+          getRef={input => {
+            this.password = input;
+          }}
+          type="password"
+          name="password"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('password', e);
+            if (e.nativeEvent.text) {
+              passwordEmpty = false;
+            } else {
+              passwordEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="go"
+          secureTextEntry={true}
+          onSubmitEditing={props.signIn}
+        />
+      </Item>
       <Button
         disabled={passwordEmpty || usernameEmpty}
         title="Sign In"
@@ -282,28 +358,42 @@ function SignIn(props) {
 function ConfirmSignUp(props) {
   return (
     <View style={styles.container}>
-      <Text>
+      <H1 style={{marginBottom: 60, marginTop: 20}}>Email verification</H1>
+      <Image
+        style={{
+          width: 160,
+          height: 130,
+          marginBottom: 30,
+        }}
+        source={require('../src/assets/img/oneMoonLogo-white-background.png')}
+      />
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>Confirmation Code</Label>
+
+        <Input
+          name="confirmationCode"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('confirmationCode', e);
+            if (e.nativeEvent.text) {
+              confirmationEmpty = false;
+            } else {
+              confirmationEmpty = true;
+            }
+          }}
+          placeholder="Confirmation Code"
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="go"
+          onSubmitEditing={props.confirmSignUp}
+        />
+      </Item>
+      <Text style={{marginBottom: 20}}>
         Please check your email for a verification email and enter the
         confirmation code below:
       </Text>
-      <TextInput
-        name="confirmationCode"
-        placeholder="Confirmation Code"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        onSubmitEditing={props.confirmSignUp}
-        onChange={e => {
-          e.persist();
-          props.updateFormState('confirmationCode', e);
-          if (e.nativeEvent.text) {
-            confirmationEmpty = false;
-          } else {
-            confirmationEmpty = true;
-          }
-        }}
-        style={styles.input}
-      />
       <Button
         disabled={confirmationEmpty}
         title="Sign In"
@@ -319,9 +409,9 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 150,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 5,
   },
   input: {
     borderColor: 'lightgray',

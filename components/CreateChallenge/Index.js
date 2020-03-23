@@ -258,7 +258,7 @@ function CreateChallenge({navigation, route}) {
         component={FormJoin02GroupConfirmation}
         initialParams={{userName: route.params.userName}}
         options={{
-          title: 'Join Group Challenge Confirmation',
+          title: 'Group Challenge Confirmation',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}

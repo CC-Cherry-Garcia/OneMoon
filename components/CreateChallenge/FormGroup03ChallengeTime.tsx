@@ -32,6 +32,12 @@ function FormGroup03ChallengeTime({navigation, route}, props) {
     <Container style={styles.Container}>
       <Content padder>
         <H1>Set your Daily Task</H1>
+        <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+          }}
+        />
         <Text style={styles.textDefault}>
           Enter your Daily Task and choose how many minutes per day you want to
           increase the task by daily.
@@ -73,7 +79,6 @@ function FormGroup03ChallengeTime({navigation, route}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',

@@ -39,6 +39,12 @@ function Form01TitleAndDate({navigation}, props) {
     <Container style={styles.Container}>
       <Content>
         <H1>Create your Challenge!</H1>
+        <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+          }}
+        />
         <Text style={styles.TextIntro}>
           First, select a title and pick your start date.
         </Text>
@@ -95,7 +101,6 @@ function Form01TitleAndDate({navigation}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',
