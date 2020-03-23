@@ -18,6 +18,8 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
+let titleInputEmpty = true;
+let groupNameInputEmpty = true;
 
 function FormGroup01TitleAndDateAndGroup({navigation}, props) {
   const state = useStore(state => state);
@@ -54,12 +56,17 @@ function FormGroup01TitleAndDateAndGroup({navigation}, props) {
             <Input
               placeholder="Squat Til You Drop"
               style={styles.Text}
-              onChangeText={TextInputValue =>
+              onChangeText={TextInputValue => {
                 state.setChallengeInput({
                   ...state.challengeInput,
                   title: TextInputValue,
-                })
-              }
+                });
+                if (TextInputValue.length > 0) {
+                  titleInputEmpty = false;
+                } else {
+                  titleInputEmpty = true;
+                }
+              }}
             />
           </Item>
           <Label style={styles.Title}>Group Name:</Label>
@@ -67,12 +74,17 @@ function FormGroup01TitleAndDateAndGroup({navigation}, props) {
             <Input
               placeholder="Squat Challenge Group"
               style={styles.Text}
-              onChangeText={TextInputValue =>
+              onChangeText={TextInputValue => {
                 state.setChallengeInput({
                   ...state.challengeInput,
                   groupName: TextInputValue,
-                })
-              }
+                });
+                if (TextInputValue.length > 0) {
+                  groupNameInputEmpty = false;
+                } else {
+                  groupNameInputEmpty = true;
+                }
+              }}
             />
           </Item>
           <Label style={styles.Title}>Start Date:</Label>
@@ -101,7 +113,12 @@ function FormGroup01TitleAndDateAndGroup({navigation}, props) {
           </Item>
           <Button
             block
-            style={styles.btn}
+            style={
+              titleInputEmpty || groupNameInputEmpty
+                ? styles.btnDisabled
+                : styles.btn
+            }
+            disabled={titleInputEmpty || groupNameInputEmpty}
             onPress={() => navigation.navigate('GroupChallengeType')}>
             <Text>Next Step</Text>
           </Button>
@@ -129,6 +146,10 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 20,
     backgroundColor: Colors.primary,
+  },
+  btnDisabled: {
+    marginTop: 20,
+    backgroundColor: 'lightgray',
   },
 });
 

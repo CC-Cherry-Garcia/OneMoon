@@ -18,6 +18,7 @@ import {
 } from 'native-base';
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
+let titleInputEmpty = true;
 
 function Form01TitleAndDate({navigation}, props) {
   const state = useStore(state => state);
@@ -53,12 +54,17 @@ function Form01TitleAndDate({navigation}, props) {
           <Item>
             <Input
               placeholder="Squat Til You Drop"
-              onChangeText={TextInputValue =>
+              onChangeText={TextInputValue => {
                 state.setChallengeInput({
                   ...state.challengeInput,
                   title: TextInputValue,
-                })
-              }
+                });
+                if (TextInputValue.length > 0) {
+                  titleInputEmpty = false;
+                } else {
+                  titleInputEmpty = true;
+                }
+              }}
               style={styles.Text}
             />
           </Item>
@@ -87,9 +93,10 @@ function Form01TitleAndDate({navigation}, props) {
             />
           </Item>
           <Button
-            style={styles.btn}
+            style={titleInputEmpty ? styles.btnDisabled : styles.btn}
             block
-            onPress={() => navigation.navigate('ChallengeType')}>
+            onPress={() => navigation.navigate('ChallengeType')}
+            disabled={titleInputEmpty}>
             <Text>Next Step</Text>
           </Button>
         </Form>
@@ -116,6 +123,10 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 20,
     backgroundColor: Colors.primary,
+  },
+  btnDisabled: {
+    marginTop: 20,
+    backgroundColor: 'lightgray',
   },
 });
 

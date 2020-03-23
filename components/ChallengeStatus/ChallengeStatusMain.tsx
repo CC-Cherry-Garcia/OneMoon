@@ -15,7 +15,7 @@ import {
   Left,
   Right,
   Body,
-  Spinner
+  Spinner,
 } from 'native-base';
 import {
   Table,
@@ -99,22 +99,22 @@ function ChallengeStatusMain({navigation, route}, props) {
     }
 
     API.graphql(graphqlOperation(mutation, {input}))
-    .then(res => {
-      state.setCurrentChallengeTodayTaskIsDone(true);
-      state.setUserCurrentChallenge({
-        ...state.userCurrentChallenge,
-        [`task${state.currentChallengeTodayDate}IsDone`]: true,
-      });
-      Alert.alert('Great Job!!!');
-      LocalPushNotificationSetting.completeTodayTask();
-      if (
-        state.currentChallengeTodayDate === 30 &&
-        state.userActiveChallengesList.length === 1
-      ) {
-        LocalPushNotificationSetting.unregister();
-      }
-    })
-    .catch(error => console.error(error));
+      .then(res => {
+        state.setCurrentChallengeTodayTaskIsDone(true);
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: true,
+        });
+        Alert.alert('Great Job!!!');
+        LocalPushNotificationSetting.completeTodayTask();
+        if (
+          state.currentChallengeTodayDate === 30 &&
+          state.userActiveChallengesList.length === 1
+        ) {
+          LocalPushNotificationSetting.unregister();
+        }
+      })
+      .catch(error => console.error(error));
   }
 
   async function notYet() {
@@ -130,15 +130,15 @@ function ChallengeStatusMain({navigation, route}, props) {
     }
 
     API.graphql(graphqlOperation(mutation, {input}))
-    .then(res => {
-      state.setCurrentChallengeTodayTaskIsDone(false);
-      state.setUserCurrentChallenge({
-        ...state.userCurrentChallenge,
-        [`task${state.currentChallengeTodayDate}IsDone`]: false,
-      });
-      Alert.alert('Not complete yet');
-    })
-    .catch(error => console.error(error));
+      .then(res => {
+        state.setCurrentChallengeTodayTaskIsDone(false);
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: false,
+        });
+        Alert.alert('Not complete yet');
+      })
+      .catch(error => console.error(error));
   }
 
   useEffect(() => {
@@ -151,26 +151,26 @@ function ChallengeStatusMain({navigation, route}, props) {
         id: state.userCurrentChallenge.id,
       }),
     )
-    .then(res => {
-      let isDone;
-      if (res.data.getUserChallenge) {
-        isDone =
-          res.data.getUserChallenge[
-            `task${state.currentChallengeTodayDate}IsDone`
-          ];
-      } else {
-        isDone =
-          res.data.getGroupChallenge[
-            `task${state.currentChallengeTodayDate}IsDone`
-          ];
-      }
-      state.setUserCurrentChallenge({
-        ...state.userCurrentChallenge,
-        [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
-      });
-      setLoading(false);
-    })
-    .catch(err => console.log(err));
+      .then(res => {
+        let isDone;
+        if (res.data.getUserChallenge) {
+          isDone =
+            res.data.getUserChallenge[
+              `task${state.currentChallengeTodayDate}IsDone`
+            ];
+        } else {
+          isDone =
+            res.data.getGroupChallenge[
+              `task${state.currentChallengeTodayDate}IsDone`
+            ];
+        }
+        state.setUserCurrentChallenge({
+          ...state.userCurrentChallenge,
+          [`task${state.currentChallengeTodayDate}IsDone`]: isDone,
+        });
+        setLoading(false);
+      })
+      .catch(err => console.log(err));
   }, [state.currentChallengeTodayDate]);
 
   useEffect(() => {
@@ -241,52 +241,52 @@ function ChallengeStatusMain({navigation, route}, props) {
         filter: {groupId: {eq: state.userCurrentChallenge.groupId}},
       }),
     )
-    .then(res => {
-      const groupChallenges = res.data.listGroupChallenges.items;
-      const groupUsersInput = [];
-      for (const groupChallengeOfOneUser of groupChallenges) {
-        groupUsersInput.push(
-          groupChallengeOfOneUser.userId.charAt(0).toUpperCase() + 
-          groupChallengeOfOneUser.userId.substring(1).toLowerCase()
-        );
-      }
-      state.setGroupUsers(groupUsersInput);
-
-      const groupProgressDataInput = [];
-      let countOfTotalTasksDone = 0;
-      for (const groupChallengeOfOneUser of groupChallenges) {
-        const dataInputRow = [];
-
-        if (
-          groupChallengeOfOneUser[
-            `task${state.currentChallengeTodayDate}IsDone`
-          ] === true
-        ) {
-          dataInputRow.push('👍🏻');
-        } else {
-          dataInputRow.push('❓');
+      .then(res => {
+        const groupChallenges = res.data.listGroupChallenges.items;
+        const groupUsersInput = [];
+        for (const groupChallengeOfOneUser of groupChallenges) {
+          groupUsersInput.push(
+            groupChallengeOfOneUser.userId.charAt(0).toUpperCase() +
+              groupChallengeOfOneUser.userId.substring(1).toLowerCase(),
+          );
         }
+        state.setGroupUsers(groupUsersInput);
 
-        let countOfTasksDone = 0;
-        for (let [key, value] of Object.entries(groupChallengeOfOneUser)) {
-          if (key.slice(-6) === 'IsDone' && value === true) {
-            countOfTasksDone++;
+        const groupProgressDataInput = [];
+        let countOfTotalTasksDone = 0;
+        for (const groupChallengeOfOneUser of groupChallenges) {
+          const dataInputRow = [];
+
+          if (
+            groupChallengeOfOneUser[
+              `task${state.currentChallengeTodayDate}IsDone`
+            ] === true
+          ) {
+            dataInputRow.push('👍🏻');
+          } else {
+            dataInputRow.push('❓');
           }
+
+          let countOfTasksDone = 0;
+          for (let [key, value] of Object.entries(groupChallengeOfOneUser)) {
+            if (key.slice(-6) === 'IsDone' && value === true) {
+              countOfTasksDone++;
+            }
+          }
+          const progressOfOneUser = Math.ceil((countOfTasksDone / 30) * 100);
+          dataInputRow.push(`${progressOfOneUser}%`);
+          groupProgressDataInput.push(dataInputRow);
+
+          countOfTotalTasksDone += countOfTasksDone;
         }
-        const progressOfOneUser = Math.ceil((countOfTasksDone / 30) * 100);
-        dataInputRow.push(`${progressOfOneUser}%`);
-        groupProgressDataInput.push(dataInputRow);
+        const progressOfAllUsersAVG = Math.ceil(
+          (countOfTotalTasksDone / (30 * groupChallenges.length)) * 100,
+        );
+        state.setCurrentGroupTotalProgress(progressOfAllUsersAVG);
 
-        countOfTotalTasksDone += countOfTasksDone;
-      }
-      const progressOfAllUsersAVG = Math.ceil(
-        (countOfTotalTasksDone / (30 * groupChallenges.length)) * 100,
-      );
-      state.setCurrentGroupTotalProgress(progressOfAllUsersAVG);
-
-      state.setCurrentGroupProgressData(groupProgressDataInput);
-    })
-    .catch(err => console.log(err));
+        state.setCurrentGroupProgressData(groupProgressDataInput);
+      })
+      .catch(err => console.log(err));
   }, [state.userCurrentChallenge]);
 
   if (loading) {
@@ -310,7 +310,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </H1>
               </Body>
             </Card>
-  
+
             <Card style={styles.viewCard}>
               <Body>
                 <CardItem header>
@@ -349,7 +349,7 @@ function ChallengeStatusMain({navigation, route}, props) {
                 )}
               </Body>
             </Card>
-  
+
             <Card style={styles.viewCard}>
               <Body>
                 <CardItem header>
@@ -395,7 +395,9 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </View>
               </CardItem>
               <CardItem style={{padding: 10}}>
-                <Table borderStyle={{flex: 1, borderColor: 'transparent'}} style={{flex: 6}}>
+                <Table
+                  borderStyle={{flex: 1, borderColor: 'transparent'}}
+                  style={{flex: 6}}>
                   {tableData.map((rowData, index) => (
                     <TableWrapper key={index} style={styles.row}>
                       {rowData.map((cellData, cellIndex) => (
@@ -422,10 +424,35 @@ function ChallengeStatusMain({navigation, route}, props) {
                 </Table>
               </CardItem>
               <CardItem>
-                <Text><View style={{width: 20, height: 20, backgroundColor: '#5cb85c', margin: 0}}></View> Completed   <View style={{width: 20, height: 20, backgroundColor: 'lightgray', margin: 0}}></View> Incomplete   <View style={{width: 20, height: 20, backgroundColor: '#FFF1C1', margin: 0}}></View> Upcoming</Text>
+                <Text>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: '#5cb85c',
+                      margin: 0,
+                    }}></View>{' '}
+                  Completed{' '}
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: 'lightgray',
+                      margin: 0,
+                    }}></View>{' '}
+                  Incomplete{' '}
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: '#FFF1C1',
+                      margin: 0,
+                    }}></View>{' '}
+                  Upcoming
+                </Text>
               </CardItem>
             </Card>
-  
+
             <Button
               style={{
                 marginTop: 10,
@@ -438,7 +465,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               }>
               <Text>View Challenge</Text>
             </Button>
-  
+
             {state.userCurrentChallenge.groupId !== undefined && (
               <Card style={styles.viewCard}>
                 <Body>
