@@ -74,7 +74,7 @@ function FormGroup03ChallengeTime({navigation, route}, props) {
         />
         <Button
           title="Review your Challege"
-          onPress={() => navigation.navigate('ChallengeConfirmation')}
+          onPress={() => navigation.navigate('GroupChallengeConfirmation')}
           style={
             dailyTaskIsEmpty || dailyTimeIsEmpty
               ? styles.btnDisabled

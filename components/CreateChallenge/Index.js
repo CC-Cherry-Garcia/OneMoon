@@ -135,7 +135,7 @@ function CreateChallenge({navigation, route}) {
         component={Form04ChallengeConfirmation}
         initialParams={{userName: route.params.userName}}
         options={{
-          title: 'Challenge Confirmation',
+          title: 'Confirmation',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}
@@ -215,7 +215,7 @@ function CreateChallenge({navigation, route}) {
         component={FormGroup04ChallengeConfirmation}
         initialParams={{userName: route.params.userName}}
         options={{
-          title: 'Group Challenge Confirmation',
+          title: 'Confirmation',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}
@@ -229,7 +229,7 @@ function CreateChallenge({navigation, route}) {
         component={FormGroup05SharingInformation}
         initialParams={{userName: route.params.userName}}
         options={{
-          title: 'Group Challenge Sharing Information',
+          title: 'Sharing Information',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}
@@ -258,7 +258,7 @@ function CreateChallenge({navigation, route}) {
         component={FormJoin02GroupConfirmation}
         initialParams={{userName: route.params.userName}}
         options={{
-          title: 'Join Group Challenge Confirmation',
+          title: 'Confirmation',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}

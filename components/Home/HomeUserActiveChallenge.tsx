@@ -54,7 +54,6 @@ function HomeUserActiveChallenge({navigation, route}) {
               }
             }
           }
-          console.log('todayStatus :', todayStatus);
           return (
             <ListItem
               style={{
