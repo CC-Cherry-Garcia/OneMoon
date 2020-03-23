@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {Component, useEffect, useState, useRef} from 'react';
 import {StyleSheet, TextInput, Alert} from 'react-native';
 import {
@@ -71,18 +72,20 @@ function FormGroup03ChallengeLibrary({navigation, route}, props) {
     );
   } else {
     return (
-      <Container style={styles.Container}>
+      <Container style={styles.container}>
         <Content padder>
+          <H1>Search the Challenge library</H1>
+
           <Text>
             Search through the challenge library to find one that will get you
             started achieving your goals.
           </Text>
           <Form>
-            <Label style={styles.Title}>Challenge library</Label>
             <Item>
               <Input
-                placeholder="Search"
+                placeholder="Enter Search Here"
                 onChangeText={value => filterChallengeList(value)}
+                style={{marginBottom: 10}}
               />
             </Item>
             {filteredChallengeList.map(item => (

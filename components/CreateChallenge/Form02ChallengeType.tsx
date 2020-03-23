@@ -97,8 +97,8 @@ function Form02ChallengeType({navigation}, props) {
                 </Text>
                 <Text
                   onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
-                  Pick this if you want to increase the duration you do
-                  something. For example: Read for 10 minutes longer everyday.
+                  Pick this if you want to complete the same goal for 30 days.
+                  For example: Go for a walk.
                 </Text>
               </Col>
             </Grid>
