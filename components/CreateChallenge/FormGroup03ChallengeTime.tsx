@@ -22,13 +22,12 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
-function Form03ChallengeTime({navigation, route}, props) {
+function FormGroup03ChallengeTime({navigation, route}, props) {
   const state = useStore(state => state);
   useEffect(() => {
     state.setChallengeType('time');
   }, []);
 
-  console.log('state in Form03ChallengeTimetsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form03ChallengeTime;
+export default FormGroup03ChallengeTime;

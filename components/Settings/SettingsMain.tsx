@@ -16,19 +16,19 @@ import {
   DatePicker,
 } from 'native-base';
 import {Auth} from 'aws-amplify';
-
-function signOut() {
-  console.log('signOut :');
-  Auth.signOut()
-    .then(data => {
-      console.log('signed out: ', data);
-      // setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
-    })
-    .catch(err => console.log(err));
-}
+import useStore from '../../state/state';
 
 function SettingsMain(props) {
-  console.log('props in SettingsMain.tsx: ', props);
+  const state = useStore(state => state);
+  function signOut() {
+    state.setUserActiveChallengesList([]);
+    Auth.signOut()
+      .then(data => {
+        // setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <Container style={styles.Container}>
       <Content>

@@ -14,8 +14,10 @@ import {
   Label,
   Button,
   DatePicker,
+  Icon,
 } from 'native-base';
 import useStore from '../../state/state';
+import Colors from '../../variablesColors';
 
 function Form00CreateTop({navigation}, props) {
   const state = useStore(state => state);
@@ -24,28 +26,31 @@ function Form00CreateTop({navigation}, props) {
     <Container style={styles.Container}>
       <Content>
         <H1>You're only 30 days away from achieving a new goal</H1>
-        <Text>
-          You can create a personal individual challenge, create a group
-          challenge with your friends, or join an existing group challenge.
+        <Text style={styles.Text}>
+          You can create an individual challenge, group challenge with your
+          friends, or join an existing group challenge.
         </Text>
 
         <Button
           style={styles.btn}
           block
           onPress={() => navigation.navigate('ChallengeTitle')}>
-          <Text>Make an Individual Challenge</Text>
+          <Icon active style={styles.Icon} name="trophy" />
+          <Text style={styles.BtnText}>Make an Individual Challenge</Text>
         </Button>
         <Button
           style={styles.btn}
           block
-          onPress={() => navigation.navigate('ChallengeTitle')}>
-          <Text>Start a Group Challenge</Text>
+          onPress={() => navigation.navigate('GroupChallengeTitle')}>
+          <Icon active style={styles.Icon} name="people" />
+          <Text style={styles.BtnText}>Start a Group Challenge</Text>
         </Button>
         <Button
           style={styles.btn}
           block
-          onPress={() => navigation.navigate('ChallengeTitle')}>
-          <Text>Join a Group Challenge</Text>
+          onPress={() => navigation.navigate('JoinGroupChallenge')}>
+          <Icon active style={styles.Icon} name="add" />
+          <Text style={styles.BtnText}>Join a Group Challenge</Text>
         </Button>
       </Content>
     </Container>
@@ -61,8 +66,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
   },
+  Text: {
+    marginTop: 20,
+    fontSize: 18,
+  },
   btn: {
     marginTop: 20,
+    backgroundColor: Colors.primary,
+  },
+  Icon: {
+    color: '#fff',
+  },
+  BtnText: {
+    fontSize: 18,
   },
 });
 

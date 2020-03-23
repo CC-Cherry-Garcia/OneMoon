@@ -25,13 +25,13 @@ import {
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, {API, graphqlOperation} from 'aws-amplify';
-import * as queries from '../../src/graphql/queries';
+import * as mutations from '../../src/graphql/mutations';
 import * as customMutations from '../../src/graphql/customMutations';
 import useStore from '../../state/state';
 import LocalPushNotificationSetting from '../LocalPushNotificationSetting';
 import Colors from '../../variablesColors';
 
-function Form04ChallengeConfirmation({navigation, route}, props) {
+function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
 
   const state = useStore(state => state);
@@ -104,7 +104,23 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     task29Name: taskQuantityArray[28].split(':')[1].trim(),
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
   };
-  const userChallengeInput = {
+  const generateGroupId = function(len, bits) {
+    bits = bits || 36;
+    let outStr = '',
+      newStr;
+    while (outStr.length < len) {
+      newStr = Math.random()
+        .toString(bits)
+        .slice(2);
+      outStr += newStr.slice(0, Math.min(newStr.length, len - outStr.length));
+    }
+    return outStr.toUpperCase();
+  };
+  const groupInput = {
+    name: state.challengeInput.groupName,
+    id: generateGroupId(5, 16),
+  };
+  const groupChallengeInput = {
     userId: route.params.userName,
     startDate: state.challengeInput.startDate,
     isValid: true,
@@ -171,53 +187,50 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
   };
   const insertChallenge = () => {
     API.graphql(
-      graphqlOperation(customMutations.createNewChallenge, {
+      graphqlOperation(customMutations.createNewGroupAndChallenge, {
+        inputGroup: groupInput,
         inputChallenge: challengeInput,
       }),
     )
+    .then(resultIds => {
+      state.setChallengeInput({
+        ...state.challengeInput,
+        groupId: resultIds.data.createGroup.id,
+      });
+
+      API.graphql(
+        graphqlOperation(mutations.createGroupChallenge, {
+          input: {
+            ...groupChallengeInput,
+            challengeId: resultIds.data.createChallenge.id,
+            groupId: resultIds.data.createGroup.id,
+          },
+        }),
+      )
       .then(res => {
-        console.log('userChallengeInput:  ********  ', {
-          ...userChallengeInput,
-          challengeId: res.data.createChallenge.id,
-        });
-        console.log('res:  ********  ', res);
-        API.graphql(
-          graphqlOperation(
-            customMutations.createUserChallengeWithGroupAndChallenge,
-            {
-              inputUserChallenge: {
-                ...userChallengeInput,
-                challengeId: res.data.createChallenge.id,
-              },
-            },
-          ),
-        )
-          .then(res => {
-            console.log('res createUserChallengeWithChallenge:', res);
-            state.setUserHasActiveChallenge(true);
-            state.setUserActiveChallengesList([
-              ...state.userActiveChallengesList,
-              res.data.createUserChallenge,
-            ]);
-            LocalPushNotificationSetting.register(
-              9,
-              0,
-              0,
-              'You have a daily goal to complete',
-              21,
-              0,
-              0,
-              'Did you complete your goal for today?',
-            );
-          })
-          .catch(error =>
-            console.log(
-              'Error happens in createUserChallengeWithChallenge: ',
-              error,
-            ),
-          );
+        state.setUserHasActiveChallenge(true);
+        state.setUserActiveChallengesList([
+          ...state.userActiveChallengesList,
+          res.data.createGroupChallenge,
+        ]);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
       })
-      .catch(error => console.log('Error happens in createChallenge: ', error));
+      .catch(error =>
+        console.log('Error happens in createGroupChallenge : ', error),
+      );
+    })
+    .catch(error =>
+      console.log('Error happens in createNewGroupAndChallenge: ', error),
+    );
   };
 
   return (
@@ -225,12 +238,16 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
       <Content padder>
         <H1>Double check your Challenge</H1>
         <Text style={styles.textDefault}>
-          See your 30-day challenge below. Use the back button if you need to
-          make any changes.
+          See your 30-day group challenge below. Use the back button if you need
+          to make any changes.
         </Text>
         <Text style={styles.textDefault}>
           <Text style={{fontWeight: 'bold'}}>Title:</Text>{' '}
           {state.challengeInput.title}
+        </Text>
+        <Text style={styles.textDefault}>
+          <Text style={{fontWeight: 'bold'}}>Challenge Group name:</Text>{' '}
+          {state.challengeInput.groupName}
         </Text>
         <Text style={styles.textDefault}>
           <Text style={{fontWeight: 'bold'}}>Start Date:</Text>{' '}
@@ -247,10 +264,9 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
           title="Start Challenge"
           onPress={() => {
             insertChallenge();
-            // props.changeView();
-            navigation.navigate('Home', {screen: 'HomeUser'});
+            navigation.navigate('GroupChallengeSharingInformation');
           }}>
-          <Text>Save Challenge</Text>
+          <Text>Save Group Challenge</Text>
         </Button>
         <List>
           <ListItem>
@@ -346,13 +362,12 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
         </List>
         <Button
           style={styles.btn}
-          title="Start Challenge"
+          title="Start Group Challenge"
           onPress={() => {
             insertChallenge();
-            // props.changeView();
-            navigation.navigate('Home', {screen: 'HomeUser'});
+            navigation.navigate('GroupChallengeSharingInformation');
           }}>
-          <Text>Save Challenge</Text>
+          <Text>Save Group Challenge</Text>
         </Button>
       </Content>
     </Container>
@@ -380,4 +395,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form04ChallengeConfirmation;
+export default FormGroup04ChallengeConfirmation;

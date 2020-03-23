@@ -19,7 +19,7 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
-function Form01TitleAndDate({navigation}, props) {
+function FormGroup01TitleAndDateAndGroup({navigation}, props) {
   const state = useStore(state => state);
 
   // create placeholder for datepicker to show today on load
@@ -38,22 +38,35 @@ function Form01TitleAndDate({navigation}, props) {
   return (
     <Container style={styles.Container}>
       <Content>
-        <H1>Create your Challenge!</H1>
+        <H1>Create your Group Challenge!</H1>
         <Text style={styles.TextIntro}>
-          First, select a title and pick your start date.
+          First, select a challenge title, group name and pick your start date.
         </Text>
         <Form>
           <Label style={styles.Title}>Challenge Title:</Label>
           <Item>
             <Input
               placeholder="Squat Til You Drop"
+              style={styles.Text}
               onChangeText={TextInputValue =>
                 state.setChallengeInput({
                   ...state.challengeInput,
                   title: TextInputValue,
                 })
               }
+            />
+          </Item>
+          <Label style={styles.Title}>Group Name:</Label>
+          <Item>
+            <Input
+              placeholder="Squat Challenge Group"
               style={styles.Text}
+              onChangeText={TextInputValue =>
+                state.setChallengeInput({
+                  ...state.challengeInput,
+                  groupName: TextInputValue,
+                })
+              }
             />
           </Item>
           <Label style={styles.Title}>Start Date:</Label>
@@ -81,9 +94,9 @@ function Form01TitleAndDate({navigation}, props) {
             />
           </Item>
           <Button
-            style={styles.btn}
             block
-            onPress={() => navigation.navigate('ChallengeType')}>
+            style={styles.btn}
+            onPress={() => navigation.navigate('GroupChallengeType')}>
             <Text>Next Step</Text>
           </Button>
         </Form>
@@ -114,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form01TitleAndDate;
+export default FormGroup01TitleAndDateAndGroup;

@@ -1,105 +1,218 @@
 type User @model {
   id: String!
-  name: String!
-  challenges: [Challenge] @connection(keyName: "ByUser", fields: ["id"])
+  name: String
+  groups: [UserGroup] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type Challenge @model 
-  @key(name: "ByUser", fields: ["userID", "id"]) {
-    id: String!
-    userID: String!
-    title: String!
-    startDate: String!
-    increase: Int
-    isValid: String! # Boolean types cannot be sort keys
-    task1Name: String!
-    task1IsDone: Boolean!
-    task1Date: String
-    task2Name: String!
-    task2IsDone: Boolean!
-    task2Date: String
-    task3Name: String!
-    task3IsDone: Boolean!
-    task3Date: String
-    task4Name: String!
-    task4IsDone: Boolean!
-    task4Date: String
-    task5Name: String!
-    task5IsDone: Boolean!
-    task5Date: String
-    task6Name: String!
-    task6IsDone: Boolean!
-    task6Date: String
-    task7Name: String!
-    task7IsDone: Boolean!
-    task7Date: String
-    task8Name: String!
-    task8IsDone: Boolean!
-    task8Date: String
-    task9Name: String!
-    task9IsDone: Boolean!
-    task9Date: String
-    task10Name: String!
-    task10IsDone: Boolean!
-    task10Date: String
-    task11Name: String!
-    task11IsDone: Boolean!
-    task11Date: String
-    task12Name: String!
-    task12IsDone: Boolean!
-    task12Date: String
-    task13Name: String!
-    task13IsDone: Boolean!
-    task13Date: String
-    task14Name: String!
-    task14IsDone: Boolean!
-    task14Date: String
-    task15Name: String!
-    task15IsDone: Boolean!
-    task15Date: String
-    task16Name: String!
-    task16IsDone: Boolean!
-    task16Date: String
-    task17Name: String!
-    task17IsDone: Boolean!
-    task17Date: String
-    task18Name: String!
-    task18IsDone: Boolean!
-    task18Date: String
-    task19Name: String!
-    task19IsDone: Boolean!
-    task19Date: String
-    task20Name: String!
-    task20IsDone: Boolean!
-    task20Date: String
-    task21Name: String!
-    task21IsDone: Boolean!
-    task21Date: String
-    task22Name: String!
-    task22IsDone: Boolean!
-    task22Date: String
-    task23Name: String!
-    task23IsDone: Boolean!
-    task23Date: String
-    task24Name: String!
-    task24IsDone: Boolean!
-    task24Date: String
-    task25Name: String!
-    task25IsDone: Boolean!
-    task25Date: String
-    task26Name: String!
-    task26IsDone: Boolean!
-    task26Date: String
-    task27Name: String!
-    task27IsDone: Boolean!
-    task27Date: String
-    task28Name: String!
-    task28IsDone: Boolean!
-    task28Date: String
-    task29Name: String!
-    task29IsDone: Boolean!
-    task29Date: String
-    task30Name: String!
-    task30IsDone: Boolean!
-    task30Date: String
+type Group @model {
+  id: String!
+  name: String!
+  users: [UserGroup] @connection(keyName: "byGroup", fields: ["id"])
+}
+
+type UserGroup
+  @model
+  @key(name: "byGroup", fields: ["groupId"])
+  @key(name: "byUser", fields: ["userId"]) {
+  userId: String!
+  groupId: String!
+  user: User @connection(fields: ["userId"])
+  group: Group @connection(fields: ["groupId"])
+}
+
+type Post @model @key(name: "byGroup", fields: ["groupId"]) {
+  id: ID!
+  groupId: String!
+  group: Group @connection(fields: ["groupId"])
+  createdByUserId: String!
+  user: User @connection(fields: ["createdByUserId"])
+  createdAt: String!
+  content: String!
+  likeCount: Int!
+}
+
+type Challenge @model @key(name: "byUser", fields: ["createdByUserId"]) {
+  id: String!
+  title: String!
+  createdByUserId: String!
+  user: User @connection(fields: ["createdByUserId"])
+  increase: Int
+  task1Name: String!
+  task2Name: String!
+  task3Name: String!
+  task4Name: String!
+  task5Name: String!
+  task6Name: String!
+  task7Name: String!
+  task8Name: String!
+  task9Name: String!
+  task10Name: String!
+  task11Name: String!
+  task12Name: String!
+  task13Name: String!
+  task14Name: String!
+  task15Name: String!
+  task16Name: String!
+  task17Name: String!
+  task18Name: String!
+  task19Name: String!
+  task20Name: String!
+  task21Name: String!
+  task22Name: String!
+  task23Name: String!
+  task24Name: String!
+  task25Name: String!
+  task26Name: String!
+  task27Name: String!
+  task28Name: String!
+  task29Name: String!
+  task30Name: String!
+}
+
+type UserChallenge
+  @model
+  @key(name: "byChallenge", fields: ["challengeId"])
+  @key(name: "byUser", fields: ["userId"]) {
+  id: ID
+  challengeId: String!
+  challenge: Challenge @connection(fields: ["challengeId"])
+  userId: String!
+  user: User @connection(fields: ["userId"])
+  startDate: String!
+  isValid: String! # Boolean types cannot be sort keys
+  task1IsDone: Boolean!
+  task1Date: String
+  task2IsDone: Boolean!
+  task2Date: String
+  task3IsDone: Boolean!
+  task3Date: String
+  task4IsDone: Boolean!
+  task4Date: String
+  task5IsDone: Boolean!
+  task5Date: String
+  task6IsDone: Boolean!
+  task6Date: String
+  task7IsDone: Boolean!
+  task7Date: String
+  task8IsDone: Boolean!
+  task8Date: String
+  task9IsDone: Boolean!
+  task9Date: String
+  task10IsDone: Boolean!
+  task10Date: String
+  task11IsDone: Boolean!
+  task11Date: String
+  task12IsDone: Boolean!
+  task12Date: String
+  task13IsDone: Boolean!
+  task13Date: String
+  task14IsDone: Boolean!
+  task14Date: String
+  task15IsDone: Boolean!
+  task15Date: String
+  task16IsDone: Boolean!
+  task16Date: String
+  task17IsDone: Boolean!
+  task17Date: String
+  task18IsDone: Boolean!
+  task18Date: String
+  task19IsDone: Boolean!
+  task19Date: String
+  task20IsDone: Boolean!
+  task20Date: String
+  task21IsDone: Boolean!
+  task21Date: String
+  task22IsDone: Boolean!
+  task22Date: String
+  task23IsDone: Boolean!
+  task23Date: String
+  task24IsDone: Boolean!
+  task24Date: String
+  task25IsDone: Boolean!
+  task25Date: String
+  task26IsDone: Boolean!
+  task26Date: String
+  task27IsDone: Boolean!
+  task27Date: String
+  task28IsDone: Boolean!
+  task28Date: String
+  task29IsDone: Boolean!
+  task29Date: String
+  task30IsDone: Boolean!
+  task30Date: String
+}
+
+type GroupChallenge
+  @model
+  @key(name: "byChallenge", fields: ["challengeId"])
+  @key(name: "byUser", fields: ["userId"]) {
+  id: ID
+  challengeId: String!
+  challenge: Challenge @connection(fields: ["challengeId"])
+  userId: String!
+  user: User @connection(fields: ["userId"])
+  groupId: String!
+  group: Group @connection(fields: ["groupId"])
+  startDate: String!
+  isValid: String! # Boolean types cannot be sort keys
+  task1IsDone: Boolean!
+  task1Date: String
+  task2IsDone: Boolean!
+  task2Date: String
+  task3IsDone: Boolean!
+  task3Date: String
+  task4IsDone: Boolean!
+  task4Date: String
+  task5IsDone: Boolean!
+  task5Date: String
+  task6IsDone: Boolean!
+  task6Date: String
+  task7IsDone: Boolean!
+  task7Date: String
+  task8IsDone: Boolean!
+  task8Date: String
+  task9IsDone: Boolean!
+  task9Date: String
+  task10IsDone: Boolean!
+  task10Date: String
+  task11IsDone: Boolean!
+  task11Date: String
+  task12IsDone: Boolean!
+  task12Date: String
+  task13IsDone: Boolean!
+  task13Date: String
+  task14IsDone: Boolean!
+  task14Date: String
+  task15IsDone: Boolean!
+  task15Date: String
+  task16IsDone: Boolean!
+  task16Date: String
+  task17IsDone: Boolean!
+  task17Date: String
+  task18IsDone: Boolean!
+  task18Date: String
+  task19IsDone: Boolean!
+  task19Date: String
+  task20IsDone: Boolean!
+  task20Date: String
+  task21IsDone: Boolean!
+  task21Date: String
+  task22IsDone: Boolean!
+  task22Date: String
+  task23IsDone: Boolean!
+  task23Date: String
+  task24IsDone: Boolean!
+  task24Date: String
+  task25IsDone: Boolean!
+  task25Date: String
+  task26IsDone: Boolean!
+  task26Date: String
+  task27IsDone: Boolean!
+  task27Date: String
+  task28IsDone: Boolean!
+  task28Date: String
+  task29IsDone: Boolean!
+  task29Date: String
+  task30IsDone: Boolean!
+  task30Date: String
 }

@@ -16,7 +16,7 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
-function Form02ChallengeType({navigation}, props) {
+function FormGroup02ChallengeType({navigation}, props) {
   const state = useStore(state => state);
 
   return (
@@ -25,7 +25,7 @@ function Form02ChallengeType({navigation}, props) {
         <H1 style={styles.H1}>Choose your Challenge Type</H1>
         <Card>
           <CardItem
-            onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+            onPress={() => navigation.navigate('GroupChallengeQuantityInfo')}>
             <Grid style={styles.Grid}>
               <Col style={{width: 50}}>
                 <Icon
@@ -33,17 +33,23 @@ function Form02ChallengeType({navigation}, props) {
                   // style={styles.QuantIcon}
                   name="apps"
                   style={styles.Icon}
-                  onPress={() => navigation.navigate('ChallengeQuantityInfo')}
+                  onPress={() =>
+                    navigation.navigate('GroupChallengeQuantityInfo')
+                  }
                 />
               </Col>
               <Col>
                 <Text
                   style={styles.CardTitle}
-                  onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+                  onPress={() =>
+                    navigation.navigate('GroupChallengeQuantityInfo')
+                  }>
                   Quantity Challenge
                 </Text>
                 <Text
-                  onPress={() => navigation.navigate('ChallengeQuantityInfo')}>
+                  onPress={() =>
+                    navigation.navigate('GroupChallengeQuantityInfo')
+                  }>
                   Pick this if you want to increase the amount of times you do
                   something. For example: 5 more squats everyday.
                 </Text>
@@ -52,7 +58,8 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem onPress={() => navigation.navigate('ChallengeTimeInfo')}>
+          <CardItem
+            onPress={() => navigation.navigate('GroupChallengeTimeInfo')}>
             <Grid style={styles.Grid}>
               <Col style={{width: 50}}>
                 <Icon
@@ -60,16 +67,17 @@ function Form02ChallengeType({navigation}, props) {
                   // style={styles.QuantIcon}
                   name="md-time"
                   style={styles.Icon}
-                  onPress={() => navigation.navigate('ChallengeTimeInfo')}
+                  onPress={() => navigation.navigate('GroupChallengeTimeInfo')}
                 />
               </Col>
               <Col>
                 <Text
                   style={styles.CardTitle}
-                  onPress={() => navigation.navigate('ChallengeTimeInfo')}>
+                  onPress={() => navigation.navigate('GroupChallengeTimeInfo')}>
                   Time Challenge
                 </Text>
-                <Text onPress={() => navigation.navigate('ChallengeTimeInfo')}>
+                <Text
+                  onPress={() => navigation.navigate('GroupChallengeTimeInfo')}>
                   Pick this if you want to increase the duration you do
                   something. For example: Read for 10 minutes longer everyday.
                 </Text>
@@ -78,7 +86,8 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
+          <CardItem
+            onPress={() => navigation.navigate('GroupChallengeRepeatInfo')}>
             <Grid style={styles.Grid}>
               <Col style={{width: 50}}>
                 <Icon
@@ -86,17 +95,23 @@ function Form02ChallengeType({navigation}, props) {
                   // style={styles.QuantIcon}
                   name="refresh"
                   style={styles.Icon}
-                  onPress={() => navigation.navigate('ChallengeRepeatInfo')}
+                  onPress={() =>
+                    navigation.navigate('GroupChallengeRepeatInfo')
+                  }
                 />
               </Col>
               <Col>
                 <Text
                   style={styles.CardTitle}
-                  onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
+                  onPress={() =>
+                    navigation.navigate('GroupChallengeRepeatInfo')
+                  }>
                   Same Daily Goal Challenge
                 </Text>
                 <Text
-                  onPress={() => navigation.navigate('ChallengeRepeatInfo')}>
+                  onPress={() =>
+                    navigation.navigate('GroupChallengeRepeatInfo')
+                  }>
                   Pick this if you want to complete the same goal for 30 days.
                   For example: Go for a walk.
                 </Text>
@@ -105,7 +120,8 @@ function Form02ChallengeType({navigation}, props) {
           </CardItem>
         </Card>
         <Card>
-          <CardItem onPress={() => navigation.navigate('ChallengeLibrary')}>
+          <CardItem
+            onPress={() => navigation.navigate('GroupChallengeLibrary')}>
             <Grid style={styles.Grid}>
               <Col style={{width: 50}}>
                 <Icon
@@ -113,16 +129,17 @@ function Form02ChallengeType({navigation}, props) {
                   // style={styles.QuantIcon}
                   name="folder"
                   style={styles.Icon}
-                  onPress={() => navigation.navigate('ChallengeLibrary')}
+                  onPress={() => navigation.navigate('GroupChallengeLibrary')}
                 />
               </Col>
               <Col>
                 <Text
                   style={styles.CardTitle}
-                  onPress={() => navigation.navigate('ChallengeLibrary')}>
+                  onPress={() => navigation.navigate('GroupChallengeLibrary')}>
                   Search Challenge Library
                 </Text>
-                <Text onPress={() => navigation.navigate('ChallengeLibrary')}>
+                <Text
+                  onPress={() => navigation.navigate('GroupChallengeLibrary')}>
                   Choose from a library of user-created challenges.
                 </Text>
               </Col>
@@ -171,4 +188,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form02ChallengeType;
+export default FormGroup02ChallengeType;

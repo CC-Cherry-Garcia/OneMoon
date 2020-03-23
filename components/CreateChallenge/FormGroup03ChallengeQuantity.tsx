@@ -22,20 +22,19 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
-function Form03ChallengeTime({navigation, route}, props) {
+function FormGroup03ChallengeQuantity({navigation, route}, props) {
   const state = useStore(state => state);
   useEffect(() => {
-    state.setChallengeType('time');
+    state.setChallengeType('quantity');
   }, []);
 
-  console.log('state in Form03ChallengeTimetsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>
         <H1>Set your Daily Task</H1>
         <Text style={styles.textDefault}>
-          Enter your Daily Task and choose how many minutes per day you want to
-          increase the task by daily.
+          Enter your Daily Task and how much you want the quantity to increase
+          by daily.
         </Text>
         <Text style={styles.Title}>Daily Task:</Text>
         <TextInput
@@ -45,10 +44,10 @@ function Form03ChallengeTime({navigation, route}, props) {
               taskName: TextInputValue,
             })
           }
-          placeholder=" Read a Book"
+          placeholder=" Squats"
           style={styles.textInputDefault}
         />
-        <Text style={styles.Title}>Increase Daily Minutes by:</Text>
+        <Text style={styles.Title}>Increase Daily Quantity by:</Text>
         <TextInput
           onChangeText={TextInputValue =>
             state.setChallengeInput({
@@ -56,13 +55,13 @@ function Form03ChallengeTime({navigation, route}, props) {
               increase: TextInputValue,
             })
           }
-          placeholder=" 10"
-          style={styles.textInputDefault}
+          placeholder=" 5"
+          style={styles.textDefault}
           keyboardType="numeric"
         />
         <Button
-          title="Review your Challege"
-          onPress={() => navigation.navigate('ChallengeConfirmation')}
+          title="Review your Challenge"
+          onPress={() => navigation.navigate('GroupChallengeConfirmation')}
           style={styles.btn}>
           <Text>Review your Challenge</Text>
         </Button>
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form03ChallengeTime;
+export default FormGroup03ChallengeQuantity;
