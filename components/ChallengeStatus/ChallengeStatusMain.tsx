@@ -232,7 +232,7 @@ function ChallengeStatusMain({navigation, route}, props) {
         const groupChallenges = res.data.listGroupChallenges.items;
         const groupUsersInput = [];
         for (const groupChallengeOfOneUser of groupChallenges) {
-          groupUsersInput.push(groupChallengeOfOneUser.userId);
+          groupUsersInput.push(groupChallengeOfOneUser.userId.charAt(0).toUpperCase() + groupChallengeOfOneUser.userId.substring(1).toLowerCase());
         }
         state.setGroupUsers(groupUsersInput);
 
@@ -396,7 +396,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </Table>
             </CardItem>
             <CardItem>
-              <Text><View style={{width: 20, height: 20, backgroundColor: '#5cb85c', margin: 0}}></View> Completed   <View style={{width: 20, height: 20, backgroundColor: 'lightgray', margin: 0}}></View> Incomplete</Text>
+              <Text><View style={{width: 20, height: 20, backgroundColor: '#5cb85c', margin: 0}}></View> Completed   <View style={{width: 20, height: 20, backgroundColor: 'lightgray', margin: 0}}></View> Incomplete   <View style={{width: 20, height: 20, backgroundColor: '#FFF1C1', margin: 0}}></View> Upcoming</Text>
             </CardItem>
           </Card>
 

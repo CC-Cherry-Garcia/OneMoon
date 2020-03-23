@@ -25,16 +25,16 @@ function FormJoin01Group({navigation}, props) {
   return (
     <Container style={styles.Container}>
       <Content>
-        <H1>Input Challenge group id!</H1>
+        <H1>Join a Group Challenge</H1>
         <Text>
-          Input your group challenge that you want to join and get started
-          achieving your goals.
+          Enter a group challenge ID to join the group and get started achieving
+          your goals. It should be a 5-character code.
         </Text>
         <Form>
-          <Label style={styles.Title}>Group id</Label>
+          <Label style={styles.Title}>Group ID Code:</Label>
           <Item>
             <Input
-              placeholder="group id that you want to join!"
+              placeholder="123AZ"
               onChangeText={TextInputValue => {
                 state.setChallengeInput({
                   ...state.challengeInput,
