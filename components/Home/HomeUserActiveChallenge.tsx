@@ -86,6 +86,8 @@ function HomeUserActiveChallenge({navigation, route}) {
                 </Text>
               </Body>
               <Right>
+                <Icon active name="arrow-forward" />
+                {/* For now
                 {todayStatus ? (
                   <Icon
                     active
@@ -94,7 +96,7 @@ function HomeUserActiveChallenge({navigation, route}) {
                   />
                 ) : (
                   <Icon active name="arrow-forward" />
-                )}
+                )} */}
               </Right>
             </ListItem>
           );
