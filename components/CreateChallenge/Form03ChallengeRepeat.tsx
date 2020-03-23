@@ -22,9 +22,11 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
+let dailyTaskInputField = true;
+
 function Form03ChallengeRepeat({navigation, route}, props) {
   const state = useStore(state => state);
-  
+
   useEffect(() => {
     state.setChallengeType('repeat');
   }, []);
@@ -38,19 +40,25 @@ function Form03ChallengeRepeat({navigation, route}, props) {
         </Text>
         <Text style={styles.Title}>Daily Task:</Text>
         <TextInput
-          onChangeText={TextInputValue =>
+          onChangeText={TextInputValue => {
             state.setChallengeInput({
               ...state.challengeInput,
               taskName: TextInputValue,
-            })
-          }
+            });
+            if (TextInputValue.length > 0) {
+              dailyTaskInputField = false;
+            } else {
+              dailyTaskInputField = true;
+            }
+          }}
           placeholder=" Do something kind for someone else"
           style={styles.textInputDefault}
         />
         <Button
           title="Review your Challege"
           onPress={() => navigation.navigate('ChallengeConfirmation')}
-          style={styles.btn}>
+          style={dailyTaskInputField ? styles.btnDisabled : styles.btn}
+          disabled={dailyTaskInputField}>
           <Text>Review your Challenge</Text>
         </Button>
       </Content>
@@ -78,6 +86,10 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 20,
     backgroundColor: Colors.primary,
+  },
+  btnDisabled: {
+    marginTop: 20,
+    backgroundColor: 'lightgray',
   },
 });
 
