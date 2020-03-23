@@ -181,6 +181,14 @@ function SignUp(props) {
   return (
     <View style={styles.container}>
       <H1 style={{marginBottom: 60, marginTop: 20}}>Sign Up</H1>
+      <Image
+        style={{
+          width: 160,
+          height: 130,
+          marginBottom: 30,
+        }}
+        source={require('../src/assets/img/oneMoonLogo-white-background.png')}
+      />
       <Item
         floatingLabel
         style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
@@ -275,6 +283,14 @@ function SignIn(props) {
   return (
     <View style={styles.container}>
       <H1 style={{marginBottom: 60, marginTop: 20}}>Login</H1>
+      <Image
+        style={{
+          width: 160,
+          height: 130,
+          marginBottom: 30,
+        }}
+        source={require('../src/assets/img/oneMoonLogo-white-background.png')}
+      />
       <Item
         floatingLabel
         style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
@@ -343,7 +359,14 @@ function ConfirmSignUp(props) {
   return (
     <View style={styles.container}>
       <H1 style={{marginBottom: 60, marginTop: 20}}>Email verification</H1>
-
+      <Image
+        style={{
+          width: 160,
+          height: 130,
+          marginBottom: 30,
+        }}
+        source={require('../src/assets/img/oneMoonLogo-white-background.png')}
+      />
       <Item
         floatingLabel
         style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
