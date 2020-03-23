@@ -23,7 +23,7 @@ import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
 let dailyTaskIsEmpty = true;
-let dailyQuantityIsEmpty = true;
+let dailyTimeIsEmpty = true;
 
 function Form03ChallengeTime({navigation, route}, props) {
   const state = useStore(state => state);
@@ -64,9 +64,9 @@ function Form03ChallengeTime({navigation, route}, props) {
               increase: TextInputValue,
             });
             if (TextInputValue.length > 0) {
-              dailyQuantityIsEmpty = false;
+              dailyTimeIsEmpty = false;
             } else {
-              dailyQuantityIsEmpty = true;
+              dailyTimeIsEmpty = true;
             }
           }}
           placeholder=" 10"
@@ -77,11 +77,11 @@ function Form03ChallengeTime({navigation, route}, props) {
           title="Review your Challege"
           onPress={() => navigation.navigate('ChallengeConfirmation')}
           style={
-            dailyTaskIsEmpty || dailyQuantityIsEmpty
+            dailyTaskIsEmpty || dailyTimeIsEmpty
               ? styles.btnDisabled
               : styles.btn
           }
-          disabled={dailyTaskIsEmpty || dailyQuantityIsEmpty}>
+          disabled={dailyTaskIsEmpty || dailyTimeIsEmpty}>
           <Text>Review your Challenge</Text>
         </Button>
       </Content>
