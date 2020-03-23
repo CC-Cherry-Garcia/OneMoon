@@ -229,7 +229,7 @@ function CreateChallenge({navigation, route}) {
         component={FormGroup05SharingInformation}
         initialParams={{userName: route.params.userName}}
         options={{
-          title: 'Group Challenge Sharing Information',
+          title: 'Group Challenge Information',
           // headerRight: () => (
           //   <Button
           //     onPress={() => navigation.navigate('ChallengeTitle')}

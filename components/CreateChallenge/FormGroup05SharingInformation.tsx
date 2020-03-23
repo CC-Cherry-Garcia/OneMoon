@@ -1,46 +1,16 @@
-import React, {Component} from 'react';
-import {StyleSheet, TextInput, Share, Alert} from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  H1,
-  H2,
-  H3,
-  Text,
-  Form,
-  Item,
-  Input,
-  Label,
-  Button,
-  DatePicker,
-  Card,
-  CardItem,
-  Body,
-  View,
-  StatusBar,
-  FlatList,
-  List,
-  Icon,
-  Fab,
-  ListItem,
-} from 'native-base';
+import React from 'react';
+import {StyleSheet, Share} from 'react-native';
+import {Container, Content, H1, Text, Button, View} from 'native-base';
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
 function FormGroup05SharingInformation({navigation, route}, props) {
-  // console.log('state in Form04ChallengeConfirmation.tsx: ', state);
-
   const state = useStore(state => state);
 
   async function onShare() {
     try {
       const result = await Share.share({
-        message: `I just started ${
-          state.challengeInput.title
-        } Challenge! Join me on One Moon with this code: ${
-          state.challengeInput.groupId
-        } #30DayChallenge`,
+        message: `I just started ${state.challengeInput.title} Challenge! Join me on One Moon with this code: ${state.challengeInput.groupId} #30DayChallenge`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -60,6 +30,12 @@ function FormGroup05SharingInformation({navigation, route}, props) {
     <Container style={styles.Container}>
       <Content padder>
         <H1>Invite more group members!</H1>
+        <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+          }}
+        />
         <Text style={styles.textDefault}>
           Share your Group Challenge ID so that your friends can join you.
         </Text>
@@ -105,7 +81,6 @@ function FormGroup05SharingInformation({navigation, route}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',
