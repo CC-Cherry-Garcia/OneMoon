@@ -274,8 +274,61 @@ function SignUp(props) {
 function SignIn(props) {
   return (
     <View style={styles.container}>
-      <H1>Login</H1>
-      <TextInput
+      <H1 style={{marginBottom: 60, marginTop: 20}}>Login</H1>
+
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>username</Label>
+
+        <Input
+          name="username"
+          onChange={e => {
+            console.log(e.nativeEvent.text);
+            e.persist();
+            props.updateFormState('username', e);
+            if (e.nativeEvent.text.length > 0) {
+              usernameEmpty = false;
+            } else {
+              usernameEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          onSubmitEditing={() => this.password._root.focus()}
+        />
+      </Item>
+
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>password</Label>
+
+        <Input
+          getRef={input => {
+            this.password = input;
+          }}
+          type="password"
+          name="password"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('password', e);
+            if (e.nativeEvent.text) {
+              passwordEmpty = false;
+            } else {
+              passwordEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="go"
+          secureTextEntry={true}
+          onSubmitEditing={props.signIn}
+        />
+      </Item>
+
+      {/* <TextInput
         name="username"
         onChange={e => {
           console.log(e.nativeEvent.text);
@@ -293,8 +346,9 @@ function SignIn(props) {
         autoCorrect={false}
         returnKeyType="next"
         onSubmitEditing={() => this.secondInput.focus()}
-      />
-      <TextInput
+      /> */}
+
+      {/* <TextInput
         ref={ref => {
           this.secondInput = ref;
         }}
@@ -316,7 +370,7 @@ function SignIn(props) {
         autoCorrect={false}
         returnKeyType="go"
         onSubmitEditing={props.signIn}
-      />
+      /> */}
       <Button
         disabled={passwordEmpty || usernameEmpty}
         title="Sign In"
