@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react';
 import {TextInput, Alert} from 'react-native';
-import {Text, Button, View, H1} from 'native-base';
+import {Text, Button, View, H1, Item, Label, Input} from 'native-base';
 import {Auth} from 'aws-amplify';
 import LocalPushNotificationSetting from './LocalPushNotificationSetting';
 
@@ -180,64 +180,83 @@ export default function EmailLoginForm() {
 function SignUp(props) {
   return (
     <View style={styles.container}>
-      <H1>Sign Up</H1>
-      <TextInput
-        name="username"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('username', e);
-          if (e.nativeEvent.text.length > 0) {
-            usernameEmpty = false;
-          } else {
-            usernameEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="username"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="next"
-        onSubmitEditing={() => this.secondInput.focus()}
-      />
-      <TextInput
-        ref={ref => {
-          this.secondInput = ref;
-        }}
-        type="password"
-        name="password"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('password', e);
-          if (e.nativeEvent.text.length > 0) {
-            passwordEmpty = false;
-          } else {
-            passwordEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="password"
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry={true}
-      />
-      <TextInput
-        name="email"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('email', e);
-          if (e.nativeEvent.text.length > 0) {
-            emailEmpty = false;
-          } else {
-            emailEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="email"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        onSubmitEditing={props.signUp}
-      />
+      <H1 style={{marginBottom: 60, marginTop: 20}}>Sign Up</H1>
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>username</Label>
+
+        <Input
+          name="username"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('username', e);
+            if (e.nativeEvent.text.length > 0) {
+              usernameEmpty = false;
+            } else {
+              usernameEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          onSubmitEditing={() => this.password._root.focus()}
+        />
+      </Item>
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>password</Label>
+
+        <Input
+          getRef={input => {
+            this.password = input;
+          }}
+          type="password"
+          name="password"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('password', e);
+            if (e.nativeEvent.text.length > 0) {
+              passwordEmpty = false;
+            } else {
+              passwordEmpty = true;
+            }
+          }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="next"
+          secureTextEntry={true}
+          onSubmitEditing={() => this.email._root.focus()}
+        />
+      </Item>
+      <Item
+        floatingLabel
+        style={{marginBottom: 40, marginLeft: 15, marginRight: 15}}>
+        <Label>email</Label>
+
+        <Input
+          getRef={input => {
+            this.email = input;
+          }}
+          name="email"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('email', e);
+            if (e.nativeEvent.text.length > 0) {
+              emailEmpty = false;
+            } else {
+              emailEmpty = true;
+            }
+          }}
+          placeholder="email"
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="go"
+          onSubmitEditing={props.signUp}
+        />
+      </Item>
+
       <Button
         disabled={passwordEmpty || usernameEmpty || emailEmpty}
         title="Sign Up"
@@ -252,7 +271,6 @@ function SignUp(props) {
     </View>
   );
 }
-
 function SignIn(props) {
   return (
     <View style={styles.container}>
@@ -352,10 +370,9 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 5,
   },
   input: {
     borderColor: 'lightgray',
