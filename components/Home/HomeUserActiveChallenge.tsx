@@ -21,7 +21,7 @@ import Colors from '../../variablesColors';
 
 function HomeUserActiveChallenge({navigation, route}) {
   const state = useStore(state => state);
-
+  const now = new Date();
   return (
     <Container>
       <Content>
@@ -38,43 +38,67 @@ function HomeUserActiveChallenge({navigation, route}) {
           }}
         />
         <H3 style={styles.H3}>Current Challenges:</H3>
+        {state.userActiveChallengesList.map(item => {
+          let todayStatus = false;
+          for (const key in item) {
+            if (key.startsWith('task') && key.endsWith('Date')) {
+              const date = new Date(item[key]);
+              if (
+                now.getFullYear() === date.getFullYear() &&
+                now.getMonth() === date.getMonth() &&
+                now.getDate() === date.getDate()
+              ) {
+                if (item[`task${key.replace(/[^0-9]/g, '')}IsDone`]) {
+                  todayStatus = true;
+                }
+              }
+            }
+          }
+          console.log('todayStatus :', todayStatus);
+          return (
+            <ListItem
+              style={{
+                marginRight: 20,
+                backgroundColor: 'rgba(24, 61, 95, 0.03)',
+              }}
+              key={item.id}
+              onPress={() => {
+                state.setUserCurrentChallenge(item);
+                navigation.navigate('Home', {
+                  screen: 'ChallengeStatusMain',
+                });
+              }}>
+              {(item.groupId !== undefined && (
+                <Icon active style={styles.people} name="people" />
+              )) || <Icon active style={styles.people} name="trophy" />}
 
-        {state.userActiveChallengesList.map(item => (
-          <ListItem
-            style={{
-              marginRight: 20,
-              backgroundColor: 'rgba(24, 61, 95, 0.03)',
-            }}
-            key={item.id}
-            onPress={() => {
-              state.setUserCurrentChallenge(item);
-              navigation.navigate('Home', {
-                screen: 'ChallengeStatusMain',
-              });
-            }}>
-            {(item.groupId !== undefined && (
-              <Icon active style={styles.people} name="people" />
-            )) || <Icon active style={styles.people} name="trophy" />}
-
-            <Body>
-              <Text style={styles.Text}>
+              <Body>
                 <Text style={styles.Text}>
-                  {item.challenge.title}
-                  {'\n'}
-                  <Text style={styles.startDate}>
-                    Started: {new Date(item.startDate).getFullYear()}/
-                    {new Date(item.startDate).getMonth() + 1}/
-                    {new Date(item.startDate).getDate()}
+                  <Text style={styles.Text}>
+                    {item.challenge.title}
+                    {'\n'}
+                    <Text style={styles.startDate}>
+                      Started: {new Date(item.startDate).getFullYear()}/
+                      {new Date(item.startDate).getMonth() + 1}/
+                      {new Date(item.startDate).getDate()}
+                    </Text>
                   </Text>
                 </Text>
-              </Text>
-            </Body>
-            <Right>
-              {/* <Icon active style={styles.checkmark} name="checkmark-circle" /> */}
-              <Icon active name="arrow-forward" />
-            </Right>
-          </ListItem>
-        ))}
+              </Body>
+              <Right>
+                {todayStatus ? (
+                  <Icon
+                    active
+                    style={styles.checkmark}
+                    name="checkmark-circle"
+                  />
+                ) : (
+                  <Icon active name="arrow-forward" />
+                )}
+              </Right>
+            </ListItem>
+          );
+        })}
         <View style={styles.container}>
           <Button
             style={styles.button}
