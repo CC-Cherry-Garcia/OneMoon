@@ -104,8 +104,21 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
     task29Name: taskQuantityArray[28].split(':')[1].trim(),
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
   };
+  const generateGroupId = function(len, bits) {
+    bits = bits || 36;
+    var outStr = '',
+      newStr;
+    while (outStr.length < len) {
+      newStr = Math.random()
+        .toString(bits)
+        .slice(2);
+      outStr += newStr.slice(0, Math.min(newStr.length, len - outStr.length));
+    }
+    return outStr.toUpperCase();
+  };
   const groupInput = {
     name: state.challengeInput.groupName,
+    id: generateGroupId(5, 16),
   };
   const groupChallengeInput = {
     userId: route.params.userName,
