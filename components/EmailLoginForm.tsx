@@ -1,5 +1,5 @@
 import React, {useState, useReducer} from 'react';
-import {TextInput, Alert} from 'react-native';
+import {TextInput, Alert, Image} from 'react-native';
 import {Text, Button, View, H1, Item, Label, Input} from 'native-base';
 import {Auth} from 'aws-amplify';
 import LocalPushNotificationSetting from './LocalPushNotificationSetting';
@@ -275,7 +275,6 @@ function SignIn(props) {
   return (
     <View style={styles.container}>
       <H1 style={{marginBottom: 60, marginTop: 20}}>Login</H1>
-
       <Item
         floatingLabel
         style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
