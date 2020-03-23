@@ -369,7 +369,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </View>
             </CardItem>
             <CardItem style={{padding: 10}}>
-              <Table borderStyle={{flex: 1, borderColor: 'transparent'}}>
+              <Table borderStyle={{flex: 1, borderColor: 'transparent'}} style={{flex: 6}}>
                 {tableData.map((rowData, index) => (
                   <TableWrapper key={index} style={styles.row}>
                     {rowData.map((cellData, cellIndex) => (
@@ -382,11 +382,11 @@ function ChallengeStatusMain({navigation, route}, props) {
                           state.currentChallengeCompletedDatesList[index][
                             cellIndex
                           ] === true
-                            ? {backgroundColor: '#5cb85c', width: 59}
+                            ? {backgroundColor: '#5cb85c', flex: 1}
                             : Number(tableData[index][cellIndex]) <
                               state.currentChallengeTodayDate
-                            ? {backgroundColor: 'lightgrey', width: 59}
-                            : {backgroundColor: 'transparent', width: 59}
+                            ? {backgroundColor: 'lightgrey', flex: 1}
+                            : {backgroundColor: 'transparent', flex: 1}
                         }
                         textStyle={styles.text}
                       />
