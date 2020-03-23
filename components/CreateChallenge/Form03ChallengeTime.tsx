@@ -22,6 +22,9 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
+let dailyTaskIsEmpty = true;
+let dailyQuantityIsEmpty = true;
+
 function Form03ChallengeTime({navigation, route}, props) {
   const state = useStore(state => state);
   useEffect(() => {
@@ -39,23 +42,33 @@ function Form03ChallengeTime({navigation, route}, props) {
         </Text>
         <Text style={styles.Title}>Daily Task:</Text>
         <TextInput
-          onChangeText={TextInputValue =>
+          onChangeText={TextInputValue => {
             state.setChallengeInput({
               ...state.challengeInput,
               taskName: TextInputValue,
-            })
-          }
+            });
+            if (TextInputValue.length > 0) {
+              dailyTaskIsEmpty = false;
+            } else {
+              dailyTaskIsEmpty = true;
+            }
+          }}
           placeholder=" Read a Book"
           style={styles.textInputDefault}
         />
         <Text style={styles.Title}>Increase Daily Minutes by:</Text>
         <TextInput
-          onChangeText={TextInputValue =>
+          onChangeText={TextInputValue => {
             state.setChallengeInput({
               ...state.challengeInput,
               increase: TextInputValue,
-            })
-          }
+            });
+            if (TextInputValue.length > 0) {
+              dailyQuantityIsEmpty = false;
+            } else {
+              dailyQuantityIsEmpty = true;
+            }
+          }}
           placeholder=" 10"
           style={styles.textInputDefault}
           keyboardType="numeric"
@@ -63,7 +76,12 @@ function Form03ChallengeTime({navigation, route}, props) {
         <Button
           title="Review your Challege"
           onPress={() => navigation.navigate('ChallengeConfirmation')}
-          style={styles.btn}>
+          style={
+            dailyTaskIsEmpty || dailyQuantityIsEmpty
+              ? styles.btnDisabled
+              : styles.btn
+          }
+          disabled={dailyTaskIsEmpty || dailyQuantityIsEmpty}>
           <Text>Review your Challenge</Text>
         </Button>
       </Content>
@@ -91,6 +109,10 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 20,
     backgroundColor: Colors.primary,
+  },
+  btnDisabled: {
+    marginTop: 20,
+    backgroundColor: 'lightgray',
   },
 });
 
