@@ -35,6 +35,7 @@ function reducer(state: any, action: {type: string}) {
 }
 
 async function signUp({username, password, email}, updateFormType) {
+  emptyFlags();
   try {
     console.log('sign up try!', username, email, updateFormType);
     await Auth.signUp({
@@ -56,6 +57,7 @@ async function signUp({username, password, email}, updateFormType) {
 }
 
 async function confirmSignUp({username, confirmationCode}, updateFormType) {
+  emptyFlags();
   try {
     console.log('try confirm sign up :', username, confirmationCode);
     await Auth.confirmSignUp(username, confirmationCode);
@@ -73,6 +75,7 @@ async function confirmSignUp({username, confirmationCode}, updateFormType) {
 }
 
 async function signIn({username, password}) {
+  emptyFlags();
   try {
     console.log('try sign in :', username);
     const result = await Auth.signIn(username, password);
