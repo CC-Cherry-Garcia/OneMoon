@@ -104,8 +104,21 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
     task29Name: taskQuantityArray[28].split(':')[1].trim(),
     task30Name: taskQuantityArray[29].split(':')[1].trim(),
   };
+  const generateGroupId = function(len, bits) {
+    bits = bits || 36;
+    let outStr = '',
+      newStr;
+    while (outStr.length < len) {
+      newStr = Math.random()
+        .toString(bits)
+        .slice(2);
+      outStr += newStr.slice(0, Math.min(newStr.length, len - outStr.length));
+    }
+    return outStr.toUpperCase();
+  };
   const groupInput = {
     name: state.challengeInput.groupName,
+    id: generateGroupId(5, 16),
   };
   const groupChallengeInput = {
     userId: route.params.userName,
@@ -173,64 +186,51 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
     task30Date: getDateOfChallenge(30),
   };
   const insertChallenge = () => {
-    console.log('createNewGroupAndChallenge:  ********  ', challengeInput);
-    console.log('groupInput:  ********  ', groupInput);
-    console.log('challengeInput:  ********  ', challengeInput);
     API.graphql(
       graphqlOperation(customMutations.createNewGroupAndChallenge, {
         inputGroup: groupInput,
         inputChallenge: challengeInput,
       }),
     )
-      .then(resultIds => {
-        console.log('res.data.createGroup.id :', resultIds.data.createGroup.id);
-        console.log(
-          'resultIds.data.createChallenge.id :',
-          resultIds.data.createChallenge.id,
-        );
-        state.setChallengeInput({
-          ...state.challengeInput,
-          groupId: resultIds.data.createGroup.id,
-        });
-        console.log('groupChallengeInput:  ********  ', {
-          ...groupChallengeInput,
-          challengeId: resultIds.data.createChallenge.id,
-          groupId: resultIds.data.createGroup.id,
-        });
+    .then(resultIds => {
+      state.setChallengeInput({
+        ...state.challengeInput,
+        groupId: resultIds.data.createGroup.id,
+      });
 
-        API.graphql(
-          graphqlOperation(mutations.createGroupChallenge, {
-            input: {
-              ...groupChallengeInput,
-              challengeId: resultIds.data.createChallenge.id,
-              groupId: resultIds.data.createGroup.id,
-            },
-          }),
-        )
-          .then(res => {
-            state.setUserHasActiveChallenge(true);
-            state.setUserActiveChallengesList([
-              ...state.userActiveChallengesList,
-              res.data.createGroupChallenge,
-            ]);
-            LocalPushNotificationSetting.register(
-              9,
-              0,
-              0,
-              'You have a daily goal to complete',
-              21,
-              0,
-              0,
-              'Did you complete your goal for today?',
-            );
-          })
-          .catch(error =>
-            console.log('Error happens in createGroupChallenge : ', error),
-          );
+      API.graphql(
+        graphqlOperation(mutations.createGroupChallenge, {
+          input: {
+            ...groupChallengeInput,
+            challengeId: resultIds.data.createChallenge.id,
+            groupId: resultIds.data.createGroup.id,
+          },
+        }),
+      )
+      .then(res => {
+        state.setUserHasActiveChallenge(true);
+        state.setUserActiveChallengesList([
+          ...state.userActiveChallengesList,
+          res.data.createGroupChallenge,
+        ]);
+        LocalPushNotificationSetting.register(
+          9,
+          0,
+          0,
+          'You have a daily goal to complete',
+          21,
+          0,
+          0,
+          'Did you complete your goal for today?',
+        );
       })
       .catch(error =>
-        console.log('Error happens in createNewGroupAndChallenge: ', error),
+        console.log('Error happens in createGroupChallenge : ', error),
       );
+    })
+    .catch(error =>
+      console.log('Error happens in createNewGroupAndChallenge: ', error),
+    );
   };
 
   return (
@@ -270,7 +270,6 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
           title="Start Challenge"
           onPress={() => {
             insertChallenge();
-            // props.changeView();
             navigation.navigate('GroupChallengeSharingInformation');
           }}>
           <Text>Save Group Challenge</Text>

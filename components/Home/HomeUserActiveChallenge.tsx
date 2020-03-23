@@ -69,10 +69,9 @@ function HomeUserActiveChallenge({navigation, route}) {
                 </Text>
               </Text>
             </Body>
-            {/* {console.log('item: ', item)} */}
             <Right>
-              <Icon active style={styles.checkmark} name="checkmark-circle" />
-              {/* <Icon active name="arrow-forward" /> */}
+              {/* <Icon active style={styles.checkmark} name="checkmark-circle" /> */}
+              <Icon active name="arrow-forward" />
             </Right>
           </ListItem>
         ))}

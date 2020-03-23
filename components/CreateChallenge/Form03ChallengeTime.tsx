@@ -28,7 +28,6 @@ function Form03ChallengeTime({navigation, route}, props) {
     state.setChallengeType('time');
   }, []);
 
-  console.log('state in Form03ChallengeTimetsx: ', state);
   return (
     <Container style={styles.Container}>
       <Content padder>

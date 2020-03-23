@@ -25,19 +25,17 @@ import {Auth} from 'aws-amplify';
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
-function signOut() {
-  console.log('signOut :');
-  Auth.signOut()
-    .then(data => {
-      console.log('signed out: ', data);
-      // setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
-    })
-    .catch(err => console.log(err));
-}
-
 function SettingsMain({navigation, route}) {
   const state = useStore(state => state);
   // console.log('state in SettingsMain.tsx: ', state);
+  function signOut() {
+    state.setUserActiveChallengesList([]);
+    Auth.signOut()
+      .then(data => {
+        // setTimeout(() => dispatch({type: 'SET_USER', user: null}), 350);
+      })
+      .catch(err => console.log(err));
+  }
 
   return (
     <Container style={styles.container}>

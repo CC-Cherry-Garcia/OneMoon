@@ -25,7 +25,10 @@ import Colors from '../../variablesColors';
 function FormGroup03ChallengeRepeat({navigation, route}, props) {
   const state = useStore(state => state);
 
-  console.log('state in Form03ChallengeRepeattsx: ', state);
+  useEffect(() => {
+    state.setChallengeType('repeat');
+  }, []);
+
   return (
     <Container style={styles.Container}>
       <Content padder>

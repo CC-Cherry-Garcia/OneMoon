@@ -37,6 +37,14 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   const state = useStore(state => state);
   const [loading, setLoading] = useState(true);
 
+  //Store user's active challenge list in other variable,
+  //because current challenge is going to be added into user's active challenge (state change)
+  //and check function is going to happen again(duplicate challenge error alert papers)
+  const [
+    userCurrentActiveChallenges,
+    setUserCurrentActiveChallenges,
+  ] = useState([]);
+
   //To get group challenge data
   useEffect(() => {
     const getGroupChallenge = async () => {
@@ -52,6 +60,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
       );
       setLoading(false);
     };
+    setUserCurrentActiveChallenges(state.userActiveChallengesList);
     getGroupChallenge();
   }, []);
 
@@ -154,8 +163,7 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
   };
 
   const checkUserHasGroupChallenge = () => {
-    return state.userActiveChallengesList.find(x => {
-      console.log('x.groupId :', x.groupId);
+    return userCurrentActiveChallenges.find(x => {
       return x.groupId && x.groupId === state.challengeInput.groupId;
     });
   };
