@@ -410,7 +410,7 @@ function ChallengeStatusMain({navigation, route}, props) {
             onPress={() =>
               navigation.navigate('Home', {screen: 'ChallengeStatusSchedule'})
             }>
-            <Text>View Challenge</Text>
+            <Text>View Challenge Schedule</Text>
           </Button>
 
           {state.userCurrentChallenge.groupId !== undefined && (
