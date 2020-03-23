@@ -327,50 +327,6 @@ function SignIn(props) {
           onSubmitEditing={props.signIn}
         />
       </Item>
-
-      {/* <TextInput
-        name="username"
-        onChange={e => {
-          console.log(e.nativeEvent.text);
-          e.persist();
-          props.updateFormState('username', e);
-          if (e.nativeEvent.text.length > 0) {
-            usernameEmpty = false;
-          } else {
-            usernameEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="username"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="next"
-        onSubmitEditing={() => this.secondInput.focus()}
-      /> */}
-
-      {/* <TextInput
-        ref={ref => {
-          this.secondInput = ref;
-        }}
-        type="password"
-        name="password"
-        onChange={e => {
-          e.persist();
-          props.updateFormState('password', e);
-          if (e.nativeEvent.text) {
-            passwordEmpty = false;
-          } else {
-            passwordEmpty = true;
-          }
-        }}
-        style={styles.input}
-        placeholder="password"
-        secureTextEntry={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        onSubmitEditing={props.signIn}
-      /> */}
       <Button
         disabled={passwordEmpty || usernameEmpty}
         title="Sign In"
@@ -387,28 +343,35 @@ function SignIn(props) {
 function ConfirmSignUp(props) {
   return (
     <View style={styles.container}>
-      <Text>
+      <H1 style={{marginBottom: 60, marginTop: 20}}>Email verification</H1>
+
+      <Item
+        floatingLabel
+        style={{marginBottom: 20, marginLeft: 15, marginRight: 15}}>
+        <Label>Confirmation Code</Label>
+
+        <Input
+          name="confirmationCode"
+          onChange={e => {
+            e.persist();
+            props.updateFormState('confirmationCode', e);
+            if (e.nativeEvent.text) {
+              confirmationEmpty = false;
+            } else {
+              confirmationEmpty = true;
+            }
+          }}
+          placeholder="Confirmation Code"
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="go"
+          onSubmitEditing={props.confirmSignUp}
+        />
+      </Item>
+      <Text style={{marginBottom: 20}}>
         Please check your email for a verification email and enter the
         confirmation code below:
       </Text>
-      <TextInput
-        name="confirmationCode"
-        placeholder="Confirmation Code"
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        onSubmitEditing={props.confirmSignUp}
-        onChange={e => {
-          e.persist();
-          props.updateFormState('confirmationCode', e);
-          if (e.nativeEvent.text) {
-            confirmationEmpty = false;
-          } else {
-            confirmationEmpty = true;
-          }
-        }}
-        style={styles.input}
-      />
       <Button
         disabled={confirmationEmpty}
         title="Sign In"
