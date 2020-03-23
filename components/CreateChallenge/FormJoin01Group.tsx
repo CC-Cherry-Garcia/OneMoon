@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import {StyleSheet, View, TextInput, Alert} from 'react-native';
 import {
   Container,
@@ -21,6 +21,13 @@ let groupIdEmpty = true;
 
 function FormJoin01Group({navigation}, props) {
   const state = useStore(state => state);
+
+  useEffect(() => {
+    //Init
+    groupIdEmpty = true;
+    state.setChallengeInput({});
+    state.setGroupChallengeInformation({});
+  }, []);
 
   return (
     <Container style={styles.Container}>
@@ -54,7 +61,7 @@ function FormJoin01Group({navigation}, props) {
             onPress={() =>
               navigation.navigate('JoinGroupChallengeConfirmation')
             }
-            style={styles.btn}>
+            style={groupIdEmpty ? styles.btnDisabled : styles.btn}>
             <Text>Next Step</Text>
           </Button>
         </Form>
@@ -75,6 +82,10 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: Colors.primary,
     marginTop: 20,
+  },
+  btnDisabled: {
+    marginTop: 20,
+    backgroundColor: 'lightgray',
   },
 });
 
