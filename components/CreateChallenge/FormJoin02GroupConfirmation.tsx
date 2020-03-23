@@ -243,134 +243,182 @@ function FormJoin02GroupConfirmation({navigation, route}, props) {
           </Button>
           <List>
             <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task1Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task2Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task3Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task4Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task5Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task6Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task7Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task8Name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{state.groupChallengeInformation.challenge.task9Name}</Text>
+              <Text>
+                Day 1 Task:{' '}
+                {state.groupChallengeInformation.challenge.task1Name}
+              </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 2 Task:{' '}
+                {state.groupChallengeInformation.challenge.task2Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 3 Task:{' '}
+                {state.groupChallengeInformation.challenge.task3Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 4 Task:{' '}
+                {state.groupChallengeInformation.challenge.task4Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 5 Task:{' '}
+                {state.groupChallengeInformation.challenge.task5Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 6 Task:{' '}
+                {state.groupChallengeInformation.challenge.task6Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 7 Task:{' '}
+                {state.groupChallengeInformation.challenge.task7Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 8 Task:{' '}
+                {state.groupChallengeInformation.challenge.task8Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 9 Task:{' '}
+                {state.groupChallengeInformation.challenge.task9Name}
+              </Text>
+            </ListItem>
+            <ListItem>
+              <Text>
+                Day 10 Task:{' '}
                 {state.groupChallengeInformation.challenge.task10Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 11 Task:{' '}
                 {state.groupChallengeInformation.challenge.task11Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 12 Task:{' '}
                 {state.groupChallengeInformation.challenge.task12Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 13 Task:{' '}
                 {state.groupChallengeInformation.challenge.task13Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 14 Task:{' '}
                 {state.groupChallengeInformation.challenge.task14Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 15 Task:{' '}
                 {state.groupChallengeInformation.challenge.task15Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 16 Task:{' '}
                 {state.groupChallengeInformation.challenge.task16Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 17 Task:{' '}
                 {state.groupChallengeInformation.challenge.task17Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 18 Task:{' '}
                 {state.groupChallengeInformation.challenge.task18Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 19 Task:{' '}
                 {state.groupChallengeInformation.challenge.task19Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 20 Task:{' '}
                 {state.groupChallengeInformation.challenge.task20Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 21 Task:{' '}
                 {state.groupChallengeInformation.challenge.task21Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 22 Task:{' '}
                 {state.groupChallengeInformation.challenge.task22Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 23 Task:{' '}
                 {state.groupChallengeInformation.challenge.task23Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 24 Task:{' '}
                 {state.groupChallengeInformation.challenge.task24Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 25 Task:{' '}
                 {state.groupChallengeInformation.challenge.task25Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 26 Task:{' '}
                 {state.groupChallengeInformation.challenge.task26Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 27 Task:{' '}
                 {state.groupChallengeInformation.challenge.task27Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 28 Task:{' '}
                 {state.groupChallengeInformation.challenge.task28Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 29 Task:{' '}
                 {state.groupChallengeInformation.challenge.task29Name}
               </Text>
             </ListItem>
             <ListItem>
               <Text>
+                Day 30 Task:{' '}
                 {state.groupChallengeInformation.challenge.task30Name}
               </Text>
             </ListItem>
