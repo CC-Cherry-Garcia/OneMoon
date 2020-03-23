@@ -22,6 +22,9 @@ import {
 import useStore from '../../state/state';
 import Colors from '../../variablesColors';
 
+let dailyTaskIsEmpty = true;
+let dailyQuantityIsEmpty = true;
+
 function FormGroup03ChallengeQuantity({navigation, route}, props) {
   const state = useStore(state => state);
   useEffect(() => {
@@ -38,23 +41,33 @@ function FormGroup03ChallengeQuantity({navigation, route}, props) {
         </Text>
         <Text style={styles.Title}>Daily Task:</Text>
         <TextInput
-          onChangeText={TextInputValue =>
+          onChangeText={TextInputValue => {
             state.setChallengeInput({
               ...state.challengeInput,
               taskName: TextInputValue,
-            })
-          }
+            });
+            if (TextInputValue.length > 0) {
+              dailyTaskIsEmpty = false;
+            } else {
+              dailyTaskIsEmpty = true;
+            }
+          }}
           placeholder=" Squats"
           style={styles.textInputDefault}
         />
         <Text style={styles.Title}>Increase Daily Quantity by:</Text>
         <TextInput
-          onChangeText={TextInputValue =>
+          onChangeText={TextInputValue => {
             state.setChallengeInput({
               ...state.challengeInput,
               increase: TextInputValue,
-            })
-          }
+            });
+            if (TextInputValue.length > 0) {
+              dailyQuantityIsEmpty = false;
+            } else {
+              dailyQuantityIsEmpty = true;
+            }
+          }}
           placeholder=" 5"
           style={styles.textDefault}
           keyboardType="numeric"
@@ -62,7 +75,12 @@ function FormGroup03ChallengeQuantity({navigation, route}, props) {
         <Button
           title="Review your Challenge"
           onPress={() => navigation.navigate('GroupChallengeConfirmation')}
-          style={styles.btn}>
+          style={
+            dailyTaskIsEmpty || dailyQuantityIsEmpty
+              ? styles.btnDisabled
+              : styles.btn
+          }
+          disabled={dailyTaskIsEmpty || dailyQuantityIsEmpty}>
           <Text>Review your Challenge</Text>
         </Button>
       </Content>
@@ -90,6 +108,10 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 20,
     backgroundColor: Colors.primary,
+  },
+  btnDisabled: {
+    marginTop: 20,
+    backgroundColor: 'lightgray',
   },
 });
 
