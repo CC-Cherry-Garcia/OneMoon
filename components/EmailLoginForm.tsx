@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react';
 import {TextInput, Alert} from 'react-native';
-import {Text, Button, Icon, View, H1} from 'native-base';
+import {Text, Button, View, H1} from 'native-base';
 import {Auth} from 'aws-amplify';
 import LocalPushNotificationSetting from './LocalPushNotificationSetting';
 
@@ -14,6 +14,13 @@ let passwordEmpty = true;
 let usernameEmpty = true;
 let emailEmpty = true;
 let confirmationEmpty = true;
+
+function emptyFlags() {
+  passwordEmpty = true;
+  usernameEmpty = true;
+  emailEmpty = true;
+  confirmationEmpty = true;
+}
 
 function reducer(state: any, action: {type: string}) {
   switch (action.type) {
@@ -127,7 +134,12 @@ export default function EmailLoginForm() {
       {formType === 'signUp' && (
         <Text style={styles.footer}>
           Already have an account?{' '}
-          <Text style={styles.anchor} onPress={() => updateFormType('signIn')}>
+          <Text
+            style={styles.anchor}
+            onPress={() => {
+              updateFormType('signIn');
+              emptyFlags();
+            }}>
             Sign In
           </Text>
         </Text>
@@ -135,7 +147,12 @@ export default function EmailLoginForm() {
       {formType === 'signIn' && (
         <Text style={styles.footer}>
           Need an account?{' '}
-          <Text style={styles.anchor} onPress={() => updateFormType('signUp')}>
+          <Text
+            style={styles.anchor}
+            onPress={() => {
+              emptyFlags();
+              updateFormType('signUp');
+            }}>
             Sign Up
           </Text>
         </Text>
