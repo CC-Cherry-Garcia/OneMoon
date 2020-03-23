@@ -160,6 +160,19 @@ export default function EmailLoginForm() {
           </Text>
         </Text>
       )}
+      {formType === 'confirmSignUp' && (
+        <Text style={styles.footer}>
+          Go back to the{' '}
+          <Text
+            style={styles.anchor}
+            onPress={() => {
+              emptyFlags();
+              updateFormType('signUp');
+            }}>
+            Sign Up Page
+          </Text>
+        </Text>
+      )}
     </View>
   );
 }
@@ -339,9 +352,10 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 150,
+    marginTop: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
   },
   input: {
     borderColor: 'lightgray',
