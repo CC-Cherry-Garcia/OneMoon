@@ -396,7 +396,7 @@ function ChallengeStatusMain({navigation, route}, props) {
               </Table>
             </CardItem>
             <CardItem>
-              <Text><View style={{width: 20, height: 20, backgroundColor: '#5cb85c', margin: 0}}></View> Completed   <View style={{width: 20, height: 20, backgroundColor: 'lightgray', margin: 0}}></View> Incomplete</Text>
+              <Text><View style={{width: 20, height: 20, backgroundColor: '#5cb85c', margin: 0}}></View> Completed   <View style={{width: 20, height: 20, backgroundColor: 'lightgray', margin: 0}}></View> Incomplete   <View style={{width: 20, height: 20, backgroundColor: '#FFF1C1', margin: 0}}></View> Upcoming</Text>
             </CardItem>
           </Card>
 
