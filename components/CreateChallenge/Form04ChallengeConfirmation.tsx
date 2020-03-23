@@ -224,6 +224,12 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
     <Container style={styles.Container}>
       <Content padder>
         <H1>Double check your Challenge</H1>
+        <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+          }}
+        />
         <Text style={styles.textDefault}>
           See your 30-day challenge below. Use the back button if you need to
           make any changes.
@@ -362,7 +368,6 @@ function Form04ChallengeConfirmation({navigation, route}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',

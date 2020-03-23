@@ -33,7 +33,13 @@ function FormJoin01Group({navigation}, props) {
     <Container style={styles.Container}>
       <Content>
         <H1>Join a Group Challenge</H1>
-        <Text>
+          <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+          }}
+        />
+        <Text style={{marginTop: 20}}>
           Enter a group challenge ID to join the group and get started achieving
           your goals. It should be a 5-character code.
         </Text>
@@ -73,7 +79,6 @@ function FormJoin01Group({navigation}, props) {
 const styles = StyleSheet.create({
   Container: {
     padding: 20,
-    marginTop: 20,
   },
   Title: {
     fontWeight: 'bold',
