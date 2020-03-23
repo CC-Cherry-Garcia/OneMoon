@@ -86,7 +86,6 @@ function ChallengeStatusMain({navigation, route}, props) {
 
   function completeTask() {
     if (!state.currentChallengeTodayDate) {
-      console.log('clicked button but returned');
       return;
     }
 
