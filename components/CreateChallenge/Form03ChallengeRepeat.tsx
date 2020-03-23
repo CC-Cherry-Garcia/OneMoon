@@ -24,6 +24,9 @@ import Colors from '../../variablesColors';
 
 function Form03ChallengeRepeat({navigation, route}, props) {
   const state = useStore(state => state);
+  useEffect(() => {
+    state.setChallengeType('repeat');
+  }, []);
 
   return (
     <Container style={styles.Container}>
