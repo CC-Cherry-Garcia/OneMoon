@@ -106,7 +106,7 @@ function FormGroup04ChallengeConfirmation({navigation, route}, props) {
   };
   const generateGroupId = function(len, bits) {
     bits = bits || 36;
-    var outStr = '',
+    let outStr = '',
       newStr;
     while (outStr.length < len) {
       newStr = Math.random()
