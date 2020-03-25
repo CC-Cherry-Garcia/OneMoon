@@ -1,9 +1,8 @@
-![oneMoon app](/src/assets/img/oneMoonHeader-white.png)
-
+![oneMoon app](/src/assets/img/oneMoonHeader-white-background.png)
 
 <img src="src/assets/img/appIcon.png" align="left" width="100" height="100"> A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
 
-## [Download the app in the iOS Store](https://apps.apple.com/us/app/one-moon/id1502061901)
+## [Download on the iOS App Store](https://apps.apple.com/us/app/one-moon/id1502061901)
 
 ---
 
@@ -38,7 +37,7 @@ _- **Travis Ricks** - [GitHub](https://github.com/travisricks) - [LinkedIn](http
 
 _- **Nemanja Milenkovic** - [GitHub](https://github.com/NemanjaMilenkovic) - [LinkedIn](https://www.linkedin.com/in/NemanjaMilenkovic/)_
 
---- 
+---
 
 #### [Getting started for internal team members](GETTING_STARTED.md)
 
