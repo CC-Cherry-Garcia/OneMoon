@@ -1,6 +1,11 @@
 ![oneMoon app](/src/assets/img/oneMoonHeader-white.png)
 
-A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
+
+<img src="src/assets/img/appIcon.png" style="width: 100px; float: left; padding-right: 15px;"> A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
+
+## [Download the app in the iOS Store](https://apps.apple.com/us/app/one-moon/id1502061901)
+
+---
 
 ## Achieve your goals in 30 days.
 
@@ -33,6 +38,12 @@ _- **Travis Ricks** - [GitHub](https://github.com/travisricks) - [LinkedIn](http
 
 _- **Nemanja Milenkovic** - [GitHub](https://github.com/NemanjaMilenkovic) - [LinkedIn](https://www.linkedin.com/in/NemanjaMilenkovic/)_
 
+--- 
+
+#### [Getting started for internal team members](GETTING_STARTED.md)
+
+---
+
 ## Acknowledgments
 
-Many thanks to the amazing Code Chrysalis staff - none of this would be possible without. ❤️
+Many thanks to the amazing Code Chrysalis staff - none of this would be possible without them. ❤️
