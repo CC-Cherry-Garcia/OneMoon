@@ -1,7 +1,7 @@
 ![oneMoon app](/src/assets/img/oneMoonHeader-white.png)
 
 
-<img src="src/assets/img/appIcon.png" style="width: 100px; height: 100px; float: left; padding-right: 15px;"> A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
+<img src="src/assets/img/appIcon.png" align="left" width="100" height="100"> A mobile app that allows users to create custom 30-day challenges either for themselves or a group while helping them stay accountable throughout the challenge.
 
 ## [Download the app in the iOS Store](https://apps.apple.com/us/app/one-moon/id1502061901)
 
