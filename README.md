@@ -4,6 +4,9 @@
 
 ## [Download on the iOS App Store](https://apps.apple.com/us/app/one-moon/id1502061901)
 
+<br/><br/>
+<img width="488" alt="Screen_Shot_1" src="https://user-images.githubusercontent.com/16607351/77504161-f442d780-6ea2-11ea-951f-e9b596713f97.png">
+
 ---
 
 ## Achieve your goals in 30 days.
